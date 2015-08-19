@@ -1,0 +1,124 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AR	lib/Makefile	/^AR = $(TILERA_ROOT)\/bin\/tile-ar$/;"	m
+CC	lib/Makefile	/^CC = $(TILERA_ROOT)\/bin\/tile-cc$/;"	m
+CC	simple/Makefile	/^CC = $(TILERA_ROOT)\/bin\/tile-cc$/;"	m
+CFLAGS	lib/Makefile	/^CFLAGS = -std=c99 -O2 -g -ffunction-sections -Wall -Wshadow -Werror \\$/;"	m
+CFLAGS	simple/Makefile	/^CFLAGS = -std=gnu99 -Wall -g $(OPT) $/;"	m
+COMMON_EREAD	lib/sirius_pcie.c	17;"	d	file:
+COMMON_EWRITE	lib/sirius_pcie.c	18;"	d	file:
+DLL_FLAGS	lib/Makefile	/^DLL_FLAGS = \\$/;"	m
+EXTRA_CFLAGS	lib/Makefile	/^EXTRA_CFLAGS ?=$/;"	m
+GENERIC_PCIE_BAR_INDEX	include/sirius_pcie.h	7;"	d
+GENERIC_PCIE_DEVICEID	driver/generic_pcie.h	34;"	d
+GENERIC_PCIE_DRIVER_H	driver/generic_pcie.h	2;"	d
+GENERIC_PCIE_NAME	driver/generic_pcie.c	16;"	d	file:
+GENERIC_PCIE_NUMS	driver/generic_pcie.c	17;"	d	file:
+GENERIC_PCIE_TYPE	include/common.h	10;"	d
+GENERIC_PCIE_VENDORID	driver/generic_pcie.h	33;"	d
+INCLUDES	lib/Makefile	/^INCLUDES =  $/;"	m
+IOCTL_DMA_READ	include/common.h	15;"	d
+IOCTL_DMA_WRITE	include/common.h	16;"	d
+IOCTL_READ_ULLONG	include/common.h	11;"	d
+IOCTL_READ_ULONG	include/common.h	13;"	d
+IOCTL_WRITE_ULLONG	include/common.h	12;"	d
+IOCTL_WRITE_ULONG	include/common.h	14;"	d
+KERNELDIR	driver/Makefile	/^KERNELDIR ?= $(TILERA_ROOT)\/src\/linux-3.4.68\/build$/;"	m
+KERNELDIR	driver/Makefile	/^KERNELDIR ?= \/lib\/modules\/$(shell uname -r)\/build$/;"	m
+LDFLAGS	simple/Makefile	/^LDFLAGS = -static   $/;"	m
+LIBS	simple/Makefile	/^LIBS = -ltmc -lgxio  -L..\/lib -lsirius_pcie$/;"	m
+L_COMMON_H	include/common.h	2;"	d
+MKDIR	lib/Makefile	/^MKDIR = mkdir -p$/;"	m
+OBJS	simple/Makefile	/^OBJS = $(SRCS:%.c=%.o)$/;"	m
+OPT	simple/Makefile	/^OPT = -Os$/;"	m
+PCI_TYPE0_ADDRESSES	driver/generic_pcie.h	51;"	d
+PWD	driver/Makefile	/^PWD := $(shell pwd)$/;"	m
+RCMD	simple/read_loop.c	24;"	d	file:
+RCMD	simple/read_reg.c	25;"	d	file:
+RM	lib/Makefile	/^RM = rm -f$/;"	m
+SIRIUS_PCIE_H	include/sirius_pcie.h	2;"	d
+SIRIUS_PCIE_NAME	include/sirius_pcie.h	4;"	d
+SOURCES	lib/Makefile	/^SOURCES := \\$/;"	m
+SRCS	simple/Makefile	/^SRCS = read_reg.c read_loop.c fpga_mem_test.c watcher_dma.c$/;"	m
+TILE_ARCH	lib/Makefile	/^TILE_ARCH = $(shell uname -m)$/;"	m
+TRACE	driver/generic_pcie.h	80;"	d
+TR_F_CLOSE	driver/generic_pcie.h	71;"	d
+TR_F_ERROR	driver/generic_pcie.h	73;"	d
+TR_F_IOCTL	driver/generic_pcie.h	72;"	d
+TR_F_MMAP	driver/generic_pcie.h	75;"	d
+TR_F_OPEN	driver/generic_pcie.h	70;"	d
+TR_F_REMOVE	driver/generic_pcie.h	74;"	d
+WCMD	simple/read_loop.c	25;"	d	file:
+WCMD	simple/read_reg.c	26;"	d	file:
+__devinitdata	driver/generic_pcie.c	/^static struct pci_device_id pcie_generic_table[] __devinitdata = $/;"	v	typeref:struct:pcie_generic_table	file:
+__this_module	driver/generic_pcie.mod.c	/^struct module __this_module$/;"	v	typeref:struct:module
+__used	driver/generic_pcie.mod.c	/^__used$/;"	v	file:
+bar	driver/generic_pcie.h	/^        u64     bar[PCI_TYPE0_ADDRESSES];$/;"	m	struct:generic_dev::st_cfg
+bar	include/common.h	/^    char bar;$/;"	m	struct:__anon1
+cdev	driver/generic_pcie.h	/^    struct cdev cdev;$/;"	m	struct:generic_dev	typeref:struct:generic_dev::cdev
+cfg	driver/generic_pcie.h	/^    }  cfg;$/;"	m	struct:generic_dev	typeref:struct:generic_dev::st_cfg
+data	include/common.h	/^    unsigned long long data;$/;"	m	struct:__anon1
+dma_desc_phyaddr	driver/generic_pcie.h	/^    u64 dma_desc_phyaddr;$/;"	m	struct:generic_dev
+dma_desc_t	driver/generic_pcie.c	/^}dma_desc_t;$/;"	t	typeref:struct:__anon2	file:
+dma_desc_viraddr	driver/generic_pcie.h	/^    u64 dma_desc_viraddr;$/;"	m	struct:generic_dev
+dma_length	driver/generic_pcie.c	/^    u32 dma_length;$/;"	m	struct:__anon2	file:
+dma_read_phyaddr	driver/generic_pcie.h	/^    u64 dma_read_phyaddr;$/;"	m	struct:generic_dev
+dma_read_viraddr	driver/generic_pcie.h	/^    u64 dma_read_viraddr;$/;"	m	struct:generic_dev
+dma_write_phyaddr	driver/generic_pcie.h	/^    u64 dma_write_phyaddr;$/;"	m	struct:generic_dev
+dma_write_viraddr	driver/generic_pcie.h	/^    u64 dma_write_viraddr;$/;"	m	struct:generic_dev
+endpoint	driver/generic_pcie.c	/^    u32 endpoint;$/;"	m	struct:__anon2	file:
+first	driver/generic_pcie.h	/^    dev_t first;$/;"	m	struct:generic_dev
+func	driver/generic_pcie.h	/^        u32 func;$/;"	m	struct:generic_dev::st_cfg
+gdev_body	driver/generic_pcie.c	/^struct generic_dev gdev_body[3];$/;"	v	typeref:struct:generic_dev
+generic_dev	driver/generic_pcie.h	/^struct generic_dev$/;"	s
+generic_exit	driver/generic_pcie.c	/^module_exit(generic_exit);  $/;"	v
+generic_exit	driver/generic_pcie.c	/^static void __exit generic_exit(void)$/;"	f	file:
+generic_init	driver/generic_pcie.c	/^module_init(generic_init);$/;"	v
+generic_init	driver/generic_pcie.c	/^static int __init generic_init(void)$/;"	f	file:
+generic_pcie_close	driver/generic_pcie.c	/^static int generic_pcie_close(struct inode * inode, struct file * filp)$/;"	f	file:
+generic_pcie_dma_read	driver/generic_pcie.c	/^static int generic_pcie_dma_read(struct generic_dev * gdev, unsigned long arg)$/;"	f	file:
+generic_pcie_dma_write	driver/generic_pcie.c	/^static int generic_pcie_dma_write(struct generic_dev * gdev, unsigned long arg)$/;"	f	file:
+generic_pcie_ioctl	driver/generic_pcie.c	/^static long generic_pcie_ioctl(struct file * fp, unsigned int cmd, unsigned long arg)$/;"	f	file:
+generic_pcie_open	driver/generic_pcie.c	/^static int generic_pcie_open(struct inode * inode, struct file * filp)$/;"	f	file:
+generic_pcie_ops	driver/generic_pcie.c	/^static const struct file_operations generic_pcie_ops = $/;"	v	typeref:struct:file_operations	file:
+generic_pcie_read_ullong	driver/generic_pcie.c	/^static int generic_pcie_read_ullong(struct generic_dev * gdev, unsigned long long arg)$/;"	f	file:
+generic_pcie_read_ulong	driver/generic_pcie.c	/^static int generic_pcie_read_ulong(struct generic_dev * gdev, unsigned long arg)$/;"	f	file:
+generic_pcie_write_ullong	driver/generic_pcie.c	/^static int generic_pcie_write_ullong(struct generic_dev * gdev, unsigned long arg)$/;"	f	file:
+generic_pcie_write_ulong	driver/generic_pcie.c	/^static int generic_pcie_write_ulong(struct generic_dev * gdev, unsigned long arg)$/;"	f	file:
+global_trace	driver/generic_pcie.c	/^int global_trace = TR_F_ERROR;$/;"	v
+help	simple/read_loop.c	/^void help()$/;"	f
+help	simple/read_reg.c	/^void help()$/;"	f
+inited	driver/generic_pcie.h	/^    int    inited;$/;"	m	struct:generic_dev
+iomsg_t	include/common.h	/^}iomsg_t, * piomsg_t;$/;"	t	typeref:struct:__anon1
+irq	driver/generic_pcie.h	/^        u32 irq;$/;"	m	struct:generic_dev::st_cfg
+lower_addr	driver/generic_pcie.c	/^    u32 lower_addr;$/;"	m	struct:__anon2	file:
+main	simple/read_loop.c	/^int main(int argc, char ** argv)$/;"	f
+main	simple/read_reg.c	/^int main()$/;"	f
+main	simple/watcher_dma.c	/^int main(int argc, char ** argv)$/;"	f
+map	driver/generic_pcie.h	/^        void    *map[PCI_TYPE0_ADDRESSES];$/;"	m	struct:generic_dev::st_cfg
+obj-m	driver/Makefile	/^obj-m		:= generic_pcie.o$/;"	m
+offset	include/common.h	/^    int offset;$/;"	m	struct:__anon1
+pcie_generic_driver	driver/generic_pcie.c	/^static struct pci_driver pcie_generic_driver =$/;"	v	typeref:struct:pci_driver	file:
+pcie_generic_probe	driver/generic_pcie.c	/^static int pcie_generic_probe(struct pci_dev * pci_dev, const struct pci_device_id * id)$/;"	f	file:
+pcie_generic_remove	driver/generic_pcie.c	/^static void pcie_generic_remove(struct pci_dev * dev)$/;"	f	file:
+pcie_user_read32	lib/sirius_pcie.c	/^int pcie_user_read32(int fd, int bar, int offset, unsigned long* value)$/;"	f
+pcie_user_read64	lib/sirius_pcie.c	/^int pcie_user_read64(int fd, int bar, int offset, unsigned long long* value)$/;"	f
+pcie_user_write32	lib/sirius_pcie.c	/^int pcie_user_write32(int fd, int bar, int offset, unsigned long value)$/;"	f
+pcie_user_write64	lib/sirius_pcie.c	/^int pcie_user_write64(int fd, int bar, int offset, unsigned long long value)$/;"	f
+pdev	driver/generic_pcie.h	/^    struct pci_dev * pdev;$/;"	m	struct:generic_dev	typeref:struct:generic_dev::pci_dev
+piomsg_t	include/common.h	/^}iomsg_t, * piomsg_t;$/;"	t	typeref:struct:__anon1
+reg_read_ullong	driver/generic_pcie.c	/^static inline void reg_read_ullong(struct generic_dev* gdev, $/;"	f	file:
+reg_read_ulong	driver/generic_pcie.c	/^static inline void reg_read_ulong(struct generic_dev* ldev,$/;"	f	file:
+reg_write_ullong	driver/generic_pcie.c	/^static inline void reg_write_ullong(struct generic_dev* gdev,$/;"	f	file:
+reg_write_ulong	driver/generic_pcie.c	/^static inline void reg_write_ulong(struct generic_dev* ldev,$/;"	f	file:
+reserved	driver/generic_pcie.c	/^    volatile u32 reserved[4];$/;"	m	struct:__anon2	file:
+siz	driver/generic_pcie.h	/^        u32     siz[PCI_TYPE0_ADDRESSES];$/;"	m	struct:generic_dev::st_cfg
+slot	driver/generic_pcie.h	/^        u32 slot;$/;"	m	struct:generic_dev::st_cfg
+st_cfg	driver/generic_pcie.h	/^    struct st_cfg$/;"	s	struct:generic_dev
+typ	driver/generic_pcie.h	/^        u32     typ[PCI_TYPE0_ADDRESSES];$/;"	m	struct:generic_dev::st_cfg
+upper_addr	driver/generic_pcie.c	/^    u32 upper_addr;$/;"	m	struct:__anon2	file:
+using_base_num	driver/generic_pcie.h	/^        u8      using_base_num;$/;"	m	struct:generic_dev::st_cfg

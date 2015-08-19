@@ -1,0 +1,1 @@
+cmd_/home/root/watcher_pcie_driver/driver/generic_pcie.ko := ld -m elf64ppc -r  -T /usr/src/linux/scripts/module-common.lds arch/powerpc/lib/crtsavres.o --build-id  -o /home/root/watcher_pcie_driver/driver/generic_pcie.ko /home/root/watcher_pcie_driver/driver/generic_pcie.o /home/root/watcher_pcie_driver/driver/generic_pcie.mod.o
