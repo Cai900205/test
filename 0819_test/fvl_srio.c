@@ -266,7 +266,7 @@ int fvl_srio_channel_open(char *name)
     fvl_srio_portpool_t *cpool;
     fvl_srio_portpool_t *ppool;
     fvl_srio_ctrlblk_t *pscb;
-    fvl_rthread_t *re_arg;
+    fvl_rthread_t re_arg;
     int port_num=0,chan_size=0,ctl_size=0,bfnum=0;
     uint32_t offset=0,ctl_offset=0;
     fd=fvl_get_channel(name);
@@ -320,8 +320,8 @@ int fvl_srio_channel_open(char *name)
     re_arg->fd=fd;
     re_arg->buf_num = psrio->buf_num[port_num];
     re_arg->buf_virt=cpool->pwrite_ctl_result;
-    rvl = pthread_create(temp_channel->chan_id, NULL,fvl_srio_recv, &re_arg);
-	if (rvl) 
+    rvl = pthread_create(&(temp_channel->chan_id), NULL,fvl_srio_recv, &re_arg);
+    if (rvl) 
     {
 		FVL_LOG("Create receive packet thread error!\n");
 		return -errno;
@@ -446,14 +446,15 @@ int fvl_srio_read(int fd,fvl_read_rvl_t *rvl)
     {
         rvl->len=length;
         read_num[fd]=read_num[fd]+packet_num;
+        rvl->num=packet_num;
     }
     else
     {
        rvl->len=(buf_size*(num-1)) +10;//end packet size;
        read_num[fd]=read_num[fd]+num;
+       rvl->num=num;
     }
     buf_virt=(cpool->pwrite_result+offset);
-    rvl->num=num;
     rvl->buf_virt=buf_virt;
 
     return 0;
