@@ -448,12 +448,20 @@ int fvl_srio_read(int fd,fvl_read_rvl_t *rvl)
         read_num[fd]=read_num[fd]+packet_num;
         rvl->num=packet_num;
     }
-    else
+    else 
     {
-       rvl->len=(buf_size*(num-1)) +10;//end packet size;
+       if(num==0)
+       {
+           rvl->len=0;
+       }
+       else
+       {
+           rvl->len=(buf_size*(num-1)) +10;//end packet size;
+       }
        read_num[fd]=read_num[fd]+num;
        rvl->num=num;
     }
+    
     buf_virt=(cpool->pwrite_result+offset);
     rvl->buf_virt=buf_virt;
 
