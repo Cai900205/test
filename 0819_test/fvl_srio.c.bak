@@ -248,10 +248,10 @@ void fvl_srio_recv(void *arg)
         }
         pclt->FLA = 0;
         if(ctl_count == priv->buf_num)
-	      {
+	{
             pclt= pcnt;
-	          ctl_count=1;
-	      }
+	    ctl_count=1;
+	}
         ctl_count++;
         receive_num[priv->fd]++;
         pclt=pclt+1;
