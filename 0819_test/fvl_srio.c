@@ -317,9 +317,9 @@ int fvl_srio_channel_open(char *name)
         return -1;
     }
 
-    re_arg->fd=fd;
-    re_arg->buf_num = psrio->buf_num[port_num];
-    re_arg->buf_virt=cpool->pwrite_ctl_result;
+    re_arg.fd=fd;
+    re_arg.buf_num = psrio->buf_num[port_num];
+    re_arg.buf_virt=cpool->pwrite_ctl_result;
     rvl = pthread_create(&(temp_channel->chan_id), NULL,fvl_srio_recv, &re_arg);
     if (rvl) 
     {
