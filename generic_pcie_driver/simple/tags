@@ -1,0 +1,53 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	Makefile	/^CC = $(TILERA_ROOT)\/bin\/tile-cc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -std=gnu99 -Wall -g $(OPT) $/;"	m
+DDR3_ERRADDR	fpga_mem_test.c	38;"	d	file:
+DDR3_ERRDAT_0	fpga_mem_test.c	39;"	d	file:
+DDR3_EXPDAT_0	fpga_mem_test.c	40;"	d	file:
+DDR3_PTTRN_CFG_0	fpga_mem_test.c	35;"	d	file:
+DDR3_PTTRN_SEL	fpga_mem_test.c	34;"	d	file:
+DDR3_REPORT	fpga_mem_test.c	37;"	d	file:
+DDR3_RND_LNGTH	fpga_mem_test.c	36;"	d	file:
+END_AND_FAULT	fpga_mem_test.c	32;"	d	file:
+END_AND_NOFAULT	fpga_mem_test.c	31;"	d	file:
+FPGA_REVERSION	fpga_mem_test.c	33;"	d	file:
+LDFLAGS	Makefile	/^LDFLAGS = -static   $/;"	m
+LIBS	Makefile	/^LIBS = -ltmc -lgxio  -L..\/lib -lsirius_pcie$/;"	m
+OBJS	Makefile	/^OBJS = $(SRCS:%.c=%.o)$/;"	m
+OPT	Makefile	/^OPT = -Os$/;"	m
+PCIE_user_read64	fpga_mem_test.c	/^static void PCIE_user_read64(int fd, unsigned long long addr, unsigned long long * data)$/;"	f	file:
+PCIE_user_write64	fpga_mem_test.c	/^static inline void PCIE_user_write64(int fd, unsigned long long addr, uint64_t data)$/;"	f	file:
+PTTRN_SEL_MASK	fpga_mem_test.c	28;"	d	file:
+RCMD	read_loop.c	30;"	d	file:
+RCMD	read_reg.c	25;"	d	file:
+REPORT_MASK	fpga_mem_test.c	30;"	d	file:
+RESET_TEST_STATE	fpga_mem_test.c	43;"	d	file:
+RND_LNGTH_MASK	fpga_mem_test.c	29;"	d	file:
+SET_TEST_STATE	fpga_mem_test.c	42;"	d	file:
+SRCS	Makefile	/^SRCS = read_reg.c read_loop.c fpga_mem_test.c$/;"	m
+WCMD	read_loop.c	31;"	d	file:
+WCMD	read_reg.c	26;"	d	file:
+alternums	fpga_mem_test.c	/^static uint64_t alternums[][2] = $/;"	v	file:
+describe	fpga_mem_test.c	/^    char * describe;$/;"	m	struct:__anon1	file:
+do_or_not	fpga_mem_test.c	/^    int   do_or_not;$/;"	m	struct:__anon1	file:
+dump_fault_memory	fpga_mem_test.c	/^static void dump_fault_memory(int fd)$/;"	f	file:
+err_addr	fpga_mem_test.c	/^static uint32_t err_addr;$/;"	v	file:
+err_cnt	fpga_mem_test.c	/^static uint32_t err_cnt;$/;"	v	file:
+help	read_loop.c	/^void help()$/;"	f
+help	read_reg.c	/^void help()$/;"	f
+init_randnums	fpga_mem_test.c	/^static int init_randnums(int passes)$/;"	f	file:
+main	fpga_mem_test.c	/^int main(int argc, char ** argv)$/;"	f
+main	read_loop.c	/^int main()$/;"	f
+main	read_reg.c	/^int main()$/;"	f
+mode	fpga_mem_test.c	/^    int    mode;$/;"	m	struct:__anon1	file:
+patterns	fpga_mem_test.c	/^pattren_t patterns[] = $/;"	v
+pattren_t	fpga_mem_test.c	/^}pattren_t;$/;"	t	typeref:struct:__anon1	file:
+randnums	fpga_mem_test.c	/^static uint64_t * randnums;$/;"	v	file:
+set_alter_pattern_cfg	fpga_mem_test.c	/^static void set_alter_pattern_cfg(int fd, int i)$/;"	f	file:
+set_pattern_cfg	fpga_mem_test.c	/^    void (* set_pattern_cfg)(int fd, int i);$/;"	m	struct:__anon1	file:
+set_random_pattern_cfg	fpga_mem_test.c	/^static void set_random_pattern_cfg(int fd, int i)$/;"	f	file:

@@ -1,0 +1,53 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+GENERIC_PCIE_DEVICEID	generic_pcie.h	34;"	d
+GENERIC_PCIE_DRIVER_H	generic_pcie.h	2;"	d
+GENERIC_PCIE_NAME	generic_pcie.c	19;"	d	file:
+GENERIC_PCIE_NUMS	generic_pcie.c	20;"	d	file:
+GENERIC_PCIE_TYPE	generic_pcie.h	43;"	d
+GENERIC_PCIE_VENDORID	generic_pcie.h	33;"	d
+IOCTL_READ_ULLONG	generic_pcie.h	44;"	d
+IOCTL_WRITE_ULLONG	generic_pcie.h	45;"	d
+PCI_TYPE0_ADDRESSES	generic_pcie.h	58;"	d
+TRACE	generic_pcie.h	79;"	d
+TR_F_CLOSE	generic_pcie.h	70;"	d
+TR_F_ERROR	generic_pcie.h	72;"	d
+TR_F_IOCTL	generic_pcie.h	71;"	d
+TR_F_MMAP	generic_pcie.h	74;"	d
+TR_F_OPEN	generic_pcie.h	69;"	d
+TR_F_REMOVE	generic_pcie.h	73;"	d
+__devinitdata	generic_pcie.c	/^static struct pci_device_id pcie_generic_table[] __devinitdata = $/;"	v	typeref:struct:pcie_generic_table	file:
+bar	generic_pcie.h	/^        u64     bar[PCI_TYPE0_ADDRESSES];$/;"	m	struct:generic_dev::st_cfg
+cdev	generic_pcie.h	/^    struct cdev cdev;$/;"	m	struct:generic_dev	typeref:struct:generic_dev::cdev
+cfg	generic_pcie.h	/^    }  cfg;$/;"	m	struct:generic_dev	typeref:struct:generic_dev::st_cfg
+first	generic_pcie.h	/^    dev_t first;$/;"	m	struct:generic_dev
+func	generic_pcie.h	/^        u32 func;$/;"	m	struct:generic_dev::st_cfg
+gdev_body	generic_pcie.c	/^struct generic_dev gdev_body;$/;"	v	typeref:struct:generic_dev
+generic_dev	generic_pcie.h	/^struct generic_dev$/;"	s
+generic_exit	generic_pcie.c	/^static void __exit generic_exit(void)$/;"	f	file:
+generic_init	generic_pcie.c	/^static int __init generic_init(void)$/;"	f	file:
+generic_pcie_close	generic_pcie.c	/^static int generic_pcie_close(struct inode * inode, struct file * filp)$/;"	f	file:
+generic_pcie_ioctl	generic_pcie.c	/^static long generic_pcie_ioctl(struct file * fp, unsigned int cmd, unsigned long arg)$/;"	f	file:
+generic_pcie_open	generic_pcie.c	/^static int generic_pcie_open(struct inode * inode, struct file * filp)$/;"	f	file:
+generic_pcie_ops	generic_pcie.c	/^static const struct file_operations generic_pcie_ops = $/;"	v	typeref:struct:file_operations	file:
+generic_pcie_read_ullong	generic_pcie.c	/^static int generic_pcie_read_ullong(struct generic_dev * gdev, unsigned long arg)$/;"	f	file:
+generic_pcie_write_ullong	generic_pcie.c	/^static int generic_pcie_write_ullong(struct generic_dev * gdev, unsigned long arg)$/;"	f	file:
+global_trace	generic_pcie.c	/^int global_trace = TR_F_ERROR;$/;"	v
+iomsg_t	generic_pcie.h	/^}iomsg_t, * piomsg_t;$/;"	t	typeref:struct:__anon1
+irq	generic_pcie.h	/^        u32 irq;$/;"	m	struct:generic_dev::st_cfg
+map	generic_pcie.h	/^        void    *map[PCI_TYPE0_ADDRESSES];$/;"	m	struct:generic_dev::st_cfg
+offset	generic_pcie.h	/^    unsigned long long offset;$/;"	m	struct:__anon1
+pdev	generic_pcie.h	/^    struct pci_dev * pdev;$/;"	m	struct:generic_dev	typeref:struct:generic_dev::pci_dev
+piomsg_t	generic_pcie.h	/^}iomsg_t, * piomsg_t;$/;"	t	typeref:struct:__anon1
+reg_read_ullong	generic_pcie.c	/^static inline void reg_read_ullong(struct generic_dev* gdev,$/;"	f	file:
+reg_write_ullong	generic_pcie.c	/^static inline void reg_write_ullong(struct generic_dev* gdev,$/;"	f	file:
+siz	generic_pcie.h	/^        u32     siz[PCI_TYPE0_ADDRESSES];$/;"	m	struct:generic_dev::st_cfg
+slot	generic_pcie.h	/^        u32 slot;$/;"	m	struct:generic_dev::st_cfg
+st_cfg	generic_pcie.h	/^    struct st_cfg$/;"	s	struct:generic_dev
+typ	generic_pcie.h	/^        u32     typ[PCI_TYPE0_ADDRESSES];$/;"	m	struct:generic_dev::st_cfg
+using_base_num	generic_pcie.h	/^        u8      using_base_num;$/;"	m	struct:generic_dev::st_cfg
+value	generic_pcie.h	/^    unsigned long long value;$/;"	m	struct:__anon1
