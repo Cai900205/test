@@ -512,7 +512,7 @@ int dma_usmem_init(fvl_dma_pool_t *pool,uint64_t pool_size,uint64_t dma_size)
 	dma_mem_generic = dma_mem_create(DMA_MAP_FLAG_ALLOC,
 					NULL, pool_size);
 	if (!dma_mem_generic) 
-  {
+        {
 		err = -EINVAL;
 		error(0, -err, "%s(): dma_mem_create()", __func__);
 		return err;
@@ -520,7 +520,7 @@ int dma_usmem_init(fvl_dma_pool_t *pool,uint64_t pool_size,uint64_t dma_size)
 
 	pool->dma_virt_base = __dma_mem_memalign(4096, dma_size);
 	if (!pool->dma_virt_base) 
-  {  
+        {  
 		err = -EINVAL;
 		error(0, -err, "%s(): __dma_mem_memalign()", __func__);
 		return err;
@@ -537,7 +537,7 @@ int dma_pool_init(fvl_dma_pool_t **pool,uint64_t pool_size,uint64_t dma_size)
 
 	dma_pool = malloc(sizeof(*dma_pool));
 	if (!dma_pool) 
-  {
+        {
 		error(0, errno, "%s(): DMA pool", __func__);
 		return -errno;
 	}
@@ -545,8 +545,8 @@ int dma_pool_init(fvl_dma_pool_t **pool,uint64_t pool_size,uint64_t dma_size)
 	*pool = dma_pool;
 
 	err = dma_usmem_init(dma_pool,pool_size,dma_size);
-  if (err < 0) 
-  {
+  	if (err < 0) 
+        {
  		error(0, -err, "%s(): DMA pool", __func__);
 		free(dma_pool);
 		return err;
