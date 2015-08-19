@@ -116,7 +116,7 @@ int fvl_srio_init(fvl_srio_init_param_t *srio_param)
         return -errno;
     }
  
-	uint32_t attr_read, attr_write;
+    uint32_t attr_read, attr_write;
     attr_read = srio_test_win_attrv[3];
     attr_write = srio_test_win_attrv[srio_type];
     FVL_LOG("attr_write = %u, srio_type = %u\n", attr_write, srio_type);
@@ -240,19 +240,20 @@ void fvl_srio_recv(void *arg)
     {
         while(1)
         {
-            if(!(pclt->FLA&0x01)) {
+            if(!(pclt->FLA&0x01)) 
+            {
                 continue;
             }
             break;
         }
-	    if(ctl_count == priv->buf_num)
-	    {
-          pclt= pcnt;
-	      ctl_count=1;
-	    }
-	    ctl_count++;
+        if(ctl_count == priv->buf_num)
+	{
+            pclt= pcnt;
+	    ctl_count=1;
+	}
+        ctl_count++;
         receive_num[priv->fd]++;
-	    pclt=pclt+1;
+        pclt=pclt+1;
     }
     return;
 }
@@ -323,8 +324,8 @@ int fvl_srio_channel_open(char *name)
     rvl = pthread_create(&(temp_channel->chan_id), NULL,fvl_srio_recv, &re_arg);
     if (rvl) 
     {
-		FVL_LOG("Create receive packet thread error!\n");
-		return -errno;
+        FVL_LOG("Create receive packet thread error!\n");
+        return -errno;
     }
     return fd;
 }
@@ -503,50 +504,50 @@ int fvl_srio_read_feedback(int fd,int num)
 
 int dma_usmem_init(fvl_dma_pool_t *pool,uint64_t pool_size,uint64_t dma_size)
 {
-	int err;
+    int err;
 
-	dma_mem_generic = dma_mem_create(DMA_MAP_FLAG_ALLOC,
-					NULL, pool_size);
-	if (!dma_mem_generic) 
-        {
-		err = -EINVAL;
-		error(0, -err, "%s(): dma_mem_create()", __func__);
-		return err;
-	}
+    dma_mem_generic = dma_mem_create(DMA_MAP_FLAG_ALLOC,
+			NULL, pool_size);
+    if (!dma_mem_generic) 
+    {
+        err = -EINVAL;
+        error(0, -err, "%s(): dma_mem_create()", __func__);
+        return err;
+    }
 
-	pool->dma_virt_base = __dma_mem_memalign(4096, dma_size);
-	if (!pool->dma_virt_base) 
-        {  
-		err = -EINVAL;
-		error(0, -err, "%s(): __dma_mem_memalign()", __func__);
-		return err;
-	}
-	pool->dma_phys_base = __dma_mem_vtop(pool->dma_virt_base);
+    pool->dma_virt_base = __dma_mem_memalign(4096, dma_size);
+    if (!pool->dma_virt_base) 
+    {  
+        err = -EINVAL;
+        error(0, -err, "%s(): __dma_mem_memalign()", __func__);
+        return err;
+    }
+    pool->dma_phys_base = __dma_mem_vtop(pool->dma_virt_base);
 
-	return 0;
+    return 0;
 }
 
 int dma_pool_init(fvl_dma_pool_t **pool,uint64_t pool_size,uint64_t dma_size)
 {
-	fvl_dma_pool_t *dma_pool;
-	int err;
+    fvl_dma_pool_t *dma_pool;
+    int err;
 
-	dma_pool = malloc(sizeof(*dma_pool));
-	if (!dma_pool) 
-        {
-		error(0, errno, "%s(): DMA pool", __func__);
-		return -errno;
-	}
-	memset(dma_pool, 0, sizeof(*dma_pool));
-	*pool = dma_pool;
+    dma_pool = malloc(sizeof(*dma_pool));
+    if (!dma_pool) 
+    {
+        error(0, errno, "%s(): DMA pool", __func__);
+        return -errno;
+    }
+    memset(dma_pool, 0, sizeof(*dma_pool));
+    *pool = dma_pool;
 
-	err = dma_usmem_init(dma_pool,pool_size,dma_size);
-  	if (err < 0) 
-        {
- 		error(0, -err, "%s(): DMA pool", __func__);
-		free(dma_pool);
-		return err;
-	}
-	return 0;
+    err = dma_usmem_init(dma_pool,pool_size,dma_size);
+    if (err < 0) 
+    {
+        error(0, -err, "%s(): DMA pool", __func__);
+        free(dma_pool);
+        return err;
+    }
+    return 0;
 }
 

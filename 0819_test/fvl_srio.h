@@ -24,7 +24,9 @@
 
 #define FVL_BASE_LAW 11
 #define FVL_BASE_LAW_SIZE  0x1000
+
 //default value
+
 #define DE_BUF_SIZE 0x100000 
 #define DE_BUF_NUM  0x10 
 #define DE_CHAN_NUM 1
