@@ -1,0 +1,31 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	Makefile	/^CC = $(TILERA_ROOT)\/bin\/tile-cc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -std=gnu99 -Wall -g $(OPT) $/;"	m
+LDFLAGS	Makefile	/^LDFLAGS = -static   $/;"	m
+LIBS	Makefile	/^LIBS = -ltmc -lgxio  -L..\/lib -lsirius_pcie$/;"	m
+OBJS	Makefile	/^OBJS = $(SRCS:%.c=%.o)$/;"	m
+OPT	Makefile	/^OPT = -Os$/;"	m
+RCMD	read_loop.c	24;"	d	file:
+RCMD	read_reg.c	25;"	d	file:
+SRCS	Makefile	/^SRCS = read_reg.c read_loop.c fpga_mem_test.c watcher_dma.c$/;"	m
+WCMD	read_loop.c	25;"	d	file:
+WCMD	read_reg.c	26;"	d	file:
+addr_lower	watcher_dma.c	/^    uint32_t addr_lower;$/;"	m	struct:__anon1	file:
+addr_upper	watcher_dma.c	/^    uint32_t addr_upper;$/;"	m	struct:__anon1	file:
+create_dma_desc	watcher_dma.c	/^dma_desc_t * create_dma_desc(uint32_t size)$/;"	f
+dma_desc_t	watcher_dma.c	/^}dma_desc_t;$/;"	t	typeref:struct:__anon1	file:
+dma_length	watcher_dma.c	/^    uint32_t dma_length;$/;"	m	struct:__anon1	file:
+endpoint_addr	watcher_dma.c	/^    uint32_t endpoint_addr;$/;"	m	struct:__anon1	file:
+help	read_loop.c	/^void help()$/;"	f
+help	read_reg.c	/^void help()$/;"	f
+main	read_loop.c	/^int main(int argc, char ** argv)$/;"	f
+main	read_reg.c	/^int main()$/;"	f
+main	watcher_dma.c	/^int main(int argc, char ** argv)$/;"	f
+reserved	watcher_dma.c	/^    uint32_t reserved[4];$/;"	m	struct:__anon1	file:
+set_dma_read	watcher_dma.c	/^static int set_dma_read(int fd, uint64_t address)$/;"	f	file:
+set_dma_write	watcher_dma.c	/^static int set_dma_write(int fd, uint64_t address)$/;"	f	file:

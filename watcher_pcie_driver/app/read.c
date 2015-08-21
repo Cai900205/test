@@ -39,7 +39,7 @@ int main(int argc, char ** argv)
     unsigned long data; //write by ...
     unsigned long data_back;
     help();
-    int g_handle = open(VGA_PCIE2_NAME, O_RDWR);
+    int g_handle = open(VGA_PCIE1_NAME, O_RDWR);
     if (g_handle < 0)
     {
         printf("Can not open the board.\n");
@@ -53,31 +53,21 @@ int main(int argc, char ** argv)
         {
             bar = atoi(argv[++i]);
         }
-        else if(!strcmp(arg, "--max_addr") && i + 1 < argc)
-        {
-            max_addr = atoi(argv[++i]);
-        }
     }
     data_back  = 0;
     data = 0x30;
     addr = 0x0;
-    printf("max_addr: 0x%x\n",max_addr);
-    while (addr < max_addr )
+//    if (pcie_user_write32(g_handle,bar, addr, data) != 0)
+  //  {
+    //    printf("write bar: 0x%02x , addr: 0x%016llx value : 0x%016llx error\n", bar, addr, data);
+  //  }
+    if (pcie_user_read32(g_handle, bar, addr, &data_back) != 0)
     {
-        if (pcie_user_write32(g_handle,bar, addr, data) != 0)
-        {
-             printf("write bar: 0x%02x , addr: 0x%016llx value : 0x%016llx error\n", bar, addr, data);
-        }
-        if (pcie_user_read32(g_handle, bar, addr, &data_back) != 0)
-        {
-             printf("read bar: 0x%02x , addr: 0x%016llx error\n", bar, addr);
-        }
-        if(data_back != data)
-        {
-            printf("################# %x read %x and write %x is different #################\n",addr,data_back,data);
-        }
-        data += 0x55;
-        addr += 1024;
+        printf("read bar: 0x%02x , addr: 0x%016llx error\n", bar, addr);
+    }
+    if(data_back != data)
+    {
+        printf("################# %x read %x and write %x is different #################\n",addr,data_back,data);
     }
     printf("################# 0x%x read and write 0x%x is ok #################\n",addr,data);
     return 0;

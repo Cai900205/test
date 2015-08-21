@@ -1,7 +1,8 @@
-#ifndef SIRIUS_PCIE_H
-#define SIRIUS_PCIE_H
+#ifndef VGA_PCIE_H
+#define VGA_PCIE_H
 
-#define SIRIUS_PCIE_NAME "/dev/fpga_pcie1"
+#define VGA_PCIE2_NAME "/dev/vga_pcie2"
+#define VGA_PCIE1_NAME "/dev/vga_pcie1"
 
 
 #define GENERIC_PCIE_BAR_INDEX 0
