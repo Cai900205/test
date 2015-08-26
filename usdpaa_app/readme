@@ -1,0 +1,2 @@
+re_check :srio_4M_receive_check
+se_check :srio_4M_send_check

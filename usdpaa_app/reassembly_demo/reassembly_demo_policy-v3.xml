@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (c) 2011-2013 Freescale Semiconductor, Inc.
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<!--
+ Reassembly demo application policy file
+-->
+
+<netpcd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="xmlProject/pcd.xsd" name="pcd_reass"
+    description="FMAN configuration for Reassembly">
+
+	<vsp name="Default_VSP" base="0"/>
+	<vsp name="IPv4_Reass_VSP" base="1"/>
+	<vsp name="IPv6_Reass_VSP" base="2"/>
+
+	<manipulations>
+		<reassembly name="reassembly">
+			<nonConsistentSpFqid>0x66</nonConsistentSpFqid>
+			<maxInProcess>1024</maxInProcess>
+			<timeOutMode>fragment</timeOutMode>
+			<fqidForTimeOutFrames>0</fqidForTimeOutFrames>
+			<numOfFramesPerHashEntry>8</numOfFramesPerHashEntry>
+			<timeoutThreshold>2000</timeoutThreshold>
+			<ipv4minFragSize>0</ipv4minFragSize>
+		</reassembly>
+	</manipulations>
+
+	<classification name="ipv4_udp" statistics="frame">
+		<key>
+			<fieldref name="udp.dport" />
+		</key>
+		<entry>
+			<data>0x868</data>
+			<mask>0xFFFF</mask>
+			<queue base="0x2e01" />
+			<vsp name="IPv4_Reass_VSP" />
+			<action statistics="enable" />
+		</entry>
+	</classification>
+
+	<classification name="ipv4_udp_first_frag">
+		<key>
+			<fieldref name="ipv4.foffset" />
+		</key>
+		<entry>
+			<data>0x0000</data>
+			<action type="classification" name="ipv4_udp" />
+		</entry>
+	</classification>
+
+	<!-- Coarse classification for IPv4 source IP-->
+	<classification name="reass_ipv4_classif" statistics="frame">
+		<key>
+			<fieldref name="ipv4.nextp"/>
+		</key>
+		<entry>
+			<data>0x11</data>
+			<action type="classification" name="ipv4_udp_first_frag"/>
+		</entry>
+		<action condition="on-miss" type="drop"/>
+	</classification>
+
+	<!-- Coarse classification for VLAN TCI and IPv4 source IP-->
+	<classification name="vlan_ipv4_classif" statistics="frame">
+		<key>
+			<nonheader source="key" action="exact_match" offset="0" size="6"/>
+		</key>
+		<entry>
+			<data>0x0001C0A80001</data>
+			<queue base="0x1775"/>
+			<action statistics="enable"/>
+		</entry>
+		<entry>
+			<data>0x0002C0A80002</data>
+			<queue base="0x1775"/>
+			<action statistics="enable"/>
+		</entry>
+		<entry>
+			<data>0x0003C0A80003</data>
+			<queue base="0x1775"/>
+			<action statistics="enable"/>
+		</entry>
+		<entry>
+			<data>0x0004C0A80004</data>
+			<queue base="0x1775"/>
+			<action statistics="enable"/>
+		</entry>
+		<action condition="on-miss" type="drop" statistics="enable"/>
+	</classification>
+
+	<!-- Coarse classification for IPv6 source IP-->
+	<classification name="reass_ipv6_classif" statistics="frame">
+		<key>
+			<fieldref name="ipv6.nexthdr" header_index="last" />
+		</key>
+		<entry>
+			<data>0x11</data>
+			<vsp name="IPv6_Reass_VSP"/>
+			<queue base="0x1881"/>
+			<action statistics="enable"/>
+		</entry>
+	</classification>
+
+	<!-- Coarse classification for VLAN TCI and IPv6 source IP-->
+	<classification name="vlan_ipv6_classif" statistics="frame">
+		<key>
+			<nonheader source="key" action="exact_match" offset="0" size="18"/>
+		</key>
+		<entry>
+			<data>0x00013FFE19440100000A000000BC25000D0B</data>
+			<queue base="0x1777"/>
+			<action statistics="enable"/>
+		</entry>
+		<entry>
+			<data>0x00023FFE19440200000A000000BC25000D0B</data>
+			<queue base="0x1777"/>
+			<action statistics="enable"/>
+		</entry>
+		<entry>
+			<data>0x00033FFE19440300000A000000BC25000D0B</data>
+			<queue base="0x1777"/>
+			<action statistics="enable"/>
+		</entry>
+		<entry>
+			<data>0x00043FFE19440400000A000000BC25000D0B</data>
+			<queue base="0x1777"/>
+			<action statistics="enable"/>
+		</entry>
+		<action condition="on-miss" type="drop" statistics="enable"/>
+	</classification>
+
+	<!--Distribution for IPv4 frames reassembly-->
+	<distribution name="vlan_ipv4_reassembly_dist">
+		<protocols>
+			<protocolref name="ipv4"/>
+			<protocolref name="ipv4" opt="0x00000008" />
+		</protocols>
+		<queue count="1" base="0x1880"/>
+	<action type="classification" name="reass_ipv4_classif"/>
+	</distribution>
+
+	<!--Distribution for VLAN, IPv4 frames-->
+	<distribution name="vlan_ipv4_dist">
+		<protocols>
+			<protocolref name="ipv4"/>
+		</protocols>
+		<key>
+			<fieldref name="vlan.tci"/>
+			<fieldref name="ipv4.src"/>
+		</key>
+		<queue count="2" base="0x1774"/>
+		<action type="classification" name="vlan_ipv4_classif"/>
+	</distribution>
+
+	<!--Distribution for IPv6 frames reassembly-->
+	<distribution name="vlan_ipv6_reassembly_dist">
+		<protocols>
+			<protocolref name="ipv6"/>
+			<protocolref name="ipv6" opt="0x00000004"/>
+		</protocols>
+		<queue count="1" base="0x1881"/>
+		<action type="classification" name="reass_ipv6_classif"/>
+	</distribution>
+
+	<!--Distribution for VLAN, IPv6 frames-->
+	<distribution name="vlan_ipv6_dist">
+		<protocols>
+			<protocolref name="ipv6"/>
+		</protocols>
+		<key>
+			<fieldref name="vlan.tci"/>
+			<fieldref name="ipv6.src"/>
+		</key>
+		<queue count="2" base="0x1776"/>
+		<action type="classification" name="vlan_ipv6_classif"/>
+	</distribution>
+
+	<distribution name="default_dist">
+		<vsp name="Default_VSP"/>
+		<queue count="1" base="0x66"/>
+	</distribution>
+
+	<policy name="reassembly_policy">
+		<dist_order>
+			<distributionref name="vlan_ipv4_reassembly_dist"/>
+			<distributionref name="vlan_ipv6_reassembly_dist"/>
+			<distributionref name="vlan_ipv4_dist"/>
+			<distributionref name="vlan_ipv6_dist"/>
+			<distributionref name="default_dist"/>
+		</dist_order>
+		 <reassembly name="reassembly"/>
+	</policy>
+</netpcd>

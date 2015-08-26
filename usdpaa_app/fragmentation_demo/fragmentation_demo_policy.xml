@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (c) 2011-2013 Freescale Semiconductor, Inc.
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<!--
+ Fragmentation demo application policy file
+-->
+
+<netpcd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlProject/pcd.xsd" name="3_tuple_lookup"
+	description="FMAN configuration for Fragmentation">
+
+	<manipulations>
+		<header name="vlan_remove_1">
+			<remove_header type="qtags"/>
+		</header>
+		<header name="update_id_1">
+			<update type="ipv4">
+				<field type="id" value="0x2000"/>
+			</update>
+			<nextmanip name="vlan_remove_1"/>
+		</header>
+
+		<header name="vlan_remove_2">
+			<remove_header type="qtags"/>
+		</header>
+		<header name="update_id_2">
+			<update type="ipv4">
+				<field type="id" value="0x3000"/>
+			</update>
+			<nextmanip name="vlan_remove_2"/>
+		</header>
+
+		<header name="vlan_remove_3">
+			<remove_header type="qtags"/>
+		</header>
+		<header name="update_id_3">
+			<update type="ipv4">
+				<field type="id" value="0x4000"/>
+			</update>
+			<nextmanip name="vlan_remove_3"/>
+		</header>
+
+		<header name="vlan_remove_4">
+			<remove_header type="qtags"/>
+		</header>
+		<header name="update_id_4">
+			<update type="ipv4">
+				<field type="id" value="0x5000"/>
+			</update>
+			<nextmanip name="vlan_remove_4"/>
+		</header>
+
+		<fragmentation name="oh_frag1">
+			<scratchBpid>4</scratchBpid>
+			<size>256</size>
+			<dontFragAction>discard</dontFragAction>
+		</fragmentation>
+
+		<fragmentation name="oh_frag2">
+			<scratchBpid>4</scratchBpid>
+			<size>512</size>
+			<dontFragAction>discard</dontFragAction>
+		</fragmentation>
+
+	</manipulations>
+
+	<!-- Coarse classification -->
+	<classification name="fman_eth_classif_ipv4">
+		<key>
+			<nonheader source="key" action="exact_match" size="6"/>
+		</key>
+		<entry>
+			<data>0x2614C0A80101</data>
+			<header name="update_id_1"/>
+		<queue base="0x1778"/>
+		</entry>
+		<entry>
+			<data>0x2615C0A80102</data>
+			<header name="update_id_2"/>
+		<queue base="0x1779"/>
+		</entry>
+		<entry>
+			<data>0x2616C0A80103</data>
+			<header name="update_id_3"/>
+		<queue base="0x177a"/>
+		</entry>
+		<entry>
+			<data>0x2617C0A80104</data>
+			<header name="update_id_4"/>
+		<queue base="0x177b"/>
+		</entry>
+		<action condition="on-miss" type="drop"/>
+	</classification>
+
+	<!-- Coarse classification -->
+	<classification name="fman_eth_classif_ipv6">
+		<key>
+			<nonheader source="key" action="exact_match" size="18"/>
+		</key>
+		<entry>
+			<data>0x68003FFE19440400000A000000BC25000D01</data>
+			<queue base="0x177c"/>
+		</entry>
+		<entry>
+			<data>0x68013FFE19440400000A000000BC25000D02</data>
+			<queue base="0x177d"/>
+		</entry>
+		<entry>
+			<data>0x68023FFE19440400000A000000BC25000D03</data>
+			<queue base="0x177e"/>
+		</entry>
+		<entry>
+			<data>0x68033FFE19440400000A000000BC25000D04</data>
+			<queue base="0x177f"/>
+		</entry>
+		<action condition="on-miss" type="drop"/>
+	</classification>
+
+	<!-- Coarse classification -->
+	<classification name="fman_oh_classif">
+		<key>
+			<nonheader source="key" action="exact_match" size="6"/>
+		</key>
+		<entry>
+			<data>0x000000000029</data>
+			<queue base="0x1788"/>
+			<fragmentation name="oh_frag1"/>
+		</entry>
+		<entry>
+			<data>0x00000000002a</data>
+			<queue base="0x1789"/>
+			<fragmentation name="oh_frag2"/>
+		</entry>
+		<entry>
+			<data>0x00000000002b</data>
+			<queue base="0x178a"/>
+			<fragmentation name="oh_frag1"/>
+		</entry>
+		<entry>
+			<data>0x00000000002c</data>
+			<queue base="0x178b"/>
+			<fragmentation name="oh_frag2"/>
+		</entry>
+		<entry>
+			<data>0x00000000002d</data>
+			<queue base="0x178c"/>
+			<fragmentation name="oh_frag1"/>
+		</entry>
+		<entry>
+			<data>0x00000000002e</data>
+			<queue base="0x178d"/>
+			<fragmentation name="oh_frag2"/>
+		</entry>
+		<entry>
+			<data>0x00000000002f</data>
+			<queue base="0x178e"/>
+			<fragmentation name="oh_frag1"/>
+		</entry>
+		<entry>
+			<data>0x000000000030</data>
+			<queue base="0x178f"/>
+			<fragmentation name="oh_frag2"/>
+		</entry>
+		<action condition="on-miss" type="drop"/>
+	</classification>
+
+	<!--Distribution -->
+	<distribution name="fman_eth_dist_ipv4">
+		<protocols>
+			<protocolref name="vlan"/>
+			<protocolref name="ipv4"/>
+		</protocols>
+		<key>
+			<fieldref name="vlan.tci"/>
+			<fieldref name="ipv4.src"/>
+		</key>
+		<queue count="4" base="0x1778"/>
+		<action type="classification" name="fman_eth_classif_ipv4"/>
+	</distribution>
+
+	<!--Distribution -->
+	<distribution name="fman_eth_dist_ipv6">
+		<protocols>
+			<protocolref name="vlan"/>
+			<protocolref name="ipv6"/>
+		</protocols>
+		<key>
+			<fieldref name="vlan.tci"/>
+			<fieldref name="ipv6.dst"/>
+		</key>
+		<queue count="4" base="0x177c"/>
+		<action type="classification" name="fman_eth_classif_ipv6"/>
+	</distribution>
+
+	<!--Distribution -->
+	<distribution name="fman_eth_default">
+		<queue count="1" base="0x1773"/>
+	</distribution>
+
+	<!--Distribution -->
+	<distribution name="fragmentation_dist">
+		<protocols>
+			<protocolref name="ethernet"/>
+		</protocols>
+		<key>
+			<fieldref name="ethernet.dst"/>
+		</key>
+		<queue count="8" base="0x1788"/>
+		<action type="classification" name="fman_oh_classif"/>
+	</distribution>
+
+	<distribution name="fragmentation_default">
+		<queue count="1" base="0x1770"/>
+	</distribution>
+
+	<policy name="fman_eth_policy">
+		<dist_order>
+			<distributionref name="fman_eth_dist_ipv4"/>
+			<distributionref name="fman_eth_dist_ipv6"/>
+			<distributionref name="fman_eth_default"/>
+		</dist_order>
+	</policy>
+
+	<policy name="fragmentation_policy">
+		<dist_order>
+			<distributionref name="fragmentation_dist"/>
+			<distributionref name="fragmentation_default"/>
+		</dist_order>
+	</policy>
+
+</netpcd>

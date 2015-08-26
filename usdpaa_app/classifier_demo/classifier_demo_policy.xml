@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (c) 2011-2013 Freescale Semiconductor, Inc.
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<!--
+ DPA Classifier demo application policy file
+-->
+
+<netpcd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlProject/pcd.xsd" name="3_tuple_lookup"
+	description="FMAN configuration for 3 tuple lookup">
+
+	<!-- Coarse classification -->
+	<classification name="3_tuple_ipv4_classif" max="64" masks="yes" statistics="frame">
+		<!-- Key value to be extracted from the packet -->
+		<key>
+			<nonheader source="key" action="exact_match" size="9"/>
+		</key>
+		<may-use>
+			<action type="classification" name="dscp_classif" />
+		</may-use>
+		<action condition="on-miss" type="drop"/>
+	</classification>
+
+	<classification name="3_tuple_ipv6_classif" max="64" masks="yes" statistics="frame">
+		<!-- Key value to be extracted from the packet -->
+		<key>
+			<nonheader source="key" action="exact_match" size="33"/>
+		</key>
+		<may-use>
+			<action type="classification" name="dscp_classif" />
+		</may-use>
+		<action condition="on-miss" type="drop"/>
+	</classification>
+
+	<classification name="dscp_classif" max="12" masks="yes" statistics="frame">
+		<!-- Key value to be extracted from the packet -->
+		<key>
+			<fieldref name="ip.dscp"/>
+		</key>
+		<entry>
+			<data>0x0A</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x0C</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x0E</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x12</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x14</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x16</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x1A</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x1C</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x1E</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x22</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x24</data>
+			<mask>0xff</mask>
+		</entry>
+		<entry>
+			<data>0x26</data>
+			<mask>0xff</mask>
+		</entry>
+		<action condition="on-miss" type="drop"/>
+	</classification>
+
+	<!--Distribution -->
+	<distribution name="ipv4_distribution" description="IPv4 distribution">
+		<key>
+			<fieldref name ="ipv4.src"/>
+			<fieldref name ="ipv4.dst"/>
+			<fieldref name ="ipv4.nextp"/>
+		</key>
+		<queue count="1" base="0x1780"/>
+		<action type="classification" name="3_tuple_ipv4_classif"/>
+	</distribution>
+
+	<distribution name="ipv6_distribution" description="IPv6 distribution">
+		<key>
+			<fieldref name ="ipv6.src"/>
+			<fieldref name ="ipv6.dst"/>
+			<fieldref name ="ipv6.nexthdr"/>
+		</key>
+		<queue count="1" base="0x1782"/>
+		<action type="classification" name="3_tuple_ipv6_classif"/>
+	</distribution>
+
+	<manipulations>
+		<header name="fwd6" duplicate="64">
+			<insert>
+				<size>12</size>
+				<offset>0</offset>
+				<replace>yes</replace>
+				<data>0x0102030405060708090a0b0c</data>
+			</insert>
+		</header>
+		<header name="fwd4" duplicate="64">
+			<insert>
+				<size>12</size>
+				<offset>0</offset>
+				<replace>yes</replace>
+				<data>0x0102030405060708090a0b0c</data>
+			</insert>
+		</header>
+	</manipulations>
+
+	<!-- Default distribution for garbage -->
+	<distribution name="default_dist">
+		<queue count="1" base="0x65"/>
+	</distribution>
+
+	<policy name="3_tuple_policy">
+		<dist_order>
+			<distributionref name="ipv4_distribution"/>
+			<distributionref name="ipv6_distribution"/>
+			<distributionref name="default_dist"/>
+		</dist_order>
+	</policy>
+</netpcd>

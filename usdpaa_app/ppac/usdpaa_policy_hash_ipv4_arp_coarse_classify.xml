@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (c) 2012 Freescale Semiconductor, Inc.
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<!--
+This fmc policy file establishes separate policies for network interfaces.  It includes
+entries for all 1 G and 10 G interfaces on two FMan instances.	A given policy file need
+not used them all.  The entries names end with an integer, 0 - 10.  The intended usage is
+to associate them with FMan MACs as follows.
+
+  fm0 dtsec0  - 0
+      dtsec1  - 1
+      dtsec2  - 2
+      dtsec3  - 3
+      dtsec4  - 4
+       tgec0  - 5
+  fm1 dtsec0  - 6
+      dtsec1  - 7
+      dtsec2  - 8
+      dtsec3  - 9
+      dtsec4  - 10
+       tgec0  - 11
+
+Likely, no single config file will use all of the policies in this file.
+
+The policies form a key using only the IPv4 source and destination IP address and SPI
+field of ESP header. The key is then used to hash to "count" FQs.  The base (i.e. first)
+FQID is different for each policy.
+
+If frame is non-ESP, the policies form a key using only the IPv4 source and destination
+IP address fields. The key is then used to hash to "count" FQs.  The base (i.e. first)
+FQID is different for each policy.
+
+Non-IPv4 packets are sent to the default FQ, the ID of which is distinct for each
+policy.
+-->
+
+<netpcd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlProject/pcd.xsd" name="example"
+	description="Bridging configuration">
+
+<!--	xxxxxxxxxxxxxxxxxxxxxxxx Distributions xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<distribution name="hash_ipv4_src_dst_dist0">
+		<queue count="32" base="0x400"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist1">
+		<queue count="32" base="0x500"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist2">
+		<queue count="32" base="0x600"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist3">
+		<queue count="32" base="0x700"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist4">
+		<queue count="32" base="0x800"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist5">
+		<queue count="32" base="0x900"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist6">
+		<queue count="32" base="0xa00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist7">
+		<queue count="32" base="0xb00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist8">
+		<queue count="32" base="0xc00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist9">
+		<queue count="32" base="0xd00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist10">
+		<queue count="32" base="0xe00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist11">
+		<queue count="32" base="0xf00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+
+	<!-- Policer profile used to drop packets other than ARP
+	request for self IP address of an interface -->
+
+	<policer name="fman_drop_traffic">
+		<algorithm>pass_through</algorithm>
+		<color_mode>color_blind</color_mode>
+		<action condition="on-green" type="drop"/>
+		<action condition="on-yellow" type="drop"/>
+		<action condition="on-red" type="drop"/>
+	</policer>
+
+	<distribution name="fman_drop_dist">
+		<queue base="1" count="1"/>
+		<action type="policer" name="fman_drop_traffic"/>
+	</distribution>
+
+	<distribution name="arp_dist0">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf0"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf0">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf0"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf0">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf0"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf0">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf0"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf0">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a80a01</data>
+			<action type="distribution" name="default_dist0"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist1">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf1"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf1">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf1"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf1">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf1"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf1">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf1"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf1">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a81401</data>
+			<action type="distribution" name="default_dist1"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist2">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf2"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf2">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf2"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf2">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf2"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf2">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf2"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf2">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a81e01</data>
+			<action type="distribution" name="default_dist2"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist3">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf3"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf3">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf3"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf3">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf3"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf3">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf3"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf3">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a82801</data>
+			<action type="distribution" name="default_dist3"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist4">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf4"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf4">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf4"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf4">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf4"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf4">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf4"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf4">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a83201</data>
+			<action type="distribution" name="default_dist4"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist5">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf5"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf5">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf5"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf5">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf5"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf5">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf5"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf5">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a83c01</data>
+			<action type="distribution" name="default_dist5"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist6">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf6"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf6">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf6"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf6">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf6"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf6">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf6"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf6">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a86e01</data>
+			<action type="distribution" name="default_dist6"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist7">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf7"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf7">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf7"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf7">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf7"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf7">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf7"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf7">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a87801</data>
+			<action type="distribution" name="default_dist7"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist8">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf8"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf8">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf8"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf8">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf8"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf8">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf8"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf8">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a88201</data>
+			<action type="distribution" name="default_dist8"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist9">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf9"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf9">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf9"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf9">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf9"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf9">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf9"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf9">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a88c01</data>
+			<action type="distribution" name="default_dist9"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist10">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf10"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf10">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf10"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf10">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf10"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf10">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf10"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf10">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a89601</data>
+			<action type="distribution" name="default_dist10"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="arp_dist11">
+		<queue base="1" count="1"/>
+		<protocols>
+			<protocolref name="arp"/>
+		</protocols>
+		<action type="classification" name="arp_htype_clsf11"/>
+	</distribution>
+
+	<classification name="arp_htype_clsf11">
+		<key>
+			<fieldref name="arp.htype"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_ptype_clsf11"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_ptype_clsf11">
+		<key>
+			<fieldref name="arp.ptype"/>
+		</key>
+		<entry>
+			<data>0x800</data>
+			<action type="classification" name="arp_opcode_clsf11"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_opcode_clsf11">
+		<key>
+			<fieldref name="arp.opcode"/>
+		</key>
+		<entry>
+			<data>0x1</data>
+			<action type="classification" name="arp_tpa_clsf11"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<classification name="arp_tpa_clsf11">
+		<key>
+			<fieldref name="arp.tpa"/>
+		</key>
+		<entry>
+			<data>0xc0a8a001</data>
+			<action type="distribution" name="default_dist11"/>
+		</entry>
+		<action type="distribution" name="fman_drop_dist" condition="on-miss"/>
+	</classification>
+
+	<distribution name="default_dist0">
+		<queue count="1" base="0x51"/>
+	</distribution>
+	<distribution name="default_dist1">
+		<queue count="1" base="0x53"/>
+	</distribution>
+	<distribution name="default_dist2">
+		<queue count="1" base="0x55"/>
+	</distribution>
+	<distribution name="default_dist3">
+		<queue count="1" base="0x57"/>
+	</distribution>
+	<distribution name="default_dist4">
+		<queue count="1" base="0x59"/>
+	</distribution>
+	<distribution name="default_dist5">
+		<queue count="1" base="0x5b"/>
+	</distribution>
+	<distribution name="default_dist6">
+		<queue count="1" base="0x5d"/>
+	</distribution>
+	<distribution name="default_dist7">
+		<queue count="1" base="0x5f"/>
+	</distribution>
+	<distribution name="default_dist8">
+		<queue count="1" base="0x61"/>
+	</distribution>
+	<distribution name="default_dist9">
+		<queue count="1" base="0x63"/>
+	</distribution>
+	<distribution name="default_dist10">
+		<queue count="1" base="0x65"/>
+	</distribution>
+	<distribution name="default_dist11">
+		<queue count="1" base="0x67"/>
+	</distribution>
+
+<!--	xxxxxxxxxxxxxxxxxxxxxxxxxx Policies xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<policy name="hash_ipsec_src_dst_spi_policy0">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist0"/>
+			<distributionref name="arp_dist0"/>
+			<distributionref name="default_dist0"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy1">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist1"/>
+			<distributionref name="arp_dist1"/>
+			<distributionref name="default_dist1"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy2">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist2"/>
+			<distributionref name="arp_dist2"/>
+			<distributionref name="default_dist2"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy3">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist3"/>
+			<distributionref name="arp_dist3"/>
+			<distributionref name="default_dist3"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy4">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist4"/>
+			<distributionref name="arp_dist4"/>
+			<distributionref name="default_dist4"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy5">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist5"/>
+			<distributionref name="arp_dist5"/>
+			<distributionref name="default_dist5"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy6">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist6"/>
+			<distributionref name="arp_dist6"/>
+			<distributionref name="default_dist6"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy7">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist7"/>
+			<distributionref name="arp_dist7"/>
+			<distributionref name="default_dist7"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy8">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist8"/>
+			<distributionref name="arp_dist8"/>
+			<distributionref name="default_dist8"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy9">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist9"/>
+			<distributionref name="arp_dist9"/>
+			<distributionref name="default_dist9"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy10">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist10"/>
+			<distributionref name="arp_dist10"/>
+			<distributionref name="default_dist10"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy11">
+		<dist_order>
+			<distributionref name="hash_ipv4_src_dst_dist11"/>
+			<distributionref name="arp_dist11"/>
+			<distributionref name="default_dist11"/>
+		</dist_order>
+	</policy>
+
+</netpcd>

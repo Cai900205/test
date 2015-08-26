@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2012 Freescale Semiconductor, Inc.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<dists_cfg>
+<!--	xxxxxxxxxxxxxxxxxxxxxxx RMAN RX distribution xxxxxxxxxxxxxxxxxxxxxxx -->
+	<distribution name="rman_from_peer_10gec0" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2600" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-10gec0"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_10gec1" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2700" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-10gec1"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_10gec2" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2e00" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-10gec2"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_10gec3" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2f00" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-10gec3"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec0" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2000" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec0"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec1" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2100" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec1"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec2" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2200" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec2"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec3" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2300" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec3"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec4" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2400" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec4"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec5" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2500" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec5"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec8" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2800" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec8"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec9" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2900" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec9"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec10" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2a000" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec10"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec11" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2b00" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec11"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec12" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2c00" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec12"/>
+	</distribution>
+
+	<distribution name="rman_from_peer_dtsec13" type="RMAN_RX">
+		<rio_port number="0" mask="1"/>
+		<sid value="0" mask="0xff"/>
+		<queue base="0x2d00" mode="algorithmic" wq="4"/>
+		<transactionref name="dstr-dtsec13"/>
+	</distribution>
+
+<!--	xxxxxxxxxxxxxxxxxxxxxxx RMAN TX distribution xxxxxxxxxxxxxxxxxxxxxxx -->
+	<distribution name="rman_to_peer_10gec0" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3600" count="4" wq="3"/>
+		<transactionref name="dstr-10gec0"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_10gec1" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3700" count="4" wq="3"/>
+		<transactionref name="dstr-10gec1"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_10gec2" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3e00" count="4" wq="3"/>
+		<transactionref name="dstr-10gec2"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_10gec3" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3f00" count="4" wq="3"/>
+		<transactionref name="dstr-10gec3"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec0" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3000" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec0"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec1" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3100" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec1"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec2" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3200" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec2"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec3" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3300" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec3"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec4" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3400" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec4"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec5" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3500" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec5"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec8" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3800" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec8"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec9" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3900" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec9"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec10" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3a00" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec10"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec11" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3b00" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec11"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec12" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3c00" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec12"/>
+	</distribution>
+
+	<distribution name="rman_to_peer_dtsec13" type="RMAN_TX">
+		<rio_port number="0"/>
+		<did value="1"/>
+		<queue base="0x3d00" count="4" wq="3"/>
+		<transactionref name="dstr-dtsec13"/>
+	</distribution>
+
+<!--	xxxxxxxxxxxxxxxxxxxxxx FMAN RX distribution xxxxxxxxxxxxxxxxxxxxxxxx -->
+	<distribution name="fman_from_10gec0" type="FMAN_RX">
+		<fman_port name="10gec0"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_10gec1" type="FMAN_RX">
+		<fman_port name="10gec1"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_10gec2" type="FMAN_RX">
+		<fman_port name="10gec2"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_10gec3" type="FMAN_RX">
+		<fman_port name="10gec3"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec0" type="FMAN_RX">
+		<fman_port name="dtsec0"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec1" type="FMAN_RX">
+		<fman_port name="dtsec1"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec2" type="FMAN_RX">
+		<fman_port name="dtsec2"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec3" type="FMAN_RX">
+		<fman_port name="dtsec3"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec4" type="FMAN_RX">
+		<fman_port name="dtsec4"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec5" type="FMAN_RX">
+		<fman_port name="dtsec5"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec8" type="FMAN_RX">
+		<fman_port name="dtsec8"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec9" type="FMAN_RX">
+		<fman_port name="dtsec9"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec10" type="FMAN_RX">
+		<fman_port name="dtsec10"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec11" type="FMAN_RX">
+		<fman_port name="dtsec11"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec12" type="FMAN_RX">
+		<fman_port name="dtsec12"/>
+		<queue wq="4"/>
+	</distribution>
+
+	<distribution name="fman_from_dtsec13" type="FMAN_RX">
+		<fman_port name="dtsec13"/>
+		<queue wq="4"/>
+	</distribution>
+
+<!--	xxxxxxxxxxxxxxxxxxxxxx FMAN TX distribution xxxxxxxxxxxxxxxxxxxxxxxx -->
+	<distribution name="fman_to_10gec0" type="FMAN_TX">
+		<fman_port name="10gec0"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_10gec1" type="FMAN_TX">
+		<fman_port name="10gec1"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_10gec2" type="FMAN_TX">
+		<fman_port name="10gec2"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_10gec3" type="FMAN_TX">
+		<fman_port name="10gec3"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec0" type="FMAN_TX">
+		<fman_port name="dtsec0"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec1" type="FMAN_TX">
+		<fman_port name="dtsec1"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec2" type="FMAN_TX">
+		<fman_port name="dtsec2"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec3" type="FMAN_TX">
+		<fman_port name="dtsec3"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec4" type="FMAN_TX">
+		<fman_port name="dtsec4"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec5" type="FMAN_TX">
+		<fman_port name="dtsec5"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec8" type="FMAN_TX">
+		<fman_port name="dtsec8"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec9" type="FMAN_TX">
+		<fman_port name="dtsec9"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec10" type="FMAN_TX">
+		<fman_port name="dtsec10"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec11" type="FMAN_TX">
+		<fman_port name="dtsec11"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec12" type="FMAN_TX">
+		<fman_port name="dtsec12"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+	<distribution name="fman_to_dtsec13" type="FMAN_TX">
+		<fman_port name="dtsec13"/>
+		<queue count="2" wq="3"/>
+	</distribution>
+
+<!--	xxxxxxxxxxxxxxxxxxx RMAN to FMAN distribution xxxxxxxxxxxxxxxxxxxxx -->
+	<distribution name="rman_to_fman_10gec0" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_10gec0"/>
+		<distributionref name="fman_to_10gec0"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_10gec1" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_10gec1"/>
+		<distributionref name="fman_to_10gec1"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_10gec2" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_10gec2"/>
+		<distributionref name="fman_to_10gec2"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_10gec3" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_10gec3"/>
+		<distributionref name="fman_to_10gec3"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec0" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec0"/>
+		<distributionref name="fman_to_dtsec0"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec1" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec1"/>
+		<distributionref name="fman_to_dtsec1"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec2" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec2"/>
+		<distributionref name="fman_to_dtsec2"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec3" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec3"/>
+		<distributionref name="fman_to_dtsec3"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec4" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec4"/>
+		<distributionref name="fman_to_dtsec4"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec5" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec5"/>
+		<distributionref name="fman_to_dtsec5"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec8" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec8"/>
+		<distributionref name="fman_to_dtsec8"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec9" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec9"/>
+		<distributionref name="fman_to_dtsec9"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec10" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec10"/>
+		<distributionref name="fman_to_dtsec10"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec11" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec11"/>
+		<distributionref name="fman_to_dtsec11"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec12" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec12"/>
+		<distributionref name="fman_to_dtsec12"/>
+	</distribution>
+
+	<distribution name="rman_to_fman_dtsec13" type="RMAN_TO_FMAN">
+		<distributionref name="rman_from_peer_dtsec13"/>
+		<distributionref name="fman_to_dtsec13"/>
+	</distribution>
+
+<!--	xxxxxxxxxxxxxxxxxxx FMan to RMan distribution xxxxxxxxxxxxxxxxxxxxxx -->
+	<distribution name="fman_to_rman_10gec0" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_10gec0"/>
+		<distributionref name="rman_to_peer_10gec0"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_10gec1" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_10gec1"/>
+		<distributionref name="rman_to_peer_10gec1"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_10gec2" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_10gec2"/>
+		<distributionref name="rman_to_peer_10gec2"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_10gec3" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_10gec3"/>
+		<distributionref name="rman_to_peer_10gec3"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec0" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec0"/>
+		<distributionref name="rman_to_peer_dtsec0"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec1" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec1"/>
+		<distributionref name="rman_to_peer_dtsec1"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec2" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec2"/>
+		<distributionref name="rman_to_peer_dtsec2"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec3" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec3"/>
+		<distributionref name="rman_to_peer_dtsec3"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec4" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec4"/>
+		<distributionref name="rman_to_peer_dtsec4"/>
+	</distribution>
+	<distribution name="fman_to_rman_dtsec5" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec5"/>
+		<distributionref name="rman_to_peer_dtsec5"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec8" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec8"/>
+		<distributionref name="rman_to_peer_dtsec8"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec9" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec9"/>
+		<distributionref name="rman_to_peer_dtsec9"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec10" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec10"/>
+		<distributionref name="rman_to_peer_dtsec10"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec11" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec11"/>
+		<distributionref name="rman_to_peer_dtsec11"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec12" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec12"/>
+		<distributionref name="rman_to_peer_dtsec12"/>
+	</distribution>
+
+	<distribution name="fman_to_rman_dtsec13" type="FMAN_TO_RMAN">
+		<distributionref name="fman_from_dtsec13"/>
+		<distributionref name="rman_to_peer_dtsec13"/>
+	</distribution>
+</dists_cfg>

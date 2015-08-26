@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (c) 2013 Freescale Semiconductor, Inc.
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<!--
+This CEETM configuration file describes hierarchy of queue, channel and
+network interface of CEETM. The same configuration will be applied to
+every interface enabled in usdpaa and in application.
+The configuration must be compliant with CEETM rules, here is a simple illustration
+
+<ceetm>	root node of this xml file
+
+<lni>	Logic network interface, only one for each interface
+	control:‘shaped’ if shaper is placed on this interface; ‘unshaped’ otherwise
+	cr:	bandwidth for Commit Rate
+	er:	bandwidth for Excess Rate
+
+<channel>	Each LNI contains 8 CQ channels at most
+	control:‘shaped’ if shaper is placed on this channel; ‘unshaped’ otherwise
+	group:	0 – no group; 1 – only groupA enabled; 2 – both groupA/B are enabled
+	cr/er:	See above
+
+<groupA/B>	Class queue group under CQ channel
+		groupA has 8 CQs (8-15) if no groupB required or has 4 CQs (8-11) if groupB required
+	idx:	The priority of the group.
+		The group with idx 'n' has priority higher than CQn but lower than CQ(n-1)
+	op:	Eligibility of the group.
+		cr – cr eligible; er – er eligible; both - cr/er
+
+<cq>	Each channel has 16 class queues
+		CQ 0-7 are scheduled using strict priority(SP)
+		CQ 8-15 are scheduled using a weighted scheduling algorithm(WBFS)
+	idx:	CQ id, ranging from 0 to 15
+	op:	Eligibility of SP class queue. Not applicable to WBFS CQs
+		cr – cr eligible; er – er eligible; both - cr/er
+	weight:	Weight of WBFS class queue. Not applicable to SP CQs
+-->
+
+<ceetm>
+	<lni control="shaped" cr="2g" er="2g" >
+		<channel control="unshaped" group="0" >
+			<cq idx='0'/>
+		</channel>
+		<channel control="unshaped" group="2">
+			<groupA idx="6" />
+			<groupB idx="6" />
+			<cq idx='0' />
+			<cq idx='1' />
+			<cq idx='2' />
+			<cq idx='3' />
+			<cq idx='4' />
+			<cq idx='5' />
+			<cq idx='6' />
+			<cq idx='7' />
+			<cq idx="8" weight="1" />
+			<cq idx="9" weight="1" />
+			<cq idx="10" weight="1" />
+			<cq idx="11" weight="1" />
+			<cq idx="12" weight="1" />
+			<cq idx="13" weight="2" />
+			<cq idx="14" weight="4" />
+			<cq idx="15" weight="8" />
+		</channel>
+		<channel control="shaped" group="2" cr="500m" er="50m">
+			<groupA idx="1" op="cr" />
+			<groupB idx="3" op="er" />
+			<cq idx='0' op="cr" />
+			<cq idx='1' op="both" />
+			<cq idx='2' op="er" />
+			<cq idx="8" weight="1" />
+			<cq idx="9" weight="1" />
+			<cq idx="10" weight="1" />
+			<cq idx="11" weight="1" />
+			<cq idx="12" weight="1" />
+			<cq idx="13" weight="1" />
+			<cq idx="14" weight="1" />
+			<cq idx="15" weight="1" />
+		</channel>
+		<channel control="shaped" group="1" cr="250m" er="100m">
+			<groupA idx="2" op="both" />
+			<cq idx='0' op="both" />
+			<cq idx='1' op="both" />
+			<cq idx='2' op="both" />
+			<cq idx='3' op="both" />
+			<cq idx="8" weight="1" />
+			<cq idx="9" weight="2" />
+			<cq idx="10" weight="4" />
+			<cq idx="11" weight="8" />
+			<cq idx="12" weight="16" />
+			<cq idx="13" weight="32" />
+			<cq idx="14" weight="64" />
+			<cq idx="15" weight="128" />
+		</channel>
+	</lni>
+</ceetm>
+

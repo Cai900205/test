@@ -1,0 +1,39 @@
+252a253
+> 	    //memset((send_data.virt.write_data_prep+offset),0x5a,size);
+255,261c256,260
+<             do{
+< 	    	err = fsl_dma_wait(dmadev);
+< 	    	if (err < 0) {
+< 				printf("port %d: dma task error!\n", port + 1);
+< 				fflush(stdout);
+< 	    	}
+< 	    }while(err!=0);
+---
+> 	    err = fsl_dma_wait(dmadev);
+> 	    if (err < 0) {
+> 			printf("port %d: dma task error!\n", port + 1);
+> 			fflush(stdout);
+> 	    }
+284a284
+> /*ctx add send packet */
+295a296
+> /*ctx send*/
+322a324
+> /*end*/
+456a459
+> /*ctx send*/
+467a471
+> /*end*/
+655,666d658
+< 	if(err!=0)
+<         {
+< 		printf("sro set targetid  failed!\n");
+<                 fflush(stdout);
+< 	}
+<         err = fsl_srio_set_deviceid(sriodev,1,0x11);
+< 	if(err!=0)
+<         {
+< 		printf("sro set targetid  failed!\n");
+<                 fflush(stdout);
+< 	}
+<         err = fsl_srio_set_deviceid(sriodev,0,0x14);

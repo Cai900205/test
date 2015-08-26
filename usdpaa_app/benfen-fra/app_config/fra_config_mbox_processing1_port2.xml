@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2012 Freescale Semiconductor, Inc.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<fra_cfg>
+<!--	xxxxxxxxxxxxxxxxxxxx RMan hardware configuration xxxxxxxxxxxxxxxxxxx -->
+	<rman_cfg>
+		<defcfg file="/usr/etc/rman_config.xml"/>
+	</rman_cfg>
+
+<!--	xxxxxxxxxxxxxxxxxxxxx FMan port configuration xxxxxxxxxxxxxxxxxxxxxx -->
+	<network_cfg>
+		<defcfg file="/usr/etc/network_config.xml"/>
+	</network_cfg>
+
+<!--	xxxxxxxxxxxxxxxxxxxxxxxx Transaction xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+	<trans_cfg>
+		<defcfg file="/usr/etc/transactions_config.xml"/>
+	</trans_cfg>
+
+<!--	xxxxxxxxxxxxxxxxxxxxxxxx Distribution xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+	<dists_cfg>
+		<defcfg file="/usr/etc/distributions_config.xml"/>
+
+		<!--
+		 For B4 platform, When using Serdes2 0x8d, There is only SRIO2.
+		 So this file changes the SRIO port index of the related
+		 distribution from 0 to 1.
+		-->
+		<!--	xxxxxx RMan to FMan distribution xxxxxxxxx -->
+		<distribution name="rman_to_fman_10gec0">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-10gec0"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_10gec1">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-10gec1"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_10gec2">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-10gec2"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_10gec3">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-10gec3"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec0">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec0"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec1">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec1"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec2">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec2"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec3">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec3"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec4">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec4"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec5">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec5"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec8">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec8"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec9">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec9"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec10">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec10"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec11">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec11"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec12">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec12"/>
+		</distribution>
+
+		<distribution name="rman_to_fman_dtsec13">
+		<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec13"/>
+		</distribution>
+
+		<!--	xxxxxx FMan to RMan distribution xxxxxx -->
+		<distribution name="fman_to_rman_10gec0">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-10gec0"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_10gec1">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-10gec1"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_10gec2">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-10gec2"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_10gec3">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-10gec3"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec0">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec0"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec1">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec1"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec2">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec2"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec3">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec3"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec4">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec4"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec5">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec5"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec8">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec8"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec9">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec9"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec10">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec10"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec11">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec11"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec12">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec12"/>
+		</distribution>
+
+		<distribution name="fman_to_rman_dtsec13">
+			<rio_port number="1" mask="1"/>
+			<transactionref name="mbox-dtsec13"/>
+		</distribution>
+	</dists_cfg>
+
+<!--	xxxxxxxxxxxxxxxxxxxxxxxxxx Policy xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+	<policies_cfg>
+		<defcfg file="/usr/etc/policies_config.xml"/>
+		<policy name="processing1" enable="yes"/>
+	</policies_cfg>
+</fra_cfg>

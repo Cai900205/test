@@ -1,0 +1,3 @@
+cd /usr/etc
+fmc -c usdpaa_config_p4_serdes_0xe.xml -p usdpaa_policy_hash_ipv4.xml -a
+reflector

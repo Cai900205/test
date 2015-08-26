@@ -1,0 +1,22 @@
+45c45
+<     uint32_t ctl_size=FVL_CTL_WIN_SIZE;
+---
+>     uint32_t ctl_size=768;//FVLSRIO_CTL_SIZE;
+53c53
+<     uint32_t ctl_win_size=0x100000;//ctl_size*chan_num;
+---
+>     uint32_t ctl_win_size=0x1000;//ctl_size*chan_num;
+329d328
+<     FVL_LOG("Host receive ctl num!\n");
+382c381
+<     volatile uint8_t *flag=&head_port[port_num].uflag;
+---
+>     volatile uint32_t *flag=&head_port[port_num].uflag;
+395c394
+<     ctl_size = FVL_CTL_WIN_SIZE;
+---
+>     ctl_size = 768;//FVL_CTL_SIZE; 
+432a432
+>     
+445d444
+< 

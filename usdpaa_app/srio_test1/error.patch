@@ -1,0 +1,17 @@
+232c232
+< 	uint32_t total_buf=BUFFER_NUM;
+---
+> 	uint64_t total_buf=BUFFER_NUM;
+286,287c286
+< 			//	if(send_num == SEND_TOTAL_NUM)
+< 				if(send_num == 4)
+---
+> 				if(send_num == SEND_TOTAL_NUM)
+289d287
+< 				//	memcpy((send_data.virt.write_data_prep+SEND_NUM_OFFSET),&usebuf_number,sizeof(uint32_t));
+301d298
+< //                                        pi++;
+325c322
+< 	uint64_t receive_num=0,use_num=0,total_buf=200;
+---
+> 	uint64_t receive_num=0,use_num=0,total_buf=BUFFER_NUM;

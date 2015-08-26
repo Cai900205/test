@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (c) 2010 - 2011 Freescale Semiconductor, Inc.
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<!--
+This fmc policy file establishes separate policies for network interfaces.  It includes
+entries for all 1 G and 10 G interfaces on two FMan instances.	A given policy file need
+not used them all.  The entries names end with an integer, 0 - 10.  The intended usage is
+to associate them with FMan MACs as follows.
+
+  fm0 dtsec0  - 0
+      dtsec1  - 1
+      dtsec2  - 2
+      dtsec3  - 3
+      dtsec4  - 4
+       tgec0  - 5
+  fm1 dtsec0  - 6
+      dtsec1  - 7
+      dtsec2  - 8
+      dtsec3  - 9
+      dtsec4  - 10
+       tgec0  - 11
+
+Likely, no single config file will use all of the policies in this file.
+
+The policies form a key using only the IPv4 source and destination IP address and SPI
+field of ESP header. The key is then used to hash to "count" FQs.  The base (i.e. first)
+FQID is different for each policy.
+
+If frame is non-ESP, the policies form a key using only the IPv4 source and destination
+IP address fields. The key is then used to hash to "count" FQs.  The base (i.e. first)
+FQID is different for each policy.
+
+Non-IPv4 packets are sent to the default FQ, the ID of which is distinct for each
+policy.
+-->
+
+<netpcd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlProject/pcd.xsd" name="example"
+	description="Bridging configuration">
+
+<!--	xxxxxxxxxxxxxxxxxxxxxxxx Distributions xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<distribution name="hash_ipv4_src_dst_dist0">
+		<queue count="32" base="0x400"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist1">
+		<queue count="32" base="0x500"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist2">
+		<queue count="32" base="0x600"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist3">
+		<queue count="32" base="0x700"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist4">
+		<queue count="32" base="0x800"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist5">
+		<queue count="32" base="0x900"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist6">
+		<queue count="32" base="0xa00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist7">
+		<queue count="32" base="0xb00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist8">
+		<queue count="32" base="0xc00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist9">
+		<queue count="32" base="0xd00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist10">
+		<queue count="32" base="0xe00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipv4_src_dst_dist11">
+		<queue count="32" base="0xf00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist0">
+		<queue count="32" base="0x400"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist1">
+		<queue count="32" base="0x500"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist2">
+		<queue count="32" base="0x600"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist3">
+		<queue count="32" base="0x700"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist4">
+		<queue count="32" base="0x800"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist5">
+		<queue count="32" base="0x900"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist6">
+		<queue count="32" base="0xa00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist7">
+		<queue count="32" base="0xb00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+
+	<distribution name="hash_ipv4_shared_mac_dist6">
+		<queue base="1" count="1" />
+		<protocols>
+			<protocolref name="ipv4" />
+		</protocols>
+		<action type="classification" name="ip_dest_clsf6"/>
+	</distribution>
+	<classification name="ip_dest_clsf6">
+		<key>
+			<fieldref name="ipv4.dst" />
+		</key>
+		<entry>
+			<data>0xc0a82c03</data>
+			<queue base="0x02" />
+			<action type="distribution" name="usdpaa_dist6" />
+		</entry>
+		<entry>
+			<data>0xc0a82c04</data>
+			<queue base="0x03" />
+			<action type="distribution" name="default_dist6" />
+		</entry>
+		<action type="distribution" name="default_dist6" condition="on-miss" />
+	</classification>
+	<distribution name="usdpaa_dist6">
+		<queue count="32" base="0xf00"/>
+		<key>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+
+	<distribution name="hash_ipv4_shared_mac_dist7">
+                <queue base="1" count="1" />
+                <protocols>
+                        <protocolref name="ipv4" />
+                </protocols>
+                <action type="classification" name="ip_dest_clsf7"/>
+        </distribution>
+        <classification name="ip_dest_clsf7">
+                <key>
+                        <fieldref name="ipv4.dst" />
+                </key>
+                <entry>
+                        <data>0xc0a82c03</data>
+                        <queue base="0x02" />
+                        <action type="distribution" name="usdpaa_dist7" />
+                </entry>
+                <entry>
+                        <data>0xc0a82c04</data>
+                        <queue base="0x03" />
+                        <action type="distribution" name="default_dist7" />
+                </entry>
+		<action type="distribution" name="default_dist7" condition="on-miss" />
+        </classification>
+        <distribution name="usdpaa_dist7">
+                <queue count="32" base="0xf00"/>
+                <key>
+                        <fieldref name="ipv4.dst"/>
+                </key>
+        </distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist8">
+		<queue count="32" base="0xc00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist9">
+		<queue count="32" base="0xd00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist10">
+		<queue count="32" base="0xe00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+	<distribution name="hash_ipsec_src_dst_spi_dist11">
+		<queue count="32" base="0xf00"/>
+		<key>
+			<fieldref name="ipv4.src"/>
+			<fieldref name="ipv4.dst"/>
+			<fieldref name="ipsec_esp.spi"/>
+		</key>
+	</distribution>
+
+	<distribution name="hash_ipv4_shared_mac_dist4">
+		<queue base="1" count="1" />
+		<protocols>
+			<protocolref name="ipv4" />
+		</protocols>
+		<action type="classification" name="ip_dest_clsf4"/>
+	</distribution>
+	<classification name="ip_dest_clsf4">
+		<key>
+			<fieldref name="ipv4.dst" />
+		</key>
+		<entry>
+			<data>0xc0a85803</data>
+			<queue base="0x02" />
+			<action type="distribution" name="usdpaa_dist4" />
+		</entry>
+		<entry>
+			<data>0xc0a85804</data>
+			<queue base="0x03" />
+			<action type="distribution" name="default_dist4" />
+		</entry>
+		<action type="distribution" name="default_dist4" condition="on-miss" />
+	</classification>
+	<distribution name="usdpaa_dist4">
+		<queue count="32" base="0x800"/>
+		<key>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+
+	<distribution name="hash_ipv4_shared_mac_dist5">
+		<queue base="1" count="1" />
+		<protocols>
+			<protocolref name="ipv4" />
+		</protocols>
+		<action type="classification" name="ip_dest_clsf5"/>
+	</distribution>
+	<classification name="ip_dest_clsf5">
+		<key>
+			<fieldref name="ipv4.dst" />
+		</key>
+		<entry>
+			<data>0xc0a85803</data>
+			<queue base="0x02" />
+			<action type="distribution" name="usdpaa_dist5" />
+		</entry>
+		<entry>
+			<data>0xc0a85804</data>
+			<queue base="0x03" />
+			<action type="distribution" name="default_dist5" />
+		</entry>
+		<action type="distribution" name="default_dist5" condition="on-miss" />
+	</classification>
+	<distribution name="usdpaa_dist5">
+		<queue count="32" base="0x900"/>
+		<key>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+
+	<distribution name="hash_ipv4_shared_mac_dist11">
+		<queue base="1" count="1" />
+		<protocols>
+			<protocolref name="ipv4" />
+		</protocols>
+		<action type="classification" name="ip_dest_clsf11"/>
+	</distribution>
+	<classification name="ip_dest_clsf11">
+		<key>
+			<fieldref name="ipv4.dst" />
+		</key>
+		<entry>
+			<data>0xc0a82c03</data>
+			<queue base="0x02" />
+			<action type="distribution" name="usdpaa_dist11" />
+		</entry>
+		<entry>
+			<data>0xc0a82c04</data>
+			<queue base="0x03" />
+			<action type="distribution" name="default_dist11" />
+		</entry>
+		<action type="distribution" name="default_dist11" condition="on-miss" />
+	</classification>
+	<distribution name="usdpaa_dist11">
+		<queue count="32" base="0xf00"/>
+		<key>
+			<fieldref name="ipv4.dst"/>
+		</key>
+	</distribution>
+
+	<distribution name="hash_ipv4_shared_mac_dist15">
+                <queue base="1" count="1" />
+                <protocols>
+                        <protocolref name="ipv4" />
+                </protocols>
+                <action type="classification" name="ip_dest_clsf15"/>
+        </distribution>
+        <classification name="ip_dest_clsf15">
+                <key>
+                        <fieldref name="ipv4.dst" />
+                </key>
+                <entry>
+                        <data>0xc0a82c03</data>
+                        <queue base="0x02" />
+                        <action type="distribution" name="usdpaa_dist15" />
+                </entry>
+                <entry>
+                        <data>0xc0a82c04</data>
+                        <queue base="0x03" />
+                        <action type="distribution" name="default_dist15" />
+                </entry>
+		<action type="distribution" name="default_dist15" condition="on-miss" />
+        </classification>
+        <distribution name="usdpaa_dist15">
+                <queue count="32" base="0xf00"/>
+                <key>
+                        <fieldref name="ipv4.dst"/>
+                </key>
+        </distribution>
+
+	<distribution name="default_dist0">
+		<queue count="1" base="0x51"/>
+	</distribution>
+	<distribution name="default_dist1">
+		<queue count="1" base="0x53"/>
+	</distribution>
+	<distribution name="default_dist2">
+		<queue count="1" base="0x55"/>
+	</distribution>
+	<distribution name="default_dist3">
+		<queue count="1" base="0x57"/>
+	</distribution>
+	<distribution name="default_dist4">
+		<queue count="1" base="0x59"/>
+	</distribution>
+	<distribution name="default_dist5">
+		<queue count="1" base="0x5b"/>
+	</distribution>
+	<distribution name="default_dist6">
+		<queue count="1" base="0x5d"/>
+	</distribution>
+	<distribution name="default_dist7">
+		<queue count="1" base="0x5f"/>
+	</distribution>
+	<distribution name="default_dist8">
+		<queue count="1" base="0x61"/>
+	</distribution>
+	<distribution name="default_dist9">
+		<queue count="1" base="0x63"/>
+	</distribution>
+	<distribution name="default_dist10">
+		<queue count="1" base="0x65"/>
+	</distribution>
+	<distribution name="default_dist11">
+		<queue count="1" base="0x67"/>
+	</distribution>
+	<distribution name="default_dist15">
+		<queue count="1" base="0x6f"/>
+	</distribution>
+
+<!--	xxxxxxxxxxxxxxxxxxxxxxxxxx Policies xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+	<policy name="hash_ipsec_src_dst_spi_policy0">
+		<dist_order>
+			<distributionref name="hash_ipsec_src_dst_spi_dist0"/>
+			<distributionref name="hash_ipv4_src_dst_dist0"/>
+			<distributionref name="default_dist0"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy0">
+		<dist_order>
+			<distributionref name="default_dist0"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy1">
+		<dist_order>
+			<distributionref name="hash_ipsec_src_dst_spi_dist1"/>
+			<distributionref name="hash_ipv4_src_dst_dist1"/>
+			<distributionref name="default_dist1"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy1">
+		<dist_order>
+			<distributionref name="default_dist1"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy2">
+		<dist_order>
+			<distributionref name="hash_ipsec_src_dst_spi_dist2"/>
+			<distributionref name="hash_ipv4_src_dst_dist2"/>
+			<distributionref name="default_dist2"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy2">
+		<dist_order>
+			<distributionref name="default_dist2"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy3">
+		<dist_order>
+			<distributionref name="hash_ipsec_src_dst_spi_dist3"/>
+			<distributionref name="hash_ipv4_src_dst_dist3"/>
+			<distributionref name="default_dist3"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy3">
+		<dist_order>
+			<distributionref name="default_dist3"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy4">
+		<dist_order>
+			<distributionref name="hash_ipv4_shared_mac_dist4"/>
+			<distributionref name="default_dist4"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy4">
+		<dist_order>
+			<distributionref name="default_dist4"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy5">
+		<dist_order>
+			<distributionref name="hash_ipsec_src_dst_spi_dist5"/>
+			<distributionref name="hash_ipv4_src_dst_dist5"/>
+			<distributionref name="default_dist5"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipv4_shared_policy5">
+		<dist_order>
+			<distributionref name="hash_ipv4_shared_mac_dist5"/>
+			<distributionref name="default_dist5"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy5">
+		<dist_order>
+			<distributionref name="default_dist5"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy6">
+		<dist_order>
+			<distributionref name="hash_ipv4_shared_mac_dist6"/>
+			<distributionref name="default_dist6"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy6">
+		<dist_order>
+			<distributionref name="default_dist6"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy7">
+		<dist_order>
+			<distributionref name="hash_ipv4_shared_mac_dist7"/>
+			<distributionref name="default_dist7"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy7">
+		<dist_order>
+			<distributionref name="default_dist7"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy8">
+		<dist_order>
+			<distributionref name="hash_ipsec_src_dst_spi_dist8"/>
+			<distributionref name="hash_ipv4_src_dst_dist8"/>
+			<distributionref name="default_dist8"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy8">
+		<dist_order>
+			<distributionref name="default_dist8"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy9">
+		<dist_order>
+			<distributionref name="hash_ipsec_src_dst_spi_dist9"/>
+			<distributionref name="hash_ipv4_src_dst_dist9"/>
+			<distributionref name="default_dist9"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy9">
+		<dist_order>
+			<distributionref name="default_dist9"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy10">
+		<dist_order>
+			<distributionref name="hash_ipsec_src_dst_spi_dist10"/>
+			<distributionref name="hash_ipv4_src_dst_dist10"/>
+			<distributionref name="default_dist10"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy10">
+		<dist_order>
+			<distributionref name="default_dist10"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy11">
+		<dist_order>
+			<distributionref name="hash_ipv4_shared_mac_dist11"/>
+			<distributionref name="default_dist11"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_default_policy11">
+		<dist_order>
+			<distributionref name="default_dist11"/>
+		</dist_order>
+	</policy>
+
+	<policy name="hash_ipsec_src_dst_spi_policy15">
+		<dist_order>
+			<distributionref name="hash_ipv4_shared_mac_dist15"/>
+			<distributionref name="default_dist15"/>
+		</dist_order>
+	</policy>
+
+</netpcd>
