@@ -20,18 +20,13 @@
 
 #define FVL_SRIO_HEAD_ADDR	0x01000000
 
-#define FVL_CTL_WIN_SIZE  (3*256)
+#define FVL_CTL_WIN_SIZE  (2*256)
 #define FVL_SRIO_PORT_NUM        2
 #define FVL_PORT_DMA_NUM          8 //DMA MAX NUMBER
 #define FVL_SRIO_CBMAX          (FVL_SRIO_PORT_NUM*FVL_PORT_DMA_NUM) //DMA MAX NUMBER
 
 #define FVL_BASE_LAW 11
 #define FVL_BASE_LAW_SIZE  0x1000
-
-//operation type
-
-#define FVL_SRIO_WR_OP 1
-#define FVL_SRIO_RD_OP 2
 
 //default value
 
@@ -159,12 +154,12 @@ int fvl_srio_finish();
 void fvl_srio_recv_ctl(void *arg);
 void fvl_srio_rese_ctl(void *arg);
 void fvl_srio_recv_head(void *arg);
+int fvl_srio_recv_ctlhead(fvl_head_thread_t *arg);
 fvl_srio_ctrlblk_t * fvl_srio_getcb(uint32_t port, uint32_t tmid);
 int fvl_srio_send(struct dma_ch *dmadev, uint64_t src_phys, uint64_t dest_phys, uint32_t size);
 int fvl_srio_read(int fd,fvl_read_rvl_t *buf);
-//int fvl_srio_write(int fd,void  *buf,uint32_t length);
-int fvl_srio_write(int fd,uint64_t phys,uint32_t length);
-int fvl_srio_read_feedback(int fd, int num);
+int fvl_srio_write(int fd,void  *buf,uint32_t length);
+int fvl_srio_read_reedback(int fd, int num);
 int dma_usmem_init(fvl_dma_pool_t *pool,uint64_t pool_size,uint64_t dma_size);
 int dma_pool_init(fvl_dma_pool_t **pool,uint64_t pool_size,uint64_t dma_size);
 

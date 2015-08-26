@@ -28,6 +28,11 @@
 #define FVL_BASE_LAW 11
 #define FVL_BASE_LAW_SIZE  0x1000
 
+// operation type
+
+#define FVL_SRIO_RD_OP 1
+#define FVL_SRIO_WR_OP 2
+
 //default value
 
 #define DE_BUF_SIZE 0x100000 
