@@ -1,0 +1,372 @@
+--- srio_check.c	2015-05-21 13:40:44.196262737 +0800
++++ loop.c	2015-05-21 13:28:25.308275787 +0800
+@@ -94,10 +94,12 @@
+ 
+ 
+ /*ctx add*/
++/*
+ struct srio_packet{
+ 	uint32_t length;
+ 	unsigned char data[PACKET_LENGTH-4];	
+-};
++};*/
++
+ /*ctx end*/
+ struct cmd_param_type {
+ 	uint8_t curr_port_id;
+@@ -232,7 +234,9 @@
+ 	err = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+ 	uint8_t data=0;
+         gettimeofday(&tm_start,NULL);
+-	while (1) 
++  //      memset(send_data.virt.write_data_prep,0x5a,size*BUFFER_NUM);
++//	printf("hello!\n");
++        while (1) 
+ 	{	
+ 		if(test_type)
+ 		{
+@@ -256,18 +260,18 @@
+                         total_count++;
+                         gettimeofday(&tm_end,NULL);
+ 			float diff=((tm_end.tv_sec-tm_start.tv_sec)*1000000+(tm_end.tv_usec-tm_start.tv_usec))/1000000;
+-                       if(diff>5)
+-                       {
+-                           double da_lu=total_count*size/1024/1024/diff;
+-                           printf("CPU:%d  port:%d  length(byte): %-15u time(s): %-15f  avg MB/s: %-15f total_count:%lld \n",args->cpu,port,size,diff,da_lu,total_count);
+-			   fflush(stdout);
+-			   if(da_lu<1000)
+-			   {
++                        if(diff>5)
++                        {
++                            double da_lu=total_count*size/1024/1024/diff;
++                            printf("CPU:%d  port:%d  length(byte): %-15u time(s): %-15f  avg MB/s: %-15f total_count:%lld \n",args->cpu,port,size,diff,da_lu,total_count);
++        	            fflush(stdout);
++			    if(da_lu<1000)
++			    {
+ 					printf("speed error:%15f\n",da_lu);
+ 					fflush(stdout);
+-			   }                           
+-                           total_count=0;
+-                           gettimeofday(&tm_start,NULL);	
++			    }                           
++                            total_count=0;
++                            gettimeofday(&tm_start,NULL);	
+                        }
+ 	
+ 		}
+@@ -277,7 +281,7 @@
+ 			for(;usebuf_number<buf_number;)
+ 			{
+ /*ctx add send packet */
+-				uint32_t offset= (usebuf_number%total_buf)*sizeof(struct srio_packet);
++				uint32_t offset= (usebuf_number%total_buf)*PACKET_LENGTH;
+ 				if(srio_type!=3){
+ 					src_phys = send_data.phys.write_data_prep+offset;	
+ 				
+@@ -299,10 +303,12 @@
+ 				}
+ 				/*send success*/
+ 				usebuf_number++;
+-				memset((send_data.virt.write_data_prep+offset),0,sizeof(struct srio_packet));
++		//		memset((send_data.virt.write_data_prep+offset),0x5a,PACKET_LENGTH);
+ 				send_num++;
++                                
+ 				if(send_num == SEND_TOTAL_NUM)
+ 				{
++					usleep(1000);
+ 					memcpy((send_data.virt.write_data_prep+SEND_NUM_OFFSET),&usebuf_number,sizeof(uint32_t));
+ 					src_phys = send_data.phys.write_data_prep+SEND_NUM_OFFSET;	
+ 					dest_phys = send_data.port_info.range_start+SEND_NUM_OFFSET;
+@@ -358,6 +364,7 @@
+ 		src_phys = receive_data.port_info.range_start;			
+ 		dest_phys = receive_data.phys.read_recv_data;
+ 	}
++        memset(receive_data.virt.write_recv_data,0x5a,PACKET_LENGTH*BUFFER_NUM);
+ 	memcpy(receive_data.virt.write_data_prep,&buf_number,sizeof(uint32_t));
+ 	
+ /*ctx send*/
+@@ -368,12 +375,13 @@
+ 		fflush(stdout);
+ 		return NULL;
+ 	}
++        printf("receive:send ok!\n");
+ 	uint8_t data=0;
+         uint32_t receive_total=0;
+ 	while (1) 
+ 	{
+ /*ctx add receive packet */
+-		uint32_t offset=(count%buf_number)*sizeof(struct srio_packet);
++		uint32_t offset=(count%buf_number)*PACKET_LENGTH;
+ 		receive_num = *(volatile uint32_t *)(receive_data.virt.write_recv_data+SEND_NUM_OFFSET);
+ 		if(receive_num>use_num)
+ 		{
+@@ -391,9 +399,11 @@
+ 						error_count++;
+ 				                printf("###Receive ERROR Data:%02x  Test Data:%02x port:%d option:%d\n",*p,data,port,i);
+ 				                fflush(stdout);
++                                                //sleep(1);
+ 					}
+ 					p++;
+ 				}
++                                
+                                 if(error_count!=0)
+                                 {
+ 				    printf("Receive ERROR Data:%02x  Test Data:%02x error Number:%08x port:%d\n",pdata,data,error_count,port);
+@@ -407,13 +417,13 @@
+ 			{
+ 				if(receive_total==1000)
+ 				{
+-					printf("port:%d Data Right!\n",port);
++					printf("port:%d,Data Right!\n",port);
+ 					fflush(stdout);
+                                         receive_total=0;
+ 				}
+ 			}
+ 		
+-			memset((receive_data.virt.write_recv_data+offset),0,sizeof(struct srio_packet)*packet_num);
++			memset((receive_data.virt.write_recv_data+offset),0x5a,packet_num*PACKET_LENGTH);
+ 			count=count+packet_num;
+ 			total_buf=total_buf+packet_num;
+ 			memcpy(receive_data.virt.write_data_prep,&total_buf,sizeof(uint32_t));
+@@ -629,8 +639,6 @@
+                 fflush(stdout);
+ 	}
+ /*ctx add*/
+-        sleep(5);
+-
+ 	for(i=0;i<1;i++)
+ 	{
+ 		
+@@ -652,35 +660,42 @@
+ 		fsl_dma_chan_bwc(receive_dmadev[i], DMA_BWC_1024);
+ 		task_arg_receive[i].dmadev = receive_dmadev[i];
+ 		
+-                task_arg_receive[i].port_data_thread.phys.write_recv_data=port_data[port].phys.write_recv_data+THREAD_WIN_SIZE*0;
+-		task_arg_receive[i].port_data_thread.phys.read_recv_data=port_data[port].phys.read_recv_data+THREAD_WIN_SIZE*1;
+-		task_arg_receive[i].port_data_thread.phys.write_data_prep=port_data[port].phys.write_data_prep+THREAD_WIN_SIZE*1;
+-		task_arg_receive[i].port_data_thread.phys.res=port_data[port].phys.res+THREAD_WIN_SIZE*1;
+-		task_arg_receive[i].port_data_thread.virt.write_recv_data = &port_data[port].virt->write_recv_data_t[0][0];
+-		task_arg_receive[i].port_data_thread.virt.read_recv_data = &port_data[port].virt->read_recv_data_t[1][0];
+-		task_arg_receive[i].port_data_thread.virt.write_data_prep = &port_data[port].virt->write_data_prep_t[1][0];
+-		task_arg_receive[i].port_data_thread.virt.res = &port_data[port].virt->res_t[1][0];
+-		task_arg_receive[i].port_data_thread.port_info.range_start = port_data[port].port_info.range_start+THREAD_WIN_SIZE*1; 
+-		/* cta end*/
+-		task_arg_receive[i].port = port;
++		
++		task_arg_receive[i].port_data_thread.phys.write_recv_data=port_data[1-port].phys.write_recv_data+THREAD_WIN_SIZE*(1-i);
++		task_arg_receive[i].port_data_thread.phys.read_recv_data=port_data[1-port].phys.read_recv_data+THREAD_WIN_SIZE*i;
++		task_arg_receive[i].port_data_thread.phys.write_data_prep=port_data[1-port].phys.write_data_prep+THREAD_WIN_SIZE*i;
++		task_arg_receive[i].port_data_thread.phys.res=port_data[1-port].phys.res+THREAD_WIN_SIZE*i;
++		
++		task_arg_receive[i].port_data_thread.virt.write_recv_data = &port_data[1-port].virt->write_recv_data_t[1-i][0];
++		
++		task_arg_receive[i].port_data_thread.virt.read_recv_data = &port_data[1-port].virt->read_recv_data_t[i][0];
++		
++		task_arg_receive[i].port_data_thread.virt.write_data_prep = &port_data[1-port].virt->write_data_prep_t[i][0];
++		
++		task_arg_receive[i].port_data_thread.virt.res = &port_data[1-port].virt->res_t[i][0];
++		
++		task_arg_receive[i].port_data_thread.port_info.range_start = port_data[1-port].port_info.range_start+THREAD_WIN_SIZE*i; 
++		
++		task_arg_receive[i].port = 1-port;
+ 		task_arg_receive[i].srio_type = cmd_param.test_srio_type;
+-		task_arg_receive[i].cpu = cmd_param.start_cpu+2;/*bind cpu*/
++		task_arg_receive[i].cpu = cmd_param.start_cpu;/*bind cpu*/
+ 		
+ 		/* ctx add*/
+-		task_arg_send[i].port_data_thread.phys.write_recv_data=port_data[port].phys.write_recv_data+THREAD_WIN_SIZE*1;
+-		task_arg_send[i].port_data_thread.phys.read_recv_data=port_data[port].phys.read_recv_data+THREAD_WIN_SIZE*0;
+-		task_arg_send[i].port_data_thread.phys.write_data_prep=port_data[port].phys.write_data_prep+THREAD_WIN_SIZE*0;
+-		task_arg_send[i].port_data_thread.phys.res=port_data[port].phys.res+THREAD_WIN_SIZE*0;
+-		task_arg_send[i].port_data_thread.virt.write_recv_data = &port_data[port].virt->write_recv_data_t[1][0];
+-		task_arg_send[i].port_data_thread.virt.read_recv_data = &port_data[port].virt->read_recv_data_t[0][0];
+-		task_arg_send[i].port_data_thread.virt.write_data_prep = &port_data[port].virt->write_data_prep_t[0][0];
+-		task_arg_send[i].port_data_thread.virt.res = &port_data[port].virt->res_t[0][0];
+-		task_arg_send[i].port_data_thread.port_info.range_start = port_data[port].port_info.range_start+THREAD_WIN_SIZE*0; 
++		task_arg_send[i].port_data_thread.phys.write_recv_data=port_data[port].phys.write_recv_data+THREAD_WIN_SIZE*(1-i);
++		task_arg_send[i].port_data_thread.phys.read_recv_data=port_data[port].phys.read_recv_data+THREAD_WIN_SIZE*i;
++		task_arg_send[i].port_data_thread.phys.write_data_prep=port_data[port].phys.write_data_prep+THREAD_WIN_SIZE*i;
++		task_arg_send[i].port_data_thread.phys.res=port_data[port].phys.res+THREAD_WIN_SIZE*i;
++		task_arg_send[i].port_data_thread.virt.write_recv_data = &port_data[port].virt->write_recv_data_t[1-i][0];
++		task_arg_send[i].port_data_thread.virt.read_recv_data = &port_data[port].virt->read_recv_data_t[i][0];
++		task_arg_send[i].port_data_thread.virt.write_data_prep = &port_data[port].virt->write_data_prep_t[i][0];
++		task_arg_send[i].port_data_thread.virt.res = &port_data[port].virt->res_t[i][0];
++		task_arg_send[i].port_data_thread.port_info.range_start = port_data[port].port_info.range_start+THREAD_WIN_SIZE*i; 
+ 		/* cta end*/
+ 		task_arg_send[i].port = port;
+ 		task_arg_send[i].srio_type = cmd_param.test_srio_type;
+ 		task_arg_send[i].cpu = cmd_param.start_cpu+1;/*bind cpu*/
+-		if(cmd_param.test_type==2)
++	}
++/*		if(cmd_param.test_type==2)
+ 		{
+ 			task_arg_send[i].test_type=0;
+ 			err = pthread_create(&send_id[i], NULL,t_srio_send, &task_arg_send[i]);
+@@ -689,13 +704,15 @@
+ 				fflush(stdout);
+ 				return -errno;
+ 			}
+-                        sleep(1);
++                        printf("###################send0\n");
++                        sleep(10);
+ 			err = pthread_create(&receive_id[i],NULL,t_srio_receive,&task_arg_receive[i]);
+ 			if (err) {
+ 				printf("Port %d : Receive thread failed!\n",2-port);
+ 				fflush(stdout);
+ 				return -errno;
+ 			} 
++                        printf("###################receive1\n");
+ 		} 
+ 		else if(cmd_param.test_type==3)
+ 		{	
+@@ -707,7 +724,7 @@
+ 				return -errno;
+ 			}			
+ 		}	
+-	}
++	}*/
+ /*multiple*/
+ 	for(i=1;i<SEND_THREAD_NUM;i++)
+ 	{
+@@ -731,61 +748,83 @@
+ 		task_arg_receive[i].dmadev = receive_dmadev[i];
+ 		
+ 		/* ctx add*/
+-
+-		task_arg_receive[i].port_data_thread.phys.write_recv_data=port_data[1-port].phys.write_recv_data+THREAD_WIN_SIZE*0;
+-		task_arg_receive[i].port_data_thread.phys.read_recv_data=port_data[1-port].phys.read_recv_data+THREAD_WIN_SIZE*1;
+-		task_arg_receive[i].port_data_thread.phys.write_data_prep=port_data[1-port].phys.write_data_prep+THREAD_WIN_SIZE*1;
+-		task_arg_receive[i].port_data_thread.phys.res=port_data[1-port].phys.res+THREAD_WIN_SIZE*1;
+-		task_arg_receive[i].port_data_thread.virt.write_recv_data = &port_data[1-port].virt->write_recv_data_t[0][0];
+-		task_arg_receive[i].port_data_thread.virt.read_recv_data = &port_data[1-port].virt->read_recv_data_t[1][0];
+-		task_arg_receive[i].port_data_thread.virt.write_data_prep = &port_data[1-port].virt->write_data_prep_t[1][0];
+-		task_arg_receive[i].port_data_thread.virt.res = &port_data[1-port].virt->res_t[1][0];
+-		task_arg_receive[i].port_data_thread.port_info.range_start = port_data[1-port].port_info.range_start+THREAD_WIN_SIZE*1; 
+-		
+-		task_arg_receive[i].port = 1-port;
++		task_arg_receive[i].port_data_thread.phys.write_recv_data=port_data[port].phys.write_recv_data+THREAD_WIN_SIZE*(1-i);
++		task_arg_receive[i].port_data_thread.phys.read_recv_data=port_data[port].phys.read_recv_data+THREAD_WIN_SIZE*i;
++		task_arg_receive[i].port_data_thread.phys.write_data_prep=port_data[port].phys.write_data_prep+THREAD_WIN_SIZE*i;
++		task_arg_receive[i].port_data_thread.phys.res=port_data[port].phys.res+THREAD_WIN_SIZE*i;
++		task_arg_receive[i].port_data_thread.virt.write_recv_data = &port_data[port].virt->write_recv_data_t[1-i][0];
++		task_arg_receive[i].port_data_thread.virt.read_recv_data = &port_data[port].virt->read_recv_data_t[i][0];
++		task_arg_receive[i].port_data_thread.virt.write_data_prep = &port_data[port].virt->write_data_prep_t[i][0];
++		task_arg_receive[i].port_data_thread.virt.res = &port_data[port].virt->res_t[i][0];
++		task_arg_receive[i].port_data_thread.port_info.range_start = port_data[port].port_info.range_start+THREAD_WIN_SIZE*i; 
++		/* cta end*/
++		task_arg_receive[i].port = port;
+ 		task_arg_receive[i].srio_type = cmd_param.test_srio_type;
+-		task_arg_receive[i].cpu = cmd_param.start_cpu;/*bind cpu*/
+-		task_arg_send[i].port_data_thread.phys.write_recv_data=port_data[1-port].phys.write_recv_data+THREAD_WIN_SIZE*1;
+-		task_arg_send[i].port_data_thread.phys.read_recv_data=port_data[1-port].phys.read_recv_data+THREAD_WIN_SIZE*0;
+-		task_arg_send[i].port_data_thread.phys.write_data_prep=port_data[1-port].phys.write_data_prep+THREAD_WIN_SIZE*0;
+-		task_arg_send[i].port_data_thread.phys.res=port_data[1-port].phys.res+THREAD_WIN_SIZE*0;
+-		task_arg_send[i].port_data_thread.virt.write_recv_data = &port_data[1-port].virt->write_recv_data_t[1][0];
+-		task_arg_send[i].port_data_thread.virt.read_recv_data = &port_data[1-port].virt->read_recv_data_t[0][0];
+-		task_arg_send[i].port_data_thread.virt.write_data_prep = &port_data[1-port].virt->write_data_prep_t[0][0];
+-		task_arg_send[i].port_data_thread.virt.res = &port_data[1-port].virt->res_t[0][0];
+-		task_arg_send[i].port_data_thread.port_info.range_start = port_data[1-port].port_info.range_start+THREAD_WIN_SIZE*0; 
++		task_arg_receive[i].cpu = cmd_param.start_cpu+2;/*bind cpu*/
++
++		task_arg_send[i].port_data_thread.phys.write_recv_data=port_data[1-port].phys.write_recv_data+THREAD_WIN_SIZE*(1-i);
++		task_arg_send[i].port_data_thread.phys.read_recv_data=port_data[1-port].phys.read_recv_data+THREAD_WIN_SIZE*i;
++		task_arg_send[i].port_data_thread.phys.write_data_prep=port_data[1-port].phys.write_data_prep+THREAD_WIN_SIZE*i;
++		task_arg_send[i].port_data_thread.phys.res=port_data[1-port].phys.res+THREAD_WIN_SIZE*i;
++		task_arg_send[i].port_data_thread.virt.write_recv_data = &port_data[1-port].virt->write_recv_data_t[1-i][0];
++		task_arg_send[i].port_data_thread.virt.read_recv_data = &port_data[1-port].virt->read_recv_data_t[i][0];
++		task_arg_send[i].port_data_thread.virt.write_data_prep = &port_data[1-port].virt->write_data_prep_t[i][0];
++		task_arg_send[i].port_data_thread.virt.res = &port_data[1-port].virt->res_t[i][0];
++		task_arg_send[i].port_data_thread.port_info.range_start = port_data[1-port].port_info.range_start+THREAD_WIN_SIZE*i; 
+ 		
+ 		task_arg_send[i].port = 1-port;
+ 		task_arg_send[i].srio_type = cmd_param.test_srio_type;
+ 		task_arg_send[i].cpu = cmd_param.start_cpu+3;/*bind cpu*/
+-		if(cmd_param.test_type==2)
+-		{	
+-			task_arg_send[i].test_type=0;
+-			err = pthread_create(&send_id[i],NULL,t_srio_send,&task_arg_send[i]);
+-			if (err) {
+-				printf("Port %d : Send thread failed!\n",2-port);
+-				fflush(stdout);
+-				return -errno;
+-			} 
+-                        sleep(1);
+-	
+-			err = pthread_create(&receive_id[i], NULL,t_srio_receive, &task_arg_receive[i]);
+-			if (err) {
+-				printf("Port %d : Send thread failed!\n",port + 1);
+-				fflush(stdout);
+-				return -errno;
+-			} 
++	}
+ 
+-		}else if(cmd_param.test_type==3)
+-		{
+-			task_arg_send[i].test_type=1;	
+-			err = pthread_create(&send_id[i],NULL,t_srio_send,&task_arg_send[i]);
+-			if (err) {
+-				printf("Port %d : Send thread failed!\n",2-port);
+-				fflush(stdout);
+-				return -errno;
+-			} 			
+-		}
++        sleep(5);
++
++	if(cmd_param.test_type==2)
++	{	
++		task_arg_send[0].test_type=0;
++		err = pthread_create(&send_id[0],NULL,t_srio_send,&task_arg_send[0]);
++		if (err) {
++			printf("Port 0 : Send thread failed!\n");
++			fflush(stdout);
++			return -errno;
++		} 
++		task_arg_send[1].test_type=0;
++		err = pthread_create(&send_id[1],NULL,t_srio_send,&task_arg_send[1]);
++		if (err) {
++			printf("Port 1  : Send thread failed!\n");
++			fflush(stdout);
++			return -errno;
++		} 
++                sleep(5);	
++	
++		err = pthread_create(&receive_id[0], NULL,t_srio_receive, &task_arg_receive[0]);
++		if (err) {
++			printf("Port 0 : receive thread failed!\n");
++			fflush(stdout);
++			return -errno;
++		} 
++		err = pthread_create(&receive_id[1], NULL,t_srio_receive, &task_arg_receive[1]);
++		if (err) {
++			printf("Port 1 : receive thread failed!\n");
++			fflush(stdout);
++			return -errno;
++		} 
++	}else if(cmd_param.test_type==3)
++	{
++		task_arg_send[0].test_type=1;	
++		err = pthread_create(&send_id[0],NULL,t_srio_send,&task_arg_send[0]);
++		if (err) {
++			printf("Port 0 : Send thread failed!\n");
++			fflush(stdout);
++			return -errno;
++		} 			
++		task_arg_send[1].test_type=1;	
++		err = pthread_create(&send_id[1],NULL,t_srio_send,&task_arg_send[1]);
++		if (err) {
++			printf("Port 0 : Send thread failed!\n");
++			fflush(stdout);
++			return -errno;
++		} 			
+ 	}
+ 
+ 	for(i=0;i<SEND_THREAD_NUM;i++)
+@@ -801,7 +840,7 @@
+ 	}
+ /*ctx end*/
+ 
+-    free(port_data);
++        free(port_data);
+ 	for(i=0;i<SEND_THREAD_NUM;i++)
+ 	{
+ 		fsl_dma_chan_finish(send_dmadev[i]);
