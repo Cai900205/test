@@ -1,0 +1,88 @@
+45c45
+<     uint32_t ctl_size= FVL_CTL_WIN_SIZE;
+---
+>     uint32_t ctl_size=1024;//FVLSRIO_CTL_SIZE;
+53c53
+<     uint32_t ctl_win_size=0x100000;//ctl_size*chan_num;
+---
+>     uint32_t ctl_win_size=0x1000;//ctl_size*chan_num;
+106c106
+<         FVL_LOG("Get port %u info, range=%p, range_start=%llx ,range_size=%llx\n", port_num, range, pinfo->range_start,pinfo->range_size);
+---
+>         FVL_LOG("Get port %u info, range=%p, range_start=%llx\n", port_num, range, pinfo->range_start);
+112c112,113
+<     }    
+---
+>     }
+>     
+133a135,136
+> 
+>  
+149d151
+< 
+233d234
+<     FVL_LOG("###########fvl_srio_recv_head####\n");
+238a240
+>             fvl_srio_context_t  *psrio = &g_srio_context;
+240c242
+<             {
+---
+> 	          {
+243,244d244
+<             FVL_LOG("Slave  receive address!\n");
+<             fvl_srio_context_t  *psrio = &g_srio_context;
+252d251
+<             FVL_LOG("Slave 1  receive address!\n");
+255d253
+<             FVL_LOG("Slave $  receive address!\n");
+261d258
+<             FVL_LOG("Slave %  receive address!\n");
+264d260
+< 
+276c272
+<             int ctl_law=FVL_BASE_LAW+4;
+---
+>             int ctl_law=FVL_BASE_LAW;
+344c340
+< /*            uint64_t dest_phys,src_phys;
+---
+>             uint64_t dest_phys,src_phys;
+353c349
+<             fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);*/
+---
+>             fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);
+368d363
+<     FVL_LOG("Slave recv ctl !\n");
+398,399d392
+<     pcnt  = (fvl_srio_ctl_info_t *)(priv->buf_virt);
+<     FVL_LOG("Slave rese ctl !\n");
+451c444
+<     volatile uint8_t *flag= &head_port[port_num].uflag;
+---
+>     volatile uint32_t *flag= &head_port[port_num].uflag;
+464c457
+<     ctl_size = FVL_CTL_WIN_SIZE; 
+---
+>     ctl_size = 768;//FVL_CTL_SIZE; 
+488c481
+<     FVL_LOG("#################bfnum:%d\n",bfnum);
+---
+> 
+495,496c488
+< //  
+<     FVL_LOG("################getcb##########\n");
+---
+> //
+504,505c496
+<     head_arg.buf_virt=cpool->pwrite_ctl_result;
+< 
+---
+>     head_arg.buf_virt=ppool->pwrite_ctl_result;
+507d497
+< 
+508a499
+> /*
+512c503
+<     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);
+---
+>     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);*/
