@@ -236,6 +236,7 @@ int fvl_srio_init(fvl_srio_init_param_t *srio_param)
     dest_phys=ppool->ctl_info_start;
     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);
 //create thread:
+    FVL_LOG("PORT_NUM:%d\n",port_num);
     head_arg[port_num].num = port_num;
     head_arg[port_num].op_mode = 0;
     head_arg[port_num].buf_virt=ppool->pwrite_ctl_result;
@@ -416,14 +417,10 @@ int fvl_srio_channel_open(char *name)
         FVL_LOG("open error:channel name error.\n");
         return -1;
     }
+
     port_num=srio_ctable_context[fd].port;
-    bfnum = srio_ctable_context[fd].chan;
+    bfnum   = srio_ctable_context[fd].chan;
 //mode master
-    if(bfnum > head_port[port_num].chan_num)
-    {
-        FVL_LOG("open error:channel not exist.\n");
-        return -1; 
-    }
     FVL_LOG("port num:%d uflag:%d\n",port_num,head_port[port_num].uflag);
     FVL_LOG("###############*********************\n");
     volatile uint8_t *flag=&head_port[port_num].uflag;
@@ -434,6 +431,12 @@ int fvl_srio_channel_open(char *name)
         {
             break;
         }
+    }
+    FVL_LOG("chan_fid:%d,bfnum:%d port_num:%d chan_num %d\n",fd,bfnum,port_num,head_port[port_num].chan_num);
+    if(bfnum > head_port[port_num].chan_num)
+    {
+        FVL_LOG("open error:channel not exist.\n");
+        return -1; 
     }
     rese_num[fd]=head_port[port_num].buf_num;//
 //end mode master

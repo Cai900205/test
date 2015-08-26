@@ -102,7 +102,7 @@ int fvl_srio_init(fvl_srio_init_param_t *srio_param)
     {
         head_channel[i].data_se_addr=FVL_SRIO_SYS_ADDR+chan_size*i;
         head_channel[i].data_re_addr=FVL_SRIO_SYS_ADDR+chan_size*i;
-        head_channel[i].ctl_se_addr=FVL_SRIO_CTL_ADDR+HEAD_SIZE+ctl_size*i;
+        head_channel[i].ctl_re_addr=FVL_SRIO_CTL_ADDR+HEAD_SIZE+ctl_size*i;
         head_channel[i].ctl_se_addr=FVL_SRIO_CTL_ADDR+HEAD_SIZE+ctl_size*i;
         head_channel[i].re_flag=1;
         head_channel[i].uflag=0;
@@ -236,6 +236,7 @@ int fvl_srio_init(fvl_srio_init_param_t *srio_param)
     dest_phys=ppool->ctl_info_start;
     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);
 //create thread:
+    FVL_LOG("PORT_NUM:%d\n",port_num);
     head_arg[port_num].num = port_num;
     head_arg[port_num].op_mode = 0;
     head_arg[port_num].buf_virt=ppool->pwrite_ctl_result;
@@ -416,14 +417,10 @@ int fvl_srio_channel_open(char *name)
         FVL_LOG("open error:channel name error.\n");
         return -1;
     }
+
     port_num=srio_ctable_context[fd].port;
-    bfnum = srio_ctable_context[fd].chan;
+    bfnum   = srio_ctable_context[fd].chan;
 //mode master
-    if(bfnum > head_port[port_num].chan_num)
-    {
-        FVL_LOG("open error:channel not exist.\n");
-        return -1; 
-    }
     FVL_LOG("port num:%d uflag:%d\n",port_num,head_port[port_num].uflag);
     FVL_LOG("###############*********************\n");
     volatile uint8_t *flag=&head_port[port_num].uflag;
@@ -434,6 +431,12 @@ int fvl_srio_channel_open(char *name)
         {
             break;
         }
+    }
+    FVL_LOG("chan_fid:%d,bfnum:%d port_num:%d chan_num %d\n",fd,bfnum,port_num,head_port[port_num].chan_num);
+    if(bfnum > head_port[port_num].chan_num)
+    {
+        FVL_LOG("open error:channel not exist.\n");
+        return -1; 
     }
     rese_num[fd]=head_port[port_num].buf_num;//
 //end mode master
@@ -493,7 +496,7 @@ int fvl_srio_channel_open(char *name)
 
     ctl_re_arg[fd].fd=fd;
     ctl_re_arg[fd].port_num=port_num;
-    ctl_re_arg[fd].buf_virt=cpool->pwrite_ctl_result+HEAD_SIZE;
+    ctl_re_arg[fd].buf_virt=cpool->pwrite_ctl_result+FVL_SRIO_RD_OP*HEAD_SIZE;
     rvl = pthread_create(&(temp_channel->chan_id), NULL,fvl_srio_recv_ctl, &ctl_re_arg[fd]);
     if (rvl) 
     {
@@ -503,7 +506,7 @@ int fvl_srio_channel_open(char *name)
 
     ctl_se_arg[fd].fd=fd;
     ctl_se_arg[fd].port_num=port_num;
-    ctl_se_arg[fd].buf_virt=cpool->pwrite_ctl_result+2*HEAD_SIZE;
+    ctl_se_arg[fd].buf_virt=cpool->pwrite_ctl_result+FVL_SRIO_WR_OP*HEAD_SIZE;
     rvl = pthread_create(&(temp_channel->chan_id), NULL,fvl_srio_rese_ctl, &ctl_se_arg[fd]);
     if (rvl) 
     {
@@ -611,11 +614,11 @@ int fvl_srio_write(int fd, uint64_t phys,uint32_t length)
     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,length);
     send_num[fd]=send_num[fd]+step;
     
-    pcnt=(fvl_srio_ctl_info_t *)(cpool->pwrite_ctl_data+2*HEAD_SIZE);
+    pcnt=(fvl_srio_ctl_info_t *)(cpool->pwrite_ctl_data+FVL_SRIO_WR_OP*HEAD_SIZE);
     pcnt->com=(send_num[fd]%buf_num);
-    dest_phys=(uint64_t *)(cpool->ctl_info_start+2*HEAD_SIZE);
-    src_phys =(uint64_t *)(cpool->write_ctl_data+2*HEAD_SIZE);
-    fvl_srio_send(pscb->dmadev,src_phys,dest_phys,2*HEAD_SIZE);
+    dest_phys=(uint64_t *)(cpool->ctl_info_start+FVL_SRIO_WR_OP*HEAD_SIZE);
+    src_phys =(uint64_t *)(cpool->write_ctl_data+FVL_SRIO_WR_OP*HEAD_SIZE);
+    fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);
 
     return 0;
 }
@@ -691,11 +694,11 @@ int fvl_srio_read_feedback(int fd,int num)
     buf_num = head_port[port_num].buf_num;
 	
     rfreeback_num[fd]=rfreeback_num[fd]+num;
-    pcnt=(fvl_srio_ctl_info_t *)(cpool->pwrite_ctl_data+HEAD_SIZE);
+    pcnt=(fvl_srio_ctl_info_t *)(cpool->pwrite_ctl_data+FVL_SRIO_RD_OP*HEAD_SIZE);
 //need change ctl_info
     pcnt->com=(rfreeback_num[fd]%buf_num);
-    dest_phys=(uint64_t *)(cpool->ctl_info_start+HEAD_SIZE);
-    src_phys =(uint64_t *)(cpool->write_ctl_data+HEAD_SIZE);
+    dest_phys=(uint64_t *)(cpool->ctl_info_start+FVL_SRIO_RD_OP*HEAD_SIZE);
+    src_phys =(uint64_t *)(cpool->write_ctl_data+FVL_SRIO_RD_OP*HEAD_SIZE);
     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);
 }
 

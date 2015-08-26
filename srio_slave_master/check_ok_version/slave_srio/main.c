@@ -14,7 +14,7 @@
 #define Port_Num 2
 
 #define Total_Buf_Size (Buf_num*Buf_size*Chan_num)
-static char channame[]="srio0-chan3";
+static char channame[]="srio1-chan3";
 
 uint32_t test_data(uint8_t src, uint8_t *buf,uint64_t count ,uint8_t step)
 {
@@ -80,7 +80,7 @@ int main(int argc, char **argv)
         if(rlen.len!=0)
         {
  //           printf("length:%08x\n",rlen.len);
-            test_data(i,rlen.buf_virt,1000,0);
+            test_data(i,rlen.buf_virt,104857,0);
             i++;    
             gettimeofday(&tm_end,NULL);
             total_count++;        

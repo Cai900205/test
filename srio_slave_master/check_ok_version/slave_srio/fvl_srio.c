@@ -450,11 +450,6 @@ int fvl_srio_channel_open(char *name)
     }
     port_num=srio_ctable_context[fd].port;
     bfnum = srio_ctable_context[fd].chan;
-    if(bfnum > head_port[port_num].chan_num)
-    {
-        FVL_LOG("open error:channel not exist.\n");
-        return -1;
-    }
     FVL_LOG("#############################\n");
     FVL_LOG("port_num:%d uflag:%d\n",port_num,head_port[port_num].uflag);
     volatile uint8_t *flag= &head_port[port_num].uflag;
@@ -466,7 +461,11 @@ int fvl_srio_channel_open(char *name)
             break;
         }
     }
-    
+    if(bfnum > head_port[port_num].chan_num)
+    {
+        FVL_LOG("open error:channel not exist.\n");
+        return -1;
+    }
     FVL_LOG("###########after while ************************\n");
 
     chan_size = head_port[port_num].chan_size;
