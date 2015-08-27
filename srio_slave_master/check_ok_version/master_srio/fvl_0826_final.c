@@ -318,9 +318,9 @@ void fvl_srio_recv_head(void *arg)
             pcnt->re_flag=0;
             FVL_LOG("HOST: Receive Back Head info:chan_num %d\n",pcnt->chan_num);
             head_port[priv->num].re_flag=1;
+            head_port[priv->num].chan_num=pcnt->chan_num;
             head_port[priv->num].uflag=1;
             FVL_LOG("port num:%d uflag:%d\n",priv->num,head_port[priv->num].uflag);
-            head_port[priv->num].chan_num=pcnt->chan_num;
         }
         else if(priv->op_mode == 1)
         {

@@ -25,15 +25,11 @@ void thread_channel_send(void *arg)
     fvl_dma_pool_t *port_data;
     int rvl=0;
     uint8_t i=0;
-    int *j=(int *)arg;
+    int j=(int *)arg;
     int fd= 0;
     struct timeval tm_start,tm_end;
-    fd=fvl_srio_channel_open(channame[*j]);
+    fd=fvl_srio_channel_open(channame[j]);
     printf("###################fd:%d*****************\n",fd);
-    if(fd<0)
-    {
-        return;
-    }
     rvl = dma_pool_init(&port_data,Buf_size,Buf_size/2);
     if(rvl!=0)
     {
@@ -58,7 +54,7 @@ void thread_channel_send(void *arg)
         if(diff>5)
         {
             double da_lu=total_count/diff;
-            printf("fd: %d length(byte): %-15u time(s): %-15f  avg MB/s: %-15f total_count:%lld \n",fd,Buf_size,diff,da_lu,total_count);
+            printf("length(byte): %-15u time(s): %-15f  avg MB/s: %-15f total_count:%lld \n",Buf_size,diff,da_lu,total_count);
             fflush(stdout);
             total_count=0;
             gettimeofday(&tm_start,NULL);
@@ -72,10 +68,6 @@ int main(int argc, char **argv)
     fvl_dma_pool_t *port_dma_wr[Port_Num];
     int rvl=0,j=0;
     uint8_t i=0;
-    int k=1;
-    int start=1;
-    start = atoi(argv[1]);
-    k = atoi(argv[2]);
     for(i=0;i<2;i++)
     {
         srio_init[i].buf_num=Buf_num;
@@ -97,15 +89,14 @@ int main(int argc, char **argv)
             return -errno;
         }
     }
-    int fd[8];    
+    
     pthread_t fd_id[8];
-    for(j=start;j<k+start;j++)
+    for(j=0;j<8;j++)
     {
-        fd[j]=j;
-        pthread_create(&fd_id[j],NULL,thread_channel_send,&fd[j]);
+        pthread_create(&fd_id[j],NULL,thread_channel_send,&j);
     }
 
-   for(j=start;j<k+start;j++)
+   for(j=0;j<8;j++)
    {
        pthread_join(fd_id[j],NULL);
    }

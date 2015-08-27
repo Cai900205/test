@@ -15,7 +15,7 @@
 
 #define Total_Buf_Size (Buf_num*Buf_size*Chan_num)
 
-static char channame[]="srio0-chan3";
+static char channame[]="srio1-chan3";
 int main(int argc, char **argv)
 {
     fvl_srio_init_param_t srio_init[Port_Num];
@@ -62,7 +62,6 @@ int main(int argc, char **argv)
     gettimeofday(&tm_start,NULL);
     i=0;
     while(1)
-//    for(j=0;j<10;j++)
     {
 	memset(port_data[0]->dma_virt_base,i,Buf_size);
         rvl=fvl_srio_write(fd,port_data[0]->dma_phys_base,Buf_size);
