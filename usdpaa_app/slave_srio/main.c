@@ -7,20 +7,42 @@
 
 #include "fvl_common.h"
 #include "fvl_srio.h"
+#include <sys/time.h>
 #define Buf_num 16
 #define Buf_size 0x100000
 #define Chan_num 4
 #define Port_Num 2
 
 #define Total_Buf_Size (Buf_num*Buf_size*Chan_num)
-static char channame[]="srio0-chan3";
+static char channame[]="srio1-chan3";
+
+uint32_t test_data(uint8_t src, uint8_t *buf,uint64_t count ,uint8_t step)
+{
+    uint64_t i=0;
+    uint32_t error_count=0;
+//    printf("data:%02x\n",*buf);
+    for(i=0;i<count;i++)
+    {
+       if(src!=*buf)
+       {
+          error_count++;
+          printf("###Receive ERROR Data:%02x  addr: %08x Test Data:%02x  option:%d\n",*buf,buf,src,i);
+          fflush(stdout);
+       }
+       src=src+step;
+       buf++;
+    }
+    return error_count;
+}
+
 int main(int argc, char **argv)
 {
     fvl_srio_init_param_t srio_init[Port_Num];
     fvl_dma_pool_t *port_dma_wr[Port_Num];
     fvl_read_rvl_t rlen;
-    int rvl=0;
+    int rvl=0,j=0;
     uint8_t i=0;
+    struct timeval tm_start,tm_end;
     for(i=0;i<2;i++)
     {
         srio_init[i].buf_num=Buf_num;
@@ -43,20 +65,34 @@ int main(int argc, char **argv)
         }
     }
     int fd=0;
-//    open one channel
     fd=fvl_srio_channel_open(channame);
 
     printf("##################fd:%d*****************\n",fd);
-     int  num=0;
-    sleep(3);
+    int  num=0;
+    uint64_t total_count=0;
+    gettimeofday(&tm_start,NULL);
+    i=0;
     while(1)
+//    for(j=0;j<10;j++)
     {
         rlen.len=0x100000;
  	rvl=fvl_srio_read(fd,&rlen);
         if(rlen.len!=0)
         {
-          num++;
-        //  printf("##################:%d\n",num); 
+ //           printf("length:%08x\n",rlen.len);
+            test_data(i,rlen.buf_virt,104857,0);
+            i++;    
+            gettimeofday(&tm_end,NULL);
+            total_count++;        
+            double diff=(tm_end.tv_sec-tm_start.tv_sec)+(tm_end.tv_usec-tm_start.tv_usec)/1000000.0;
+            if(diff>5)
+            {
+                double da_lu=total_count/diff;
+                printf("length(byte): %-15u time(s): %-15f  avg MB/s: %-15f total_count:%lld \n",rlen.len,diff,da_lu,total_count);
+                fflush(stdout);
+                total_count=0;
+                gettimeofday(&tm_start,NULL);
+            }       
         }
         fvl_srio_read_feedback(fd,rlen.num);
     }

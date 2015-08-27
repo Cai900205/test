@@ -15,12 +15,11 @@
 
 #define Total_Buf_Size (Buf_num*Buf_size*Chan_num)
 
-static char channame[]="srio1-chan3";
+static char channame[]="srio0-chan3";
 int main(int argc, char **argv)
 {
     fvl_srio_init_param_t srio_init[Port_Num];
     fvl_dma_pool_t *port_dma_wr[Port_Num];
-    fvl_dma_pool_t *port_data[Port_Num];
     fvl_read_rvl_t rlen;
     char data[Buf_size];
     int rvl=0,j=0;
@@ -47,13 +46,6 @@ int main(int argc, char **argv)
             return -errno;
         }
     }
-    rvl = dma_pool_init(&port_data[0],Buf_size,Buf_size/2);
-    if(rvl!=0)
-    {
-       FVL_LOG("port %d dma_pool_init failed!\n",i+1);
-       return -errno;
-    }
-    
     int fd=0;
 //    open one channel
     fd=fvl_srio_channel_open(channame);
@@ -61,11 +53,11 @@ int main(int argc, char **argv)
     uint64_t total_count=0;
     gettimeofday(&tm_start,NULL);
     i=0;
-    while(1)
-//    for(j=0;j<10;j++)
+//    while(1)
+    for(j=0;j<10;j++)
     {
-	memset(port_data[0]->dma_virt_base,i,Buf_size);
-        rvl=fvl_srio_write(fd,port_data[0]->dma_phys_base,Buf_size);
+	memset(data,i,Buf_size);
+        rvl=fvl_srio_write(fd,data,Buf_size);
         if(rvl!=0)
         {
             continue;

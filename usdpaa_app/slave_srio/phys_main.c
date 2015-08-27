@@ -15,7 +15,7 @@
 
 #define Total_Buf_Size (Buf_num*Buf_size*Chan_num)
 
-static char channame[]="srio1-chan3";
+static char channame[]="srio0-chan3";
 int main(int argc, char **argv)
 {
     fvl_srio_init_param_t srio_init[Port_Num];
