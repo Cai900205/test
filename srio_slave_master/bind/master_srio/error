@@ -1,0 +1,87 @@
+19c19
+< static fvl_srio_ctable_t srio_ctable_context[FVL_SRIO_CBMAX/2]={
+---
+> static fvl_srio_ctable_t srio_ctable_context[FVL_SRIO_CBMAX]={
+21c21,23
+< {"srio1-chan0",1,0,0},{"srio1-chan1",1,1,0},{"srio1-chan2",1,2,0},{"srio1-chan3",1,3,0}
+---
+> {"srio0-chan4",0,4,0},{"srio0-chan5",0,5,0},{"srio0-chan6",0,6,0},{"srio0-chan7",0,7,0},
+> {"srio1-chan0",1,0,0},{"srio1-chan1",1,1,0},{"srio1-chan2",1,2,0},{"srio1-chan3",1,3,0},
+> {"srio1-chan4",1,4,0},{"srio1-chan5",1,5,0},{"srio1-chan6",1,6,0},{"srio1-chan7",1,7,0}
+242d243
+<     head_arg[port_num].cpu = port_num+1;
+312,324d312
+<     int rvl=0;
+<     cpu_set_t cpuset;
+<     if(!priv->op_mode)
+<     {
+<         CPU_ZERO(&cpuset);
+<         CPU_SET(priv->cpu,&cpuset);
+<         rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+<         if(rvl)
+<         {
+< 	    FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+< 	    return;
+<         }
+<     }
+363,373c351
+<     FVL_LOG("channel:%d Host recv ctl !\n",priv->fd);
+<     int rvl=0;
+<     cpu_set_t cpuset;
+<     CPU_ZERO(&cpuset);
+<     CPU_SET(priv->cpu,&cpuset);
+<     rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+<     if(rvl)
+<     {
+< 	FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+< 	return;
+<     }
+---
+>     FVL_LOG("Host receive ctl num!\n");
+378,379c356
+<            // FVL_LOG("Warning##############\n");
+<            continue;
+---
+>             FVL_LOG("Warning##############\n");
+404,414c381
+<     FVL_LOG("channel:%d Host rese ctl !\n",priv->fd);
+<     int rvl=0;
+<     cpu_set_t cpuset;
+<     CPU_ZERO(&cpuset);
+<     CPU_SET(priv->cpu,&cpuset);
+<     rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+<     if(rvl)
+<     {
+< 	FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+< 	return;
+<     }
+---
+>     FVL_LOG("Slave rese ctl !\n");
+461c428
+<     FVL_LOG("*********************************\n");
+---
+>     FVL_LOG("###############*********************\n");
+480c447
+<     FVL_LOG("*****after while ****Head_size:%d rese_num:%d \n",HEAD_SIZE,rese_num[fd]);
+---
+>     FVL_LOG("after while ###############**************Head_size:%d\n",HEAD_SIZE);
+521c488
+<     FVL_LOG("channel:%d Host send channel head info!\n",fd);
+---
+>     FVL_LOG("#########send channel head info ############\n");
+532c499
+<     FVL_LOG("channel:%d Host Receive Ctl head info!\n",fd);
+---
+>     FVL_LOG("Host Receive Ctl head info!\n");
+536d502
+<     ctl_re_arg[fd].cpu=fd+3;
+547d512
+<     ctl_se_arg[fd].cpu=fd+7;
+646c611
+<       //  FVL_LOG("have no enuogh buffer available!\n");
+---
+>         FVL_LOG("have no enuogh buffer available!\n");
+656c621
+<   //  FVL_LOG("add:%08x,data:%02x\n",buf_virt,*(uint8_t *)buf_virt);
+---
+>   //  printf("add:%08x,data:%02x\n",buf_virt,*(uint8_t *)buf_virt);
