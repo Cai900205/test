@@ -121,6 +121,7 @@ typedef struct fvl_srio_context {
 //channel info
 typedef struct fvl_srio_channel {
     fvl_srio_ctrlblk_t  chanblk;  
+    fvl_srio_ctrlblk_t  rechanblk;  
     fvl_srio_portpool_t chanpool;
     pthread_t chan_id;
 } fvl_srio_channel_t;
