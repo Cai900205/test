@@ -1,0 +1,280 @@
+11c11
+< fvl_srio_head_info_t head_channel[FVL_SRIO_PORT_NUM*FVL_CHAN_NUM_MAX];
+---
+> fvl_srio_head_info_t head_channel[FVL_SRIO_CBMAX];
+16d15
+< static uint32_t ctl_count[FVL_SRIO_CBMAX]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+20c19
+< static fvl_srio_ctable_t srio_ctable_context[FVL_CHAN_NUM_MAX*2]={
+---
+> static fvl_srio_ctable_t srio_ctable_context[FVL_SRIO_CBMAX/2]={
+24a24,25
+> static fvl_head_thread_t head_arg[FVL_SRIO_PORT_NUM];
+> static fvl_ctl_thread_t  ctl_se_arg[FVL_SRIO_CBMAX];
+28c29,32
+< 
+---
+> /*static const uint32_t win_out_offset[20]={0x1000,0x2000,0x4000,0x8000,0x10000,0x20000,0x40000,0x80000,
+>                                     0x100000,0x200000,0x400000,0x800000,0x1000000,0x2000000,0x4000000,0x8000000,
+>                                     0x10000000,0x20000000,0x40000000,0x80000000};
+> */
+38,39c42
+<     fvl_srio_ctrlblk_t *pscb,*cscb,*re_cscb;
+<     fvl_head_thread_t head_arg;
+---
+>     fvl_srio_ctrlblk_t *pscb;
+61c64
+<     if((chan_num > FVL_CHAN_NUM_MAX) || ( chan_num<0))
+---
+>     if((chan_num > FVL_PORT_DMA_NUM) || ( chan_num<0))
+95d97
+< 
+97d98
+<     int j=FVL_CHAN_NUM_MAX*port_num;
+100,105c101,106
+<         head_channel[j+i].data_se_addr=FVL_SRIO_SYS_ADDR+chan_size*i;
+<         head_channel[j+i].data_re_addr=FVL_SRIO_SYS_ADDR+chan_size*i;
+<         head_channel[j+i].ctl_re_addr=FVL_SRIO_CTL_ADDR+HEAD_SIZE+ctl_size*i;
+<         head_channel[j+i].ctl_se_addr=FVL_SRIO_CTL_ADDR+HEAD_SIZE+ctl_size*i;
+<         head_channel[j+i].re_flag=1;
+<         head_channel[j+i].uflag=0;
+---
+>         head_channel[i].data_se_addr=FVL_SRIO_SYS_ADDR+chan_size*i;
+>         head_channel[i].data_re_addr=FVL_SRIO_SYS_ADDR+chan_size*i;
+>         head_channel[i].ctl_re_addr=FVL_SRIO_CTL_ADDR+HEAD_SIZE+ctl_size*i;
+>         head_channel[i].ctl_se_addr=FVL_SRIO_CTL_ADDR+HEAD_SIZE+ctl_size*i;
+>         head_channel[i].re_flag=1;
+>         head_channel[i].uflag=0;
+150a152
+> 
+218a221
+>     
+222,249d224
+<     
+<     fvl_srio_channel_t *temp_channel;
+<   
+<     for(i=0;i<FVL_CHAN_NUM_MAX;i++)
+<     {
+<         pscb=fvl_srio_getcb(port_num,i*2);
+<         if(pscb==NULL)
+<         {
+<             FVL_LOG("port:%d channel:%d : dmadev init error.\n",port_num+1,2*i);
+<             return -1;
+<         }
+<         temp_channel=&srio_channel_context[FVL_CHAN_NUM_MAX*port_num+i];
+<         cscb=&(temp_channel->chanblk);
+<         cscb->dmadev=pscb->dmadev;
+<         cscb->bfnum=pscb->bfnum;
+<         cscb->port = pscb->port;
+<     
+<         pscb=fvl_srio_getcb(port_num,i*2+1);
+<         if(pscb==NULL)
+<         {
+<             FVL_LOG("port:%d channel:%d : dmadev init error.\n",port_num+1,2*i+1);
+<             return -1;
+<         }
+<         re_cscb=&(temp_channel->rechanblk);
+<         re_cscb->dmadev=pscb->dmadev;
+<         re_cscb->bfnum=pscb->bfnum;
+<         re_cscb->port = pscb->port;
+<     }    
+254a230,235
+>     pscb=fvl_srio_getcb(port_num,0);
+>     if(pscb==NULL)
+>     {
+>         FVL_LOG("port:%d  dmadev init error.\n",port_num+1);
+>         return -1;
+>     }
+257,259d237
+<     temp_channel=&srio_channel_context[FVL_CHAN_NUM_MAX*port_num];
+< 
+<     pscb=&(temp_channel->chanblk);
+261c239
+< 
+---
+> //create thread:
+263,267c241,251
+<     head_arg.num = port_num;
+<     head_arg.op_mode = 0;
+<     head_arg.buf_virt=ppool->pwrite_ctl_result;
+<     
+<     fvl_srio_recv_head(&head_arg);
+---
+>     head_arg[port_num].num = port_num;
+>     head_arg[port_num].cpu = port_num+1;
+>     head_arg[port_num].op_mode = 0;
+>     head_arg[port_num].buf_virt=ppool->pwrite_ctl_result;
+> 
+>     rvl = pthread_create(&(psrio->chan_id[port_num]), NULL,fvl_srio_recv_head, &head_arg[port_num]);
+>     if (rvl) 
+>     {
+>         FVL_LOG("Create receive packet thread error!\n");
+>         return -errno;
+>     }
+268a253
+> //    pthread_exit(NULL);
+322c307
+< int fvl_srio_recv_head(fvl_head_thread_t *priv)
+---
+> void fvl_srio_recv_head(void *arg)
+323a309
+>     fvl_head_thread_t  *priv=arg;
+327c313,324
+< 
+---
+>     cpu_set_t cpuset;
+>     if(!priv->op_mode)
+>     {
+>         CPU_ZERO(&cpuset);
+>         CPU_SET(priv->cpu,&cpuset);
+>         rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+>         if(rvl)
+>         {
+> 	    FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+> 	    return;
+>         }
+>     }
+342d338
+<             break;
+356c352
+<     return 0;
+---
+>     return;
+402c398
+< void fvl_srio_rese_ctl(fvl_ctl_thread_t *priv)
+---
+> void fvl_srio_rese_ctl(void *arg)
+403a400
+>     fvl_ctl_thread_t  *priv=arg;
+404a402
+>     uint16_t ctl_count=0;
+405a404
+>     FVL_LOG("channel:%d Host rese ctl !\n",priv->fd);
+407,408c406,410
+<             
+<     if(pcnt->com < ctl_count[priv->fd])
+---
+>     cpu_set_t cpuset;
+>     CPU_ZERO(&cpuset);
+>     CPU_SET(priv->cpu,&cpuset);
+>     rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+>     if(rvl)
+410,412c412,413
+<          rese_num[priv->fd]=rese_num[priv->fd]+(head_port[priv->port_num].buf_num -ctl_count[priv->fd]);
+<          rese_num[priv->fd]=rese_num[priv->fd]+pcnt->com;
+<          ctl_count[priv->fd]=pcnt->com;
+---
+> 	FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+> 	return;
+414c415
+<     else if(pcnt->com >ctl_count[priv->fd])
+---
+>     while(1) 
+416,417c417,434
+<          rese_num[priv->fd]=rese_num[priv->fd]+(pcnt->com-ctl_count[priv->fd]);
+<          ctl_count[priv->fd]=pcnt->com;
+---
+>         if(pcnt->fla&0x0001)
+>         {
+>             FVL_LOG("fd:%d *******warning***********\n",priv->fd);
+>             continue;
+>         }
+>         else
+>         {
+>             if(pcnt->com < ctl_count)
+>             {
+>                 rese_num[priv->fd]=rese_num[priv->fd]+(head_port[priv->port_num].buf_num -ctl_count);
+>                 ctl_count=0;
+>             }
+>             else if(pcnt->com >ctl_count)
+>             {
+>                 rese_num[priv->fd]=rese_num[priv->fd]+(pcnt->com-ctl_count);
+>                 ctl_count=pcnt->com;
+>             }
+>         }
+419d435
+<         
+430a447
+>     fvl_srio_ctrlblk_t *pscb,*cscb;
+462,463c479
+< 
+<     rese_num[fd]=head_port[port_num].buf_num;
+---
+>     rese_num[fd]=head_port[port_num].buf_num;//
+469d484
+< 
+475a491
+>     cscb=&(temp_channel->chanblk);
+489a506,524
+>     pscb=fvl_srio_getcb(port_num,bfnum+1);
+>     if(pscb==NULL)
+>     {
+>         FVL_LOG("port:%d channel:%d : dmadev init error.\n",port_num+1,bfnum);
+>         return -1;
+>     }
+>     cscb->dmadev=pscb->dmadev;
+>     cscb->bfnum=pscb->bfnum;
+>     cscb->port = pscb->port;
+> //send channel head info
+> //mode master
+>     uint64_t dest_phys,src_phys;
+>     dest_phys=cpool->ctl_info_start;
+>     src_phys=cpool->write_ctl_data;
+>     memcpy(cpool->pwrite_ctl_data,&head_channel[bfnum],HEAD_SIZE);
+>     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);
+>     FVL_LOG("channel:%d Host send channel head info!\n",fd);
+> //wait 
+> //
+492a528
+>        
+494d529
+< 
+504d538
+< 
+510a545,555
+> 
+>     ctl_se_arg[fd].fd=fd;
+>     ctl_se_arg[fd].port_num=port_num;
+>     ctl_se_arg[fd].cpu=fd+7;
+>     ctl_se_arg[fd].buf_virt=cpool->pwrite_ctl_result+FVL_SRIO_WR_OP*HEAD_SIZE;
+>     rvl = pthread_create(&(temp_channel->chan_id), NULL,fvl_srio_rese_ctl, &ctl_se_arg[fd]);
+>     if (rvl) 
+>     {
+>         FVL_LOG("Create receive packet thread error!\n");
+>         return -errno;
+>     }
+575a621
+> //int fvl_srio_write(int fd, void *buf_virt,uint32_t length)
+582d627
+<     fvl_ctl_thread_t  ctl_se_arg;
+591d635
+<     
+592a637
+> 
+595,600d639
+< 
+<     ctl_se_arg.fd=fd;
+<     ctl_se_arg.port_num=port_num;
+<     ctl_se_arg.buf_virt=cpool->pwrite_ctl_result+FVL_SRIO_WR_OP*HEAD_SIZE;
+<     fvl_srio_rese_ctl(&ctl_se_arg);
+< 
+606c645
+<      
+---
+>    // printf("rese_num:%d\n",rese_num[fd]);
+608a648
+>       //  FVL_LOG("have no enuogh buffer available!\n");
+617a658
+>   //  FVL_LOG("add:%08x,data:%02x\n",buf_virt,*(uint8_t *)buf_virt);
+619c660
+<     src_phys = phys; 
+---
+>     src_phys = phys;//__dma_mem_vtop(buf_virt);
+629c670
+<     FVL_LOG("send sucessful!\n");
+---
+> 
+695c736
+<     pscb=&(temp_channel->rechanblk);
+---
+>     pscb=&(temp_channel->chanblk);
