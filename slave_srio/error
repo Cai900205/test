@@ -1,0 +1,92 @@
+185d184
+<     head_arg[port_num].cpu = port_num+1;
+241a241
+>     FVL_LOG("###########fvl_srio_recv_head:%ld####\n",priv->num);
+243,256c243
+<     FVL_LOG("port:%d fvl_srio_recv_head!\n",port_num);
+<     int rvl=0;
+<     cpu_set_t cpuset;
+<     if(!priv->op_mode)
+<     {
+<         CPU_ZERO(&cpuset);
+<         CPU_SET(priv->cpu,&cpuset);
+<         rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+<         if(rvl)
+<         {
+< 	    FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+< 	    return;
+<         }
+<     }
+---
+>     FVL_LOG("###########fvl_srio_recv_head:%ld####\n",port_num);
+264a252,253
+>             FVL_LOG("Slave  receive address!:%ld\n",port_num);
+>             FVL_LOG("Slave  receive address!:%ld\n",priv->num);
+272a262
+>             FVL_LOG("Slave 1  receive address!\n");
+273a264,266
+>             FVL_LOG("Slave 2  receive address!\n");
+>             FVL_LOG("Slave 3  receive address!\n");
+>             
+279a273
+>             FVL_LOG("Slave %  receive address!\n");
+351c345
+<             FVL_LOG("port_num:%d Receive Head info and send chan num info sucess!\n",port_num);
+---
+>             FVL_LOG("Receive Head info and send chan num info sucess!\n");
+360a355,365
+> //add
+> /*            uint64_t dest_phys,src_phys;
+>             fvl_srio_channel_t *temp_channel;
+>             temp_channel=&srio_channel_context[priv->num];
+>             ppool=&(temp_channel->chanpool);
+>             pscb=&(temp_channel->chanblk);
+>             FVL_LOG("##### Slave receive ctl_head info!\n");
+>             dest_phys=ppool->ctl_info_start;
+>             src_phys=ppool->write_ctl_data;
+>             memcpy(ppool->pwrite_ctl_data,&head_channel[priv->num],HEAD_SIZE);
+>             fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE);*/
+375,385c380
+<     FVL_LOG("channel:%d Slave recv ctl !\n",priv->fd);
+<     int rvl=0;
+<     cpu_set_t cpuset;
+<     CPU_ZERO(&cpuset);
+<     CPU_SET(priv->cpu,&cpuset);
+<     rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+<     if(rvl)
+<     {
+< 	FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+< 	return;
+<     }
+---
+>     FVL_LOG("Slave recv ctl !\n");
+390c385
+<             FVL_LOG("*************Warning********\n");
+---
+>             FVL_LOG("Warning##############\n");
+415,425c410
+<     FVL_LOG("channel:%d Slave rese ctl !\n",priv->fd);
+<     int rvl=0;
+<     cpu_set_t cpuset;
+<     CPU_ZERO(&cpuset);
+<     CPU_SET(priv->cpu,&cpuset);
+<     rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+<     if(rvl)
+<     {
+< 	FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+< 	return;
+<     }
+---
+>     FVL_LOG("Slave rese ctl !\n");
+532c517
+<     FVL_LOG("##### channel:%d Slave receive ctl_head info!\n",fd);
+---
+>     FVL_LOG("##### Slave receive ctl_head info!\n");
+537c522
+<     FVL_LOG("##### channel:%d Slave reback ctl_head info!\n",fd);
+---
+>     FVL_LOG("##### Slave reback ctl_head info!\n");
+543d527
+<     ctl_se_arg[fd].cpu=fd+3;
+553d536
+<     ctl_re_arg[fd].cpu=fd+7;
