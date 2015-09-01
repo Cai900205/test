@@ -1,0 +1,62 @@
+240a241
+>     FVL_LOG("###########fvl_srio_recv_head:%ld####\n",priv->num);
+241a243
+>     FVL_LOG("###########fvl_srio_recv_head:%ld####\n",port_num);
+250a253
+>             FVL_LOG("Slave  receive address!:%ld\n",priv->num);
+258a262
+>             FVL_LOG("Slave 1  receive address!\n");
+259a264,266
+>             FVL_LOG("Slave 2  receive address!\n");
+>             FVL_LOG("Slave 3  receive address!\n");
+>             
+265a273
+>             FVL_LOG("Slave %  receive address!\n");
+337c345
+<             FVL_LOG("port_num:%d Receive Head info and send chan num info sucess!\n",port_num);
+---
+>             FVL_LOG("Receive Head info and send chan num info sucess!\n");
+372c380
+<     FVL_LOG("fd:%d Slave recv ctl !\n",priv->fd);
+---
+>     FVL_LOG("Slave recv ctl !\n");
+377,378c385
+<             FVL_LOG("fd:%d *********Warning********\n",priv->fd);
+<             continue;
+---
+>             FVL_LOG("Warning##############\n");
+403c410
+<     FVL_LOG("fd:%d Slave rese ctl !\n",priv->fd);
+---
+>     FVL_LOG("Slave rese ctl !\n");
+408,409c415
+<             FVL_LOG("fd:%d *********Warning********\n",priv->fd);
+<             continue;
+---
+>             FVL_LOG("Warning##############\n");
+448c454
+<     FVL_LOG("*************************************************\n");
+---
+>     FVL_LOG("#############################\n");
+491c497
+<     
+---
+>     FVL_LOG("#################bfnum:%d\n",bfnum);
+498a505
+>     FVL_LOG("################getcb##########\n");
+510c517
+<     FVL_LOG("fd:%d Slave receive ctl_head info!\n",fd);
+---
+>     FVL_LOG("##### Slave receive ctl_head info!\n");
+515c522
+<     FVL_LOG("fd:%d Slave reback ctl_head info!\n",fd);
+---
+>     FVL_LOG("##### Slave reback ctl_head info!\n");
+630c637
+<         FVL_LOG("fd:%d have no enuogh buffer available!\n",fd);
+---
+>         FVL_LOG("have no enuogh buffer available!\n");
+641c648
+<     src_phys =  phys  ;
+---
+>     src_phys =  phys  ;// __dma_mem_vtop(buf_virt);

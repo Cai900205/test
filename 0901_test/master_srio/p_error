@@ -1,0 +1,10 @@
+31,39d30
+<     int cpu=*j+11;
+<     cpu_set_t cpuset;
+<     CPU_ZERO(&cpuset);
+<     CPU_SET(cpu,&cpuset);
+<     rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+<     if(rvl){
+< 	    printf("(%d)fail:pthread_setaffinity_np()\n",cpu);
+< 	    return;
+<     }
