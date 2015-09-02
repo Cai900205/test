@@ -1,0 +1,50 @@
+297c297
+<         FVL_LOG("Error:have no port_num:%d\n",port_num);
+---
+>         FVL_LOG("Error:have no port\n");
+351c351
+<     FVL_LOG("fd:%d Host receive ctl num!\n",priv->fd);
+---
+>     FVL_LOG("Host receive ctl num!\n");
+356,357c356
+<             FVL_LOG("fd:%d ****************warning***********\n",priv->fd);
+<             continue;
+---
+>             FVL_LOG("Warning##############\n");
+382c381
+<     FVL_LOG("fd:%d Host rese ctl !\n",priv->fd);
+---
+>     FVL_LOG("Slave rese ctl !\n");
+387,388c386
+<             FVL_LOG("fd:%d ****************warning***********\n",priv->fd);
+<             continue;
+---
+>             FVL_LOG("Warning##############\n");
+430c428
+<     FVL_LOG("*******************************************************\n");
+---
+>     FVL_LOG("###############*********************\n");
+439a438
+> 
+448c447
+<     FVL_LOG("****************after while**************Head_size:%d\n",HEAD_SIZE);
+---
+>     FVL_LOG("after while ###############**************Head_size:%d\n",HEAD_SIZE);
+489c488
+<     FVL_LOG("fd:%d Host send channel head info!\n",priv->fd);
+---
+>     FVL_LOG("#########send channel head info ############\n");
+500c499
+<     FVL_LOG("fd:%d Host Receive Ctl head info!\n",priv->fd);
+---
+>     FVL_LOG("Host Receive Ctl head info!\n");
+612c611
+<         FVL_LOG("fd:%d have no enuogh buffer available!\n",fd);
+---
+>         FVL_LOG("have no enuogh buffer available!\n");
+621a621
+>   //  printf("add:%08x,data:%02x\n",buf_virt,*(uint8_t *)buf_virt);
+623c623
+<     src_phys = phys;
+---
+>     src_phys = phys;//__dma_mem_vtop(buf_virt);

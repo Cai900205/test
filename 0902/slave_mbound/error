@@ -1,0 +1,224 @@
+15d14
+< static uint32_t ctl_count[FVL_SRIO_CBMAX]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+20c19
+< static fvl_srio_ctable_t srio_ctable_context[FVL_CHAN_NUM_MAX*2]={
+---
+> static fvl_srio_ctable_t srio_ctable_context[FVL_SRIO_CBMAX/2]={
+27c26
+< 
+---
+> static fvl_ctl_thread_t  ctl_se_arg[FVL_SRIO_CBMAX];
+31,32c30,33
+< 
+< 
+---
+> /*static const uint32_t win_out_offset[20]={0x1000,0x2000,0x4000,0x8000,0x10000,0x20000,0x40000,0x80000,
+>                                     0x100000,0x200000,0x400000,0x800000,0x1000000,0x2000000,0x4000000,0x8000000,
+>                                     0x10000000,0x20000000,0x40000000,0x80000000};
+> */
+42c43
+<     fvl_srio_ctrlblk_t *pscb,*cscb,*re_cscb;
+---
+>     fvl_srio_ctrlblk_t *pscb;
+95d95
+<     int j=FVL_CHAN_NUM_MAX*port_num;
+98,99c98,99
+<         head_channel[j+i].re_flag=1;
+<         head_channel[j+i].uflag=0;
+---
+>         head_channel[i].re_flag=1;
+>         head_channel[i].uflag=0;
+178,205c178
+<     memset(port_dma_ctl_wr->dma_virt_base,0,ctl_win_size); 
+<     
+<     fvl_srio_channel_t *temp_channel;
+<     for(i=0;i<FVL_CHAN_NUM_MAX;i++)
+<     {
+<         pscb=fvl_srio_getcb(port_num,i*2);
+<         if(pscb==NULL)
+<         {
+<             FVL_LOG("port:%d channel:%d : dmadev init error.\n",port_num+1,2*i);
+<             return -1;
+<         }
+<         temp_channel=&srio_channel_context[4*port_num+i];
+<         cscb=&(temp_channel->chanblk);
+<         cscb->dmadev=pscb->dmadev;
+<         cscb->bfnum=pscb->bfnum;
+<         cscb->port = pscb->port;
+<         
+<         pscb=fvl_srio_getcb(port_num,i*2+1);
+<         if(pscb==NULL)
+<         {
+<             FVL_LOG("port:%d channel:%d : dmadev init error.\n",port_num+1,2*i+1);
+<             return -1;
+<         }
+<         re_cscb=&(temp_channel->rechanblk);
+<         re_cscb->dmadev=pscb->dmadev;
+<         re_cscb->bfnum=pscb->bfnum;
+<         re_cscb->port = pscb->port;
+<     }        
+---
+>     memset(port_dma_ctl_wr->dma_virt_base,0,ctl_win_size);        
+278,279c251,252
+< 	          FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+< 	          return;
+---
+> 	    FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+> 	    return;
+365c338,343
+<             pscb=&psrio->ctrlblk[FVL_PORT_DMA_NUM*port_num];
+---
+>             pscb=fvl_srio_getcb(port_num,0);
+>             if(pscb==NULL)
+>             {
+>                 FVL_LOG("port:%d  dmadev init error.\n",port_num+1);
+>                 return -1;
+>             }
+369a348
+>             FVL_LOG("port_num:%d uflag:%d\n",port_num,head_port[port_num].uflag);
+409c388
+<             //FVL_LOG("fd:%d********Warning*************\n",priv->fd);
+---
+>             FVL_LOG("fd:%d********Warning*************\n",priv->fd);
+429c408
+< void fvl_srio_rese_ctl(fvl_ctl_thread_t *priv)
+---
+> void fvl_srio_rese_ctl(void *arg)
+430a410
+>     fvl_ctl_thread_t  *priv=arg;
+431a412
+>     uint16_t ctl_count=0;
+432a414
+>     FVL_LOG("channel:%d Slave rese ctl !\n",priv->fd);
+434,435c416,420
+<             
+<     if(pcnt->com < ctl_count[priv->fd])
+---
+>     cpu_set_t cpuset;
+>     CPU_ZERO(&cpuset);
+>     CPU_SET(priv->cpu,&cpuset);
+>     rvl = pthread_setaffinity_np(pthread_self(),sizeof(cpu_set_t),&cpuset);
+>     if(rvl)
+437,439c422,423
+<          rese_num[priv->fd]=rese_num[priv->fd]+(head_port[priv->port_num].buf_num -ctl_count[priv->fd]);
+<          rese_num[priv->fd]=rese_num[priv->fd]+pcnt->com;
+<          ctl_count[priv->fd]=pcnt->com;
+---
+> 	FVL_LOG("(%d)fail:pthread_setaffinity_np()\n",priv->cpu);
+> 	return;
+441c425
+<     else if(pcnt->com >ctl_count[priv->fd])
+---
+>     while(1) 
+443,444c427,444
+<          rese_num[priv->fd]=rese_num[priv->fd]+(pcnt->com-ctl_count[priv->fd]);
+<          ctl_count[priv->fd]=pcnt->com;
+---
+>         if(pcnt->fla&0x0001)
+>         {
+>             FVL_LOG("fd:%d********Warning*************\n",priv->fd);
+>             continue;
+>         }
+>         else
+>         {
+>             if(pcnt->com < ctl_count)
+>             {
+>                 rese_num[priv->fd]=rese_num[priv->fd]+(head_port[priv->port_num].buf_num -ctl_count);
+>                 ctl_count=0;
+>             }
+>             else if(pcnt->com >ctl_count)
+>             {
+>                 rese_num[priv->fd]=rese_num[priv->fd]+(pcnt->com-ctl_count);
+>                 ctl_count=pcnt->com;
+>             }
+>         }
+446d445
+<         
+458c457
+<     fvl_srio_ctrlblk_t *pscb;
+---
+>     fvl_srio_ctrlblk_t *pscb,*cscb;
+498,499c497,498
+<     pscb=&(temp_channel->chanblk);
+< 
+---
+>     cscb=&(temp_channel->chanblk);
+>     
+513c512,522
+<     
+---
+>     pscb=fvl_srio_getcb(port_num,bfnum+1);
+>     if(pscb==NULL)
+>     {
+>         FVL_LOG("port:%d channel:%d : dmadev init error.\n",port_num+1,bfnum);
+>         return -1;
+>     }
+> //  
+>     cscb->dmadev=pscb->dmadev;
+>     cscb->bfnum=pscb->bfnum;
+>     cscb->port=pscb->port;
+> 
+514a524,529
+>     head_p_arg.num = fd;
+>     head_p_arg.op_mode = 1;
+>     head_p_arg.buf_virt=cpool->pwrite_ctl_result;
+> 
+>     fvl_srio_recv_head(&head_p_arg);
+> 
+521d535
+< 
+522a537,548
+>     while(!head_channel[fd].uflag);
+> 
+>     ctl_se_arg[fd].fd=fd;
+>     ctl_se_arg[fd].port_num=port_num;
+>     ctl_se_arg[fd].cpu=fd+3;
+>     ctl_se_arg[fd].buf_virt=cpool->pwrite_ctl_result+FVL_SRIO_WR_OP*HEAD_SIZE;
+>     rvl = pthread_create(&(temp_channel->chan_id), NULL,fvl_srio_rese_ctl, &ctl_se_arg[fd]);
+>     if (rvl) 
+>     {
+>         FVL_LOG("Create receive packet thread error!\n");
+>         return -errno;
+>     }
+525c551
+<     ctl_re_arg[fd].cpu=fd+3;
+---
+>     ctl_re_arg[fd].cpu=fd+7;
+599c625
+< int fvl_srio_write(int fd, uint64_t phys,uint32_t length)
+---
+> int fvl_srio_write(int fd,uint64_t phys,uint32_t length)
+605d630
+<     fvl_ctl_thread_t  ctl_se_arg;
+614a640
+> 
+617,621d642
+<     ctl_se_arg.fd=fd;
+<     ctl_se_arg.port_num=port_num;
+<     ctl_se_arg.buf_virt=cpool->pwrite_ctl_result+FVL_SRIO_WR_OP*HEAD_SIZE;
+<     fvl_srio_rese_ctl(&ctl_se_arg);
+< 
+627c648
+<     
+---
+> 
+630c651
+<       //  printf("rese_num:%d\n",rese_num[fd]);
+---
+>       //  FVL_LOG("have no enuogh buffer available!\n");
+632d652
+<         pcnt->fla=1;
+633a654
+>         pcnt->fla=1;
+641c662
+<     src_phys = phys;
+---
+>     src_phys =  phys  ;// __dma_mem_vtop(buf_virt);
+714c735
+<     pscb=&(temp_channel->rechanblk);
+---
+>     pscb=&(temp_channel->chanblk);
+719a741
+> 	
+720a743
+> 	
