@@ -1,0 +1,15 @@
+
+[test]
+filename=/dev/dfb
+ioengine=libaio
+direct=1
+iodepth=128
+iodepth_batch=64
+iodepth_batch_complete=64
+bs=4k
+rw=randrw
+numjobs=16
+loops=1
+group_reporting
+gtod_reduce=1
+norandommap

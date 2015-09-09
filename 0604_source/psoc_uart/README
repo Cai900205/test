@@ -1,0 +1,22 @@
+[PROGRAM]:               temperature_psoc
+[VERSION]:               V1.00
+[AUTHOR]:                fival-li.ky
+[DATE]:                  2015年2月5日11:06:59
+[PLATFORM]:              MDE-4.2.2
+[REQUIREMENT]:           Nova 需要打开uart1
+[INTRODUCTION]:
+    通过psoc读取cpu和主板温度
+[PARAMETER]:
+    --passes             测试次数,默认值1。
+    --interval           两次测试之间的间隔，单位为秒,默认值1。
+    --warning            警告温度，默认90度。
+	--version    The version of this program
+[EXAMPLE]:
+    ./temperature_psoc --passes 10 --interval 1 --warning 50
+
+    
+
+------------------------------------------------------------
+[UPDATE]: NO
+[REASON]: NO
+------------------------------------------------------------

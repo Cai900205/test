@@ -1,0 +1,75 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BLOCK_SIZE	psoc_uart.c	17;"	d	file:
+BOARD	temperature_psoc.c	12;"	d	file:
+CC	Makefile	/^CC = $(TILERA_ROOT)\/bin\/tile-cc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -std=gnu99 -Wall -Werror -g $(OPT)$/;"	m
+CHIP	temperature_psoc.c	11;"	d	file:
+DATA_LEN	psoc_uart.c	19;"	d	file:
+LIBS	Makefile	/^LIBS = -lgxio $/;"	m
+OBJS	Makefile	/^OBJS = $(SRCS:%.c=%.o) $/;"	m
+OPT	Makefile	/^OPT = -Os$/;"	m
+PARALLELIZE	Makefile	/^PARALLELIZE = $(TILERA_ROOT)\/bin\/parallelize$/;"	m
+PSOC_TEMP_H	psoc_uart.h	2;"	d
+SRCS	Makefile	/^SRCS =  util.c psoc_uart.c$/;"	m
+STATUS_CHECKSUM	psoc_uart.c	56;"	d	file:
+STATUS_COMMAND	psoc_uart.c	59;"	d	file:
+STATUS_COMPLETE	psoc_uart.c	60;"	d	file:
+STATUS_DATA	psoc_uart.c	61;"	d	file:
+STATUS_FUNC	psoc_uart.c	55;"	d	file:
+STATUS_IDLE	psoc_uart.c	52;"	d	file:
+STATUS_MASTER_ADDR	psoc_uart.c	54;"	d	file:
+STATUS_RQSEQ	psoc_uart.c	58;"	d	file:
+STATUS_SLAVE_ADDR	psoc_uart.c	57;"	d	file:
+STATUS_START	psoc_uart.c	53;"	d	file:
+STATUS_STOP	psoc_uart.c	62;"	d	file:
+TEMPERATURE_PATH	temperature_psoc.c	9;"	d	file:
+TEMP_CMD	psoc_uart.c	50;"	d	file:
+TILE_MONITOR	Makefile	/^TILE_MONITOR = $(TILERA_ROOT)\/bin\/tile-monitor$/;"	m
+TP_WARNING	temperature_psoc.c	14;"	d	file:
+UART_COMPLETE	psoc_uart.c	69;"	d	file:
+UART_DEVICE	psoc_uart.c	16;"	d	file:
+UART_MASTER_ADDR	psoc_uart.c	67;"	d	file:
+UART_SLAVE_ADDR	psoc_uart.c	68;"	d	file:
+UART_START	psoc_uart.c	65;"	d	file:
+UART_STOP	psoc_uart.c	66;"	d	file:
+__UTIL_H_	util.h	2;"	d
+_message_request	psoc_uart.c	/^typedef struct _message_request$/;"	s	file:
+_message_response	psoc_uart.c	/^typedef struct _message_response$/;"	s	file:
+board_old	temperature_psoc.c	/^static int board_old = 0;$/;"	v	file:
+command	psoc_uart.c	/^    uint8_t command;$/;"	m	struct:_message_request	file:
+command	psoc_uart.c	/^    uint8_t command;$/;"	m	struct:_message_response	file:
+complete	psoc_uart.c	/^    uint8_t complete;$/;"	m	struct:_message_response	file:
+cpu_old	temperature_psoc.c	/^static int cpu_old = 0;$/;"	v	file:
+data	psoc_uart.c	/^    uint8_t data;$/;"	m	struct:_message_request	file:
+data	psoc_uart.c	/^    uint8_t data[DATA_LEN];$/;"	m	struct:_message_response	file:
+get_temperature	psoc_uart.c	/^int get_temperature(int fd,int times, int * cpu_tp,int * board_tp)$/;"	f
+get_time	psoc_uart.c	/^static void get_time(char *str_t)$/;"	f	file:
+get_time	util.c	/^void get_time(char *str_t)$/;"	f
+head_checksum	psoc_uart.c	/^    uint8_t head_checksum;$/;"	m	struct:_message_request	file:
+head_checksum	psoc_uart.c	/^    uint8_t head_checksum;$/;"	m	struct:_message_response	file:
+init_uart_device	psoc_uart.c	/^int init_uart_device()$/;"	f
+main	temperature_psoc.c	/^int main(int argc, char** argv)$/;"	f
+master_addr	psoc_uart.c	/^    uint8_t master_addr;$/;"	m	struct:_message_request	file:
+master_addr	psoc_uart.c	/^    uint8_t master_addr;$/;"	m	struct:_message_response	file:
+message_recv	psoc_uart.c	/^static int message_recv(int fd,uint8_t * buf, ssize_t len, uint8_t slave_addr,uint8_t master_addr,uint8_t command)$/;"	f	file:
+message_send	psoc_uart.c	/^static int message_send(int fd,uint8_t * buf, ssize_t len, uint8_t slave_addr,uint8_t master_addr,uint8_t command)$/;"	f	file:
+netfn_rslun	psoc_uart.c	/^    uint8_t netfn_rslun;$/;"	m	struct:_message_request	file:
+netfn_rslun	psoc_uart.c	/^    uint8_t netfn_rslun;$/;"	m	struct:_message_response	file:
+request_t	psoc_uart.c	/^}request_t;$/;"	t	typeref:struct:_message_request	file:
+response_t	psoc_uart.c	/^}response_t;$/;"	t	typeref:struct:_message_response	file:
+rqseq_rqlun	psoc_uart.c	/^    uint8_t rqseq_rqlun;$/;"	m	struct:_message_request	file:
+rqseq_rqlun	psoc_uart.c	/^    uint8_t rqseq_rqlun;$/;"	m	struct:_message_response	file:
+slave_addr	psoc_uart.c	/^    uint8_t slave_addr;$/;"	m	struct:_message_request	file:
+slave_addr	psoc_uart.c	/^    uint8_t slave_addr;$/;"	m	struct:_message_response	file:
+start	psoc_uart.c	/^    uint8_t start;$/;"	m	struct:_message_request	file:
+start	psoc_uart.c	/^    uint8_t start;$/;"	m	struct:_message_response	file:
+stop	psoc_uart.c	/^    uint8_t stop;$/;"	m	struct:_message_request	file:
+stop	psoc_uart.c	/^    uint8_t stop;$/;"	m	struct:_message_response	file:
+tail_checksum	psoc_uart.c	/^    uint8_t tail_checksum;$/;"	m	struct:_message_request	file:
+tail_checksum	psoc_uart.c	/^    uint8_t tail_checksum;$/;"	m	struct:_message_response	file:
+usage	temperature_psoc.c	/^static void usage()$/;"	f	file:

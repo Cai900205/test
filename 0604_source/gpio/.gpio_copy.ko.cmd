@@ -1,0 +1,1 @@
+cmd_/home/root/gpio/gpio_copy.ko := ld -m elf64ppc -r  -T /usr/src/linux/scripts/module-common.lds arch/powerpc/lib/crtsavres.o --build-id  -o /home/root/gpio/gpio_copy.ko /home/root/gpio/gpio_copy.o /home/root/gpio/gpio_copy.mod.o

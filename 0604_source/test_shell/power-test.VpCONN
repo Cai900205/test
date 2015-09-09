@@ -1,0 +1,12 @@
+[RTC]: rtc_do=false  rtc_interval=1  rtc_passes=3
+[RCW-ROM]: rcw_rom_do=false  rcw_rom_passes=20  rcw_rom_interval=1 rcw_rom_offset=0 rcw_rom_i2c=0  rcw_rom_slave=0x50 rcw_rom_count=20 rcw_rom_word_offset=1
+[CRYPTO-TEST]: crypto_do=do crypto_passes=3
+[SW-TEST]: sw_do=false sw_passes=10 sw_interval=1 sw_i2c=1 sw_slave=0x70
+[SPI-FLASH]: spi_flash_do=false  spi_flash_mtd=/dev/mtd0 spi_flash_offset=0 spi_flash_length=0x100 spi_flash_temp_filename=test spi_flash_passes=10
+[USB]: usb_bandwidth_do=false  usb_bandwidth_passes=4 usb_bandwidth_platform=powerpc usb_bandwidth_dev=sdb1 usb_bandwidth_size=100M
+[GPIO-TEST]: gpio_test_do=false gpio_test_cmd=1 gpio_test_gpionumber=3 gpio_test_bitnumber=5
+[MEMTEST]: memtest_do=false  memtest_size=100M memtest_loop=1 thread_num=4 startcpu=2 passes=10
+[CPU-FREQUENCY]: cpu_frequency_do=do passes=10 time=20 workers=8 startcpu=2 
+[PCIE]: pcie_do=false pcie_bridge_num=7
+[SRIO]: srio_link_do=false
+[NET]: test_net_do=false  interface1=fm2-mac9 interface2=fm2-mac10 ip1=192.168.1.1 ip2=192.168.1.2 testip1=192.168.1.11 testip2=192.168.1.22 

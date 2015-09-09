@@ -1,0 +1,52 @@
+#! /bin/sh
+#
+# [$1]: STRING	Device to test.
+# [$2]: INTEGER	Test packets length.
+# [$3]: INTEGER	Number of packets.
+#
+
+find_dev=0
+for block in `ls /sys/class/block`
+do
+	if [ "$1" == "$block" ]
+	then
+		find_dev=1
+		break
+	fi
+done
+
+if [ $find_dev -eq 0 ]
+then
+	echo "[USB-DISK-`date +'%Y-%m-%d %T'`]: Can't find the usb disk $1."
+	exit 1
+fi
+
+dev_index=`ls /sys/class/block/$1/device/subsystem/devices/`
+dev_index=`echo ${dev_index} | awk '{print $1}'`
+dev_index=`echo ${dev_index} | awk -F ":" '{print $1}'`
+
+if [ ! -f "/proc/scsi/usb-storage/${dev_index}" ]
+then
+	echo "[USB-DISK-`date +'%Y-%m-%d %T'`]: The disk isn't one usb disk."
+	exit 1
+fi
+
+packets=0
+dd if=/dev/urandom of=/opt/test.data bs=$2 count=1 >> /dev/null 2>&1
+while [ $packets -ne $3 ]
+do
+	cat /opt/test.data >> /opt/test-whole.data
+	packets=`expr $packets + 1`
+done
+
+dd if=/opt/test-whole.data of=/dev/$1 bs=$2 >> /dev/null 2>&1
+if [ $? -ne 0 ]
+then
+	echo "[USB-DISK-`date +'%Y-%m-%d %T'`]: Write the usb disk $1 failed."
+	exit 1
+fi
+
+#exit 0
+	
+
+echo "[USB-DISK-`date +'%Y-%m-%d %T'`]: The Test pass"

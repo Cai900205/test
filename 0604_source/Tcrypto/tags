@@ -1,0 +1,159 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AT808	libatcrypto.h	22;"	d
+AT808_DUMMY_I2C_ADDR	libatcrypto.h	25;"	d
+AT808_LWORD_ADDRESS	libatcrypto.h	30;"	d
+AT808_MWRITE_BYTES	libatcrypto.h	33;"	d
+AT808_NAME	libatcrypto.h	24;"	d
+AT808_RW_ACCESS_AR0	libatcrypto.h	72;"	d
+AT808_RW_ACCESS_AR0__SHIFT_AM0	libatcrypto.h	76;"	d
+AT808_RW_ACCESS_AR0__SHIFT_AM1	libatcrypto.h	75;"	d
+AT808_RW_ACCESS_AR0__SHIFT_ER	libatcrypto.h	77;"	d
+AT808_RW_ACCESS_AR0__SHIFT_MDF	libatcrypto.h	79;"	d
+AT808_RW_ACCESS_AR0__SHIFT_PGO	libatcrypto.h	80;"	d
+AT808_RW_ACCESS_AR0__SHIFT_PM0	libatcrypto.h	74;"	d
+AT808_RW_ACCESS_AR0__SHIFT_PM1	libatcrypto.h	73;"	d
+AT808_RW_ACCESS_AR0__SHIFT_WLM	libatcrypto.h	78;"	d
+AT808_RW_ACCESS_AR1	libatcrypto.h	95;"	d
+AT808_RW_ACCESS_AR2	libatcrypto.h	97;"	d
+AT808_RW_ACCESS_AR3	libatcrypto.h	99;"	d
+AT808_RW_ACCESS_AR4	libatcrypto.h	101;"	d
+AT808_RW_ACCESS_AR5	libatcrypto.h	103;"	d
+AT808_RW_ACCESS_AR6	libatcrypto.h	105;"	d
+AT808_RW_ACCESS_AR7	libatcrypto.h	107;"	d
+AT808_RW_ACCESS_DCR	libatcrypto.h	61;"	d
+AT808_RW_ACCESS_DCR__SHIFT_CS0	libatcrypto.h	66;"	d
+AT808_RW_ACCESS_DCR__SHIFT_CS1	libatcrypto.h	67;"	d
+AT808_RW_ACCESS_DCR__SHIFT_CS2	libatcrypto.h	68;"	d
+AT808_RW_ACCESS_DCR__SHIFT_CS3	libatcrypto.h	69;"	d
+AT808_RW_ACCESS_DCR__SHIFT_ETA	libatcrypto.h	65;"	d
+AT808_RW_ACCESS_DCR__SHIFT_SME	libatcrypto.h	62;"	d
+AT808_RW_ACCESS_DCR__SHIFT_UAT	libatcrypto.h	64;"	d
+AT808_RW_ACCESS_DCR__SHIFT_UCR	libatcrypto.h	63;"	d
+AT808_RW_ACCESS_INN	libatcrypto.h	83;"	d
+AT808_RW_ACCESS_ISC	libatcrypto.h	111;"	d
+AT808_RW_ACCESS_PR0	libatcrypto.h	86;"	d
+AT808_RW_ACCESS_PR0__SHIFT_AK0	libatcrypto.h	88;"	d
+AT808_RW_ACCESS_PR0__SHIFT_AK1	libatcrypto.h	87;"	d
+AT808_RW_ACCESS_PR0__SHIFT_POK0	libatcrypto.h	90;"	d
+AT808_RW_ACCESS_PR0__SHIFT_POK1	libatcrypto.h	89;"	d
+AT808_RW_ACCESS_PR0__SHIFT_PW0	libatcrypto.h	93;"	d
+AT808_RW_ACCESS_PR0__SHIFT_PW1	libatcrypto.h	92;"	d
+AT808_RW_ACCESS_PR0__SHIFT_PW2	libatcrypto.h	91;"	d
+AT808_RW_ACCESS_PR1	libatcrypto.h	96;"	d
+AT808_RW_ACCESS_PR2	libatcrypto.h	98;"	d
+AT808_RW_ACCESS_PR3	libatcrypto.h	100;"	d
+AT808_RW_ACCESS_PR4	libatcrypto.h	102;"	d
+AT808_RW_ACCESS_PR5	libatcrypto.h	104;"	d
+AT808_RW_ACCESS_PR6	libatcrypto.h	106;"	d
+AT808_RW_ACCESS_PR7	libatcrypto.h	108;"	d
+AT808_RW_CRYPTO_AAC0	libatcrypto.h	113;"	d
+AT808_RW_CRYPTO_AAC1	libatcrypto.h	116;"	d
+AT808_RW_CRYPTO_AAC2	libatcrypto.h	119;"	d
+AT808_RW_CRYPTO_AAC3	libatcrypto.h	122;"	d
+AT808_RW_CRYPTO_CC0	libatcrypto.h	114;"	d
+AT808_RW_CRYPTO_CC1	libatcrypto.h	117;"	d
+AT808_RW_CRYPTO_CC2	libatcrypto.h	120;"	d
+AT808_RW_CRYPTO_CC3	libatcrypto.h	123;"	d
+AT808_RW_CRYPTO_SEK0	libatcrypto.h	115;"	d
+AT808_RW_CRYPTO_SEK1	libatcrypto.h	118;"	d
+AT808_RW_CRYPTO_SEK2	libatcrypto.h	121;"	d
+AT808_RW_CRYPTO_SEK3	libatcrypto.h	124;"	d
+AT808_RW_ID_ATR	libatcrypto.h	46;"	d
+AT808_RW_ID_CMC	libatcrypto.h	55;"	d
+AT808_RW_ID_FCB	libatcrypto.h	49;"	d
+AT808_RW_ID_MTZ	libatcrypto.h	52;"	d
+AT808_RW_PASSWORD_PACR0	libatcrypto.h	133;"	d
+AT808_RW_PASSWORD_PACR1	libatcrypto.h	137;"	d
+AT808_RW_PASSWORD_PACR2	libatcrypto.h	141;"	d
+AT808_RW_PASSWORD_PACR3	libatcrypto.h	145;"	d
+AT808_RW_PASSWORD_PACR4	libatcrypto.h	149;"	d
+AT808_RW_PASSWORD_PACR5	libatcrypto.h	153;"	d
+AT808_RW_PASSWORD_PACR6	libatcrypto.h	157;"	d
+AT808_RW_PASSWORD_PACR7	libatcrypto.h	161;"	d
+AT808_RW_PASSWORD_PACW0	libatcrypto.h	131;"	d
+AT808_RW_PASSWORD_PACW1	libatcrypto.h	135;"	d
+AT808_RW_PASSWORD_PACW2	libatcrypto.h	139;"	d
+AT808_RW_PASSWORD_PACW3	libatcrypto.h	143;"	d
+AT808_RW_PASSWORD_PACW4	libatcrypto.h	147;"	d
+AT808_RW_PASSWORD_PACW5	libatcrypto.h	151;"	d
+AT808_RW_PASSWORD_PACW6	libatcrypto.h	155;"	d
+AT808_RW_PASSWORD_PACW7	libatcrypto.h	159;"	d
+AT808_RW_PASSWORD_R0	libatcrypto.h	134;"	d
+AT808_RW_PASSWORD_R1	libatcrypto.h	138;"	d
+AT808_RW_PASSWORD_R2	libatcrypto.h	142;"	d
+AT808_RW_PASSWORD_R3	libatcrypto.h	146;"	d
+AT808_RW_PASSWORD_R4	libatcrypto.h	150;"	d
+AT808_RW_PASSWORD_R5	libatcrypto.h	154;"	d
+AT808_RW_PASSWORD_R6	libatcrypto.h	158;"	d
+AT808_RW_PASSWORD_R7	libatcrypto.h	162;"	d
+AT808_RW_PASSWORD_W0	libatcrypto.h	132;"	d
+AT808_RW_PASSWORD_W1	libatcrypto.h	136;"	d
+AT808_RW_PASSWORD_W2	libatcrypto.h	140;"	d
+AT808_RW_PASSWORD_W3	libatcrypto.h	144;"	d
+AT808_RW_PASSWORD_W4	libatcrypto.h	148;"	d
+AT808_RW_PASSWORD_W5	libatcrypto.h	152;"	d
+AT808_RW_PASSWORD_W6	libatcrypto.h	156;"	d
+AT808_RW_PASSWORD_W7	libatcrypto.h	160;"	d
+AT808_RW_SECRET_SSG0	libatcrypto.h	126;"	d
+AT808_RW_SECRET_SSG1	libatcrypto.h	127;"	d
+AT808_RW_SECRET_SSG2	libatcrypto.h	128;"	d
+AT808_RW_SECRET_SSG3	libatcrypto.h	129;"	d
+AT808_R_ID_LHC	libatcrypto.h	58;"	d
+AT808_SECURE_CODE	libatcrypto.c	/^char AT808_SECURE_CODE[3] = { 0x22, 0xe8, 0x3f };$/;"	v
+AT808_TYPE_NUM	libatcrypto.h	36;"	d
+AT808_VERIFY_DELAY	libatcrypto.h	43;"	d
+AT808_ZONE_NUM	libatcrypto.h	39;"	d
+CC	Makefile	/^CC = $(TILERA_ROOT)\/bin\/tile-cc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -std=gnu99 -Wall -Werror -g $(OPT)$/;"	m
+CNORMAL_READ	libatcrypto.h	206;"	d
+CRANDOM_READ	libatcrypto.h	205;"	d
+CRYPTO_MEM_CNUM	libatcrypto.h	202;"	d
+CSYSTEM_READ	libatcrypto.h	208;"	d
+CSYSTEM_WRITE	libatcrypto.h	207;"	d
+CVERIFY_CRYPTO	libatcrypto.h	209;"	d
+CVERIFY_PASSWORD	libatcrypto.h	210;"	d
+CWRITE_USER_ZONE	libatcrypto.h	204;"	d
+I2C_DEV	Tcrypto.c	15;"	d	file:
+LIBS	Makefile	/^LIBS = $/;"	m
+OBJS	Makefile	/^OBJS = $(SRCS:%.c=%.o) $/;"	m
+OPT	Makefile	/^OPT = -Os$/;"	m
+PARALLELIZE	Makefile	/^PARALLELIZE = $(TILERA_ROOT)\/bin\/parallelize$/;"	m
+PROTOCOLS_ISO7816	libatcrypto.h	192;"	d
+PROTOCOLS_NUM	libatcrypto.h	190;"	d
+PROTOCOLS_TWSERIAL	libatcrypto.h	191;"	d
+SECURITY_FUSES_CMA	libatcrypto.h	179;"	d
+SECURITY_FUSES_FAB	libatcrypto.h	180;"	d
+SECURITY_FUSES_NUM	libatcrypto.h	176;"	d
+SECURITY_FUSES_PER	libatcrypto.h	178;"	d
+SECURITY_FUSES_SEC	libatcrypto.h	177;"	d
+SRCS	Makefile	/^SRCS = Tcrypto.c libatcrypto.c $/;"	m
+TILE_MONITOR	Makefile	/^TILE_MONITOR = $(TILERA_ROOT)\/bin\/tile-monitor$/;"	m
+__AT88SC0808CA_H_	libatcrypto.h	17;"	d
+access	libatcrypto.h	/^    int access[AT808_ZONE_NUM];$/;"	m	struct:__anon1
+at808_read_zone	libatcrypto.c	/^int at808_read_zone(cm_t* cm, int zone, char* buf, int addr)$/;"	f
+at808_set_access	libatcrypto.c	/^void at808_set_access(cm_t* cm, int zone, int* acc)$/;"	f
+at808_set_configuration	libatcrypto.c	/^void at808_set_configuration(cm_t* cm, int* mode)$/;"	f
+at808_set_identification	libatcrypto.c	/^void at808_set_identification(cm_t* cm, char* identfy)$/;"	f
+at808_set_issuer_code	libatcrypto.c	/^void at808_set_issuer_code(cm_t* cm, char* iss_code)$/;"	f
+at808_set_manufactur_code	libatcrypto.c	/^void at808_set_manufactur_code(cm_t* cm, char* cmc)$/;"	f
+at808_set_pac	libatcrypto.c	/^void at808_set_pac(cm_t* cm, int idx, char acc)$/;"	f
+at808_set_password	libatcrypto.c	/^void at808_set_password(cm_t* cm, int idx, char* password, int rw)$/;"	f
+at808_set_pkey	libatcrypto.c	/^void at808_set_pkey(cm_t* cm, int zone, int* pkey)$/;"	f
+at808_unlock	libatcrypto.c	/^int at808_unlock(cm_t* cm, int grunt)$/;"	f
+at808_verify_password	libatcrypto.c	/^void at808_verify_password(cm_t* cm, int idx, char* password, int rw, int grunt)$/;"	f
+at808_write_zone	libatcrypto.c	/^int at808_write_zone(cm_t* cm, int zone, char* buf, int addr)$/;"	f
+cm_t	libatcrypto.h	/^} cm_t;$/;"	t	typeref:struct:__anon1
+cryptomem_ranread	libatcrypto.c	/^cryptomem_ranread(int fd, char* buf, uint8_t slave, uint16_t addr, int count)$/;"	f
+cryptomem_write	libatcrypto.c	/^cryptomem_write(int fd, char* buf, uint8_t slave, uint16_t addr, int count)$/;"	f	file:
+cryptozone_read	libatcrypto.c	/^cryptozone_read(int fd, char* buf, int zone, uint16_t addr, int count)$/;"	f	file:
+cryptozone_write	libatcrypto.c	/^cryptozone_write(int fd, char* buf, int zone, uint16_t addr, int count)$/;"	f	file:
+fd	libatcrypto.h	/^    int fd;$/;"	m	struct:__anon1
+main	Tcrypto.c	/^int main(int argc, char** argv)$/;"	f
+mode	libatcrypto.h	/^    int mode;$/;"	m	struct:__anon1
+pkey	libatcrypto.h	/^    int pkey[AT808_ZONE_NUM];$/;"	m	struct:__anon1
+unlocked	libatcrypto.h	/^    int unlocked;$/;"	m	struct:__anon1
