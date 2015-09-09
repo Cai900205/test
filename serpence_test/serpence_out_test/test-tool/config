@@ -1,0 +1,14 @@
+#
+# Automatically generated file; DO NOT EDIT.
+# If you want to redo config, it is easy: delete this file.
+#
+sector_size_shift=12
+sector_ncodeword=5
+user_sector_size_shift=9
+nplane=1
+ifmode=1
+async_cycles=2
+ecc_mode=0
+raid_mode=1
+interrupt_delay=4
+overprovision_rate=20

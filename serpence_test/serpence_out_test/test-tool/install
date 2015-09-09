@@ -1,0 +1,67 @@
+#!/bin/bash
+
+module=./shannon_cdev.ko
+
+install_module()
+{
+	if [ $EUID != 0 ]; then
+		echo "Operation not permitted! Prefix \"sudo\" then try again"
+		exit 1
+	fi
+
+	if sudo /sbin/lsmod | grep -w shannon > /dev/null; then
+		if ! sudo /sbin/rmmod shannon; then
+			echo "Rmmod shannon failed"
+			exit 1
+		fi
+	fi
+
+	if sudo /sbin/lsmod | grep -w shannon_pcie_raid > /dev/null; then
+		if ! sudo /sbin/rmmod shannon_pcie_raid; then
+			echo "Rmmod shannon_pcie_raid failed"
+			exit 1
+		fi
+	fi
+
+	if sudo /sbin/lsmod | grep -w shannon_cdev > /dev/null; then
+		if ! sudo /sbin/rmmod shannon_cdev; then
+			echo "Rmmod shannon_cdev failed"
+			exit 1
+		fi
+	fi
+
+	if [ ! -e $module ]; then
+		make -C `dirname $module`
+	fi
+
+	if ! sudo /sbin/insmod $module; then
+		echo "Maybe need to rebuild module because '/lib/modules/build' has be changed"
+		make -C `dirname $module` clean
+		make -C `dirname $module`
+
+		if ! sudo /sbin/insmod $module; then
+			echo "insmod device driver failed"
+			exit 1
+		fi
+	fi
+
+	sleep 0.1
+
+	loop=0
+	while ! ls /dev/ | grep shannon_cdev > /dev/null; do # wait for udev complete
+		sleep 1
+
+		loop=`expr $loop + 1`
+		if [ $loop -gt 15 ]; then
+			echo "Timeout: wait for udev complete"
+			break
+		fi
+	done
+
+	for nod in `ls /dev/shannon_cdev*`; do
+		sudo chmod 0666 $nod
+	done
+}
+
+# main
+install_module

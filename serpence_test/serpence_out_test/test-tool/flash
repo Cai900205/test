@@ -1,0 +1,194 @@
+[TH58TEG7DDJ]
+id=98 DE 94 93 76 D7 08 04
+blk_num=2116
+page_num=256
+page_size_shift=14
+oob_size=1280
+plane_num=2
+plane_mask=0x0100
+lun_mask=0
+ifmode=toggle
+factory_ivb=[0,0,0] [0,16384,16384] [255,0,0] [255,16384,16384]
+drvmode=[0xEF,0x10,0x06,0,0,0]
+
+[TH58TEG8DDK]
+id=98 DE 94 93 76 D0 08 04
+blk_num=2132
+page_num=256
+page_size_shift=14
+oob_size=1280
+plane_num=1
+plane_mask=0x0100
+lun_mask=0
+ifmode=toggle
+factory_ivb=[0,0,0] [0,16384,16384] [255,0,0] [255,16384,16384]
+drvmode=[0xEF,0x10,0x06,0,0,0]
+
+[TH58TEG9DDJ]
+id=98 3A 95 93 7A D7 08 04
+blk_num=2116
+page_num=256
+page_size_shift=14
+oob_size=1280
+plane_num=2
+plane_mask=0x0100
+lun_mask=0x10
+ifmode=toggle
+factory_ivb=[0,0,0] [0,16384,16384] [255,0,0] [255,16384,16384]
+drvmode=[0xEF,0x10,0x06,0,0,0]
+
+[TH58TEG9DDK]
+id=98 3A 95 93 7A D0 08 04
+blk_num=2132
+page_num=256
+page_size_shift=14
+oob_size=1280
+plane_num=1
+plane_mask=0x0100
+lun_mask=0x10
+ifmode=toggle
+factory_ivb=[0,0,0] [0,16384,16384] [255,0,0] [255,16384,16384]
+drvmode=[0xEF,0x10,0x06,0,0,0]
+
+[TH58TFT0DFK]
+id=98 3C A5 93 7E D0 08 04
+blk_num=4276
+page_num=256
+page_size_shift=14
+oob_size=1280
+plane_num=1
+plane_mask=0x0100
+lun_mask=0x20
+ifmode=toggle
+factory_ivb=[0,0,0] [0,16384,16384] [255,0,0] [255,16384,16384]
+drvmode=[0xEF,0x10,0x06,0,0,0]
+
+[TH58TFT1DFK]
+id=98 3E A6 93 7E D0 08 04
+blk_num=4276
+page_num=256
+page_size_shift=14
+oob_size=1280
+plane_num=1
+plane_mask=0x0100
+lun_mask=0x20
+ifmode=toggle
+factory_ivb=[0,0,0] [0,16384,16384] [255,0,0] [255,16384,16384]
+drvmode=[0xEF,0x10,0x06,0,0,0]
+
+[TH58TFG9DDLBA8C]
+id=98 3A 94 93 76 D1 08 04
+blk_num=4212
+page_num=256
+page_size_shift=14
+oob_size=1280
+plane_num=1
+plane_mask=0x0100
+lun_mask=0
+ifmode=toggle
+factory_ivb=[0,0,0] [0,16384,16384] [255,0,0] [255,16384,16384]
+drvmode=[0xEF,0x10,0x06,0,0,0]
+
+[MT29F256G08CECAB]
+id=2C 84 64 3C A5 00 00 00
+blk_num=2048
+page_num=512
+page_size_shift=14
+oob_size=1216
+plane_num=2
+plane_mask=0x0200
+lun_mask=0
+ifmode=sync
+factory_ivb=[0,16384,17599]
+drvmode=[0xEF,0x10,0x00,0,0,0]
+
+[MT29F512G08CUCAB]
+id=2C A8 05 CB A9 00 00 00
+blk_num=4096
+page_num=256
+page_size_shift=13
+oob_size=448
+plane_num=2
+plane_mask=0x0100
+lun_mask=0x10
+ifmode=sync
+factory_ivb=[0,8192,8639]
+drvmode=[0xEF,0x10,0x00,0,0,0]
+
+[MT29F256G08CMCDB]
+id=2C 64 64 3C A5 04 00 00
+blk_num=1024
+page_num=512
+page_size_shift=14
+oob_size=1216
+plane_num=2
+plane_mask=0x0200
+lun_mask=0
+ifmode=sync
+factory_ivb=[0,16384,17599]
+drvmode=[0xEF,0x10,0x00,0,0,0]
+
+[MT29F512G08CKECB]
+id=2C A4 E5 54 A9 00 00 00
+blk_num=2048
+page_num=512
+page_size_shift=14
+oob_size=1872
+plane_num=2
+plane_mask=0x0200
+lun_mask=0x20
+ifmode=sync
+factory_ivb=[0,16384,18255]
+drvmode=[0xEF,0x10,0x00,0,0,0]
+
+[MT29F1T08CUEAB]
+id=2C A4 E5 3C A5 00 00 00
+blk_num=2048
+page_num=512
+page_size_shift=14
+oob_size=1216
+plane_num=2
+plane_mask=0x0200
+lun_mask=0x10
+ifmode=sync
+factory_ivb=[0,16384,17599]
+drvmode=[0xEF,0x10,0x00,0,0,0]
+
+[MT29F1T08CUCBB]
+id=2C A4 E5 3C A9 04 00 00
+blk_num=2048
+page_num=512
+page_size_shift=14
+oob_size=1216
+plane_num=2
+plane_mask=0x0200
+lun_mask=0x20
+ifmode=sync
+factory_ivb=[0,16384,17599]
+drvmode=[0xEF,0x10,0x00,0,0,0]
+
+[MT29F512G08CUED8J6-12:D]
+id=2C 84 E5 3C A5 04 00 00
+blk_num=1024
+page_num=512
+page_size_shift=14
+oob_size=1216
+plane_num=2
+plane_mask=0x0200
+lun_mask=0x10
+ifmode=sync
+factory_ivb=[0,16384,17599]
+drvmode=[0xEF,0x10,0x00,0,0,0]
+
+[JS29F32B08JCME2]
+id=89 88 24 4B A9 00 00 00
+blk_num=4096
+page_num=256
+page_size_shift=13
+oob_size=448
+plane_num=2
+plane_mask=0x0100
+lun_mask=0
+ifmode=sync
+factory_ivb=[0,8192,8639]
+drvmode=[0xEF,0x10,0x00,0,0,0]
