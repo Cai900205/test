@@ -124,18 +124,13 @@ int split_string(char *s,char _cmd[][100])
     char *p = s;
     int i = 0;
     int j = 0;
-    int k = 0;
     while(*p != '\0')
     {
         if(*p == ' ')
         {
-
-            if(j!=0)
-            {
-                _cmd[i-1][j]='\0';
-                k=j+1;
-                j = 0;
-            }
+            _cmd[i][j]='\0';
+            i++;
+            j = 0;
             p++;
             while(*p == ' ')
             {
@@ -144,23 +139,12 @@ int split_string(char *s,char _cmd[][100])
         }
         else
         {
-            if(j==0)
-            {
-                i++;
-            }
-            _cmd[i-1][j] = *p;
+            _cmd[i][j] = *p;
             p++;
             j++;
-            k=j;
         }
     }
-
-    if(_cmd[i-1][k-1]!='\0')
-    {
-        _cmd[i-1][k]='\0';
-    }
-
-    return i;
+    return i+1;
 }
 
 void print_array(char _arr[][100],int _len)

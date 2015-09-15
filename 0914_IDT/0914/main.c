@@ -82,12 +82,12 @@ int main(int argc, char* argv[])
         if (!tmp)
      	    exit (1);
         if (*tmp)
-        {
+     	{
 	      add_history (tmp);
-        }
+	}
 
         len = split_string(tmp,cli_argv);
-        printf("len:%d\n",len);     
+        
         print_array(cli_argv,len);   
         if(cli_argv[0]==NULL|| len==0)
         {
