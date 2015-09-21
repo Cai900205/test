@@ -1,0 +1,98 @@
+23a24,25
+> static uint64_t error_count[FVL_CHAN_NUM_MAX]={0,0,0,0,0,0,0,0};
+> 
+72c74
+<         uint64_t vs_type=srio_param->version_mode;
+---
+>         uint32_t vs_type=srio_param->version_mode;
+540c542,547
+<     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,256);
+---
+>     rvl = fvl_srio_send(pscb->dmadev,src_phys,dest_phys,256);
+>     if(rvl!=0)
+>     {
+>         error_count[port_num]++;
+>         FVL_LOG("DMA do't response times:%lu\n",error_count[port_num]);
+>     }
+704c711,716
+<             fvl_srio_send(pscb->dmadev,src_phys,dest_phys,256);
+---
+>             rvl=fvl_srio_send(pscb->dmadev,src_phys,dest_phys,256);
+>             if(rvl!=0)
+>             {
+>                 error_count[port_num]++;
+>                 FVL_LOG("DMA do't response times:%lu\n",error_count[port_num]);
+>             }
+736c748
+<             uint64_t vs_type=pcnt->vs_type;
+---
+>             uint32_t vs_type=pcnt->vs_type;
+799c811
+<             uint64_t vs_type=pcnt->vs_type;
+---
+>             uint32_t vs_type=pcnt->vs_type;
+1064,1065c1076,1081
+<     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,256);
+< 
+---
+>     rvl=fvl_srio_send(pscb->dmadev,src_phys,dest_phys,256);
+>     if(rvl!=0)
+>     {
+>         error_count[fd]++;
+>         FVL_LOG("DMA do't response times:%lu\n",error_count[fd]);
+>     }
+1255c1271
+<     int port_num=0;
+---
+>     int port_num=0,rvl=0;
+1291c1307,1312
+<         fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE[port_num]);
+---
+>         rvl=fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE[port_num]);
+>         if(rvl!=0)
+>         {
+>             error_count[fd]++;
+>             FVL_LOG("DMA do't response times:%lu\n",error_count[fd]);
+>         }
+1294d1314
+< 
+1298c1318,1323
+<     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,length);
+---
+>     rvl=fvl_srio_send(pscb->dmadev,src_phys,dest_phys,length);
+>     if(rvl!=0)
+>     {
+>         error_count[fd]++;
+>         FVL_LOG("DMA do't response times:%lu\n",error_count[fd]);
+>     }
+1314c1339,1344
+<     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE[port_num]);
+---
+>     rvl=fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE[port_num]);
+>     if(rvl!=0)
+>     {
+>         error_count[fd]++;
+>         FVL_LOG("DMA do't response times:%lu\n",error_count[fd]);
+>     }
+1390c1420
+<     int port_num=0,buf_num=0;
+---
+>     int port_num=0,buf_num=0,rvl=0;
+1413c1443,1448
+<     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE[port_num]);
+---
+>     rvl=fvl_srio_send(pscb->dmadev,src_phys,dest_phys,HEAD_SIZE[port_num]);
+>     if(rvl!=0)
+>     {
+>         error_count[fd]++;
+>         FVL_LOG("DMA do't response times:%lu\n",error_count[fd]);
+>     }
+1481c1516,1521
+<     fvl_srio_send(pscb->dmadev,src_phys,dest_phys,256);
+---
+>     rvl=fvl_srio_send(pscb->dmadev,src_phys,dest_phys,256);
+>     if(rvl!=0)
+>     {
+>         error_count[port_num]++;
+>         FVL_LOG("DMA do't response times:%lu\n",error_count[port_num]);
+>     }
