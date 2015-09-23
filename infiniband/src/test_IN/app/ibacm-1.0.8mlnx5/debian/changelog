@@ -1,0 +1,15 @@
+ibacm (1.0.8mlnx5-OFED.2.3.2.g2ece8e0) UNSTABLE; urgency=low
+  * Rebased with upstream ibacm, commit 66840390c85647ba7eb462ca5f30b0e2cd898adb
+
+ -- Vladimir Sokolovsky <vlad@mellanox.com>  Wed, 11 Jun 2014 13:00:00 +0200
+
+5ibacm (1.0.8mlnx4-1) UNSTABLE; urgency=low
+  * Rebased with upstream ibacm, commit cb593cb9baa9c22f36e2df57e5032e4cacbdcdb6
+  * Fixed ibacm.init issue
+
+ -- Vladimir Sokolovsky <vlad@mellanox.com>  Mon, 09 Dec 2013 17:35:00 +0200
+
+ibacm (1.0.8mlnx3-1) UNSTABLE; urgency=low
+  * Initial release. (Closes: #331563)
+
+ -- Alaa Hleihel <alaa@mellanox.com>  Sun, 08 Sep 2013 15:31:00 +0300

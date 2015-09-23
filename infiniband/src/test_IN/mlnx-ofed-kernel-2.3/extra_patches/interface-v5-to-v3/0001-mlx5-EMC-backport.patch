@@ -1,0 +1,716 @@
+From 404ab0b92933b398b64b358d7774a58a67b5820c Mon Sep 17 00:00:00 2001
+From: Majd Dibbiny <majd@mellanox.com>
+Date: Sun, 27 Jul 2014 10:13:13 +0300
+Subject: [PATCH] EMC: apply old patch + disable moderation check+ fix atomic
+
+Change-Id: I4fc64c8a39e70b5d6f02b91996c01905061a0b3d
+Signed-off-by: Majd Dibbiny <majd@mellanox.com>
+---
+ drivers/infiniband/hw/mlx5/cq.c                    | 20 +----
+ drivers/infiniband/hw/mlx5/mr.c                    |  6 --
+ drivers/infiniband/hw/mlx5/qp.c                    | 11 +--
+ drivers/net/ethernet/mellanox/mlx5/core/cmd.c      | 34 ++++-----
+ drivers/net/ethernet/mellanox/mlx5/core/eq.c       |  2 +-
+ drivers/net/ethernet/mellanox/mlx5/core/fw.c       |  8 +-
+ drivers/net/ethernet/mellanox/mlx5/core/main.c     | 88 ++++++----------------
+ .../net/ethernet/mellanox/mlx5/core/pagealloc.c    | 52 ++++++-------
+ include/linux/mlx5/device.h                        | 47 ++++--------
+ include/linux/mlx5/driver.h                        | 14 ++--
+ 10 files changed, 92 insertions(+), 190 deletions(-)
+
+diff --git a/drivers/infiniband/hw/mlx5/cq.c b/drivers/infiniband/hw/mlx5/cq.c
+index e45d5ab..4b77bd6 100644
+--- a/drivers/infiniband/hw/mlx5/cq.c
++++ b/drivers/infiniband/hw/mlx5/cq.c
+@@ -927,17 +927,9 @@ int mlx5_ib_modify_cq(struct ib_cq *cq,
+ 
+ 	in->cqn = cpu_to_be32(mcq->mcq.cqn);
+ 	if (cq_attr_mask & IB_CQ_MODERATION) {
+-		if (dev->mdev.caps.flags & MLX5_DEV_CAP_FLAG_CQ_MODER) {
+-			fsel |= (MLX5_CQ_MODIFY_PERIOD | MLX5_CQ_MODIFY_COUNT);
+-			if (cq_attr->moderation.cq_period & 0xf000)
+-				pr_info("period supported is limited to 12 bits\n");
+-
+-			in->ctx.cq_period = cpu_to_be16(cq_attr->moderation.cq_period);
+-			in->ctx.cq_max_count = cpu_to_be16(cq_attr->moderation.cq_count);
+-		} else {
+-			err = -ENOSYS;
+-			goto out;
+-		}
++		fsel |= (MLX5_CQ_MODIFY_PERIOD | MLX5_CQ_MODIFY_COUNT);
++		in->ctx.cq_period = cpu_to_be16(cq_attr->moderation.cq_period);
++		in->ctx.cq_max_count = cpu_to_be16(cq_attr->moderation.cq_count);
+ 	}
+ 
+ 	if (cq_attr_mask & IB_CQ_CAP_FLAGS) {
+@@ -947,17 +939,13 @@ int mlx5_ib_modify_cq(struct ib_cq *cq,
+ 				in->ctx.cqe_sz_flags |= MLX5_CQ_FLAGS_OI;
+ 			else
+ 				in->ctx.cqe_sz_flags &= ~MLX5_CQ_FLAGS_OI;
+-		} else {
+-			err = -ENOSYS;
+-			goto out;
+ 		}
+ 	}
+ 
+ 	in->field_select = cpu_to_be32(fsel);
+ 	err = mlx5_core_modify_cq(&dev->mdev, &mcq->mcq, in, sizeof(*in));
+-
+-out:
+ 	kfree(in);
++
+ 	if (err)
+ 		mlx5_ib_warn(dev, "modify cq 0x%x failed\n", mcq->mcq.cqn);
+ 
+diff --git a/drivers/infiniband/hw/mlx5/mr.c b/drivers/infiniband/hw/mlx5/mr.c
+index ec757e1..33f6787 100644
+--- a/drivers/infiniband/hw/mlx5/mr.c
++++ b/drivers/infiniband/hw/mlx5/mr.c
+@@ -1459,12 +1459,6 @@ struct ib_mr *mlx5_ib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
+ 	mlx5_ib_dbg(dev, "start 0x%llx, virt_addr 0x%llx, length 0x%llx\n",
+ 		    start, virt_addr, length);
+ 
+-	if ((access_flags & IB_ACCESS_REMOTE_ATOMIC) &&
+-	    !(dev->mdev.caps.flags & MLX5_DEV_CAP_FLAG_ATOMIC)) {
+-		mlx5_ib_warn(dev, "atomic operations are not supported in this version\n");
+-		return ERR_PTR(-EINVAL);
+-	}
+-
+ 	umem = ib_umem_get_ex(pd->uobject->context, start, length, access_flags,
+ 			   0, 1);
+ 	if (IS_ERR(umem)) {
+diff --git a/drivers/infiniband/hw/mlx5/qp.c b/drivers/infiniband/hw/mlx5/qp.c
+index c163d91..fc32908 100644
+--- a/drivers/infiniband/hw/mlx5/qp.c
++++ b/drivers/infiniband/hw/mlx5/qp.c
+@@ -1465,8 +1465,7 @@ static __be32 to_mlx5_access_flags(struct mlx5_ib_qp *qp, const struct ib_qp_att
+ 	if (access_flags & IB_ACCESS_REMOTE_READ)
+ 		hw_access_flags |= MLX5_QP_BIT_RRE;
+ 	if (access_flags & IB_ACCESS_REMOTE_ATOMIC)
+-		hw_access_flags |= (MLX5_QP_BIT_RAE |
+-				    atomic_mode_qp(dev));
++		hw_access_flags |= MLX5_QP_BIT_RAE | MLX5_ATOMIC_MODE_CX;
+ 	if (access_flags & IB_ACCESS_REMOTE_WRITE)
+ 		hw_access_flags |= MLX5_QP_BIT_RWE;
+ 
+@@ -1836,14 +1835,6 @@ static int __mlx5_ib_modify_qp(struct ib_qp *ibqp,
+ 				cpu_to_be32(fls(attr->max_dest_rd_atomic - 1) << 21);
+ 	}
+ 
+-	if ((attr_mask & IB_QP_ACCESS_FLAGS) &&
+-	    (attr->qp_access_flags & IB_ACCESS_REMOTE_ATOMIC) &&
+-	    !dev->enable_atomic_resp) {
+-		mlx5_ib_warn(dev, "atomic responder is not supported\n");
+-		err = -EINVAL;
+-		goto out;
+-	}
+-
+ 	if (attr_mask & (IB_QP_ACCESS_FLAGS | IB_QP_MAX_DEST_RD_ATOMIC))
+ 		context->params2 |= to_mlx5_access_flags(qp, attr, attr_mask);
+ 
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/cmd.c b/drivers/net/ethernet/mellanox/mlx5/core/cmd.c
+index be413d5..2da334a 100644
+--- a/drivers/net/ethernet/mellanox/mlx5/core/cmd.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/cmd.c
+@@ -46,7 +46,7 @@
+ #include "mlx5_core.h"
+ 
+ enum {
+-	CMD_IF_REV = 5,
++	CMD_IF_REV = 3,
+ };
+ 
+ enum {
+@@ -183,32 +183,28 @@ static int verify_block_sig(struct mlx5_cmd_prot_block *block)
+ 	return 0;
+ }
+ 
+-static void calc_block_sig(struct mlx5_cmd_prot_block *block, u8 token,
+-			   int csum)
++static void calc_block_sig(struct mlx5_cmd_prot_block *block, u8 token)
+ {
+ 	block->token = token;
+-	if (csum) {
+-		block->ctrl_sig = ~xor8_buf(block->rsvd0, sizeof(*block) -
+-					    sizeof(block->data) - 2);
+-		block->sig = ~xor8_buf(block, sizeof(*block) - 1);
+-	}
++	block->ctrl_sig = ~xor8_buf(block->rsvd0, sizeof(*block) - sizeof(block->data) - 2);
++	block->sig = ~xor8_buf(block, sizeof(*block) - 1);
+ }
+ 
+-static void calc_chain_sig(struct mlx5_cmd_msg *msg, u8 token, int csum)
++static void calc_chain_sig(struct mlx5_cmd_msg *msg, u8 token)
+ {
+ 	struct mlx5_cmd_mailbox *next = msg->next;
+ 
+ 	while (next) {
+-		calc_block_sig(next->buf, token, csum);
++		calc_block_sig(next->buf, token);
+ 		next = next->next;
+ 	}
+ }
+ 
+-static void set_signature(struct mlx5_cmd_work_ent *ent, int csum)
++static void set_signature(struct mlx5_cmd_work_ent *ent)
+ {
+ 	ent->lay->sig = ~xor8_buf(ent->lay, sizeof(*ent->lay));
+-	calc_chain_sig(ent->in, ent->token, csum);
+-	calc_chain_sig(ent->out, ent->token, csum);
++	calc_chain_sig(ent->in, ent->token);
++	calc_chain_sig(ent->out, ent->token);
+ }
+ 
+ static void poll_timeout(struct mlx5_cmd_work_ent *ent)
+@@ -289,12 +285,6 @@ const char *mlx5_command_str(int command)
+ 	case MLX5_CMD_OP_TEARDOWN_HCA:
+ 		return "TEARDOWN_HCA";
+ 
+-	case MLX5_CMD_OP_ENABLE_HCA:
+-		return "MLX5_CMD_OP_ENABLE_HCA";
+-
+-	case MLX5_CMD_OP_DISABLE_HCA:
+-		return "MLX5_CMD_OP_DISABLE_HCA";
+-
+ 	case MLX5_CMD_OP_QUERY_PAGES:
+ 		return "QUERY_PAGES";
+ 
+@@ -559,7 +549,8 @@ static void cmd_work_handler(struct work_struct *work)
+ 	lay->type = MLX5_PCI_CMD_XPORT;
+ 	lay->token = ent->token;
+ 	lay->status_own = CMD_OWNER_HW;
+-	set_signature(ent, !cmd->checksum_disabled);
++	if (!cmd->checksum_disabled)
++		set_signature(ent);
+ 	dump_command(dev, ent, 1);
+ 	ktime_get_ts(&ent->ts1);
+ 
+@@ -794,6 +785,8 @@ static int mlx5_copy_from_msg(void *to, struct mlx5_cmd_msg *from, int size)
+ 
+ 		copy = min_t(int, size, MLX5_CMD_DATA_BLOCK_SIZE);
+ 		block = next->buf;
++		if (xor8_buf(block, sizeof(*block)) != 0xff)
++			return -EINVAL;
+ 
+ 		memcpy(to, block->data, copy);
+ 		to += copy;
+@@ -1426,7 +1419,6 @@ int mlx5_cmd_init(struct mlx5_core_dev *dev)
+ 		goto err_map;
+ 	}
+ 
+-	cmd->checksum_disabled = 1;
+ 	cmd->max_reg_cmds = (1 << cmd->log_sz) - 1;
+ 	cmd->bitmask = (1 << cmd->max_reg_cmds) - 1;
+ 
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/eq.c b/drivers/net/ethernet/mellanox/mlx5/core/eq.c
+index 422dfe1..edf7ac6 100644
+--- a/drivers/net/ethernet/mellanox/mlx5/core/eq.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/eq.c
+@@ -281,7 +281,7 @@ static int mlx5_eq_int(struct mlx5_core_dev *dev, struct mlx5_eq *eq)
+ 		case MLX5_EVENT_TYPE_PAGE_REQUEST:
+ 			{
+ 				u16 func_id = be16_to_cpu(eqe->data.req_pages.func_id);
+-				s32 npages = be32_to_cpu(eqe->data.req_pages.num_pages);
++				s16 npages = be16_to_cpu(eqe->data.req_pages.num_pages);
+ 
+ 				mlx5_core_dbg(dev, "page request for func 0x%x, napges %d\n", func_id, npages);
+ 				mlx5_core_req_pages_handler(dev, func_id, npages);
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/fw.c b/drivers/net/ethernet/mellanox/mlx5/core/fw.c
+index 1ac4dc7..73e2a46 100644
+--- a/drivers/net/ethernet/mellanox/mlx5/core/fw.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/fw.c
+@@ -113,7 +113,7 @@ int query_standard_caps(struct mlx5_core_dev *dev,
+ 	caps->log_max_srq = out->hca_cap.log_max_srqs & 0x1f;
+ 	caps->local_ca_ack_delay = out->hca_cap.local_ca_ack_delay & 0x1f;
+ 	caps->log_max_mcg = out->hca_cap.log_max_mcg;
+-	caps->max_qp_mcg = be32_to_cpu(out->hca_cap.max_qp_mcg) & 0xffffff;
++	caps->max_qp_mcg = be16_to_cpu(out->hca_cap.max_qp_mcg);
+ 	caps->max_ra_res_qp = 1 << (out->hca_cap.log_max_ra_res_qp & 0x3f);
+ 	caps->max_ra_req_qp = 1 << (out->hca_cap.log_max_ra_req_qp & 0x3f);
+ 	caps->max_ra_res_dc = 1 << (out->hca_cap.log_max_ra_res_dc & 0x3f);
+@@ -195,13 +195,13 @@ static int handle_atomic_caps(struct mlx5_core_dev *dev,
+ 		goto query_ex;
+ 	}
+ 
+-	caps->atomic_ops = be16_to_cpu(out->caps.operations);
++	caps->atomic_ops = MLX5_ATOMIC_OPS_CMP_SWAP | MLX5_ATOMIC_OPS_FETCH_ADD |
++			   MLX5_ATOMIC_OPS_MASKED_CMP_SWAP | MLX5_ATOMIC_OPS_MASKED_FETCH_ADD;
+ 
+ 	caps->atomic_arg_sizes_qp = be16_to_cpu(out->caps.size_qp);
+ 	caps->atomic_arg_sizes_dc = be16_to_cpu(out->caps.size_dc);
+ 
+-	if ((out->caps.flags & MLX5_ATOMIC_REQ_HOST_ENDIAN) || !mlx5_host_is_le())
+-		caps->atomic_req_host_endianess = 1;
++	caps->atomic_req_host_endianess = 1;
+ 
+ query_ex:
+ 	kfree(out);
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/main.c b/drivers/net/ethernet/mellanox/mlx5/core/main.c
+index f070650..402cd98 100644
+--- a/drivers/net/ethernet/mellanox/mlx5/core/main.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/main.c
+@@ -186,6 +186,8 @@ static void copy_rw_fields(struct mlx5_hca_cap *to, struct mlx5_hca_cap *from)
+ 	to->log_max_ra_res_dc = from->log_max_ra_res_dc & 0x3f;
+ 	to->log_max_ra_req_qp = from->log_max_ra_req_qp & 0x3f;
+ 	to->log_max_ra_res_qp = from->log_max_ra_res_qp & 0x3f;
++	to->log_max_atomic_size_qp = from->log_max_atomic_size_qp;
++	to->log_max_atomic_size_dc = from->log_max_atomic_size_dc;
+ 	to->pkey_table_size = from->pkey_table_size;
+ 	v64 = be64_to_cpu(from->flags) & MLX5_CAP_BITS_RW_MASK;
+ 	to->flags = cpu_to_be64(v64);
+@@ -227,6 +229,7 @@ static int handle_hca_cap(struct mlx5_core_dev *dev)
+ 	struct mlx5_cmd_query_hca_cap_mbox_in query_ctx;
+ 	struct mlx5_cmd_set_hca_cap_mbox_out set_out;
+ 	struct mlx5_profile *prof = dev->profile;
++	int csum = 1;
+ 	u64 set_flags;
+ 	u64 cap_flags;
+ 	int err;
+@@ -262,6 +265,13 @@ static int handle_hca_cap(struct mlx5_core_dev *dev)
+ 	copy_rw_fields(&set_ctx->hca_cap, &query_out->hca_cap);
+ 
+ 	set_flags = be64_to_cpu(set_ctx->hca_cap.flags);
++	if (prof->mask & MLX5_PROF_MASK_CMDIF_CSUM) {
++		csum = !!prof->cmdif_csum;
++		if (csum)
++			set_flags |= MLX5_DEV_CAP_FLAG_CMDIF_CSUM;
++		else
++			set_flags &= ~MLX5_DEV_CAP_FLAG_CMDIF_CSUM;
++	}
+ 
+ 	if (prof->mask & MLX5_PROF_MASK_DCT) {
+ 		if (prof->dct_enable) {
+@@ -278,14 +288,10 @@ static int handle_hca_cap(struct mlx5_core_dev *dev)
+ 	if (prof->mask & MLX5_PROF_MASK_QP_SIZE)
+ 		set_ctx->hca_cap.log_max_qp = prof->log_max_qp;
+ 
+-	/* disable checksum */
+-	set_flags &= ~MLX5_DEV_CAP_FLAG_CMDIF_CSUM;
+-
+ 	/* we limit the size of the pkey table to 128 entries for now */
+ 	set_ctx->hca_cap.pkey_table_size = cpu_to_be16(0);
+-	set_ctx->hca_cap.flags = cpu_to_be64(set_flags);
+ 	memset(&set_out, 0, sizeof(set_out));
+-	set_ctx->hca_cap.log_uar_page_sz = cpu_to_be16(PAGE_SHIFT - 12);
++	set_ctx->hca_cap.log_uar_page_sz = cpu_to_be32(PAGE_SHIFT - 12);
+ 	set_ctx->hdr.opcode = cpu_to_be16(MLX5_CMD_OP_SET_HCA_CAP);
+ 	err = mlx5_cmd_exec(dev, set_ctx, sizeof(*set_ctx),
+ 				 &set_out, sizeof(set_out));
+@@ -298,6 +304,9 @@ static int handle_hca_cap(struct mlx5_core_dev *dev)
+ 	if (err)
+ 		goto query_ex;
+ 
++	if (!csum)
++		dev->cmd.checksum_disabled = 1;
++
+ query_ex:
+ 	kfree(query_out);
+ 	kfree(set_ctx);
+@@ -319,44 +328,6 @@ static int set_hca_ctrl(struct mlx5_core_dev *dev)
+ 	return err;
+ }
+ 
+-static int mlx5_core_enable_hca(struct mlx5_core_dev *dev)
+-{
+-	int err;
+-	struct mlx5_enable_hca_mbox_in in;
+-	struct mlx5_enable_hca_mbox_out out;
+-
+-	memset(&in, 0, sizeof(in));
+-	memset(&out, 0, sizeof(out));
+-	in.hdr.opcode = cpu_to_be16(MLX5_CMD_OP_ENABLE_HCA);
+-	err = mlx5_cmd_exec(dev, &in, sizeof(in), &out, sizeof(out));
+-	if (err)
+-		return err;
+-
+-	if (out.hdr.status)
+-		return mlx5_cmd_status_to_err(&out.hdr);
+-
+-	return 0;
+-}
+-
+-static int mlx5_core_disable_hca(struct mlx5_core_dev *dev)
+-{
+-	int err;
+-	struct mlx5_disable_hca_mbox_in in;
+-	struct mlx5_disable_hca_mbox_out out;
+-
+-	memset(&in, 0, sizeof(in));
+-	memset(&out, 0, sizeof(out));
+-	in.hdr.opcode = cpu_to_be16(MLX5_CMD_OP_DISABLE_HCA);
+-	err = mlx5_cmd_exec(dev, &in, sizeof(in), &out, sizeof(out));
+-	if (err)
+-		return err;
+-
+-	if (out.hdr.status)
+-		return mlx5_cmd_status_to_err(&out.hdr);
+-
+-	return 0;
+-}
+-
+ int mlx5_dev_init(struct mlx5_core_dev *dev, struct pci_dev *pdev)
+ {
+ 	struct mlx5_priv *priv = &dev->priv;
+@@ -428,41 +399,28 @@ int mlx5_dev_init(struct mlx5_core_dev *dev, struct pci_dev *pdev)
+ 	}
+ 
+ 	mlx5_pagealloc_init(dev);
+-
+-	err = mlx5_core_enable_hca(dev);
+-	if (err) {
+-		dev_err(&pdev->dev, "enable hca failed\n");
+-		goto err_pagealloc_cleanup;
+-	}
+-
+-	err = mlx5_satisfy_startup_pages(dev, 1);
+-	if (err) {
+-		dev_err(&pdev->dev, "failed to allocate boot pages\n");
+-		goto err_disable_hca;
+-	}
+-
+ 	err = set_hca_ctrl(dev);
+ 	if (err) {
+ 		dev_err(&pdev->dev, "set_hca_ctrl failed\n");
+-		goto reclaim_boot_pages;
++		goto err_pagealloc_cleanup;
+ 	}
+ 
+ 	err = handle_hca_cap(dev);
+ 	if (err) {
+ 		dev_err(&pdev->dev, "handle_hca_cap failed\n");
+-		goto reclaim_boot_pages;
++		goto err_pagealloc_cleanup;
+ 	}
+ 
+-	err = mlx5_satisfy_startup_pages(dev, 0);
++	err = mlx5_satisfy_startup_pages(dev);
+ 	if (err) {
+-		dev_err(&pdev->dev, "failed to allocate init pages\n");
+-		goto reclaim_boot_pages;
++		dev_err(&pdev->dev, "failed to allocate startup pages\n");
++		goto err_pagealloc_cleanup;
+ 	}
+ 
+ 	err = mlx5_pagealloc_start(dev);
+ 	if (err) {
+ 		dev_err(&pdev->dev, "mlx5_pagealloc_start failed\n");
+-		goto reclaim_boot_pages;
++		goto err_reclaim_pages;
+ 	}
+ 
+ 	err = mlx5_cmd_init_hca(dev);
+@@ -537,12 +495,9 @@ err_stop_poll:
+ err_pagealloc_stop:
+ 	mlx5_pagealloc_stop(dev);
+ 
+-reclaim_boot_pages:
++err_reclaim_pages:
+ 	mlx5_reclaim_startup_pages(dev);
+ 
+-err_disable_hca:
+-	mlx5_core_disable_hca(dev);
+-
+ err_pagealloc_cleanup:
+ 	mlx5_pagealloc_cleanup(dev);
+ 	mlx5_cmd_cleanup(dev);
+@@ -585,7 +540,6 @@ void mlx5_dev_cleanup(struct mlx5_core_dev *dev)
+ 	}
+ 	mlx5_pagealloc_stop(dev);
+ 	mlx5_reclaim_startup_pages(dev);
+-	mlx5_core_disable_hca(dev);
+ 	mlx5_pagealloc_cleanup(dev);
+ 	mlx5_cmd_cleanup(dev);
+ 	if (dev->sriov_enabled)
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/pagealloc.c b/drivers/net/ethernet/mellanox/mlx5/core/pagealloc.c
+index c16be90..3b98fde 100644
+--- a/drivers/net/ethernet/mellanox/mlx5/core/pagealloc.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/pagealloc.c
+@@ -43,16 +43,10 @@ enum {
+ 	MLX5_PAGES_TAKE		= 2
+ };
+ 
+-enum {
+-	MLX5_BOOT_PAGES		= 1,
+-	MLX5_INIT_PAGES		= 2,
+-	MLX5_POST_INIT_PAGES	= 3
+-};
+-
+ struct mlx5_pages_req {
+ 	struct mlx5_core_dev *dev;
+ 	u32	func_id;
+-	s32	npages;
++	s16	npages;
+ 	struct work_struct work;
+ };
+ 
+@@ -73,23 +67,27 @@ struct mlx5_query_pages_inbox {
+ 
+ struct mlx5_query_pages_outbox {
+ 	struct mlx5_outbox_hdr	hdr;
+-	__be16			rsvd;
++	u8			reserved[2];
+ 	__be16			func_id;
+-	__be32			num_pages;
++	__be16			init_pages;
++	__be16			num_pages;
+ };
+ 
+ struct mlx5_manage_pages_inbox {
+ 	struct mlx5_inbox_hdr	hdr;
+-	__be16			rsvd;
++	__be16			rsvd0;
+ 	__be16			func_id;
+-	__be32			num_entries;
++	__be16			rsvd1;
++	__be16			num_entries;
++	u8			rsvd2[16];
+ 	__be64			pas[0];
+ };
+ 
+ struct mlx5_manage_pages_outbox {
+ 	struct mlx5_outbox_hdr	hdr;
+-	__be32			num_entries;
+-	u8			rsvd[4];
++	u8			rsvd0[2];
++	__be16			num_entries;
++	u8			rsvd1[20];
+ 	__be64			pas[0];
+ };
+ 
+@@ -163,7 +161,7 @@ static struct fw_page *find_fw_page(struct mlx5_core_dev *dev, u64 addr)
+ }
+ 
+ static int mlx5_cmd_query_pages(struct mlx5_core_dev *dev, u16 *func_id,
+-				s32 *npages, int boot)
++				s16 *pages, s16 *init_pages)
+ {
+ 	struct mlx5_query_pages_inbox	in;
+ 	struct mlx5_query_pages_outbox	out;
+@@ -172,8 +170,6 @@ static int mlx5_cmd_query_pages(struct mlx5_core_dev *dev, u16 *func_id,
+ 	memset(&in, 0, sizeof(in));
+ 	memset(&out, 0, sizeof(out));
+ 	in.hdr.opcode = cpu_to_be16(MLX5_CMD_OP_QUERY_PAGES);
+-	in.hdr.opmod = boot ? cpu_to_be16(MLX5_BOOT_PAGES) : cpu_to_be16(MLX5_INIT_PAGES);
+-
+ 	err = mlx5_cmd_exec(dev, &in, sizeof(in), &out, sizeof(out));
+ 	if (err)
+ 		return err;
+@@ -181,7 +177,10 @@ static int mlx5_cmd_query_pages(struct mlx5_core_dev *dev, u16 *func_id,
+ 	if (out.hdr.status)
+ 		return mlx5_cmd_status_to_err(&out.hdr);
+ 
+-	*npages = be32_to_cpu(out.num_pages);
++	if (pages)
++		*pages = be16_to_cpu(out.num_pages);
++	if (init_pages)
++		*init_pages = be16_to_cpu(out.init_pages);
+ 	*func_id = be16_to_cpu(out.func_id);
+ 
+ 	return err;
+@@ -331,7 +330,7 @@ retry:
+ 	in->hdr.opcode = cpu_to_be16(MLX5_CMD_OP_MANAGE_PAGES);
+ 	in->hdr.opmod = cpu_to_be16(MLX5_PAGES_GIVE);
+ 	in->func_id = cpu_to_be16(func_id);
+-	in->num_entries = cpu_to_be32(npages);
++	in->num_entries = cpu_to_be16(npages);
+ 	err = mlx5_cmd_exec(dev, in, inlen, &out, sizeof(out));
+ 	if (err) {
+ 		mlx5_core_warn(dev, "func_id 0x%x, npages %d, err %d\n", func_id, npages, err);
+@@ -386,7 +385,7 @@ static int reclaim_pages(struct mlx5_core_dev *dev, u32 func_id, int npages,
+ 	in.hdr.opcode = cpu_to_be16(MLX5_CMD_OP_MANAGE_PAGES);
+ 	in.hdr.opmod = cpu_to_be16(MLX5_PAGES_TAKE);
+ 	in.func_id = cpu_to_be16(func_id);
+-	in.num_entries = cpu_to_be32(npages);
++	in.num_entries = cpu_to_be16(npages);
+ 	mlx5_core_dbg(dev, "npages %d, outlen %d\n", npages, outlen);
+ 	err = mlx5_cmd_exec(dev, &in, sizeof(in), out, outlen);
+ 	if (err) {
+@@ -399,7 +398,7 @@ static int reclaim_pages(struct mlx5_core_dev *dev, u32 func_id, int npages,
+ 		goto out_free;
+ 	}
+ 
+-	num_claimed = be32_to_cpu(out->num_entries);
++	num_claimed = be16_to_cpu(out->num_entries);
+ 	if (nclaimed)
+ 		*nclaimed = num_claimed;
+ 
+@@ -433,7 +432,7 @@ static void pages_work_handler(struct work_struct *work)
+ }
+ 
+ void mlx5_core_req_pages_handler(struct mlx5_core_dev *dev, u16 func_id,
+-				 s32 npages)
++				 s16 npages)
+ {
+ 	struct mlx5_pages_req *req;
+ 
+@@ -450,20 +449,19 @@ void mlx5_core_req_pages_handler(struct mlx5_core_dev *dev, u16 func_id,
+ 	queue_work(dev->priv.pg_wq, &req->work);
+ }
+ 
+-int mlx5_satisfy_startup_pages(struct mlx5_core_dev *dev, int boot)
++int mlx5_satisfy_startup_pages(struct mlx5_core_dev *dev)
+ {
++	s16 uninitialized_var(init_pages);
+ 	u16 uninitialized_var(func_id);
+-	s32 uninitialized_var(npages);
+ 	int err;
+ 
+-	err = mlx5_cmd_query_pages(dev, &func_id, &npages, boot);
++	err = mlx5_cmd_query_pages(dev, &func_id, NULL, &init_pages);
+ 	if (err)
+ 		return err;
+ 
+-	mlx5_core_dbg(dev, "requested %d %s pages for func_id 0x%x\n",
+-		      npages, boot ? "boot" : "init", func_id);
++	mlx5_core_dbg(dev, "requested %d init pages for func_id 0x%x\n", init_pages, func_id);
+ 
+-	return give_pages(dev, func_id, npages, 0);
++	return give_pages(dev, func_id, init_pages, 0);
+ }
+ 
+ enum {
+diff --git a/include/linux/mlx5/device.h b/include/linux/mlx5/device.h
+index b20df40..3a4dd04 100644
+--- a/include/linux/mlx5/device.h
++++ b/include/linux/mlx5/device.h
+@@ -218,7 +218,6 @@ enum {
+ 	MLX5_DEV_CAP_FLAG_CROSS_CHANNEL	= 1LL << 19,
+ 	MLX5_DEV_CAP_FLAG_BLOCK_MCAST	= 1LL << 23,
+ 	MLX5_DEV_CAP_FLAG_ON_DMND_PG	= 1LL << 24,
+-	MLX5_DEV_CAP_FLAG_CQ_MODER	= 1LL << 29,
+ 	MLX5_DEV_CAP_FLAG_RESIZE_CQ	= 1LL << 30,
+ 	MLX5_DEV_CAP_FLAG_CQ_OI		= 1LL << 31,
+ 	MLX5_DEV_CAP_FLAG_RESIZE_SRQ	= 1LL << 32,
+@@ -228,7 +227,7 @@ enum {
+ 	MLX5_DEV_CAP_FLAG_TLP_HINTS	= 1LL << 39,
+ 	MLX5_DEV_CAP_FLAG_SIG_HAND_OVER	= 1LL << 40,
+ 	MLX5_DEV_CAP_FLAG_SCATER_CQE	= 1LL << 42,
+-	MLX5_DEV_CAP_FLAG_CMDIF_CSUM	= 3LL << 46,
++	MLX5_DEV_CAP_FLAG_CMDIF_CSUM	= 1LL << 46,
+ };
+ 
+ enum {
+@@ -366,16 +365,21 @@ struct mlx5_hca_cap {
+ 	__be16	max_desc_sz_rq;
+ 	u8	rsvd21[2];
+ 	__be16	max_desc_sz_sq_dc;
+-	__be32	max_qp_mcg;
+-	u8	rsvd22[3];
+-	u8	log_max_mcg;
++	u8      rsvd22[4];
++	__be16  max_qp_mcg;
+ 	u8	rsvd23;
+-	u8	log_max_pd;
++	u8      log_max_mcg;
+ 	u8	rsvd24;
++	u8      log_max_pd;
++	u8      rsvd25;
+ 	u8	log_max_xrcd;
+-	u8	rsvd25[42];
+-	__be16  log_uar_page_sz;
+-	u8	rsvd26[108];
++	u8      rsvd26[40];
++	__be32  log_uar_page_sz;
++	u8	rsvd27[28];
++	u8      log_max_atomic_size_qp;
++	u8      rsvd28[2];
++	u8      log_max_atomic_size_dc;
++	u8      rsvd29[76];
+ };
+ 
+ struct mlx5_hca_cap_atomics {
+@@ -560,8 +564,9 @@ struct mlx5_eqe_cmd {
+ struct mlx5_eqe_page_req {
+ 	u8		rsvd0[2];
+ 	__be16		func_id;
+-	__be32		num_pages;
+-	__be32		rsvd1[5];
++	u8		rsvd1[2];
++	__be16		num_pages;
++	__be32		rsvd2[5];
+ };
+ 
+ struct mlx5_eqe_page_fault {
+@@ -836,26 +841,6 @@ struct mlx5_modify_cq_mbox_out {
+ 	u8			rsvd[8];
+ };
+ 
+-struct mlx5_enable_hca_mbox_in {
+-	struct mlx5_inbox_hdr	hdr;
+-	u8			rsvd[8];
+-};
+-
+-struct mlx5_enable_hca_mbox_out {
+-	struct mlx5_outbox_hdr	hdr;
+-	u8			rsvd[8];
+-};
+-
+-struct mlx5_disable_hca_mbox_in {
+-	struct mlx5_inbox_hdr	hdr;
+-	u8			rsvd[8];
+-};
+-
+-struct mlx5_disable_hca_mbox_out {
+-	struct mlx5_outbox_hdr	hdr;
+-	u8			rsvd[8];
+-};
+-
+ struct mlx5_eq_context {
+ 	u8			status;
+ 	u8			ec_oi;
+diff --git a/include/linux/mlx5/driver.h b/include/linux/mlx5/driver.h
+index f8b95e6..bb42ad4 100644
+--- a/include/linux/mlx5/driver.h
++++ b/include/linux/mlx5/driver.h
+@@ -138,8 +138,6 @@ enum {
+ 	MLX5_CMD_OP_QUERY_ADAPTER		= 0x101,
+ 	MLX5_CMD_OP_INIT_HCA			= 0x102,
+ 	MLX5_CMD_OP_TEARDOWN_HCA		= 0x103,
+-	MLX5_CMD_OP_ENABLE_HCA			= 0x104,
+-	MLX5_CMD_OP_DISABLE_HCA			= 0x105,
+ 	MLX5_CMD_OP_QUERY_PAGES			= 0x107,
+ 	MLX5_CMD_OP_MANAGE_PAGES		= 0x108,
+ 	MLX5_CMD_OP_SET_HCA_CAP			= 0x109,
+@@ -419,7 +417,7 @@ struct mlx5_caps {
+ 	u32	reserved_lkey;
+ 	u8	local_ca_ack_delay;
+ 	u8	log_max_mcg;
+-	u32	max_qp_mcg;
++	u16	max_qp_mcg;
+ 	int	min_page_sz;
+ 	int	max_ra_res_dc;
+ 	int	max_ra_req_dc;
+@@ -880,8 +878,8 @@ void mlx5_pagealloc_cleanup(struct mlx5_core_dev *dev);
+ int mlx5_pagealloc_start(struct mlx5_core_dev *dev);
+ void mlx5_pagealloc_stop(struct mlx5_core_dev *dev);
+ void mlx5_core_req_pages_handler(struct mlx5_core_dev *dev, u16 func_id,
+-				 s32 npages);
+-int mlx5_satisfy_startup_pages(struct mlx5_core_dev *dev, int boot);
++				 s16 npages);
++int mlx5_satisfy_startup_pages(struct mlx5_core_dev *dev);
+ int mlx5_reclaim_startup_pages(struct mlx5_core_dev *dev);
+ void mlx5_register_debugfs(void);
+ void mlx5_unregister_debugfs(void);
+@@ -951,8 +949,9 @@ static inline u8 mlx5_mkey_variant(u32 mkey)
+ 
+ enum {
+ 	MLX5_PROF_MASK_QP_SIZE		= (u64)1 << 0,
+-	MLX5_PROF_MASK_MR_CACHE		= (u64)1 << 1,
+-	MLX5_PROF_MASK_DCT		= (u64)1 << 2,
++	MLX5_PROF_MASK_CMDIF_CSUM	= (u64)1 << 1,
++	MLX5_PROF_MASK_MR_CACHE		= (u64)1 << 2,
++	MLX5_PROF_MASK_DCT		= (u64)1 << 3,
+ };
+ 
+ enum {
+@@ -962,6 +961,7 @@ enum {
+ struct mlx5_profile {
+ 	u64	mask;
+ 	u32	log_max_qp;
++	int	cmdif_csum;
+ 	int	dct_enable;
+ 	struct {
+ 		int	size;
+-- 
+1.8.3.1
+

@@ -1,0 +1,28 @@
+=head1 NAME
+
+B<ibmsquit> -  Quit the management simulator
+
+=head1 SYNOPSYS
+
+ibmsquit <simulator host> <simulator port>
+
+=head1 DESCRIPTION
+
+Causes the IB management simulator at the given host and port to quit
+
+=head1 ARGUMENTS
+
+=over
+
+=item <simulator host>
+
+Host name or IP where the simulator is being run.
+
+=item <simulator port>
+
+The TCP/IP port number the simulator is listening on
+
+=head1 AUTHOR
+
+Eitan Zahavi, Mellanox Technologies LTD, eitan@mellanox.co.il
+

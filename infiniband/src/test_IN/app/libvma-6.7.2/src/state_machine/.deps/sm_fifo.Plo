@@ -1,0 +1,129 @@
+sm_fifo.lo: sm_fifo.cpp sm_fifo.h /usr/include/c++/deque \
+ /usr/include/c++/bits/stl_algobase.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/c++config.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/bits/predefs.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/cpu_defines.h \
+ /usr/include/c++/bits/functexcept.h \
+ /usr/include/c++/bits/exception_defines.h \
+ /usr/include/c++/bits/cpp_type_traits.h \
+ /usr/include/c++/ext/type_traits.h /usr/include/c++/ext/numeric_traits.h \
+ /usr/include/c++/bits/stl_pair.h /usr/include/c++/bits/move.h \
+ /usr/include/c++/bits/concept_check.h \
+ /usr/include/c++/bits/stl_iterator_base_types.h \
+ /usr/include/c++/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/debug/debug.h /usr/include/c++/bits/stl_iterator.h \
+ /usr/include/c++/bits/allocator.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/c++allocator.h \
+ /usr/include/c++/ext/new_allocator.h /usr/include/c++/new \
+ /usr/include/c++/exception \
+ /usr/include/c++/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/bits/memoryfwd.h /usr/include/c++/bits/stl_construct.h \
+ /usr/include/c++/ext/alloc_traits.h \
+ /usr/include/c++/bits/stl_uninitialized.h \
+ /usr/include/c++/bits/stl_deque.h /usr/include/c++/bits/range_access.h \
+ /usr/include/c++/bits/deque.tcc /usr/include/stdio.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h
+
+sm_fifo.h:
+
+/usr/include/c++/deque:
+
+/usr/include/c++/bits/stl_algobase.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/c++config.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/os_defines.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/cpu_defines.h:
+
+/usr/include/c++/bits/functexcept.h:
+
+/usr/include/c++/bits/exception_defines.h:
+
+/usr/include/c++/bits/cpp_type_traits.h:
+
+/usr/include/c++/ext/type_traits.h:
+
+/usr/include/c++/ext/numeric_traits.h:
+
+/usr/include/c++/bits/stl_pair.h:
+
+/usr/include/c++/bits/move.h:
+
+/usr/include/c++/bits/concept_check.h:
+
+/usr/include/c++/bits/stl_iterator_base_types.h:
+
+/usr/include/c++/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/debug/debug.h:
+
+/usr/include/c++/bits/stl_iterator.h:
+
+/usr/include/c++/bits/allocator.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/c++allocator.h:
+
+/usr/include/c++/ext/new_allocator.h:
+
+/usr/include/c++/new:
+
+/usr/include/c++/exception:
+
+/usr/include/c++/bits/atomic_lockfree_defines.h:
+
+/usr/include/c++/bits/memoryfwd.h:
+
+/usr/include/c++/bits/stl_construct.h:
+
+/usr/include/c++/ext/alloc_traits.h:
+
+/usr/include/c++/bits/stl_uninitialized.h:
+
+/usr/include/c++/bits/stl_deque.h:
+
+/usr/include/c++/bits/range_access.h:
+
+/usr/include/c++/bits/deque.tcc:
+
+/usr/include/stdio.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:

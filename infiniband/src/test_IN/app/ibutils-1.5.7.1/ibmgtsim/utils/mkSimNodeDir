@@ -1,0 +1,161 @@
+#!/bin/bash
+
+#--
+# Copyright (c) 2004-2010 Mellanox Technologies LTD. All rights reserved.
+#
+# This software is available to you under a choice of one of two
+# licenses.  You may choose to be licensed under the terms of the GNU
+# General Public License (GPL) Version 2, available from the file
+# COPYING in the main directory of this source tree, or the
+# OpenIB.org BSD license below:
+#
+#     Redistribution and use in source and binary forms, with or
+#     without modification, are permitted provided that the following
+#     conditions are met:
+#
+#      - Redistributions of source code must retain the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer.
+#
+#      - Redistributions in binary form must reproduce the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer in the documentation and/or other materials
+#        provided with the distribution.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+# BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+# ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#--
+
+usage="$0 -n node-name [-g sim-guids-file]"
+function help () {
+cat <<EOF
+$usage
+
+This utility build the /proc like file tree for the given node
+based on the guids dump file produced by the simulator.
+
+Options:
+-n node-name = the node name to create the files for.
+-g sim-guids-file = dump file to use. default is ./ibmgtsim.guids.txt
+
+LIMITATIONS:
+Only HCAs are supported.
+Single HCA per guid.
+
+EOF
+exit 0
+}
+
+guids_file=ibmgtsim.guids.txt
+
+while getopts ":n:gh" options; do
+  case $options in
+    n ) node_name=$OPTARG;;
+    g ) guids_file=$OPTARG;;
+    h ) help;;
+    \? ) echo $usage
+         exit 1;;
+    * ) echo $usage
+        exit 1;;
+  esac
+done
+
+if test -z $node_name; then
+    echo "You must specify a node name using the -n option."
+    exit 1
+fi
+
+# find the node by name in the guids file:
+nodeGuid=`awk '/NODE *'$node_name'\/U1/{print $3}' $guids_file`
+if test -z $nodeGuid; then
+    echo "Fail to find node:$node_name in $guids_file"
+    exit 1
+fi
+port1Guid=`awk '/PORT *'$node_name'\/P1/{print $3}' $guids_file`
+port2Guid=`awk '/PORT *'$node_name'\/P2/{print $3}' $guids_file`
+
+ng=`echo $nodeGuid | sed -e 's/0x//' -e 's/\(....\)\(....\)\(....\)\(....\)/\1:\2:\3:\4/'`
+pg1=`echo $port1Guid | sed -e 's/0x//' -e 's/\(....\)\(....\)\(....\)\(....\)/\1:\2:\3:\4/'`
+pg2=`echo $port2Guid | sed -e 's/0x//' -e 's/\(....\)\(....\)\(....\)\(....\)/\1:\2:\3:\4/'`
+
+echo "$node_name GUIDS: Node=$ng Port1=$pg1 Port2=$pg2"
+
+# Create the node dir
+mkdir -p $node_name/ca1
+
+# Node Info
+cat <<EOF > $node_name/ca1/info
+name:          InfiniHost0
+provider:      tavor
+node GUID:     $ng
+ports:         2
+vendor ID:     0x2c9
+device ID:     0x5a44
+HW revision:   0xa1
+FW revision:   0x300020002
+EOF
+
+# Port1
+mkdir -p $node_name/ca1/port1
+
+# port info
+cat <<EOF > $node_name/ca1/port1/info
+state:         INIT
+LID:           0x0000
+LMC:           0x0000
+SM LID:        0x0001
+SM SL:         0x0000
+Capabilities:  IsTrapSupported
+               IsAutomaticMigrationSupported
+               IsSLMappingSupported
+               IsLEDInfoSupported
+               IsSystemImageGUIDSupported
+               IsVendorClassSupported
+               IsCapabilityMaskNoticeSupported
+EOF
+
+# pkey
+cat <<EOF > $node_name/ca1/port1/pkey_table
+[  0] ffff
+EOF
+
+# gids
+cat <<EOF > $node_name/ca1/port1/gid_table
+[  0] fe80:0000:0000:0000:$pg1
+EOF
+
+# Port2
+mkdir -p $node_name/ca1/port2
+
+# port info
+cat <<EOF > $node_name/ca1/port2/info
+state:         INIT
+LID:           0x0000
+LMC:           0x0000
+SM LID:        0x0001
+SM SL:         0x0000
+Capabilities:  IsTrapSupported
+               IsAutomaticMigrationSupported
+               IsSLMappingSupported
+               IsLEDInfoSupported
+               IsSystemImageGUIDSupported
+               IsVendorClassSupported
+               IsCapabilityMaskNoticeSupported
+EOF
+
+# pkey
+cat <<EOF > $node_name/ca1/port2/pkey_table
+[  0] ffff
+EOF
+
+# gids
+cat <<EOF > $node_name/ca1/port2/gid_table
+[  0] fe80:0000:0000:0000:$pg2
+EOF
+

@@ -1,0 +1,270 @@
+-I- Registering System Factory for:Generic
+-I- Registering System Factory for:Reindeer
+-I- Registering System Factory for:Gazelle
+-I- Registering System Factory for:Cougar
+-I- Parsing cabling definition:Clusters/FullCbbTwoSpines.cables
+-I- Building Gazelle: GZL1...
+-I- Building Gazelle: GZL2...
+-I- Building Gazelle: GZL3...
+-I- Building Gazelle: GZL4...
+-I- Building Gazelle: GZS1...
+-I- Building Gazelle: GZS2...
+-I- Defined 198/600 systems/nodes
+-I- Assigned 1199 LIDs (lmc=1) in 13 steps
+-I- Init Min Hops Tables in:9 steps
+---- CA to CA MIN HOP HISTOGRAM ----
+HOPS NUM-CA-CA-PAIRS
+  1   382
+  3   764
+  5   8022
+  7   432
+ 11   6030
+ 15   21042
+------------------------------------
+-I- Found worst min hops:15 at node:GZL1/leaf2/U2000 to node:H168/U1000
+-I- Tracing by Min Hops from lid:315 to lid:949
+[  0] FROM Node:GZL1/leaf2/U2000 Port:8
+      TO   Node:GZL1/leaf2/U7000 Port:3
+[  1] FROM Node:GZL1/leaf2/U7000 Port:5
+      TO   Node:GZL1/spine3/U1000 Port:2
+[  2] FROM Node:GZL1/spine3/U1000 Port:7
+      TO   Node:GZL1/leaf1/U5000 Port:7
+[  3] FROM Node:GZL1/leaf1/U5000 Port:2
+      TO   Node:GZL1/leaf1/U3000 Port:6
+[  4] FROM Host:GZL1 Plug:L1/P12
+           Node:GZL1/leaf1/U3000 Port:1
+      TO   Host:GZS2 Plug:L2/P12
+           Node:GZS2/leaf2/U3000 Port:1
+[  5] FROM Node:GZS2/leaf2/U3000 Port:5
+      TO   Node:GZS2/leaf2/U4000 Port:2
+[  6] FROM Node:GZS2/leaf2/U4000 Port:5
+      TO   Node:GZS2/spine4/U3000 Port:8
+[  7] FROM Node:GZS2/spine4/U3000 Port:2
+      TO   Node:GZS2/leaf8/U6000 Port:7
+[  8] FROM Node:GZS2/leaf8/U6000 Port:2
+      TO   Node:GZS2/leaf8/U3000 Port:7
+[  9] FROM Host:GZS2 Plug:L8/P12
+           Node:GZS2/leaf8/U3000 Port:1
+      TO   Host:GZL4 Plug:L1/P12
+           Node:GZL4/leaf1/U3000 Port:1
+[ 10] FROM Node:GZL4/leaf1/U3000 Port:5
+      TO   Node:GZL4/leaf1/U4000 Port:2
+[ 11] FROM Node:GZL4/leaf1/U4000 Port:5
+      TO   Node:GZL4/spine2/U3000 Port:8
+[ 12] FROM Node:GZL4/spine2/U3000 Port:1
+      TO   Node:GZL4/leaf4/U7000 Port:7
+[ 13] FROM Node:GZL4/leaf4/U7000 Port:2
+      TO   Node:GZL4/leaf4/U3000 Port:8
+[ 14] FROM Host:GZL4 Plug:L4/P10
+           Node:GZL4/leaf4/U3000 Port:3
+      TO   Host:H168 Plug:P1
+           Node:H168/U1000 Port:1
+----------------------------------------------------
+-I- Using Enhanced OpenSM Routing
+---- LINK SUBSCRIPTIONS HISTOGRAM ----
+NUM-LIDS COUNT
+      0   552
+      2   192
+     14   336
+     29   288
+     30   48
+     54   3
+     55   45
+     62   16
+     63   32
+     90   16
+     91   80
+     93   12
+     94   84
+    118   8
+    119   32
+    120   8
+    122   24
+    123   48
+    125   48
+    126   24
+    137   48
+    153   96
+    156   48
+    205   36
+    206   60
+    208   32
+    209   64
+    274   72
+    276   24
+    277   48
+    280   32
+    281   16
+    298   168
+    299   168
+    336   16
+    337   32
+    385   224
+    386   112
+    487   21
+    488   3
+    994   48
+------------------------------------
+-I- Enhanced selection by Sys:259336 Node:191720 Subscription:37728
+---- CA to CA LFT ROUTE HOP HISTOGRAM ----
+HOPS NUM-CA-CA-PAIRS
+  1   762
+  2   18
+  3   1573
+  5   15889
+  7   864
+ 11   12024
+ 15   41832
+------------------------------------
+---- COMMON NODES HISTOGRAM ----
+COMMON-NODES NUM-CA-CA-PAIRS
+PATH DPT|     1|     2|     3|     4|     5|     6|     7|     8|     9|    10|    11|    12|    13|    14|    15|
+COMM=  1|     0|     0|    53|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0| 29392|
+COMM=  2|     0|     0|   760|     0|  7909|     0|   432|     0|     0|     0|  5178|     0|     0|     0| 21750|
+COMM=  3|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|   834|     0|     0|     0|  5803|
+COMM=  4|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|
+------------------------------------
+---- COMMON SYSTEMS HISTOGRAM ----
+COMMON-SYSTEM NUM-CA-CA-PAIRS
+PATH DPT|     1|     2|     3|     4|     5|     6|     7|     8|     9|    10|    11|    12|    13|    14|    15|
+COMM=  1|     0|     0|   813|     0|  7909|     0|     0|     0|     0|     0|     0|     0|     0|     0| 27360|
+COMM=  2|     0|     0|     0|     0|     0|     0|   432|     0|     0|     0|  6012|     0|     0|     0| 20916|
+COMM=  3|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|
+------------------------------------
+-I- Scanned:72962 CA to CA paths
+-I- Registering System Factory for:Generic
+-I- Registering System Factory for:Reindeer
+-I- Registering System Factory for:Gazelle
+-I- Registering System Factory for:Cougar
+-I- Parsing cabling definition:Clusters/FullCbbTwoSpines.cables
+-I- Building Gazelle: GZL1...
+-I- Building Gazelle: GZL2...
+-I- Building Gazelle: GZL3...
+-I- Building Gazelle: GZL4...
+-I- Building Gazelle: GZS1...
+-I- Building Gazelle: GZS2...
+-I- Defined 198/600 systems/nodes
+-I- Assigned 1199 LIDs (lmc=1) in 13 steps
+-I- Init Min Hops Tables in:9 steps
+---- CA to CA MIN HOP HISTOGRAM ----
+HOPS NUM-CA-CA-PAIRS
+  1   382
+  3   764
+  5   8022
+  7   432
+ 11   6030
+ 15   21042
+------------------------------------
+-I- Found worst min hops:15 at node:GZL1/leaf2/U2000 to node:H168/U1000
+-I- Tracing by Min Hops from lid:315 to lid:949
+[  0] FROM Node:GZL1/leaf2/U2000 Port:8
+      TO   Node:GZL1/leaf2/U7000 Port:3
+[  1] FROM Node:GZL1/leaf2/U7000 Port:5
+      TO   Node:GZL1/spine3/U1000 Port:2
+[  2] FROM Node:GZL1/spine3/U1000 Port:7
+      TO   Node:GZL1/leaf1/U5000 Port:7
+[  3] FROM Node:GZL1/leaf1/U5000 Port:2
+      TO   Node:GZL1/leaf1/U3000 Port:6
+[  4] FROM Host:GZL1 Plug:L1/P12
+           Node:GZL1/leaf1/U3000 Port:1
+      TO   Host:GZS2 Plug:L2/P12
+           Node:GZS2/leaf2/U3000 Port:1
+[  5] FROM Node:GZS2/leaf2/U3000 Port:5
+      TO   Node:GZS2/leaf2/U4000 Port:2
+[  6] FROM Node:GZS2/leaf2/U4000 Port:5
+      TO   Node:GZS2/spine4/U3000 Port:8
+[  7] FROM Node:GZS2/spine4/U3000 Port:2
+      TO   Node:GZS2/leaf8/U6000 Port:7
+[  8] FROM Node:GZS2/leaf8/U6000 Port:2
+      TO   Node:GZS2/leaf8/U3000 Port:7
+[  9] FROM Host:GZS2 Plug:L8/P12
+           Node:GZS2/leaf8/U3000 Port:1
+      TO   Host:GZL4 Plug:L1/P12
+           Node:GZL4/leaf1/U3000 Port:1
+[ 10] FROM Node:GZL4/leaf1/U3000 Port:5
+      TO   Node:GZL4/leaf1/U4000 Port:2
+[ 11] FROM Node:GZL4/leaf1/U4000 Port:5
+      TO   Node:GZL4/spine2/U3000 Port:8
+[ 12] FROM Node:GZL4/spine2/U3000 Port:1
+      TO   Node:GZL4/leaf4/U7000 Port:7
+[ 13] FROM Node:GZL4/leaf4/U7000 Port:2
+      TO   Node:GZL4/leaf4/U3000 Port:8
+[ 14] FROM Host:GZL4 Plug:L4/P10
+           Node:GZL4/leaf4/U3000 Port:3
+      TO   Host:H168 Plug:P1
+           Node:H168/U1000 Port:1
+----------------------------------------------------
+-I- Using standard OpenSM Routing
+---- LINK SUBSCRIPTIONS HISTOGRAM ----
+NUM-LIDS COUNT
+      0   552
+      2   192
+     14   336
+     29   288
+     30   48
+     55   4
+     56   26
+     57   18
+     62   16
+     63   32
+     90   16
+     91   80
+     93   24
+     94   72
+    118   8
+    119   32
+    120   8
+    122   24
+    123   48
+    125   48
+    126   24
+    137   48
+    153   96
+    156   48
+    205   36
+    206   48
+    207   12
+    208   32
+    209   64
+    274   72
+    276   24
+    277   48
+    280   32
+    281   16
+    298   168
+    299   168
+    336   16
+    337   32
+    385   224
+    386   112
+    484   18
+    485   2
+    486   4
+    994   48
+------------------------------------
+---- CA to CA LFT ROUTE HOP HISTOGRAM ----
+HOPS NUM-CA-CA-PAIRS
+  1   762
+  2   18
+  3   1573
+  5   15889
+  7   864
+ 11   12024
+ 15   41832
+------------------------------------
+---- COMMON NODES HISTOGRAM ----
+COMMON-NODES NUM-CA-CA-PAIRS
+PATH DPT|     1|     2|     3|     4|     5|     6|     7|     8|     9|    10|    11|    12|    13|    14|    15|
+COMM=  1|     0|     0|    53|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0| 28944|
+COMM=  2|     0|     0|   760|     0|  7909|     0|   432|     0|     0|     0|  5010|     0|     0|     0| 21918|
+COMM=  3|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|  1002|     0|     0|     0|  6083|
+COMM=  4|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|
+------------------------------------
+---- COMMON SYSTEMS HISTOGRAM ----
+COMMON-SYSTEM NUM-CA-CA-PAIRS
+PATH DPT|     1|     2|     3|     4|     5|     6|     7|     8|     9|    10|    11|    12|    13|    14|    15|
+COMM=  1|     0|     0|   813|     0|  7909|     0|     0|     0|     0|     0|     0|     0|     0|     0| 27360|
+COMM=  2|     0|     0|     0|     0|     0|     0|   432|     0|     0|     0|  6012|     0|     0|     0| 20916|
+COMM=  3|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|     0|
+------------------------------------
+-I- Scanned:72962 CA to CA paths

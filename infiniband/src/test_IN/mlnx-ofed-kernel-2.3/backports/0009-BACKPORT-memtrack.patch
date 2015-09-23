@@ -1,0 +1,49 @@
+From: Vladimir Sokolovsky <vlad@mellanox.com>
+Subject: [PATCH] BACKPORT: memtrack
+
+Signed-off-by: Vladimir Sokolovsky <vlad@mellanox.com>
+---
+ drivers/infiniband/debug/memtrack.c | 9 +++++++++
+ drivers/infiniband/debug/mtrack.h   | 4 ++++
+ 2 files changed, 13 insertions(+)
+
+diff --git a/drivers/infiniband/debug/memtrack.c b/drivers/infiniband/debug/memtrack.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/debug/memtrack.c
++++ b/drivers/infiniband/debug/memtrack.c
+@@ -794,11 +794,20 @@ static int create_procfs_tree(void)
+ 
+ 	for (i = 0, bit_mask = 1; i < MEMTRACK_NUM_OF_MEMTYPES; ++i, bit_mask <<= 1) {
+ 		if (bit_mask & track_mask) {
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,10,0))
+ 			proc_ent = create_proc_entry(rsc_names[i], S_IRUGO, memtrack_tree);
+ 			if (!proc_ent)
+ 				goto undo_create_root;
+ 
+ 			proc_ent->proc_fops = &memtrack_proc_fops;
++#else
++			proc_ent = proc_create_data(rsc_names[i], S_IRUGO, memtrack_tree, &memtrack_proc_fops, NULL);
++			if (!proc_ent) {
++				printk(KERN_INFO "Warning: Cannot create /proc/%s/%s\n",
++				       memtrack_proc_entry_name, rsc_names[i]);
++				goto undo_create_root;
++			}
++#endif
+ 		}
+ 	}
+ 
+diff --git a/drivers/infiniband/debug/mtrack.h b/drivers/infiniband/debug/mtrack.h
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/debug/mtrack.h
++++ b/drivers/infiniband/debug/mtrack.h
+@@ -738,6 +738,10 @@
+ })
+ #endif
+ 
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0))
++#define WQ_RESCUER 1 << 7 /* internal: workqueue has rescuer */
++#endif
++
+ #define create_workqueue(name)							\
+ 	alloc_workqueue((name), WQ_RESCUER, 1);
+ 

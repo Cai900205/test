@@ -1,0 +1,267 @@
+From: Vladimir Sokolovsky <vlad@mellanox.com>
+Subject: [PATCH] BACKPORT: ib_sdp
+
+Signed-off-by: Vladimir Sokolovsky <vlad@mellanox.com>
+---
+ drivers/infiniband/ulp/sdp/sdp.h      | 14 ++++++++++--
+ drivers/infiniband/ulp/sdp/sdp_cma.c  |  9 ++++++--
+ drivers/infiniband/ulp/sdp/sdp_main.c | 43 +++++++++++++++++++++++++++++++++--
+ drivers/infiniband/ulp/sdp/sdp_rx.c   | 24 ++++++++++++++++---
+ drivers/infiniband/ulp/sdp/sdp_tx.c   |  5 ++++
+ 5 files changed, 86 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/infiniband/ulp/sdp/sdp.h b/drivers/infiniband/ulp/sdp/sdp.h
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/ulp/sdp/sdp.h
++++ b/drivers/infiniband/ulp/sdp/sdp.h
+@@ -52,8 +52,13 @@
+ #define sdp_sk_sleep(sk) sk_sleep(sk)
+ #define sk_ssk(ssk) ((struct sock *)ssk)
+ 
+-#define TCP_PAGE(sk)    ((sk_page_frag(sk))->page)
+-#define TCP_OFF(sk)     ((sk_page_frag(sk))->offset)
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 7, 0))
++	#define TCP_PAGE(sk)    (sk->sk_sndmsg_page)
++	#define TCP_OFF(sk)     (sk->sk_sndmsg_off)
++#else
++	#define TCP_PAGE(sk)    ((sk_page_frag(sk))->page)
++	#define TCP_OFF(sk)     ((sk_page_frag(sk))->offset)
++#endif
+ 
+ /* Interval between sucessive polls in the Tx routine when polling is used
+    instead of interrupts (in per-core Tx rings) - should be power of 2 */
+@@ -632,8 +637,13 @@ static inline struct sk_buff *sdp_stream_alloc_skb(struct sock *sk, int size,
+ 	skb = alloc_skb_fclone(size + sk->sk_prot->max_header, gfp);
+ 	if (skb) {
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 6, 0))
++		if ((kind == SK_MEM_RECV && sk_rmem_schedule(sk,
++			skb->truesize)) ||
++#else
+ 		if ((kind == SK_MEM_RECV && sk_rmem_schedule(sk, skb,
+ 			skb->truesize)) ||
++#endif
+ 			(kind == SK_MEM_SEND && sk_wmem_schedule(sk,
+ 			skb->truesize))) {
+ 			/*
+diff --git a/drivers/infiniband/ulp/sdp/sdp_cma.c b/drivers/infiniband/ulp/sdp/sdp_cma.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/ulp/sdp/sdp_cma.c
++++ b/drivers/infiniband/ulp/sdp/sdp_cma.c
+@@ -52,7 +52,9 @@
+ 
+ #define SDP_MAJV_MINV 0x22
+ 
+-#define ipv6_addr_copy(a, b) (*(a) = *(b))
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 3, 0))
++	#define ipv6_addr_copy(a, b) (*(a) = *(b))
++#endif
+ 
+ SDP_MODPARAM_INT(sdp_rx_size, 0x40, "HW rx queue size (max num of credits)."
+ 		" Must be power of 2.");
+@@ -187,8 +189,11 @@ static int sdp_connect_handler(struct sock *sk, struct rdma_cm_id *id,
+ 	if (!h->max_adverts)
+ 		return -EINVAL;
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 3, 0))
++	child = sk_clone(sk, GFP_KERNEL);
++#else
+ 	child = sk_clone_lock(sk, GFP_KERNEL);
+-	
++#endif
+ 	if (!child)
+ 		return -ENOMEM;
+ 
+diff --git a/drivers/infiniband/ulp/sdp/sdp_main.c b/drivers/infiniband/ulp/sdp/sdp_main.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/ulp/sdp/sdp_main.c
++++ b/drivers/infiniband/ulp/sdp/sdp_main.c
+@@ -81,7 +81,9 @@ MODULE_AUTHOR("Michael S. Tsirkin");
+ MODULE_DESCRIPTION("InfiniBand SDP module");
+ MODULE_LICENSE("Dual BSD/GPL");
+ 
+-#define ipv6_addr_copy(a, b) (*(a) = *(b))
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 3, 0))
++	#define ipv6_addr_copy(a, b) (*(a) = *(b))
++#endif
+ 
+ #ifdef CONFIG_INFINIBAND_SDP_DEBUG
+ SDP_MODPARAM_INT(sdp_debug_level, 0, "Enable debug tracing if > 0.");
+@@ -523,6 +525,16 @@ static void sdp_destroy_resources(struct sock *sk)
+ 	sk->sk_send_head = NULL;
+ 	skb_queue_purge(&sk->sk_write_queue);
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 7, 0))
++        /*
++         * If sendmsg cached page exists, toss it.
++         */
++        if (sk->sk_sndmsg_page) {
++                __free_page(sk->sk_sndmsg_page);
++                sk->sk_sndmsg_page = NULL;
++        }
++#endif
++
+ 	id = ssk->id;
+ 	if (ssk->id) {
+ 		id->qp = NULL;
+@@ -1284,7 +1296,11 @@ int sdp_init_sock(struct sock *sk)
+ 	lockdep_set_class(&sk->sk_callback_lock,
+ 					&ib_sdp_sk_callback_lock_key);
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 7, 0))
++	sk->sk_route_caps |= NETIF_F_SG | NETIF_F_NO_CSUM;
++#else
+ 	sk->sk_route_caps |= NETIF_F_SG;
++#endif
+ 
+ 	skb_queue_head_init(&ssk->rx_ctl_q);
+ 
+@@ -1672,10 +1688,11 @@ static inline int sdp_bcopy_get(struct sock *sk, struct sk_buff *skb,
+ 		int i = skb_shinfo(skb)->nr_frags;
+ 		struct page *page = TCP_PAGE(sk);
+ 		int off = TCP_OFF(sk);
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 7, 0))
+ 		struct page_frag *pfrag = sk_page_frag(sk);
+-
+ 		if (!sk_page_frag_refill(sk, pfrag))
+ 			return SDP_DO_WAIT_MEM;
++#endif
+ 
+ 		if (skb_can_coalesce(skb, i, page, off) &&
+ 		    off != PAGE_SIZE) {
+@@ -1705,10 +1722,14 @@ static inline int sdp_bcopy_get(struct sock *sk, struct sk_buff *skb,
+ 
+ 		if (!page) {
+ 			/* Allocate new cache page. */
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 7, 0))
++			page = sk_stream_alloc_page(sk);
++#else
+ 			pfrag = sk_page_frag(sk);
+ 			page = pfrag->page;
+ 			if (!sk_page_frag_refill(sk, pfrag))
+ 				return SDP_DO_WAIT_MEM;
++#endif
+ 			if (!page)
+ 				return SDP_DO_WAIT_MEM;
+ 		}
+@@ -1719,8 +1740,18 @@ static inline int sdp_bcopy_get(struct sock *sk, struct sk_buff *skb,
+ 		err = skb_copy_to_page(sk, from, skb, page,
+ 				       off, copy);
+ 		if (err) {
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 7, 0))
++			/* If this page was new, give it to the
++			 * socket so it does not get leaked.
++			 */
++			if (!TCP_PAGE(sk)) {
++				TCP_PAGE(sk) = page;
++				TCP_OFF(sk) = 0;
++			}
++#else
+ 			/* Nothing to do here. see tcp_sendmsg,
+ 			* call to skb_copy_to_page_nocache */
++#endif
+ 			return SDP_ERR_ERROR;
+ 		}
+ 
+@@ -1950,7 +1981,11 @@ new_segment:
+ 				 * Check whether we can use HW checksum.
+ 				 */
+ 				if (sk->sk_route_caps &
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 7, 0))
++				    (NETIF_F_IP_CSUM | NETIF_F_NO_CSUM |
++#else
+ 				    (NETIF_F_IP_CSUM |
++#endif
+ 				     NETIF_F_HW_CSUM))
+ 					skb->ip_summed = CHECKSUM_PARTIAL;
+ 
+@@ -2627,7 +2662,11 @@ struct proto sdp_proto = {
+ 	.enter_memory_pressure = sdp_enter_memory_pressure,
+ 	.memory_allocated = &memory_allocated,
+ 	.memory_pressure = &memory_pressure,
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 3, 0))
++	.sysctl_mem	= sysctl_tcp_mem,
++#else
+ 	.sysctl_mem	= init_net.ipv4.sysctl_tcp_mem,
++#endif
+         .sysctl_wmem            = sysctl_tcp_wmem,
+         .sysctl_rmem            = sysctl_tcp_rmem,
+ 	.max_header  = sizeof(struct sdp_bsdh),
+diff --git a/drivers/infiniband/ulp/sdp/sdp_rx.c b/drivers/infiniband/ulp/sdp/sdp_rx.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/ulp/sdp/sdp_rx.c
++++ b/drivers/infiniband/ulp/sdp/sdp_rx.c
+@@ -196,14 +196,23 @@ static int sdp_post_recv(struct sdp_sock *ssk)
+ 			pages_alloced++;
+ 		}
+ 		frag = &skb_shinfo(skb)->frags[i];
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0))
++		frag->page                = page;
++#else
+ 		frag->page.p              = page;
++#endif
+ 		frag->page_offset         = 0;
+ 		frag->size                = min(PAGE_SIZE, SDP_MAX_PAYLOAD);
+ 		++skb_shinfo(skb)->nr_frags;
+ 	}
+ 	skb->truesize += ssk->recv_frags * min(PAGE_SIZE, SDP_MAX_PAYLOAD);
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 6, 0))
++	if (!sk_rmem_schedule(sk, ssk->recv_frags * min(PAGE_SIZE,
++		SDP_MAX_PAYLOAD))) {
++#else
+ 	if (!sk_rmem_schedule(sk, skb, ssk->recv_frags * min(PAGE_SIZE,
+ 		SDP_MAX_PAYLOAD))) {
++#endif
+ 		sdp_dbg(sk, "RX couldn't post, rx posted = %d.",
+ 				rx_ring_posted(sdp_sk(sk)));
+ 		sdp_dbg(sk, "Out of memory\n");
+@@ -226,11 +235,16 @@ static int sdp_post_recv(struct sdp_sock *ssk)
+ 		if (rx_req->mapping[i + 1]) {
+ 			addr = rx_req->mapping[i + 1];
+ 		} else {
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0))
++			addr = ib_dma_map_page(dev,
++					skb_shinfo(skb)->frags[i].page,
++#else
+ 			addr = ib_dma_map_page(dev,
+ 					skb_shinfo(skb)->frags[i].page.p,
+-					skb_shinfo(skb)->frags[i].page_offset,
+-					skb_shinfo(skb)->frags[i].size,
+-					DMA_FROM_DEVICE);
++#endif
++				       skb_shinfo(skb)->frags[i].page_offset,
++				       skb_shinfo(skb)->frags[i].size,
++				       DMA_FROM_DEVICE);
+ 			BUG_ON(ib_dma_mapping_error(dev, addr));
+ 			rx_req->mapping[i + 1] = addr;
+ 		}
+@@ -564,7 +578,11 @@ static int sdp_process_rx_skb(struct sdp_sock *ssk, struct sk_buff *skb)
+ 	skb_shinfo(skb)->nr_frags = pagesz / PAGE_SIZE;
+ 
+ 	for (i = skb_shinfo(skb)->nr_frags; i < frags; ++i) {
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0))
++		put_page(skb_shinfo(skb)->frags[i].page);
++#else
+ 		put_page(skb_shinfo(skb)->frags[i].page.p);
++#endif
+ 	}
+ 
+ 	if (unlikely(h->flags & SDP_OOB_PEND))
+diff --git a/drivers/infiniband/ulp/sdp/sdp_tx.c b/drivers/infiniband/ulp/sdp/sdp_tx.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/ulp/sdp/sdp_tx.c
++++ b/drivers/infiniband/ulp/sdp/sdp_tx.c
+@@ -151,8 +151,13 @@ void sdp_post_send(struct sdp_sock *ssk, struct sk_buff *skb)
+ 		frags = skb_shinfo(skb)->nr_frags;
+ 		for (i = 0; i < frags; ++i) {
+ 			++sge;
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0))
++			addr = ib_dma_map_page(dev,
++					skb_shinfo(skb)->frags[i].page,
++#else
+ 			addr = ib_dma_map_page(dev,
+ 					skb_shinfo(skb)->frags[i].page.p,
++#endif
+ 					skb_shinfo(skb)->frags[i].page_offset,
+ 					skb_shinfo(skb)->frags[i].size,
+ 					DMA_TO_DEVICE);

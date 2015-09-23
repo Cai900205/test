@@ -1,0 +1,125 @@
+/* config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define to 1 if IBV_ACCESS_ALLOCATE_MR is defined */
+#undef DEFINED_IBV_ACCESS_ALLOCATE_MR
+
+/* Define to 1 if IBV_EXP_ACCESS_ALLOCATE_MR is defined */
+#undef DEFINED_IBV_EXP_ACCESS_ALLOCATE_MR
+
+/* Define to 1 if IBV_EXP_CQ_MODERATION is defined */
+#undef DEFINED_IBV_EXP_CQ_MODERATION
+
+/* Define to 1 if IBV_FLOW_SPEC_IB is defined */
+#undef DEFINED_IBV_FLOW_SPEC_IB
+
+/* Define to 1 if IBV_EXP_ACCESS_ALLOCATE_MR is defined */
+#undef DEFINED_IBV_OLD_VERBS_MLX_OFED
+
+/* Define to 1 if IBV_QPT_RAW_PACKET is defined */
+#undef DEFINED_IBV_QPT_RAW_PACKET
+
+/* Define to 1 if IBV_WC_WITH_VLAN is defined */
+#undef DEFINED_IBV_WC_WITH_VLAN
+
+/* Define to 1 if linux/net_tstamp.h is missing */
+#undef DEFINED_MISSING_NET_TSTAMP
+
+/* Define to 1 if 'struct mmsghdr' is missing */
+#undef DEFINED_MISSING_STRUCT_MMSGHDR
+
+/* Define to 1 if gcc supports __sync_bool_compare_and_swap() a.o. */
+#undef HAVE_BUILTIN_ATOMIC
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `dl' library (-ldl). */
+#undef HAVE_LIBDL
+
+/* Define to 1 if you have the `pthread' library (-lpthread). */
+#undef HAVE_LIBPTHREAD
+
+/* Define to 1 if you have the `rt' library (-lrt). */
+#undef HAVE_LIBRT
+
+/* Define to 1 if you have the `stdc++' library (-lstdc++). */
+#undef HAVE_LIBSTDC__
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
+#undef LT_OBJDIR
+
+/* Define to 1 to disable Valgrind annotations. */
+#undef NVALGRIND
+
+/* OFED Version */
+#undef OFED_VERSION
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Version number of package */
+#undef VERSION
+
+/* VMA Major Version */
+#undef VMA_LIBRARY_MAJOR
+
+/* VMA Minor Version */
+#undef VMA_LIBRARY_MINOR
+
+/* VMA Release */
+#undef VMA_LIBRARY_RELEASE
+
+/* VMA Revision */
+#undef VMA_LIBRARY_REVISION
+
+/* Define to 1 if `lex' declares `yytext' as a `char *' by default, not a
+   `char[]'. */
+#undef YYTEXT_POINTER

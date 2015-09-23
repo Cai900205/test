@@ -1,0 +1,1067 @@
+From: Eli Cohen <eli@mellanox.com>
+Subject: [PATCH] BACKPORT: mlx5 for SLES10 SP3
+
+Change-Id: I06e7ca0486b71959b3d30d010b7d816d172108b6
+---
+ drivers/infiniband/hw/mlx5/doorbell.c              |   8 ++
+ drivers/infiniband/hw/mlx5/main.c                  | 104 +++++++++++++++++++++
+ drivers/infiniband/hw/mlx5/mem.c                   |  94 +++++++++++++++++++
+ drivers/infiniband/hw/mlx5/mr.c                    |  69 +++++++++++++-
+ drivers/infiniband/hw/mlx5/qp.c                    |  11 +++
+ drivers/net/ethernet/mellanox/mlx5/core/alloc.c    |  17 +++-
+ drivers/net/ethernet/mellanox/mlx5/core/cmd.c      |  61 +++++++++++-
+ drivers/net/ethernet/mellanox/mlx5/core/debugfs.c  |  19 ++++
+ drivers/net/ethernet/mellanox/mlx5/core/main.c     |  39 +++++++-
+ .../net/ethernet/mellanox/mlx5/core/mlx5_core.h    |   8 ++
+ .../net/ethernet/mellanox/mlx5/core/pagealloc.c    |   8 ++
+ include/linux/mlx5/driver.h                        |   8 ++
+ 12 files changed, 437 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/infiniband/hw/mlx5/doorbell.c b/drivers/infiniband/hw/mlx5/doorbell.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/hw/mlx5/doorbell.c
++++ b/drivers/infiniband/hw/mlx5/doorbell.c
+@@ -47,6 +47,9 @@ int mlx5_ib_db_map_user(struct mlx5_ib_ucontext *context, unsigned long virt,
+ 			struct mlx5_db *db)
+ {
+ 	struct mlx5_ib_user_db_page *page;
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++	struct ib_umem_chunk *chunk;
++#endif
+ 	int err = 0;
+ 
+ 	mutex_lock(&context->db_page_mutex);
+@@ -74,7 +77,12 @@ int mlx5_ib_db_map_user(struct mlx5_ib_ucontext *context, unsigned long virt,
+ 	list_add(&page->list, &context->db_page_list);
+ 
+ found:
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	db->dma = sg_dma_address(page->umem->sg_head.sgl) + (virt & ~PAGE_MASK);
++#else
++	chunk = list_entry(page->umem->chunk_list.next, struct ib_umem_chunk, list);
++	db->dma		= sg_dma_address(chunk->page_list) + (virt & ~PAGE_MASK);
++#endif
+ 	db->u.user_page = page;
+ 	++page->refcnt;
+ 
+diff --git a/drivers/infiniband/hw/mlx5/main.c b/drivers/infiniband/hw/mlx5/main.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/hw/mlx5/main.c
++++ b/drivers/infiniband/hw/mlx5/main.c
+@@ -30,14 +30,18 @@
+  * SOFTWARE.
+  */
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ #include <asm-generic/kmap_types.h>
++#endif
+ #include <linux/module.h>
+ #include <linux/init.h>
+ #include <linux/errno.h>
+ #include <linux/pci.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/slab.h>
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ #include <linux/io-mapping.h>
++#endif
+ #include <linux/sched.h>
+ #include <linux/list.h>
+ #include <rdma/ib_user_verbs.h>
+@@ -66,6 +70,15 @@ static char mlx5_version[] =
+ 	DRIVER_NAME ": Mellanox Connect-IB Infiniband driver v"
+ 	DRIVER_VERSION " (" DRIVER_RELDATE ")\n";
+ 
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++#define MLX5_WC_FLAGS   (_PAGE_PWT)
++
++pgprot_t pgprot_wc(pgprot_t _prot)
++{
++	return __pgprot(pgprot_val(_prot) | MLX5_WC_FLAGS);
++}
++#endif
++
+ int mlx5_vector2eqn(struct mlx5_ib_dev *dev, int vector, int *eqn, int *irqn,
+ 		    struct mlx5_eq **peq)
+ {
+@@ -726,7 +739,11 @@ static int mlx5_ib_dealloc_ucontext(struct ib_ucontext *ibcontext)
+ 	return 0;
+ }
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ static phys_addr_t uar_index2pfn(struct mlx5_ib_dev *dev, int index)
++#else
++static u64 uar_index2pfn(struct mlx5_ib_dev *dev, int index)
++#endif
+ {
+ 	return (pci_resource_start(dev->mdev->pdev, 0) >> PAGE_SHIFT) + index;
+ }
+@@ -880,7 +897,11 @@ static int mlx5_ib_mmap(struct ib_ucontext *ibcontext, struct vm_area_struct *vm
+ 	struct mlx5_uuar_info *uuari = &context->uuari;
+ 	unsigned long command;
+ 	unsigned long idx;
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	phys_addr_t pfn;
++#else
++	u64 pfn;
++#endif
+ 	int err;
+ 	unsigned long total_size;
+ 	unsigned long order;
+@@ -900,7 +921,11 @@ static int mlx5_ib_mmap(struct ib_ucontext *ibcontext, struct vm_area_struct *vm
+ 		if (idx >= uuari->num_uars)
+ 			return -EINVAL;
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
++#else
++		vma->vm_page_prot = pgprot_wc(vma->vm_page_prot);
++#endif
+ 		if (io_remap_pfn_range(vma, vma->vm_start, pfn,
+ 				       PAGE_SIZE, vma->vm_page_prot))
+ 			return -EAGAIN;
+@@ -915,6 +940,7 @@ static int mlx5_ib_mmap(struct ib_ucontext *ibcontext, struct vm_area_struct *vm
+ #endif
+ 		break;
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	case MLX5_IB_MMAP_GET_CONTIGUOUS_PAGES:
+ 		total_size = vma->vm_end - vma->vm_start;
+ 		order = get_pg_order(vma->vm_pgoff);
+@@ -930,6 +956,7 @@ static int mlx5_ib_mmap(struct ib_ucontext *ibcontext, struct vm_area_struct *vm
+ 			return err;
+ 		}
+ 		break;
++#endif
+ 
+ 	default:
+ 		return -EINVAL;
+@@ -1155,6 +1182,7 @@ out:
+ 	return err;
+ }
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ static ssize_t show_fw_pages(struct device *device, struct device_attribute *attr,
+ 			     char *buf)
+ {
+@@ -1222,6 +1250,74 @@ static struct device_attribute *mlx5_class_attributes[] = {
+ 	&dev_attr_fw_pages,
+ 	&dev_attr_reg_pages,
+ };
++#else /* LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16) */
++
++static ssize_t show_fw_pages(struct class_device *cdev, char *buf)
++{
++	struct mlx5_ib_dev *dev = container_of(cdev, struct mlx5_ib_dev,
++					       ib_dev.class_dev);
++
++	return sprintf(buf, "%d\n", dev->mdev->priv.fw_pages);
++}
++
++static ssize_t show_reg_pages(struct class_device *cdev, char *buf)
++{
++	struct mlx5_ib_dev *dev = container_of(cdev, struct mlx5_ib_dev,
++					       ib_dev.class_dev);
++
++	return sprintf(buf, "%d\n", dev->mdev->priv.reg_pages);
++}
++
++static ssize_t show_hca(struct class_device *cdev, char *buf)
++{
++	struct mlx5_ib_dev *dev = container_of(cdev, struct mlx5_ib_dev,
++					       ib_dev.class_dev);
++
++	return sprintf(buf, "MT%d\n", dev->mdev->pdev->device);
++}
++
++static ssize_t show_fw_ver(struct class_device *cdev, char *buf)
++{
++	struct mlx5_ib_dev *dev = container_of(cdev, struct mlx5_ib_dev,
++					       ib_dev.class_dev);
++
++	return sprintf(buf, "%d.%d.%d\n", fw_rev_maj(dev->mdev),
++		       fw_rev_min(dev->mdev), fw_rev_sub(dev->mdev));
++}
++
++static ssize_t show_rev(struct class_device *cdev, char *buf)
++{
++	struct mlx5_ib_dev *dev = container_of(cdev, struct mlx5_ib_dev,
++					       ib_dev.class_dev);
++
++	return sprintf(buf, "%x\n", dev->mdev->rev_id);
++}
++
++static ssize_t show_board(struct class_device *cdev, char *buf)
++{
++	struct mlx5_ib_dev *dev = container_of(cdev, struct mlx5_ib_dev,
++					       ib_dev.class_dev);
++
++	return sprintf(buf, "%.*s\n", MLX5_BOARD_ID_LEN,
++		       dev->mdev->board_id);
++}
++
++static CLASS_DEVICE_ATTR(hw_rev,   S_IRUGO, show_rev,    NULL);
++static CLASS_DEVICE_ATTR(fw_ver,   S_IRUGO, show_fw_ver, NULL);
++static CLASS_DEVICE_ATTR(hca_type, S_IRUGO, show_hca,    NULL);
++static CLASS_DEVICE_ATTR(board_id, S_IRUGO, show_board,  NULL);
++static CLASS_DEVICE_ATTR(fw_pages, S_IRUGO, show_fw_pages, NULL);
++static CLASS_DEVICE_ATTR(reg_pages, S_IRUGO, show_reg_pages, NULL);
++
++static struct class_device_attribute *mlx5_class_attributes[] = {
++	&class_device_attr_hw_rev,
++	&class_device_attr_fw_ver,
++	&class_device_attr_hca_type,
++	&class_device_attr_board_id,
++	&class_device_attr_fw_pages,
++	&class_device_attr_reg_pages,
++};
++#endif /* LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16) */
+ 
+ static void mlx5_ib_handle_internal_error(struct mlx5_ib_dev *ibdev)
+ {
+@@ -1883,12 +1979,20 @@ static void *mlx5_ib_add(struct mlx5_core_dev *mdev)
+ 	if (err)
+ 		goto err_dev;
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	for (i = 0; i < ARRAY_SIZE(mlx5_class_attributes); i++) {
+ 		err = device_create_file(&dev->ib_dev.dev,
+ 					 mlx5_class_attributes[i]);
+ 		if (err)
+ 			goto err_umrc;
+ 	}
++#else
++	for (i = 0; i < ARRAY_SIZE(mlx5_class_attributes); ++i) {
++		if (class_device_create_file(&dev->ib_dev.class_dev,
++				       mlx5_class_attributes[i]))
++			goto err_umrc;
++	}
++#endif
+ 
+ 	dev->ib_active = true;
+ 
+diff --git a/drivers/infiniband/hw/mlx5/mem.c b/drivers/infiniband/hw/mlx5/mem.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/hw/mlx5/mem.c
++++ b/drivers/infiniband/hw/mlx5/mem.c
+@@ -45,6 +45,7 @@
+ void mlx5_ib_cont_pages(struct ib_umem *umem, u64 addr, int *count, int *shift,
+ 			int *ncont, int *order)
+ {
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	unsigned long tmp;
+ 	unsigned long m;
+ 	int i, k;
+@@ -118,6 +119,69 @@ void mlx5_ib_cont_pages(struct ib_umem *umem, u64 addr, int *count, int *shift,
+ 	}
+ 	*shift = page_shift + m;
+ 	*count = i;
++#else /* LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16) */
++	struct ib_umem_chunk *chunk;
++	int i, j, k;
++	u64 len;
++	u64 pfn;
++	u64 base = 0;
++	unsigned long m;
++	int skip;
++	int mask;
++	int p = 0;
++	unsigned long tmp;
++
++	addr = addr >> PAGE_SHIFT;
++	tmp = (unsigned long)addr;
++	m = find_first_bit(&tmp, sizeof(tmp));
++	skip = 1 << m;
++	mask = skip - 1;
++	i = 0;
++	list_for_each_entry(chunk, &umem->chunk_list, list)
++		for (j = 0; j < chunk->nmap; ++j) {
++			len = sg_dma_len(&chunk->page_list[j]) >> PAGE_SHIFT;
++			pfn = sg_dma_address(&chunk->page_list[j]) >> PAGE_SHIFT;
++			for (k = 0; k < len; ++k) {
++				if (!(i & mask)) {
++					tmp = (unsigned long)pfn;
++					m = min(m, find_first_bit(&tmp, sizeof(tmp)));
++					skip = 1 << m;
++					mask = skip - 1;
++					base = pfn;
++					p = 0;
++				} else {
++					if (base + p != pfn) {
++						tmp = (unsigned long)p;
++						m = find_first_bit(&tmp, sizeof(tmp));
++						skip = 1 << m;
++						mask = skip - 1;
++						base = pfn;
++						p = 0;
++					}
++				}
++				++p;
++				++i;
++			}
++		}
++
++	if (i) {
++		m = min_t(unsigned long, ilog2(roundup_pow_of_two(i)), m);
++
++		if (order)
++			*order = ilog2(roundup_pow_of_two(i) >> m);
++
++		*ncont = DIV_ROUND_UP(i, (1 << m));
++	} else {
++		m  = 0;
++
++		if (order)
++			*order = 0;
++
++		*ncont = 0;
++	}
++	*shift = PAGE_SHIFT + m;
++	*count = i;
++#endif /* LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16) */
+ }
+ 
+ #ifdef CONFIG_INFINIBAND_ON_DEMAND_PAGING
+@@ -150,6 +214,7 @@ void __mlx5_ib_populate_pas(struct mlx5_ib_dev *dev, struct ib_umem *umem,
+ 			  int page_shift, size_t offset, size_t num_pages,
+ 			  __be64 *pas, int access_flags)
+ {
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	unsigned long umem_page_shift = ilog2(umem->page_size);
+ 	int shift = page_shift - umem_page_shift;
+ 	int mask = (1 << shift) - 1;
+@@ -193,6 +258,35 @@ void __mlx5_ib_populate_pas(struct mlx5_ib_dev *dev, struct ib_umem *umem,
+ 				i++;
+ 		}
+ 	}
++#else /* LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16) */
++	struct ib_umem_chunk *chunk;
++	int i, j, k;
++	int len;
++	u64 cur = 0;
++	u64 base;
++	int shift = page_shift - PAGE_SHIFT;
++	int mask = (1 << shift) - 1;
++
++	i = 0;
++	list_for_each_entry(chunk, &umem->chunk_list, list)
++		for (j = 0; j < chunk->nmap; ++j) {
++			len = sg_dma_len(&chunk->page_list[j]) >> PAGE_SHIFT;
++			base = sg_dma_address(&chunk->page_list[j]);
++			for (k = 0; k < len; ++k) {
++				if (!(i & mask)) {
++					cur = base + (k << PAGE_SHIFT);
++					cur |= access_flags;
++
++					pas[i >> shift] = cpu_to_be64(cur);
++					mlx5_ib_dbg(dev, "pas[%d] 0x%llx\n",
++						    i >> shift, be64_to_cpu(pas[i >> shift]));
++				}  else
++					mlx5_ib_dbg(dev, "=====> 0x%llx\n",
++						    base + (k << PAGE_SHIFT));
++				++i;
++			}
++		}
++#endif /* LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16) */
+ }
+ 
+ void mlx5_ib_populate_pas(struct mlx5_ib_dev *dev, struct ib_umem *umem,
+diff --git a/drivers/infiniband/hw/mlx5/mr.c b/drivers/infiniband/hw/mlx5/mr.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/hw/mlx5/mr.c
++++ b/drivers/infiniband/hw/mlx5/mr.c
+@@ -41,9 +41,11 @@
+ #include <rdma/ib_umem.h>
+ #include <rdma/ib_umem_odp.h>
+ #include "mlx5_ib.h"
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ static void mlx5_invalidate_umem(void *invalidation_cookie,
+ 				struct ib_umem *umem,
+ 				unsigned long addr, size_t size);
++#endif
+ 
+ enum {
+ 	MAX_PENDING_REG_MR = 8,
+@@ -74,6 +76,15 @@ static int destroy_mkey(struct mlx5_ib_dev *dev, struct mlx5_ib_mr *mr)
+ 	return err;
+ }
+ 
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++static int backport_simple_open(struct inode *inode, struct file *file)
++{
++	file->private_data = inode->i_private;
++
++	return 0;
++}
++#endif
++
+ static int order2idx(struct mlx5_ib_dev *dev, int order)
+ {
+ 	struct mlx5_mr_cache *cache = &dev->cache;
+@@ -509,7 +520,11 @@ static int get_octo_len(u64 addr, u64 len, int page_size)
+ 
+ static int use_umr(int order)
+ {
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	return order <= MLX5_MAX_UMR_SHIFT;
++#else
++	return order <= (MAX_MR_CACHE_ENTRIES + 2);
++#endif
+ }
+ 
+ static int use_klm(int order)
+@@ -866,7 +881,11 @@ static struct mlx5_ib_mr *reg_klm(struct ib_pd *pd, struct ib_umem *umem,
+ 	}
+ 
+ 	dma = dma_map_single(ddev, dptr, dsize, DMA_TO_DEVICE);
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (dma_mapping_error(ddev, dma)) {
++#else
++	if (dma_mapping_error(dma)) {
++#endif
+ 		err = -ENOMEM;
+ 		mlx5_ib_warn(dev, "dma map failed\n");
+ 		goto out;
+@@ -1037,7 +1056,11 @@ static struct mlx5_ib_mr *reg_umr(struct ib_pd *pd, struct ib_umem *umem,
+ 	memset(pas + npages, 0, size - npages * sizeof(u64));
+ 
+ 	mr->dma = dma_map_single(ddev, pas, size, DMA_TO_DEVICE);
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (dma_mapping_error(ddev, mr->dma)) {
++#else
++	if (dma_mapping_error(mr->dma)) {
++#endif
+ 		err = -ENOMEM;
+ 		goto free_pas;
+ 	}
+@@ -1134,7 +1157,11 @@ int mlx5_ib_update_mtt(struct mlx5_ib_mr *mr, u64 start_page_index, int npages,
+ 	pages_iter = size / sizeof(u64);
+ 	dma = dma_map_single(ddev, pas, size,
+ 				 DMA_TO_DEVICE);
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (dma_mapping_error(ddev, mr->dma)) {
++#else
++	if (dma_mapping_error(mr->dma)) {
++#endif
+ 		mlx5_ib_err(dev, "unable to map DMA during MTT update.\n");
+ 		err = -ENOMEM;
+ 		goto free_pas;
+@@ -1282,7 +1309,9 @@ struct ib_mr *mlx5_ib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
+ 	int ncont;
+ 	int order;
+ 	int err;
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	struct ib_peer_memory_client *ib_peer_mem;
++#endif
+ 
+ 	mlx5_ib_dbg(dev, "start 0x%llx, virt_addr 0x%llx, length 0x%llx\n",
+ 		    start, virt_addr, length);
+@@ -1293,14 +1322,21 @@ struct ib_mr *mlx5_ib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
+ 		return ERR_PTR(-EINVAL);
+ 	}
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	umem = ib_umem_get_ex(pd->uobject->context, start, length, access_flags,
+ 			   0, 1);
++#else
++	umem = ib_umem_get(pd->uobject->context, start, length, access_flags,
++			   0);
++#endif
+ 	if (IS_ERR(umem)) {
+ 		mlx5_ib_dbg(dev, "umem get failed\n");
+ 		return (void *)umem;
+ 	}
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	ib_peer_mem = umem->ib_peer_mem;
++#endif
+ 	mlx5_ib_cont_pages(umem, start, &npages, &page_shift, &ncont, &order);
+ 	if (!npages) {
+ 		mlx5_ib_warn(dev, "avoid zero region\n");
+@@ -1348,6 +1384,7 @@ struct ib_mr *mlx5_ib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
+ 	atomic_add(npages, &dev->mdev->priv.reg_pages);
+ 	mr->ibmr.lkey = mr->mmr.key;
+ 	mr->ibmr.rkey = mr->mmr.key;
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	atomic_set(&mr->invalidated, 0);
+ 
+ 	if (ib_peer_mem) {
+@@ -1355,6 +1392,7 @@ struct ib_mr *mlx5_ib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
+ 		ib_umem_activate_invalidation_notifier(umem,
+ 					mlx5_invalidate_umem, mr);
+ 	}
++#endif
+ 
+ #ifdef CONFIG_INFINIBAND_ON_DEMAND_PAGING
+ 	if (umem->odp_data) {
+@@ -1427,12 +1465,19 @@ static int clean_mr(struct mlx5_ib_mr *mr)
+ 			mlx5_ib_warn(dev, "failed unregister\n");
+ 			return err;
+ 		}
+-	}
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++		free_cached_mr(dev, mr);
++#endif
++ 	}
+ 
+ 	return 0;
+ }
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ static int mlx5_ib_invalidate_mr(struct ib_mr *ibmr)
++#else
++int mlx5_ib_dereg_mr(struct ib_mr *ibmr)
++#endif
+ {
+ 	struct mlx5_ib_dev *dev = to_mdev(ibmr->device);
+ 	struct mlx5_ib_mr *mr = to_mmr(ibmr);
+@@ -1476,9 +1521,14 @@ static int mlx5_ib_invalidate_mr(struct ib_mr *ibmr)
+ 		atomic_sub(npages, &dev->mdev->priv.reg_pages);
+ 	}
+ 
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++	if (!cached)
++		kfree(mr);
++#endif
+ 	return 0;
+ }
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ int mlx5_ib_dereg_mr(struct ib_mr *ibmr)
+ {
+ 
+@@ -1525,6 +1575,7 @@ out:
+ 
+ 
+ }
++#endif
+ 
+ static int create_mr_sig(struct ib_pd *pd,
+ 			 struct ib_mr_init_attr *mr_init_attr,
+@@ -1865,7 +1916,11 @@ static ssize_t limit_store(struct cache_order *co, struct order_attribute *oa,
+ 	u32 var;
+ 	int err;
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (kstrtouint(buf, 0, &var))
++#else
++	if (sscanf(buf, "%u", &var) != 1)
++#endif
+ 		return -EINVAL;
+ 
+ 	if (var > ent->size)
+@@ -1902,7 +1957,11 @@ static ssize_t miss_store(struct cache_order *co, struct order_attribute *oa,
+ 	struct mlx5_cache_ent *ent = &cache->ent[co->index];
+ 	u32 var;
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (kstrtouint(buf, 0, &var))
++#else
++	if (sscanf(buf, "%u", &var) != 1)
++#endif
+ 		return -EINVAL;
+ 
+ 	if (var != 0)
+@@ -1934,7 +1993,11 @@ static ssize_t size_store(struct cache_order *co, struct order_attribute *oa,
+ 	u32 var;
+ 	int err;
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (kstrtouint(buf, 0, &var))
++#else
++	if (sscanf(buf, "%u", &var) != 1)
++#endif
+ 		return -EINVAL;
+ 
+ 	if (var < ent->limit)
+@@ -1946,7 +2009,11 @@ static ssize_t size_store(struct cache_order *co, struct order_attribute *oa,
+ 			if (err && err != -EAGAIN)
+ 				return err;
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 			usleep_range(3000, 5000);
++#else
++			msleep(4);
++#endif
+ 		} while (err);
+ 	} else if (var < ent->size) {
+ 		remove_keys(dev, co->index, ent->size - var);
+diff --git a/drivers/infiniband/hw/mlx5/qp.c b/drivers/infiniband/hw/mlx5/qp.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/infiniband/hw/mlx5/qp.c
++++ b/drivers/infiniband/hw/mlx5/qp.c
+@@ -2739,7 +2739,11 @@ static void dump_wqe(struct mlx5_ib_qp *qp, int idx, int size_16)
+ static void mlx5_bf_copy(u64 __iomem *dst, u64 *src,
+ 			 unsigned bytecnt, struct mlx5_ib_qp *qp)
+ {
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++	int i;
++#endif
+ 	while (bytecnt > 0) {
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 		__iowrite64_copy(dst++, src++, 8);
+ 		__iowrite64_copy(dst++, src++, 8);
+ 		__iowrite64_copy(dst++, src++, 8);
+@@ -2748,6 +2752,13 @@ static void mlx5_bf_copy(u64 __iomem *dst, u64 *src,
+ 		__iowrite64_copy(dst++, src++, 8);
+ 		__iowrite64_copy(dst++, src++, 8);
+ 		__iowrite64_copy(dst++, src++, 8);
++#else
++		i = 64;
++		while (i > 0) {
++			*dst++=*src++;
++			i--;
++		}
++#endif
+ 		bytecnt -= 64;
+ 		if (unlikely(src == qp->sq.qend))
+ 			src = mlx5_get_send_wqe(qp, 0);
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/alloc.c b/drivers/net/ethernet/mellanox/mlx5/core/alloc.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/net/ethernet/mellanox/mlx5/core/alloc.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/alloc.c
+@@ -57,8 +57,12 @@ int mlx5_buf_alloc(struct mlx5_core_dev *dev, int size, int max_direct,
+ 		buf->nbufs        = 1;
+ 		buf->npages       = 1;
+ 		buf->page_shift   = get_order(size) + PAGE_SHIFT;
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 		buf->direct.buf   = dma_zalloc_coherent(&dev->pdev->dev,
+-							size, &t, GFP_KERNEL);
++#else
++		buf->direct.buf   = dma_alloc_coherent(&dev->pdev->dev,
++#endif
++						       size, &t, GFP_KERNEL);
+ 		if (!buf->direct.buf)
+ 			return -ENOMEM;
+ 
+@@ -68,6 +72,10 @@ int mlx5_buf_alloc(struct mlx5_core_dev *dev, int size, int max_direct,
+ 			--buf->page_shift;
+ 			buf->npages *= 2;
+ 		}
++
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++		memset(buf->direct.buf, 0, size);
++#endif
+ 	} else {
+ 		int i;
+ 
+@@ -82,12 +90,19 @@ int mlx5_buf_alloc(struct mlx5_core_dev *dev, int size, int max_direct,
+ 
+ 		for (i = 0; i < buf->nbufs; i++) {
+ 			buf->page_list[i].buf =
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 				dma_zalloc_coherent(&dev->pdev->dev, PAGE_SIZE,
++#else
++				dma_alloc_coherent(&dev->pdev->dev, PAGE_SIZE,
++#endif
+ 						    &t, GFP_KERNEL);
+ 			if (!buf->page_list[i].buf)
+ 				goto err_free;
+ 
+ 			buf->page_list[i].map = t;
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++			memset(buf->page_list[i].buf, 0, PAGE_SIZE);
++#endif
+ 		}
+ 
+ 		if (BITS_PER_LONG == 64) {
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/cmd.c b/drivers/net/ethernet/mellanox/mlx5/core/cmd.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/net/ethernet/mellanox/mlx5/core/cmd.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/cmd.c
+@@ -30,7 +30,9 @@
+  * SOFTWARE.
+  */
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ #include <asm-generic/kmap_types.h>
++#endif
+ #include <linux/module.h>
+ #include <linux/init.h>
+ #include <linux/errno.h>
+@@ -39,7 +41,9 @@
+ #include <linux/slab.h>
+ #include <linux/delay.h>
+ #include <linux/random.h>
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ #include <linux/io-mapping.h>
++#endif
+ #include <linux/mlx5/driver.h>
+ #include <linux/debugfs.h>
+ #include <linux/sysfs.h>
+@@ -218,7 +222,11 @@ static void poll_timeout(struct mlx5_cmd_work_ent *ent)
+ 			ent->ret = 0;
+ 			return;
+ 		}
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 		usleep_range(5000, 10000);
++#else
++		msleep(4);
++#endif
+ 	} while (time_before(jiffies, poll_end));
+ 
+ 	ent->ret = -ETIMEDOUT;
+@@ -731,6 +739,7 @@ static int mlx5_cmd_invoke(struct mlx5_core_dev *dev, struct mlx5_cmd_msg *in,
+ 	s64 ds;
+ 	u16 op;
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (pci_channel_offline(dev->pdev) ||
+ 	    (dev->state & MLX5_DEVICE_STATE_INTERNAL_ERROR)) {
+ 		/* Device is going through error recovery
+@@ -738,6 +747,15 @@ static int mlx5_cmd_invoke(struct mlx5_core_dev *dev, struct mlx5_cmd_msg *in,
+ 		 */
+ 		return mlx5_internal_err_ret_value(dev, msg_to_opcode(in));
+ 	}
++#else
++	if (dev->state & MLX5_DEVICE_STATE_INTERNAL_ERROR) {
++		/*
++		 * Device is going through error recovery
++		 * and cannot accept commands.
++		 */
++		return mlx5_internal_err_ret_value(dev, msg_to_opcode(in));
++	}
++#endif
+ 
+ 	if (callback && page_queue)
+ 		return -EINVAL;
+@@ -818,7 +836,11 @@ static ssize_t dbg_write(struct file *filp, const char __user *buf,
+ 
+ static const struct file_operations fops = {
+ 	.owner	= THIS_MODULE,
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	.open	= simple_open,
++#else
++	.open	= compat_mlx5_simple_open,
++#endif
+ 	.write	= dbg_write,
+ };
+ 
+@@ -1036,7 +1058,11 @@ static ssize_t data_read(struct file *filp, char __user *buf, size_t count,
+ 
+ static const struct file_operations dfops = {
+ 	.owner	= THIS_MODULE,
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	.open	= simple_open,
++#else
++	.open	= compat_mlx5_simple_open,
++#endif
+ 	.write	= data_write,
+ 	.read	= data_read,
+ };
+@@ -1104,7 +1130,11 @@ static ssize_t outlen_write(struct file *filp, const char __user *buf,
+ 
+ static const struct file_operations olfops = {
+ 	.owner	= THIS_MODULE,
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	.open	= simple_open,
++#else
++	.open	= compat_mlx5_simple_open,
++#endif
+ 	.write	= outlen_write,
+ 	.read	= outlen_read,
+ };
+@@ -1367,10 +1397,11 @@ static int cmd_exec(struct mlx5_core_dev *dev, void *in, int in_size, void *out,
+ 	int err;
+ 	u8 status = 0;
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (pci_channel_offline(dev->pdev) ||
+ 	    dev->state & MLX5_DEVICE_STATE_INTERNAL_ERROR)
+ 		return mlx5_internal_err_ret_value(dev, opcode_from_in(in));
+-
++#endif
+ 	pages_queue = is_manage_pages(in);
+ 	gfp = callback ? GFP_ATOMIC : GFP_KERNEL;
+ 
+@@ -1531,7 +1562,11 @@ int mlx5_cmd_init(struct mlx5_core_dev *dev)
+ 	}
+ 	cmd->dma = dma_map_single(&dev->pdev->dev, cmd->cmd_buf, PAGE_SIZE,
+ 				  DMA_BIDIRECTIONAL);
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (dma_mapping_error(&dev->pdev->dev, cmd->dma)) {
++#else
++	if (dma_mapping_error(cmd->dma)) {
++#endif
+ 		err = -ENOMEM;
+ 		goto err_free;
+ 	}
+@@ -1752,7 +1787,11 @@ static ssize_t num_ent_store(struct mlx5_cmd_cache_head *ch,
+ 	u32 var;
+ 	int i;
+ 
+-	if (kstrtouint(buf, 0, &var))
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
++        if (kstrtouint(buf, 0, &var))
++#else
++        if (sscanf(buf, "%u", &var) != 1)
++#endif
+ 		return -EINVAL;
+ 
+ 	spin_lock_irqsave(&ch->lock, flags);
+@@ -1810,7 +1849,11 @@ static ssize_t miss_store(struct mlx5_cmd_cache_head *ch,
+ 	unsigned long flags;
+ 	u32 var;
+ 
+-	if (kstrtouint(buf, 0, &var))
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
++        if (kstrtouint(buf, 0, &var))
++#else
++        if (sscanf(buf, "%u", &var) != 1)
++#endif
+ 		return -EINVAL;
+ 
+ 	if (var) {
+@@ -1846,7 +1889,11 @@ static ssize_t total_commands_store(struct mlx5_cmd_cache_head *ch,
+ 	unsigned long flags;
+ 	u32 var;
+ 
+-	if (kstrtouint(buf, 0, &var))
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
++        if (kstrtouint(buf, 0, &var))
++#else
++        if (sscanf(buf, "%u", &var) != 1)
++#endif
+ 		return -EINVAL;
+ 
+ 	if (var) {
+@@ -1905,7 +1952,11 @@ static ssize_t real_miss_store(struct device *dev, struct device_attribute *attr
+ 	struct mlx5_core_dev *cdev = pci_get_drvdata(pdev);
+ 	u32 var;
+ 
+-	if (kstrtouint(buf, 0, &var))
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
++        if (kstrtouint(buf, 0, &var))
++#else
++        if (sscanf(buf, "%u", &var) != 1)
++#endif
+ 		return -EINVAL;
+ 
+ 	if (var) {
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/debugfs.c b/drivers/net/ethernet/mellanox/mlx5/core/debugfs.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/net/ethernet/mellanox/mlx5/core/debugfs.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/debugfs.c
+@@ -183,6 +183,10 @@ static ssize_t average_read(struct file *filp, char __user *buf, size_t count,
+ {
+ 	struct mlx5_cmd_stats *stats;
+ 	u64 field = 0;
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++	u64 dividend;
++	u32 divisor;
++#endif
+ 	int ret;
+ 	char tbuf[22];
+ 
+@@ -192,7 +196,14 @@ static ssize_t average_read(struct file *filp, char __user *buf, size_t count,
+ 	stats = filp->private_data;
+ 	spin_lock_irq(&stats->lock);
+ 	if (stats->n)
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 		field = div64_u64(stats->sum, stats->n);
++#else
++		dividend = stats->sum;
++		divisor = stats->n;
++		do_div(dividend, divisor);
++		field = dividend;
++#endif
+ 	spin_unlock_irq(&stats->lock);
+ 	ret = snprintf(tbuf, sizeof(tbuf), "%llu\n", field);
+ 	if (ret > 0) {
+@@ -223,7 +234,11 @@ static ssize_t average_write(struct file *filp, const char __user *buf,
+ 
+ static const struct file_operations stats_fops = {
+ 	.owner	= THIS_MODULE,
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	.open	= simple_open,
++#else
++	.open	= compat_mlx5_simple_open,
++#endif
+ 	.read	= average_read,
+ 	.write	= average_write,
+ };
+@@ -545,7 +560,11 @@ static ssize_t dbg_read(struct file *filp, char __user *buf, size_t count,
+ 
+ static const struct file_operations fops = {
+ 	.owner	= THIS_MODULE,
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	.open	= simple_open,
++#else
++	.open	= compat_mlx5_simple_open,
++#endif
+ 	.read	= dbg_read,
+ };
+ 
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/main.c b/drivers/net/ethernet/mellanox/mlx5/core/main.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/net/ethernet/mellanox/mlx5/core/main.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/main.c
+@@ -30,14 +30,18 @@
+  * SOFTWARE.
+  */
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ #include <asm-generic/kmap_types.h>
++#endif
+ #include <linux/module.h>
+ #include <linux/init.h>
+ #include <linux/errno.h>
+ #include <linux/pci.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/slab.h>
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ #include <linux/io-mapping.h>
++#endif
+ #include <linux/mlx5/driver.h>
+ #include <linux/mlx5/cq.h>
+ #include <linux/mlx5/qp.h>
+@@ -144,6 +148,7 @@ static struct mlx5_profile profile[] = {
+ 			.size	= 64,
+ 			.limit	= 32
+ 		},
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 		.mr_cache[13]	= {
+ 			.size	= 32,
+ 			.limit	= 16
+@@ -152,6 +157,7 @@ static struct mlx5_profile profile[] = {
+ 			.size	= 16,
+ 			.limit	= 8
+ 		},
++#endif
+ 	},
+ };
+ 
+@@ -184,7 +190,9 @@ static int set_dma_caps(struct pci_dev *pdev)
+ 		}
+ 	}
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	dma_set_max_seg_size(&pdev->dev, 2u * 1024 * 1024 * 1024);
++#endif
+ 	return err;
+ }
+ 
+@@ -447,6 +455,25 @@ static int mlx5_core_disable_hca(struct mlx5_core_dev *dev)
+ 	return 0;
+ }
+ 
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++static void compat_pci_set_master(struct pci_dev *dev, bool enable)
++{
++	u16 old_cmd, cmd;
++
++	pci_read_config_word(dev, PCI_COMMAND, &old_cmd);
++	if (enable)
++		cmd = old_cmd | PCI_COMMAND_MASTER;
++	else
++		cmd = old_cmd & ~PCI_COMMAND_MASTER;
++	if (cmd != old_cmd) {
++		dev_dbg(&dev->dev, "%s bus mastering\n",
++			enable ? "enabling" : "disabling");
++		pci_write_config_word(dev, PCI_COMMAND, cmd);
++	}
++	dev->is_busmaster = enable;
++}
++#endif
++
+ static void mlx5_add_device(struct mlx5_interface *intf, struct mlx5_priv *priv)
+ {
+ 	struct mlx5_device_context *dev_ctx;
+@@ -561,7 +588,11 @@ static int mlx5_pci_init(struct mlx5_core_dev *dev, struct mlx5_priv *priv)
+ 	return 0;
+ 
+ err_clr_master:
+-	pci_clear_master(dev->pdev);
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
++ 	pci_clear_master(dev->pdev);
++#else
++	compat_pci_set_master(dev->pdev, true);
++#endif
+ 	release_bar(dev->pdev);
+ 
+ err_disable:
+@@ -759,7 +790,11 @@ err_pagealloc_cleanup:
+ static void mlx5_pci_close(struct mlx5_core_dev *dev, struct mlx5_priv *priv)
+ {
+ 	iounmap(dev->iseg);
+-	pci_clear_master(dev->pdev);
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
++ 	pci_clear_master(dev->pdev);
++#else
++	compat_pci_set_master(dev->pdev, true);
++#endif
+ 	release_bar(dev->pdev);
+ 	pci_disable_device(dev->pdev);
+ 	debugfs_remove(priv->dbg_root);
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.h b/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.h
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.h
++++ b/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.h
+@@ -74,4 +74,12 @@ void mlx5_core_event(struct mlx5_core_dev *dev, enum mlx5_dev_event event,
+ void mlx5_enter_error_state(struct mlx5_core_dev *dev);
+ void mlx5_cmd_comp_handler(struct mlx5_core_dev *dev, unsigned long vector);
+ 
++#if (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 16))
++static inline int compat_mlx5_simple_open(struct inode *inode, struct file *file)
++{
++	file->private_data = inode->i_private;
++
++	return 0;
++}
++#endif
+ #endif /* __MLX5_CORE_H__ */
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/pagealloc.c b/drivers/net/ethernet/mellanox/mlx5/core/pagealloc.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/drivers/net/ethernet/mellanox/mlx5/core/pagealloc.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/pagealloc.c
+@@ -30,7 +30,11 @@
+  * SOFTWARE.
+  */
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ #include <asm-generic/kmap_types.h>
++#else
++#include <linux/vmalloc.h>
++#endif
+ #include <linux/kernel.h>
+ #include <linux/module.h>
+ #include <linux/mlx5/driver.h>
+@@ -252,7 +256,11 @@ static int alloc_system_page(struct mlx5_core_dev *dev, u16 func_id)
+ 	}
+ 	addr = dma_map_page(&dev->pdev->dev, page, 0,
+ 			    PAGE_SIZE, DMA_BIDIRECTIONAL);
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	if (dma_mapping_error(&dev->pdev->dev, addr)) {
++#else
++	if (dma_mapping_error(addr)) {
++#endif
+ 		mlx5_core_warn(dev, "failed dma mapping page\n");
+ 		err = -ENOMEM;
+ 		goto out_alloc;
+diff --git a/include/linux/mlx5/driver.h b/include/linux/mlx5/driver.h
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/include/linux/mlx5/driver.h
++++ b/include/linux/mlx5/driver.h
+@@ -638,7 +638,11 @@ struct mlx5_core_dev {
+ 	char			board_id[MLX5_BOARD_ID_LEN];
+ 	struct mlx5_cmd		cmd;
+ 	struct mlx5_caps	caps;
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	phys_addr_t		iseg_base;
++#else
++	u64			iseg_base;
++#endif
+ 	struct mlx5_init_seg __iomem *iseg;
+ 	enum mlx5_device_state	state;
+ 	struct mutex		intf_state_mutex;
+@@ -989,7 +993,11 @@ enum {
+ };
+ 
+ enum {
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 16))
+ 	MAX_MR_CACHE_ENTRIES    = 15,
++#else
++	MAX_MR_CACHE_ENTRIES    = 13,
++#endif
+ };
+ 
+ struct mlx5_interface {

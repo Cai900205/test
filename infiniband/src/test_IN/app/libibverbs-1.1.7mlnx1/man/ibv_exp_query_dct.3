@@ -1,0 +1,60 @@
+.\" -*- nroff -*-
+.\"
+.TH IBV_EXP_QUERY_DCT 3 2014-08-28 libibverbs "Libibverbs Programmer's Manual"
+.SH "NAME"
+ibv_exp_query_dct \- query DCT's attributes. 
+.SH "SYNOPSIS"
+.nf
+.B #include <infiniband/verbs_exp.h>
+.sp
+.BI "int ibv_exp_query_dct(struct ibv_exp_dct "  "*dct" ", struct ibv_exp_dct_attr " "*attr");
+.fi
+.SH "DESCRIPTION"
+.B ibv_exp_query_dct()
+gets the attributes of the DCT 
+.I dct\fR.
+into the argument 
+.I attr.
+is an ibv_exp_dct_attr struct, as defined in <infiniband/verbs_exp.h>.
+.PP
+.nf
+struct  ibv_exp_dct_attr {
+.in +8
+uint64_t                dc_key;
+uint8_t                 port;
+uint32_t                access_flags; /* use ibv_access_flags form verbs.h */
+uint8_t                 min_rnr_timer;
+uint8_t                 tclass;
+uint32_t                flow_label;
+enum ibv_mtu            mtu;
+uint8_t                 pkey_index;
+uint8_t                 gid_index;
+uint8_t                 hop_limit;
+uint32_t                key_violations;
+uint8_t                 state;
+struct ibv_srq         *srq;
+struct ibv_cq          *cq;
+struct ibv_pd          *pd;
+uint32_t                comp_mask;  /* reserved for future growth (must be 0) */
+.in -8
+};
+.fi
+.PP
+The function
+.B ibv_exp_query_dct()
+will update the
+.I attr
+struct with the actual \s-1dct\s0 values of the DCT that was queried.
+.PP
+.SH "RETURN VALUE"
+.B ibv_exp_query_dct()
+returns 0 on success, or the value of errno on failure.
+
+.SH "NOTES"
+.PP
+.SH "SEE ALSO"
+.BR ibv_exp_create_qp (3),
+.BR ibv_exp_create_dct (3)
+.SH "AUTHORS"
+.TP
+Haggai Abramovsky <hagaya@mellanox.com>

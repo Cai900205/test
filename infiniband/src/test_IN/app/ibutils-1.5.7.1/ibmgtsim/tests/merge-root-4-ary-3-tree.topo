@@ -1,0 +1,256 @@
+MTS800 SW-0-0-0
+   P1 -> Cougar H-1 P1
+   P2 -> Cougar H-2 P1
+   P3 -> Cougar H-3 P1
+   P4 -> Cougar H-4 P1
+   P5 -> MTS800 SW-0-0-1 P1
+   P6 -> MTS800 SW-0-1-1 P1
+   P7 -> MTS800 SW-0-2-1 P1
+   P8 -> MTS800 SW-0-3-1 P1
+
+MTS800 SW-0-1-0
+   P1 -> Cougar H-5 P1
+   P2 -> Cougar H-6 P1
+   P3 -> Cougar H-7 P1
+   P4 -> Cougar H-8 P1
+   P5 -> MTS800 SW-0-0-1 P2
+   P6 -> MTS800 SW-0-1-1 P2
+   P7 -> MTS800 SW-0-2-1 P2
+   P8 -> MTS800 SW-0-3-1 P2
+
+MTS800 SW-0-2-0
+   P1 -> Cougar H-9 P1
+   P2 -> Cougar H-10 P1
+   P3 -> Cougar H-11 P1
+   P4 -> Cougar H-12 P1
+   P5 -> MTS800 SW-0-0-1 P3
+   P6 -> MTS800 SW-0-1-1 P3
+   P7 -> MTS800 SW-0-2-1 P3
+   P8 -> MTS800 SW-0-3-1 P3
+
+MTS800 SW-0-3-0
+   P1 -> Cougar H-13 P1
+   P2 -> Cougar H-14 P1
+   P3 -> Cougar H-15 P1
+   P4 -> Cougar H-16 P1
+   P5 -> MTS800 SW-0-0-1 P4
+   P6 -> MTS800 SW-0-1-1 P4
+   P7 -> MTS800 SW-0-2-1 P4
+   P8 -> MTS800 SW-0-3-1 P4
+
+MTS800 SW-1-0-0
+   P1 -> Cougar H-17 P1
+   P2 -> Cougar H-18 P1
+   P3 -> Cougar H-19 P1
+   P4 -> Cougar H-20 P1
+   P5 -> MTS800 SW-1-0-1 P1
+   P6 -> MTS800 SW-1-1-1 P1
+   P7 -> MTS800 SW-1-2-1 P1
+   P8 -> MTS800 SW-1-3-1 P1
+
+MTS800 SW-1-1-0
+   P1 -> Cougar H-21 P1
+   P2 -> Cougar H-22 P1
+   P3 -> Cougar H-23 P1
+   P4 -> Cougar H-24 P1
+   P5 -> MTS800 SW-1-0-1 P2
+   P6 -> MTS800 SW-1-1-1 P2
+   P7 -> MTS800 SW-1-2-1 P2
+   P8 -> MTS800 SW-1-3-1 P2
+
+MTS800 SW-1-2-0
+   P1 -> Cougar H-25 P1
+   P2 -> Cougar H-26 P1
+   P3 -> Cougar H-27 P1
+   P4 -> Cougar H-28 P1
+   P5 -> MTS800 SW-1-0-1 P3
+   P6 -> MTS800 SW-1-1-1 P3
+   P7 -> MTS800 SW-1-2-1 P3
+   P8 -> MTS800 SW-1-3-1 P3
+
+MTS800 SW-1-3-0
+   P1 -> Cougar H-29 P1
+   P2 -> Cougar H-30 P1
+   P3 -> Cougar H-31 P1
+   P4 -> Cougar H-32 P1
+   P5 -> MTS800 SW-1-0-1 P4
+   P6 -> MTS800 SW-1-1-1 P4
+   P7 -> MTS800 SW-1-2-1 P4
+   P8 -> MTS800 SW-1-3-1 P4
+
+MTS800 SW-2-0-0
+   P1 -> Cougar H-33 P1
+   P2 -> Cougar H-34 P1
+   P3 -> Cougar H-35 P1
+   P4 -> Cougar H-36 P1
+   P5 -> MTS800 SW-2-0-1 P1
+   P6 -> MTS800 SW-2-1-1 P1
+   P7 -> MTS800 SW-2-2-1 P1
+   P8 -> MTS800 SW-2-3-1 P1
+
+MTS800 SW-2-1-0
+   P1 -> Cougar H-37 P1
+   P2 -> Cougar H-38 P1
+   P3 -> Cougar H-39 P1
+   P4 -> Cougar H-40 P1
+   P5 -> MTS800 SW-2-0-1 P2
+   P6 -> MTS800 SW-2-1-1 P2
+   P7 -> MTS800 SW-2-2-1 P2
+   P8 -> MTS800 SW-2-3-1 P2
+
+MTS800 SW-2-2-0
+   P1 -> Cougar H-41 P1
+   P2 -> Cougar H-42 P1
+   P3 -> Cougar H-43 P1
+   P4 -> Cougar H-44 P1
+   P5 -> MTS800 SW-2-0-1 P3
+   P6 -> MTS800 SW-2-1-1 P3
+   P7 -> MTS800 SW-2-2-1 P3
+   P8 -> MTS800 SW-2-3-1 P3
+
+MTS800 SW-2-3-0
+   P1 -> Cougar H-45 P1
+   P2 -> Cougar H-46 P1
+   P3 -> Cougar H-47 P1
+   P4 -> Cougar H-48 P1
+   P5 -> MTS800 SW-2-0-1 P4
+   P6 -> MTS800 SW-2-1-1 P4
+   P7 -> MTS800 SW-2-2-1 P4
+   P8 -> MTS800 SW-2-3-1 P4
+
+MTS800 SW-3-0-0
+   P1 -> Cougar H-49 P1
+   P2 -> Cougar H-50 P1
+   P3 -> Cougar H-51 P1
+   P4 -> Cougar H-52 P1
+   P5 -> MTS800 SW-3-0-1 P1
+   P6 -> MTS800 SW-3-1-1 P1
+   P7 -> MTS800 SW-3-2-1 P1
+   P8 -> MTS800 SW-3-3-1 P1
+
+MTS800 SW-3-1-0
+   P1 -> Cougar H-53 P1
+   P2 -> Cougar H-54 P1
+   P3 -> Cougar H-55 P1
+   P4 -> Cougar H-56 P1
+   P5 -> MTS800 SW-3-0-1 P2
+   P6 -> MTS800 SW-3-1-1 P2
+   P7 -> MTS800 SW-3-2-1 P2
+   P8 -> MTS800 SW-3-3-1 P2
+
+MTS800 SW-3-2-0
+   P1 -> Cougar H-57 P1
+   P2 -> Cougar H-58 P1
+   P3 -> Cougar H-59 P1
+   P4 -> Cougar H-60 P1
+   P5 -> MTS800 SW-3-0-1 P3
+   P6 -> MTS800 SW-3-1-1 P3
+   P7 -> MTS800 SW-3-2-1 P3
+   P8 -> MTS800 SW-3-3-1 P3
+
+MTS800 SW-3-3-0
+   P1 -> Cougar H-61 P1
+   P2 -> Cougar H-62 P1
+   P3 -> Cougar H-63 P1
+   P4 -> Cougar H-64 P1
+   P5 -> MTS800 SW-3-0-1 P4
+   P6 -> MTS800 SW-3-1-1 P4
+   P7 -> MTS800 SW-3-2-1 P4
+   P8 -> MTS800 SW-3-3-1 P4
+
+MTS800 SW-0-0-1
+   P5 -> MTS800 SW-0-0-2 P1
+   P6 -> MTS800 SW-0-0-2 P5
+   P7 -> MTS800 SW-2-0-2 P1
+   P8 -> MTS800 SW-2-0-2 P5
+
+MTS800 SW-0-1-1
+   P5 -> MTS800 SW-0-1-2 P1
+   P6 -> MTS800 SW-0-1-2 P5
+   P7 -> MTS800 SW-2-1-2 P1
+   P8 -> MTS800 SW-2-1-2 P5
+
+MTS800 SW-0-2-1
+   P5 -> MTS800 SW-0-2-2 P1
+   P6 -> MTS800 SW-0-2-2 P5
+   P7 -> MTS800 SW-2-2-2 P1
+   P8 -> MTS800 SW-2-2-2 P5
+
+MTS800 SW-0-3-1
+   P5 -> MTS800 SW-0-3-2 P1
+   P6 -> MTS800 SW-0-3-2 P5
+   P7 -> MTS800 SW-2-3-2 P1
+   P8 -> MTS800 SW-2-3-2 P5
+
+MTS800 SW-1-0-1
+   P5 -> MTS800 SW-0-0-2 P2
+   P6 -> MTS800 SW-0-0-2 P6
+   P7 -> MTS800 SW-2-0-2 P2
+   P8 -> MTS800 SW-2-0-2 P6
+
+MTS800 SW-1-1-1
+   P5 -> MTS800 SW-0-1-2 P2
+   P6 -> MTS800 SW-0-1-2 P6
+   P7 -> MTS800 SW-2-1-2 P2
+   P8 -> MTS800 SW-2-1-2 P6
+
+MTS800 SW-1-2-1
+   P5 -> MTS800 SW-0-2-2 P2
+   P6 -> MTS800 SW-0-2-2 P6
+   P7 -> MTS800 SW-2-2-2 P2
+   P8 -> MTS800 SW-2-2-2 P6
+
+MTS800 SW-1-3-1
+   P5 -> MTS800 SW-0-3-2 P2
+   P6 -> MTS800 SW-0-3-2 P6
+   P7 -> MTS800 SW-2-3-2 P2
+   P8 -> MTS800 SW-2-3-2 P6
+
+MTS800 SW-2-0-1
+   P5 -> MTS800 SW-0-0-2 P3
+   P6 -> MTS800 SW-0-0-2 P7
+   P7 -> MTS800 SW-2-0-2 P3
+   P8 -> MTS800 SW-2-0-2 P7
+
+MTS800 SW-2-1-1
+   P5 -> MTS800 SW-0-1-2 P3
+   P6 -> MTS800 SW-0-1-2 P7
+   P7 -> MTS800 SW-2-1-2 P3
+   P8 -> MTS800 SW-2-1-2 P7
+
+MTS800 SW-2-2-1
+   P5 -> MTS800 SW-0-2-2 P3
+   P6 -> MTS800 SW-0-2-2 P7
+   P7 -> MTS800 SW-2-2-2 P3
+   P8 -> MTS800 SW-2-2-2 P7
+
+MTS800 SW-2-3-1
+   P5 -> MTS800 SW-0-3-2 P3
+   P6 -> MTS800 SW-0-3-2 P7
+   P7 -> MTS800 SW-2-3-2 P3
+   P8 -> MTS800 SW-2-3-2 P7
+
+MTS800 SW-3-0-1
+   P5 -> MTS800 SW-0-0-2 P4
+   P6 -> MTS800 SW-0-0-2 P8
+   P7 -> MTS800 SW-2-0-2 P4
+   P8 -> MTS800 SW-2-0-2 P8
+
+MTS800 SW-3-1-1
+   P5 -> MTS800 SW-0-1-2 P4
+   P6 -> MTS800 SW-0-1-2 P8
+   P7 -> MTS800 SW-2-1-2 P4
+   P8 -> MTS800 SW-2-1-2 P8
+
+MTS800 SW-3-2-1
+   P5 -> MTS800 SW-0-2-2 P4
+   P6 -> MTS800 SW-0-2-2 P8
+   P7 -> MTS800 SW-2-2-2 P4
+   P8 -> MTS800 SW-2-2-2 P8
+
+MTS800 SW-3-3-1
+   P5 -> MTS800 SW-0-3-2 P4
+   P6 -> MTS800 SW-0-3-2 P8
+   P7 -> MTS800 SW-2-3-2 P4
+   P8 -> MTS800 SW-2-3-2 P8
+

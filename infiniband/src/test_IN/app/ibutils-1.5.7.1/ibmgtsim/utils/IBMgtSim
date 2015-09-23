@@ -1,0 +1,473 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+   exec ibmssh "$0" "$@"
+
+#--
+# Copyright (c) 2004-2010 Mellanox Technologies LTD. All rights reserved.
+#
+# This software is available to you under a choice of one of two
+# licenses.  You may choose to be licensed under the terms of the GNU
+# General Public License (GPL) Version 2, available from the file
+# COPYING in the main directory of this source tree, or the
+# OpenIB.org BSD license below:
+#
+#     Redistribution and use in source and binary forms, with or
+#     without modification, are permitted provided that the following
+#     conditions are met:
+#
+#      - Redistributions of source code must retain the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer.
+#
+#      - Redistributions in binary form must reproduce the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer in the documentation and/or other materials
+#        provided with the distribution.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+# BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+# ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#--
+#############################################################################
+# Id ..........$Id$
+# Revision.....$Revision: 1.6 $
+# Date.........$Date: 2005/06/22 06:13:51 $
+# Author.......$Author: eitan $
+#EOH#########################################################################
+
+set ToolUsage {[-h] [-V mod-verb-pair-list] [-l log-file] [-p server-port] [-w num-threads] [-f flow-tcl-file] [-s seed] -t topology}
+
+set ToolUsage "Usage: $argv0 $ToolUsage"
+
+set version "1.0"
+
+proc Usage {} {
+   global ToolUsage
+
+   puts "$ToolUsage"
+}
+
+##############################################################################
+
+proc Help {} {
+   global ToolUsage
+   global version
+
+   puts "
+        Infiniband Management Simulator
+       ---------------------------------
+
+ $ToolUsage
+
+ Simulates the Fabric as defined by the given topology file and
+ start a server to handle MAD requests from clients like OpenSM.
+
+ Command Line Arguments (required):
+   -t topology = a topology file describing the fabric.
+
+ Command Line Options:
+   -s seed = the seed to be used for random number generation.
+   -f flow-tcl-file = a tcl file to be sourced after the fabric is setup.
+   -l log-file = set the log file of the simulator (default is /tmp/ibsim.log)
+   -p server-port = set the port number the server attaches to (default 46517)
+   -w num-threads = the number of threads processing the mads
+   -V <module-verbosity-pair-list> = Provides a fine grain control over
+      the log file verbosity. Given list of pairs of simulator software
+      module names and their verbosity levels - every module is separatly
+      controlled. The first value (missing module name) is controlling the
+      default verbosity for all un-explicitly set modules.
+      Current Verbosity Levels:            Software Modules:
+      MsgShowFatal  = 0x01;                client, server
+      MsgShowError  = 0x02;                dispatcher, node, sma
+      MsgShowWarning= 0x04;                simnode, lftMad, mftMad,
+      MsgShowInfo   = 0x08;                sl2VlMad, vlArbMad, pKeyMad,
+      MsgShowVerbose= 0x10;                portInfoMad
+      MsgShowContext= 0x20;
+      MsgShowSource = 0x40;
+      MsgShowTime   = 0x80;
+      MsgShowModule = 0x100;
+      MsgShowMads   = 0x200;
+      MsgShowFrames = 0x400;
+      MsgShowAll    = 0xffff;
+      MsgDefault    = 0x62f;
+
+     Examples -V flag values might be:
+     -V 0xffff = Full verbosity on all modules
+     -V '0x3 server 0x6f2 sma 0xffff' = Only fatal and error for all modules
+        full verbosity for the SMA module and default verbosity for the Server
+        module.
+
+   -h - help.
+
+$version
+
+  "
+}
+
+##############################################################################
+#
+# Get a TS port guid string of the format 0000:ffff:1111:2222
+#
+proc getPortGuidStr {guid} {
+   set guidRex \
+      "0x(\[0-9a-fA-F\]{4})(\[0-9a-fA-F\]{4})(\[0-9a-fA-F\]{4})(\[0-9a-fA-F\]{4})"
+   if {![regexp $guidRex $guid d1 n1 n2 n3 n4]} {
+      error "Bad guid format:$guid"
+   }
+   return "$n1:$n2:$n3:$n4"
+}
+
+##############################################################################
+#
+# Update Node Information file for the given node
+#
+proc updateProcFSForNode {fabric simDir nodeName smNodeName smPortNum} {
+   global IB_SW_NODE
+
+   # obtain the node
+   set node [IBFabric_getNode $fabric $nodeName]
+   if {$node == ""} {
+      puts "-E- Fail to find node $nodeName"
+      return 1
+   }
+
+   if {[IBNode_type_get $node] == $IB_SW_NODE} {
+      puts "-E- Can not create proc file for switch node:$nodeName"
+      return 1
+   }
+
+   # obtain the SM port
+   set smNode [IBFabric_getNode $fabric $smNodeName]
+   if {$smNode == ""} {
+      puts "-E- Fail to find SM node $smNodeName"
+      return 1
+   }
+
+   set smPort [IBNode_getPort $smNode $smPortNum]
+   if {$smPort == ""} {
+      puts "-E- Fail to find SM node $smNodeName port $smPortNum"
+      return 1
+   }
+
+   if {![regexp {^([^/]+)/U([0-9]+)$} $nodeName d1 sysName caNum]} {
+      puts "-E- Node name too complex $nodeName"
+      return 1
+   }
+
+   set caName "ca$caNum"
+   set ng [IBNode_guid_get $node]
+   set nodeGuidStr [getPortGuidStr $ng]
+   set smLid [IBPort_base_lid_get $smPort]
+
+   # Create the node dir
+   file mkdir [file join $simDir $sysName $caName]
+
+   # Node Info
+   set of [open [file join $simDir $sysName $caName info] w]
+   puts $of "name:          InfiniHost0
+provider:      tavor
+node GUID:     $nodeGuidStr
+ports:         2
+vendor ID:     0x2c9
+device ID:     0x5a44
+HW revision:   0xa1
+FW revision:   0x300020002
+"
+   close $of
+
+   # do the ports:
+   foreach pn {1 2} {
+      set port [IBNode_getPort $node $pn]
+      if {$pn != ""} {
+         set pg [IBPort_guid_get $port]
+
+         # the port guid we need should look like 0000:0000:0000:0000
+         set portGuidStr [getPortGuidStr $pg]
+         set lid [IBPort_base_lid_get $port]
+
+         # Port1
+         file mkdir [file join $simDir $sysName $caName port$pn]
+
+         # port info
+         set of [open [file join $simDir $sysName $caName port$pn info] w]
+         puts $of "state:         ACTIVE
+LID:           [format 0x%04x $lid]
+LMC:           0x0000
+SM LID:        [format 0x%04x $smLid]
+SM SL:         0x0000
+Capabilities:  IsTrapSupported
+               IsAutomaticMigrationSupported
+               IsSLMappingSupported
+               IsLEDInfoSupported
+               IsSystemImageGUIDSupported
+               IsVendorClassSupported
+               IsCapabilityMaskNoticeSupported
+"
+
+         close $of
+
+         set of [open [file join $simDir $sysName $caName port$pn pkey_table] w]
+         puts $of {[  0] ffff}
+         close $of
+
+         set of [open [file join $simDir $sysName $caName port$pn gid_table] w]
+         puts $of "\[  0\] fe80:0000:0000:0000:$portGuidStr"
+         close $of
+      }
+   }
+   return $sysName
+}
+
+##############################################################################
+#
+# Start Control Server = allowing TCL evaluation in the simulator shell.
+#
+
+# Procedure called whenever a new connection is made by a client.
+proc on_connect {newsock clientAddress clientPort} {
+   global endOfVwait
+
+   puts "-I- Connecting: $newsock $clientAddress $clientPort"
+   fconfigure $newsock -blocking 0 -buffering line
+   fileevent $newsock readable [list handleInput $newsock]
+}
+
+# Procedure called whenever input arrives on a connection.
+proc handleInput {f} {
+   global endOfVwait
+   global errorInfo
+   if {[eof $f]} {
+      fileevent $f readable {}
+      close $f
+      return
+   }
+
+   set i [read $f]
+   puts -nonewline $i
+   if {[catch {set res [uplevel $i]} e]} {
+      puts "-E- $e"
+      set res "error: $errorInfo"
+   }
+   puts $f $res
+}
+
+proc startControlServer {} {
+   global env
+   set fn [file join $env(IBMGTSIM_DIR) ibmgtsim.ctrl.server]
+
+   if {[catch {set f [open $fn "w"]} e]} {
+      puts "-E- $e"
+      return 1
+   }
+
+   # invent a port
+   set num [expr int(rand()*(65535-1024)+1024)]
+   set counter 0
+   while {[catch {socket -server on_connect $num}]} {
+      set num [expr int(rand()*(65535-1024)+1024)]
+      incr counter
+      if {$counter > 10 } {
+         puts "can't create a server"
+         close $f
+         return 1
+      }
+   }
+   set hostName [info hostname]
+   puts "-I- Started server: $hostName port:$num"
+   puts $f "$hostName $num"
+   close $f
+}
+
+##############################################################################
+#
+# Get Opt
+#
+set optind 0
+
+proc getopt { argslist optstring optret argret } {
+   global optind optindc
+   upvar $optret retvar
+   upvar $argret optarg
+
+   # default settings for a normal return
+   set optarg ""
+   set retvar ""
+   set retval 0
+
+   # check if we are in a single char mode or support long
+   # option string
+   if {[string match "* *" $optstring]} {
+      set longOptMode 1
+   } else {
+      set longOptMode 0
+   }
+
+   # check if we're past the end of the args list
+   if { $optind < [ llength $argslist ] } then {
+
+      # if we got -- or an option that doesn't begin with -, return (skipping
+      # the --).  otherwise process the option arg.
+      switch -glob -- [ set arg [ lindex $argslist $optind ]] {
+         "--" {
+            incr optind
+         }
+
+         "-*" {
+            # opt needs to return the name of the option
+            regexp -- {-([^:]+):?} $arg d1 opt
+            incr optind
+
+            if {$longOptMode} {
+               # options are defined as words optionaly containing ":"
+               if { [ lsearch -regexp $optstring "^$opt:?\$" ] >= 0 } then {
+                  set retvar $opt
+                  set retval 1
+                  if { [ lsearch -regexp $optstring "^$opt:\$" ] >= 0 } then {
+                     if { $optind < [ llength $argslist ] } then {
+                        set optarg [lindex $argslist $optind]
+                        incr optind
+                     } else {
+                        set optarg "Option requires an argument -- $opt"
+                        set retvar $optarg
+                        set retval -1
+                     }
+                  }
+               } else {
+                  set optarg "Illegal option -- $opt"
+                  set retvar $optarg
+                  set retval -1
+               }
+            } else {
+               # traditional single char options
+               if { [ string match "*$opt*" $optstring ] } then {
+                  set retvar $opt
+                  set retval 1
+                  if { [ string match "*$opt:*" $optstring ] } then {
+                     if { $optind < [ llength $argslist ] } then {
+                        set optarg [lindex $argslist $optind]
+                        incr optind
+                     } else {
+                        set optarg "Option requires an argument -- $opt"
+                        set retvar $optarg
+                        set retval -1
+                     }
+                  }
+               } else {
+                  set optarg "Illegal option -- $opt"
+                  set retvar $optarg
+                  set retval -1
+               }
+            }
+         }
+      }
+   }
+   return $retval
+}
+
+##############################################################################
+#
+# MAIN FLOW:
+#
+
+set moduleVerbosityList {top 0xA7}
+set logFileName /tmp/ibsim.log
+set numWorkerThreads 1
+set serverPortNum 46517
+set simulationFlowFile ""
+set topologyFile ""
+set randomSeed [expr int(rand() * 100000)]
+
+while { [ set err [ getopt $argv "hvV:l:p:w:f:t:s:" opt arg ]] } {
+   if { $err < 0 } then {
+      Usage
+      exit 2
+   } else {
+      switch -exact $opt {
+         h {Help; exit 0}
+         v {puts "";puts $version; puts ""; exit 0}
+         V {
+            set moduleVerbosityList "top $arg"
+         }
+         p {set serverPortNum $arg}
+         l {set logFileName $arg}
+         w {set numWorkerThreads $arg}
+         f {set simulationFlowFile $arg}
+         t {set topologyFile $arg}
+         s {set randomSeed $arg}
+         default {
+            puts "-E- Unsupported option:$opt"
+            puts $ToolUsage
+            exit 1
+         }
+      }
+   }
+}
+
+# make sure we got a topology:
+if {$topologyFile == ""} {
+   puts "-E- Missing mandatory flag -t. Topology file was not defined."
+   Usage
+   exit
+}
+
+# handle extra args
+set left_args [ lrange $argv $optind end ]
+if {[llength $left_args]} {
+   puts "-E- illegal parameter(s) used : $left_args"
+   Usage
+   exit 1
+}
+
+# We can start ...
+MsgMgr setLogFile $logFileName
+
+puts "-I- Using random seed:$randomSeed"
+rmSeed $randomSeed
+
+# Handle Module Verbosity:
+foreach {mod verb} $moduleVerbosityList {
+   # check if second item is a number
+   if {[catch {format %x $verb}]} {
+      puts "-E- Provided verbosity:$verb for module: $mod is not a number."
+   } else {
+      if {$mod == "top"} {
+         MsgMgr setVerbLevel $verb
+      } else {
+         MsgMgr setVerbLevel $verb $mod
+      }
+   }
+}
+
+# Init the simulator
+if {[catch {IBMgtSimulator init $topologyFile $serverPortNum $numWorkerThreads} e]} {
+   puts "-E- Fail to initialize the simulator:$e"
+   exit
+}
+
+set fabric [IBMgtSimulator getFabric]
+puts "-I- Init fabric: $fabric"
+# start the control server:
+startControlServer
+
+puts "-I- Ready to serve"
+
+# Source any code that might be provided
+if {$simulationFlowFile != ""} {
+   if {[catch {source $simulationFlowFile} e]} {
+      puts "-E- Error loading $simulationFlowFile"
+      puts "    $e"
+      exit
+   }
+}
+
+set done 0
+catch {vwait done}
+while {!$done} {
+   after 30000
+}
+

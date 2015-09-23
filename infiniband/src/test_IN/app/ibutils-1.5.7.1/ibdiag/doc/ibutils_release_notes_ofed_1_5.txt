@@ -1,0 +1,74 @@
+                     Open Fabrics InfiniBand Diagnostic Utilities
+                     --------------------------------------------
+
+*******************************************************************************
+RELEASE: OFED 1.5
+DATE:    Dec 2009
+
+===============================================================================
+Table of Contents
+===============================================================================
+1.  Overview
+2.  New features
+3.  Major Bugs Fixed
+4.  Known Issues
+
+===============================================================================
+1. Overview
+===============================================================================
+
+The ibutils package provides a set of diagnostic tools that check the health
+of an InfiniBand fabric.
+
+Package components:
+ibis:     IB interface - A TCL shell that provides interface for sending various
+          MADs on the IB fabric. This is the component that actually accesses
+          the IB Hardware.
+
+ibdm:     IB Data Model - A library that provides IB fabric analysis.
+
+ibmgtsim: An IB fabric simulator. Useful for developing IB tools.
+
+ibdiag:   This package provides 3 tools which provide the user interface
+          to activate the above functionality:
+            - ibdiagnet:  Performs various quality and health checks on the IB
+                          fabric.
+            - ibdiagpath: Performs various fabric quality and health checks on
+                          the given links and nodes in a specific path.
+            - ibdiagui:   A GUI wrapper for the above tools.
+
+===============================================================================
+2. New Features
+===============================================================================
+
+* New "From the Edge" topology matching algorithm.
+  Integrated into ibtopodiff when run with the flag -e
+
+* New library - libsysapi
+  The library is a C API for IBDM C++ objects
+
+* Added ibnl definition files for Mellanox and Sun IB QDR products
+
+* Added new feature to ibdiagnet - general device info
+
+* ibdiagnet now can get port 0 as a parameterr (for managed switches).
+
+
+===============================================================================
+3. Major Bugs Fixed
+===============================================================================
+
+* ibutils: various fixes in build process (dependencies, parallel build, etc)
+
+* ibdiagnet: fixed crash with -r flag
+
+* ibdiagnet: fixed regular expression for pkey matching
+
+* ibdiagnet: ibdiagnet.lst file has device IDs with trailing zeroes - fixed
+
+===============================================================================
+4. Known Issues
+===============================================================================
+
+- Ibdiagnet "-wt" option may generate a bad topology file when running on a
+  cluster that contains complex switch systems.

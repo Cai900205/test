@@ -1,0 +1,36 @@
+libjenkins_hash_la-jenkins_hash.lo: jenkins_hash.c jenkins_hash.h \
+ ../../config.h /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h \
+ ../../otflib/OTF_inttypes.h ../../otflib/OTF_inttypes_unix.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h \
+ /usr/include/bits/predefs.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h
+
+jenkins_hash.h:
+
+../../config.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h:
+
+../../otflib/OTF_inttypes.h:
+
+../../otflib/OTF_inttypes_unix.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/bits/wchar.h:

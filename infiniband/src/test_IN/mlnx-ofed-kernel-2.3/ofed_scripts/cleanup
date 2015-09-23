@@ -1,0 +1,15 @@
+#!/bin/bash
+
+current_branch=`git rev-parse --abbrev-ref HEAD`
+orig_branch=`echo $current_branch | sed -e 's/backport-//'`
+branch=${branch:-$orig_branch}
+make clean
+git am --abort
+git reset --hard
+if [ "$branch" != "$current_branch" ]; then
+    git checkout $branch
+    git branch -D $current_branch
+fi
+
+/bin/rm -f backports_applied
+/bin/rm -rf drivers/infiniband/ulp/srp_2.0/

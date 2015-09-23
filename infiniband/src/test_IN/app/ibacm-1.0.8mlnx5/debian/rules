@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+DEB_CONFIGURE_EXTRA_FLAGS="CFLAGS='$CXXFLAGS -fno-strict-aliasing' LDFLAGS=-lpthread"
+DEB_MAKE_ENVVARS="LDFLAGS=-lpthread"
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	dh_auto_configure
+	dh_auto_build -- $(DEB_MAKE_ENVVARS)
+
+override_dh_auto_install:
+	dh_auto_install -- $(DEB_MAKE_ENVVARS)

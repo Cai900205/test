@@ -1,0 +1,7 @@
+Version: 1.1
+4-Dec-03 - Add a -e option to fabric_sim to run the enhanced LMC based
+           routing algorithm.
+
+Version: 1.0
+2-Dec-03 - First distribution - the news is that it is getting closer to a
+           real package.

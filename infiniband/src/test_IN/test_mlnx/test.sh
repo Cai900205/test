@@ -1,0 +1,22 @@
+#!/bin/sh
+insmod ./compat.ko
+insmod ./ib_addr.ko
+insmod ./ib_core.ko
+insmod ./ib_mad.ko
+insmod ./ib_sa.ko
+insmod ./ib_umad.ko
+insmod ./ib_uverbs.ko
+insmod ./iw_cm.ko
+insmod ./ib_cm.ko
+insmod ./ib_ucm.ko
+insmod ./rdma_cm.ko
+insmod ./rdma_ucm.ko
+insmod ./ib_ipoib.ko
+insmod ./mlx4_core.ko
+insmod ./mlx4_ib.ko
+insmod ./mlx4_en.ko
+insmod ./rds.ko
+insmod ./rds_rdma.ko
+insmod ./rds_tcp.ko
+insmod ./scsi_transport_srp.ko
+insmod ./ib_srp.ko

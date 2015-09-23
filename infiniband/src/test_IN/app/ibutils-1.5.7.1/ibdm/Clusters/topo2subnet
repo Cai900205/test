@@ -1,0 +1,190 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+	exec ibdmsh "$0" "$@"
+
+#--
+# Copyright (c) 2004-2010 Mellanox Technologies LTD. All rights reserved.
+#
+# This software is available to you under a choice of one of two
+# licenses.  You may choose to be licensed under the terms of the GNU
+# General Public License (GPL) Version 2, available from the file
+# COPYING in the main directory of this source tree, or the
+# OpenIB.org BSD license below:
+#
+#     Redistribution and use in source and binary forms, with or
+#     without modification, are permitted provided that the following
+#     conditions are met:
+#
+#      - Redistributions of source code must retain the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer.
+#
+#      - Redistributions in binary form must reproduce the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer in the documentation and/or other materials
+#        provided with the distribution.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+# BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+# ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#--
+
+set Usage "Usage: $argv0 -t topo-file"
+
+set Help "
+    Convert Topo File into OpenSM Subnet file
+   -------------------------------------------
+
+Usage:
+  $Usage
+
+Description:
+  The utility reads in a topology file and generate an OpenSM
+subnet.lst file (in local dir) to match the specified topology.
+It 'invents' guids and lids sequentially.
+
+TODO: Randomize missmatches ...
+"
+
+###########################################################################
+
+# return the string representing the given port in the subnet.lst
+proc getPortStr {port} {
+   global IB_SW_NODE
+   set portFormat "{ CA%s Ports:%02x SystemGUID:%s NodeGUID:%s PortGUID:%s VenID:000002C9 DevID:%s Rev:000000A1 {%s} LID:%04x PN:%02x }"
+   set node [IBPort_p_node_get $port]
+   set sysName [IBSystem_name_get [IBNode_p_system_get $node]]
+   if {[IBNode_type_get $node] == $IB_SW_NODE} {
+      # we assume all switches are IS3
+      set devId B9240000
+      set desc "$sysName MT47396 Infiniscale-III Mellanox Technologies"
+   } else {
+      # we assume all CAs are Tavors:
+      set devId 5A440000
+      set desc "$sysName MT23108 Infinihost-II Mellanox Technologies"
+   }
+   return [format $portFormat \
+              "" \
+              [IBNode_numPorts_get $node] \
+              [string range [IBNode_guid_get $node] 2 end] \
+              [string range [IBNode_guid_get $node] 2 end] \
+              [string range [IBPort_guid_get $port] 2 end] \
+              $devId \
+              $desc \
+              [IBPort_base_lid_get $port] \
+              [IBPort_num_get $port] \
+             ]
+}
+
+# return the string of the link in subnet.lst format
+proc getLinkStr {port1 port2} {
+   set linkFormat "%s %s PHY=%s LOG=%s SPD=%s"
+   set p1 [getPortStr $port1]
+   set p2 [getPortStr $port2]
+   set width [IBPort_width_get $port1]
+   set speed [IBPort_speed_get $port1]
+   return [format $linkFormat $p1 $p2 $width "ACT" $speed]
+}
+
+
+###########################################################################
+
+#
+# MAIN FLOW:
+#
+package require ibdm
+package require getopt
+
+while { [ set err [ getopt $argv "t:" opt arg ]] } {
+	if { $err < 0 } then {
+		Usage
+		exit 2
+	} else {
+		switch -exact $opt {
+			h {puts $Help; exit 0}
+         t {set topoFile $arg}
+         default {
+            puts "-E- Unsupported option:$opt"
+            puts $Usage
+            exit 1
+         }
+      }
+   }
+}
+
+# handle extra args
+set left_args [ lrange $argv $optind end ]
+if {[llength $left_args]} {
+   puts "-E- extra parameter(s) used : $left_args"
+   puts $Usage
+   exit 1
+}
+
+if {[catch {set of [open subnet.lst w]} e]} {
+   puts "-E- $e"
+   exit 1
+}
+
+set fabric [new_IBFabric ]
+if {[IBFabric_parseTopology $fabric $topoFile]} {
+   puts "-E- Fail to parse topo:$topoFile"
+   exit
+}
+
+# we track the number of allocated guids and lids
+set curGuid 1
+set curLid 1
+
+# go node by node and assign guids and lids,
+foreach nodeDef [IBFabric_NodeByName_get $fabric ] {
+   set node [lindex $nodeDef 1]
+
+   # make sure the node has a guid and lid
+   set guid [IBNode_guid_get $node]
+   if {$guid == 0} {
+      incr curGuid
+      IBNode_guid_set $node [format "0x0002c900%08x" $curGuid]
+   }
+
+   # loop on all ports:
+   foreach port [IBNode_Ports_get $node] {
+      # assign port base lid and guid:
+      IBPort_guid_set $port [format "0x0002c900%08x" $curGuid]
+      IBPort_base_lid_set $port $curLid
+
+      # non switches require new lid and new guid to each port:
+      if {[IBNode_type_get $node] != $IB_SW_NODE} {
+         incr curGuid
+         incr curLid
+      }
+   }
+
+   # we have assigned at least one guid and lid ...
+   if {[IBNode_type_get $node] == $IB_SW_NODE} {
+      incr curGuid
+      incr curLid
+   }
+}
+
+# second iteration we are ready for output
+
+# go node by node and assign guids and lids,
+foreach nodeDef [IBFabric_NodeByName_get $fabric ] {
+   set node [lindex $nodeDef 1]
+
+   foreach port [IBNode_Ports_get $node] {
+      set remPort [IBPort_p_remotePort_get $port]
+
+      # only interested in links
+      if {$remPort != ""} {
+         puts $of [getLinkStr $port $remPort]
+      }
+   }
+}
+
+close $of

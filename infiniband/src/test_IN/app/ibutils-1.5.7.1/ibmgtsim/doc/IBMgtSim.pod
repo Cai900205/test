@@ -1,0 +1,89 @@
+=head1 NAME
+
+B<IBMgtSim> - Infiniband Management Simulator
+
+=head1 SYNOPSYS
+
+IBMgtSim [-h] [-V mod-verb-pair-list] [-l log-file] [-p server-port]
+  [-w num-threads] [-f flow-tcl-file] [-s seed] -t topology
+
+=head1 DESCRIPTION
+
+Simulates the Fabric as defined by the given topology file and start a server to handle MAD requests from clients like OpenSM.
+
+=head1 ARGUMENTS
+
+
+=item -t topology
+
+A topology file describing the fabric to be simulated (see B<ibdm-topo-file>)
+
+=head1 OPTIONS
+
+=item -s seed
+
+The seed to be used for random number generation.
+
+=item -f flow-tcl-file
+
+A tcl file to be sourced after the fabric is setup.
+
+=item -l log-file
+
+Set the log file of the simulator (default is /tmp/ibsim.log)
+
+=item -p server-port
+
+Set the port number the server attaches to (default 46517)
+
+=item -w num-threads
+
+The number of threads processing the mads
+
+=item -V <module-verbosity-pair-list>
+
+Provides a fine grain control over the log file verbosity. Given list of pairs of simulator software module names and their verbosity levels - every module is separatly controlled. The first value (missing module name) is controlling the default verbosity for all un-explicitly set modules.
+
+=over 4
+
+Current Verbosity Levels:
+
+ MsgShowFatal  = 0x01;
+ MsgShowError  = 0x02;
+ MsgShowWarning= 0x04;
+ MsgShowInfo   = 0x08;
+ MsgShowVerbose= 0x10;
+ MsgShowContext= 0x20;
+ MsgShowSource = 0x40;
+ MsgShowTime   = 0x80;
+ MsgShowModule = 0x100;
+ MsgShowMads   = 0x200;
+ MsgShowFrames = 0x400;
+ MsgShowAll    = 0xffff;
+ MsgDefault    = 0x62f;
+
+Software Modules:
+
+client, server, dispatcher, node, sma, lftMad, mftMad, vlArbMad, pKeyMad, portInfoMad
+
+Examples -V flag values might be:
+
+ -V 0xffff = Full verbosity on all modules
+
+ -V '0x3 server 0x6f2 sma 0xffff' = Only fatal and error for all modules
+     full verbosity for the SMA module and default verbosity for the
+     Server module.
+
+=back 4
+
+=item -h
+
+This help message
+
+=head1 AUTHOR
+
+Eitan Zahavi, Mellanox Technologies LTD, eitan@mellanox.co.il
+
+
+
+

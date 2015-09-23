@@ -1,0 +1,32 @@
+Source: infiniband-diags
+Priority: extra
+Maintainer: Ira Weiny <weiny2@llnl.gov>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libopensm, libopensm-devel, libibumad-devel, libibmad-devel, libglib2.0-dev
+Standards-Version: 1.6.4
+Section: libs
+Homepage: http://www.openfabrics.org/downloads/management/
+
+Package: infiniband-diags
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: OpenFabrics Alliance InfiniBand Diagnostic Tools
+ This package provides IB diagnostic programs and scripts needed to
+ diagnose an IB subnet.
+
+Package: infiniband-diags-compat
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libibmad-devel, libopensm-devel, libibumad-devel
+Description: OpenFabrics Alliance InfiniBand Diagnostic Tools
+ Deprecated scripts and utilities which provide duplicated functionality, most
+ often at a reduced performance.  These are maintained for the time being for
+ compatibility reasons.
+
+
+Package: infiniband-diags-guest
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: OpenFabrics Alliance InfiniBand Diagnostic Tools for Guest OS
+ This package provides IB diagnostic programs and scripts for Virtual Machines,
+ needed to diagnose an IB subnet.

@@ -1,0 +1,1028 @@
+
+** Version: HEAD
+
+Sun Aug 17 15:22:31 2014 +0300 Ilya Nelkenbaum
+485ffa63eaa71253c9a296cc107efa2cae393a6f
+
+	* MOFED: gen_chlog.sh: Eliminate commit objects ancestors comparison for debian
+
+Tue Feb 26 17:45:08 2013 +0200 Ilya Nelkenbaum
+3d8c60eb5db353005f21fefaa13236c5702c9467
+
+	* MOFED: adding support for Debian packaging.
+
+Wed Feb 5 18:33:43 2014 +0200 Hal Rosenstock
+add83221d582bc3c44ee87f8abb6b1eb26cec754
+
+	* libibumad: package version update for 1.3.9 release
+
+Wed Feb 5 18:32:15 2014 +0200 Hal Rosenstock
+1accf0ba45dfa421c33c3a391822b0efca32d73e
+
+	* libibumad: update shared library version
+
+Fri Mar 29 11:21:19 2013 -0700 Ira Weiny
+cbdd6420ffb1668b7ab38125b3add7d6c62e22a5
+
+	* libibumad: document the setting of errno for umad_send and umad_recv
+
+Fri Feb 22 08:48:19 2013 -0800 Ira Weiny
+050174262809d68d4840cdeb236c7815b60e94ae
+
+	* libibumad: update umad_[send|recv] man pages to document how rmpp is handled
+
+Thu Feb 21 20:55:36 2013 +0200 Ilya Nelkenbaum
+7e15a830e5da53eac494d2270784bff2c4f0eb31
+
+	* libibumad/umad.c: In resolve_ca_port, skip ethernet link layer ports
+
+Thu Feb 21 19:15:00 2013 +0200 Alex Netes
+2c743d07b8dc3124d5a3cab3ba10257b49a7d957
+
+	* libibumad: Fix memory leak in resolve_ca_port
+
+Mon Dec 3 16:05:45 2012 -0800 Ira Weiny
+16ef3cf52af4e02afca26f7ad167061bc39bdef9
+
+	* libibumad: fix umad_register man page
+
+** Version: libibumad-1.3.8
+
+Thu Aug 2 10:19:37 2012 +0300 Alex Netes
+aeac802d2f3f5fd91fd3b8c702dba23ccdccff89
+
+	* management: packages versions update
+
+Thu Aug 2 10:16:59 2012 +0300 Alex Netes
+982f2110c73bac874fff3abd9f1c1fe66265fbd9
+
+	* libibumad: update shared library versions
+
+Sat Jul 7 14:42:25 2012 -0700 Ira Weiny
+73639fad2621590dc24352881b28c57286de1fe0
+
+	* libibumad: update umad_recv man page.
+
+Wed Jul 6 14:39:18 2011 -0700 Ira Weiny
+b6a4397d82ba1d226976ada45c90bcfbbb9c9025
+
+	* libibumad: Remove OpenSM reference from COPYING file
+
+** Version: libibumad-1.3.7
+
+Mon Feb 14 12:26:37 2011 +0200 Alex Netes
+4463772a3865d92229fb77cb548bcc6f8b1857d5
+
+	* libibumad: package version update
+
+Mon Feb 14 12:26:13 2011 +0200 Alex Netes
+49ca7c78c8ddb408a0f3b417482cadb95a024af6
+
+	* libibumad: update shared library versions
+
+Fri Feb 11 15:19:47 2011 -0600 Mike Heinz
+fe09a96f52ba3c07cb61422567a9a6562f125509
+
+	* FW: [PATCH] umad_send.3 (man page)
+
+Thu Feb 3 17:22:44 2011 +0200 Alex Netes
+b6742fb79775099bfdabc21f31cc4d111df833cf
+
+	* Makefile: ChangeLog generation script path fix
+
+Mon Oct 4 12:37:11 2010 +0200 Yevgeny Kliteynik
+f889bbaef32b8f807c853956a3cd0593a7c1771c
+
+	* umad.{c,h}: moving stdlib.h include from C to H file
+
+Thu Oct 7 16:33:01 2010 -0600 Jason Gunthorpe
+24afddbe01ce41192ce0a32f453d50530c739b49
+
+	* Fix autotools to include the necessary M4 files
+
+** Version: libibumad-1.3.6
+
+Sat Sep 4 14:15:33 2010 +0300 Sasha Khapyorsky
+88dc9488321db2e3065cc344a897e44cfdbb9449
+
+	* management: packages versions update
+
+Sat Sep 4 14:13:06 2010 +0300 Sasha Khapyorsky
+3a0028b7e689b7a75570f401d8e610c92ab49222
+
+	* management: update shared library versions
+
+Tue Aug 10 16:30:30 2010 -0700 Arputham Benjamin
+ecd49912623834e34d08b9198994bedf7f3aa829
+
+	* libibumad: Increase the limit of UMAD_MAX_DEVICES
+
+** Version: libibumad-1.3.5
+
+Sat May 22 18:00:16 2010 +0300 Sasha Khapyorsky
+9816b2dde557020605e5d2342ca767fd8ece122e
+
+	* management: packages versions update
+
+Sat May 22 17:52:50 2010 +0300 Sasha Khapyorsky
+4163c210af7cb894fb1136c0b58ab885619bfbf6
+
+	* management: update shared library versions
+
+Tue Mar 9 12:39:40 2010 +0200 Yevgeny Kliteynik
+278e4d10f414f3e0592ea5e86c6e7ef5f833ace7
+
+	* libibumad: added link_layer for RoCEE support and updated umad version
+
+** Version: libibumad-1.3.4
+
+Sun Dec 13 19:39:11 2009 +0200 Sasha Khapyorsky
+f958f06ddfa8b0e95e40b91b980d5377e1f1644b
+
+	* management: package versions bump
+
+Sun Dec 13 19:36:19 2009 +0200 Sasha Khapyorsky
+0f628f4656c6bc50fa3764ee31c2d87acca00458
+
+	* management: update library versions
+
+Tue Nov 17 14:39:37 2009 -0800 Ira Weiny
+de430629fd5634b34cfa8880e4632b7224282035
+
+	* libibmad: libibumad: Print warnings and errors to stderr not stdout
+
+** Version: libibumad-1.3.3
+
+Sun Nov 1 21:55:47 2009 +0200 Sasha Khapyorsky
+1c35b6b45676f28930343355a56b03dd5b0f7273
+
+	* management: bump package versions
+
+Sun Nov 1 21:42:56 2009 +0200 Sasha Khapyorsky
+2350f9cae648723888677f6ee004af3d8ce5cd81
+
+	* management: update libraries version information
+
+Mon Nov 2 02:09:14 2009 +0200 Sasha Khapyorsky
+34b55d8d2e371a898d6ac83cd2791841e27c1ff9
+
+	* management: update/add Voltaire copyright
+
+Wed Aug 26 14:03:04 2009 +0200 Vincent Ficet
+0b2caf8ffc7d2eadd0430ee34ed7677f784952b0
+
+	* Duplicated file man/umad_get_mad.3 in libibumad/Makefile.am
+
+Sat Aug 15 21:11:36 2009 +0300 Sasha Khapyorsky
+3f18c3dc583bf05640c6fd1fb35dd04bd6e5aae2
+
+	* libibumad: indentation fixes
+
+Fri May 1 22:30:38 2009 +0300 Sasha Khapyorsky
+1147490f3c69f2b923ce31fe3b5b53dc74a4e1b0
+
+	* libibumad: keep port capmask as 32-bit variable
+
+Mon Apr 27 12:59:05 2009 +0200 Nicolas Morey-Chaisemartin
+264c2cd5e101d7eab3b33c3b7a6ede6079fd9f04
+
+	* management: Fixed custom_release in SPEC files
+
+** Version: libibumad-1.3.2
+
+Sun Apr 26 17:05:13 2009 +0300 Sasha Khapyorsky
+310beca2c87a26187eb25be744406689b3fab181
+
+	* management: bump package versions
+
+Mon Mar 2 16:00:29 2009 -0500 Hal Rosenstock
+b6c197c08d1b4eff3e1591c7d266851f3a18d1e8
+
+	* libibumad/umad.c: Cosmetic changes
+
+** Version: libibumad-1.3.1
+
+Sat Feb 28 18:50:54 2009 +0200 Sasha Khapyorsky
+a29080008285eb96ac4a715ee8f78386639378ec
+
+	* management: bump all package versions
+
+Thu Feb 5 16:43:34 2009 -0700 Hal Rosenstock
+1721e2254ef05fd10779882e0fbe7340696f070b
+
+	* libibumad/umad.c: Change lid print format to unsigned
+
+Mon Feb 2 11:53:01 2009 -0800 Ralph Campbell
+8886e06e891e6b433d81b5f7d3ef8ce193325c8a
+
+	* libibumad: get_ca() can call release_ca() with uninitialized data
+
+Mon Dec 22 00:24:30 2008 +0200 Sasha Khapyorsky
+a617ec59c8be5a6111a364ebcc5bc16e731944b3
+
+	* management: move sysfs()_* function to libibumad
+
+** Version: libibumad-1.3.0
+
+Sat Dec 13 19:46:15 2008 +0200 Sasha Khapyorsky
+bedc4675951f9743f5d8b57b56ff785285f859e8
+
+	* management: bump all package versions
+
+** Version: libibumad-1.2.3
+
+Tue Nov 18 06:20:46 2008 +0200 Sasha Khapyorsky
+688cfb841075200cb3d509eef0594ae0c931a5c8
+
+	* management: update versions
+
+Sun Nov 16 11:37:28 2008 -0700 Hal Rosenstock
+efebda81063cd8410def680697a8ff50c741ecb4
+
+	* libibumad: Add UMAD_MAX_DEVICES define
+
+** Version: libibumad-1.2.2
+
+Sun Oct 19 20:53:23 2008 +0200 Sasha Khapyorsky
+dd9e992887da64cee0e9b842c2d39c2ae448a35c
+
+	* management/*/configure.in: bump all versions
+
+Wed Jul 23 04:32:41 2008 +0300 Sasha Khapyorsky
+4474288a0eeccced81782c3aac2133aa538a2234
+
+	* libibumad: check that node type has IB type
+
+Wed Oct 8 12:28:44 2008 +0200 Sasha Khapyorsky
+162f6b9627ce1cc1462852bd206925eb702c0571
+
+	* management: update Voltaire copyright
+
+Wed Oct 8 12:27:12 2008 +0200 Sasha Khapyorsky
+083019f736907c033a756a34cb020048a1309441
+
+	* management/*/COPYING: update Voltaire copyright years
+
+Fri Jul 25 09:27:58 2008 -0400 Hal Rosenstock
+709b551a76361aafc760610ced185b11c8d65fb0
+
+	* libibumad/umad.c: Cosmetic change
+
+** Version: libibumad-1.2.1
+
+Tue Jul 8 07:22:02 2008 +0300 Sasha Khapyorsky
+a967acdff2b7a1c467abab247ff1655ec680ae25
+
+	* management: bump management versions
+
+Sun Jul 6 23:07:38 2008 +0300 Sasha Khapyorsky
+f33ec002a1a25c052efc9d450e3d1eb4fcedb320
+
+	* management: revert configure.in update configure.in on 'make dist'
+
+Sun Jun 29 05:07:02 2008 +0300 Sasha Khapyorsky
+26e8369a5fc75df116b150729ee730a3d040bb43
+
+	* libibumad: fix snprintf() usage
+
+Sun Jun 29 05:05:48 2008 +0300 Sasha Khapyorsky
+992f23d65570fbd5ce47a1d3d9f44ee6a22f838f
+
+	* libibumad: improve snprintf() usage.
+
+** Version: libibumad-1.2.0
+
+Thu Apr 3 20:07:55 2008 +0300 Sasha Khapyorsky
+39d8296181869bf8e0c927756c4262171a5c7a7f
+
+	* management: bump all versions
+
+Sun Mar 30 17:57:29 2008 +0300 Sasha Khapyorsky
+0f30839b50adb8c620561d0bfe0cf05c815fa4cb
+
+	* libibumad: eliminate compile warning
+
+Mon Feb 11 20:17:54 2008 +0200 Sasha Khapyorsky
+1755f65a019905e8e0dcaaca3919a6e337c5488f
+
+	* management: bump versions in master branch
+
+Sun Jan 27 08:01:40 2008 -0800 Hal Rosenstock
+6a7eb4cde2549d9753d0837cfe102fb4719388a2
+
+	* management: Update License: field in management spec files
+
+Sat Jan 26 22:37:43 2008 +0200 Sasha Khapyorsky
+2b805e7e013e63062f92e0cfa50a36c2752f9441
+
+	* management/libib*: remove trailing whitespaces
+
+Tue Jan 15 19:01:53 2008 +0000 Sasha Khapyorsky
+adb65f3a9114d4748a03d558cd275e5a5637033a
+
+	* libibumad/man: umad_get_pkey man page
+
+Tue Jan 15 18:26:18 2008 +0000 Sasha Khapyorsky
+ae345ba0e21bc028d110b608064dcacb581a793c
+
+	* libibumad: increase the version of the library
+
+Sun Jan 13 19:22:29 2008 +0000 Sasha Khapyorsky
+0c82a638515d477eb3af0cd2dd665ee3ca35665a
+
+	* libibumad: umad_get_pkey() function
+
+Mon Jan 7 01:40:19 2008 +0200 Sasha Khapyorsky
+cdbdd2f5a08a1e4fc12586e3096996aab9ab69da
+
+	* management/*/Makefile.am: update configure.in version on 'make dist'
+
+Sun Jan 6 21:33:44 2008 +0200 Sasha Khapyorsky
+d6c34b1a996b9146f0947da166ddfebde9915aed
+
+	* management/*/Makefile.am: fix ChangeLog generation rule
+
+Thu Jan 3 09:44:46 2008 +0200 Sasha Khapyorsky
+47666f60679473883e0cf81d0131d8571d58521c
+
+	* management: bump versions
+
+Sat Dec 1 16:38:12 2007 +0200 Sasha Khapyorsky
+ab6dedc908ce39787d2efe670eb376f554813710
+
+	* libibumad: fix memory leak
+
+Tue Nov 20 00:00:22 2007 +0200 Sasha Khapyorsky
+e598af0e686737c62378cf760bbd56fb7f8d8126
+
+	* libibumad: version 1.1.5
+
+Thu Nov 15 10:22:00 2007 +0200 Sasha Khapyorsky
+c7c1484e6b0632a35b737198a02238ffe79852e4
+
+	* libibumad: fix NULL pointer referencing
+
+Tue Nov 6 19:07:28 2007 +0200 Sasha Khapyorsky
+8483034f057bfef1db4faae16a208d684b57d665
+
+	* libibumad: version 1.1.4
+
+Tue Nov 6 19:02:15 2007 +0200 Sasha Khapyorsky
+18c7c2a0facb24fd2c010676ff55ad2e9bf9a4de
+
+	* libibumad: bump library version
+
+Thu Nov 1 10:40:23 2007 +0200 Sasha Khapyorsky
+fd2b3090b5d41c93f05bfa52c35974c5fe2a3890
+
+	* libibumad: store pkeys in umad_port structure
+
+Mon Oct 15 20:41:33 2007 +0200 Sasha Khapyorsky
+828a1444c7b1a9de5cbb8473205517acc8eedbc0
+
+	* management: changed method_mask type in user_mad interface
+
+Thu Nov 1 13:52:06 2007 +0200 Sasha Khapyorsky
+6eafb842184bd77b945f289c9195a36589179dab
+
+	* libibumad: don't check errno when pkey enabling API ioctl() fails
+
+Thu Oct 25 19:58:40 2007 +0200 Sasha Khapyorsky
+1d2440eca0d06128ca6df93725af0c2e3ba95674
+
+	* libibumad: support for new pkey enabled user_mad API
+
+Tue Oct 23 20:39:59 2007 -0700 Hal Rosenstock
+872c7f418e97dcb092c2ef2ce3b0812b40aa8f2e
+
+	* libibumad/umad_poll.3: Fix man page return value description
+
+Thu Oct 18 17:12:44 2007 +0200 Sasha Khapyorsky
+0f53805c40be5059e29c7196ed7c22727f13757f
+
+	* libibumad/man: umad_get_issm_path() man page
+
+Thu Oct 18 16:01:52 2007 +0200 Sasha Khapyorsky
+b1384c640e2ef0217ce711f1c167dc3fde2c3180
+
+	* libibumad: umad_get_issm_path() addition
+
+Mon Oct 15 17:00:36 2007 +0200 Sasha Khapyorsky
+0dac00bf0a6e198ddd58e44def7d1928f93707ae
+
+	* libibumad: remove opened umad devices internal tracking.
+
+Mon Oct 15 16:35:11 2007 +0200 Sasha Khapyorsky
+824cae8cf6420e50b58924fdc4ff293b3845e6ff
+
+	* libibumad/man: fix umad_open_port man page
+
+Mon Oct 1 22:01:37 2007 +0200 Sasha Khapyorsky
+ae9c14c3f295d62f86afb1f70e8ed322415cd1ea
+
+	* management/Makefile: remove obsolete .orig Makefile stuff
+
+Thu Sep 20 19:38:40 2007 +0200 Sasha Khapyorsky
+9d134ad9246cca030c4cc755ba9e0b6dd5d9729b
+
+	* libibumad: update version
+
+Thu Sep 20 18:04:12 2007 +0200 Sasha Khapyorsky
+27dd6de8c92571e8d1583c2bd5f10cab2f6199ca
+
+	* management/*/*.spec.in: change Source field to OFA paths
+
+Wed Sep 19 03:37:03 2007 +0200 Sasha Khapyorsky
+330ee693872777fd7c1acd4ea43329f1db2ca775
+
+	* management/*/configure: RELEASE and TARBALL for spec files
+
+Wed Sep 19 03:42:52 2007 +0200 Sasha Khapyorsky
+52d70de853f8cdf2432262312a834a22a674f35e
+
+	* management/*/Makefile.am: generate ChangeLog files when distributed
+
+Wed Sep 19 03:28:43 2007 +0200 Sasha Khapyorsky
+b8c228f2f99b64d373cb3b200b7d0ec09544cc67
+
+	* management/*/Makefile.am: clean dist-hook target
+
+Wed Sep 19 02:00:08 2007 +0200 Sasha Khapyorsky
+de22b30cb4e50e06eed0145b030953759cb44e37
+
+	* management/*/*.spec.in: don't run autogen.sh
+
+Wed Sep 19 12:39:44 2007 +0200 Sasha Khapyorsky
+e3723bd44bb9d34397b1e1f06f5fe51d972d1424
+
+	* management/*/Makefile.am: fix include paths
+
+Wed Sep 19 02:05:57 2007 +0200 Sasha Khapyorsky
+9c5cd5741dc4cc58890aa0ae73a55799a75e8c9d
+
+	* management/*/Makefile.am: add autogen.sh script to 'make dist'
+
+Mon Sep 17 20:53:30 2007 +0200 Sasha Khapyorsky
+38afcaa5fc7941998409f99017c82e23eef7f767
+
+	* opensm and all: fix Source field in spec.in files.
+
+Sat Sep 15 16:09:07 2007 +0300 Sasha Khapyorsky
+24398a8f09fcb8fef86c42d245d7cdf42f9fa524
+
+	* libibcommon|umad: remove AC_PROG_CXX config check
+
+Fri Sep 7 15:36:14 2007 +0200 Arne Redlich
+0f2e6b3a1962351b5f7c9af0eed71e18dccd16d7
+
+	* Fix umad_get_cas_names() usage in libibumad.
+
+Fri Sep 7 15:36:12 2007 +0200 Arne Redlich
+16c9292939af0da84291889deba367bf48dfc313
+
+	* Fix potential buffer overflow in umad_get_cas_names()
+
+Thu Sep 6 15:05:03 2007 +0300 Dotan Barak
+5797229d2b45fb0e5e0a25b1eb8ea1e93548cf06
+
+	* libibumad: Fix several issues that were reported by valgrind
+
+Tue Sep 4 10:35:42 2007 +0300 Dotan Barak
+82afdb9797189389466612b4b30cbfc83386b172
+
+	* libibumad 2/2: add valgrind support to the umad code
+
+Tue Sep 4 10:34:22 2007 +0300 Dotan Barak
+f5e248e9421b84aa3bdefbd10a5b321af62a6327
+
+	* libibumad 1/2: add valgrind support to auto-tools configuration file
+
+Tue Jul 10 17:08:52 2007 -0400 Hal Rosenstock
+16670d31c1e31347915bc1e3cd46721725b98bed
+
+	* libibumad: Updated to version 1.1.2
+
+Tue Jul 10 09:25:52 2007 -0400 Hal Rosenstock
+8c2f8b5f34491b417f067db71bdc056e37e01645
+
+	* libibumad/(man/umad_set_pkey.3 Makefile.am): Clarify that umad_set_pkey takes pkey_index rather than pkey itself and add man page into libibumad installation
+
+Tue Jul 10 09:21:13 2007 -0400 Hal Rosenstock
+82b4c96a214dbba7159dbc80af52fefd63ad3bb0
+
+	* libibumad/ChangeLog: Add log entry for Sean's previous umad.h change to indicate umad_set_pkey takes pkey index rather than pkey
+
+Tue Jul 10 09:19:28 2007 -0400 Sean Hefty
+d1502aeaa3c9535eb2bbbea38ad68c3c6457ef3f
+
+	* libibumad/include/infiniband/umad.h: Clarify that umad_set_pkey() takes a pkey index, and not the pkey itself.
+
+Tue Jun 26 16:56:06 2007 -0400 Hal Rosenstock
+2b27c9a225ab9d544c01c9a10bc576078edcdc3e
+
+	* libibumad/src/umad.c: Change uint to unsigned for strict ANSI
+
+Tue Jun 26 16:30:20 2007 -0400 Hal Rosenstock
+5ef87267b5d5e55dbfadb36366567481d9a6fe88
+
+	* libibumad/include/infiniband/umad.h: Back out some changes (having to do with new user_mad ABI) which were unintentionally committed previously
+
+Tue Jun 26 16:12:13 2007 -0400 Hal Rosenstock
+d10f07c1d206d201d0520e5e7bf2fd2515ee3bf2
+
+	* management libraries/ChangeLog: Add log entry for MST change for replacing uint with unsigned for strict ANSI
+
+Tue Jun 26 16:06:46 2007 -0400 Michael S. Tsirkin
+2e8f709fcce8e3fd9a5e339ee41687e793785a8c
+
+	* management libs: uint -> unsigned replacement
+
+Thu May 31 12:33:39 2007 -0400 Hal Rosenstock
+f777e721d9c276a36426f3e6b778ced3b6d9e864
+
+	* management/*.spec: Remove *.spec files from management git repo as committed files. They are generated files.
+
+Thu May 31 11:41:16 2007 -0400 Hal Rosenstock
+2755c1778541c83cf7e63116312bf8c607631a03
+
+	* management/*.spec: Latest daily versions of .spec files (prior to removing these due to build changes)
+
+Thu May 24 09:41:12 2007 -0400 Hal Rosenstock
+1888a7f2ee564a915f8a4199d643a58154c53e58
+
+	* libibumad/man/umad_set_grh[_net].3: Some more changes based on comments from Dotan Barak
+
+Thu May 24 09:20:12 2007 -0400 Hal Rosenstock
+0b39445d322414425d276e57e13d7fcf3cdb8ebb
+
+	* libibumad/ChangeLog: Added log entries for recent changes
+
+Wed May 23 06:39:48 2007 -0400 Ira K. Weiny
+4470f4a0a89e285b7b1a831937895ffed30d5650
+
+	* libibumad/libibumad.spec.in: Add man pages
+
+Mon May 21 14:35:18 2007 -0400 Hal Rosenstock
+683268f366b07c2bbe73f90234ae86e4d938213b
+
+	* libibumad/man: Add "SEE ALSO" section to umad_set_grh[_net] and umad_set_addr[_net]
+
+Mon May 21 11:02:35 2007 -0400 Hal Rosenstock
+c990243486ae24795c78a789a48a47b560589e96
+
+	* libibumad/man: More changes based on additional comments from Dotan Barak
+
+Thu May 17 10:42:23 2007 -0400 Hal Rosenstock
+a7864b43f2dbbbd19e83f046a94e8ee366d59c2f
+
+	* libibumad: Man page updates based on comments from Dotan Barak
+
+Mon May 14 13:31:05 2007 -0400 Hal Rosenstock
+cafab12076bac1b953272deecab89e00af727036
+
+	* spec summary changes
+
+Fri May 11 17:54:13 2007 -0400 Hal Rosenstock
+802a21eee3f3528161435c81db4719f2dbb5fea0
+
+	* configure.in: Update to correct list email address
+
+Fri May 11 13:22:31 2007 -0400 Hal Rosenstock
+46fbf788ece50afb625d600fc494d43b9aae106e
+
+	* libibumad: Updated to version 1.1.1
+
+Fri May 11 09:47:57 2007 -0400 Hal Rosenstock
+dfb3c795a150042ffb1ed4b4db8bce4fc1b3a59e
+
+	* libibumad/Makefile.am: Added additional libibumad man pages into build
+
+Fri May 11 09:43:16 2007 -0400 Hal Rosenstock
+d9dc05fb93c96509cfc1b97b8a025531352e73f8
+
+	* libibumad/man: Cosmetic changes for dates and fixed header
+
+Fri May 11 09:35:49 2007 -0400 Hal Rosenstock
+a1b72b7767c4a483bd761895d53ce5fd7ae01f2a
+
+	* libibumad/man: Initial version of libibumad man pages
+
+Wed May 9 16:17:23 2007 -0400 Hal Rosenstock
+586db8871364f4f629b1b9fffb4d0c91a605ef64
+
+	* libibumad/Makefile.am: Added existing libibumad man pages into Makefile
+
+Wed May 9 16:16:33 2007 -0400 Hal Rosenstock
+30bae57e2928951888e6a1bd596bb447704dbfac
+
+	* libibumad/man: Updated existing libibumad man pages
+
+Tue Apr 24 10:12:54 2007 -0400 Hal Rosenstock
+8698171053eb97769abc9d64d9ab946f3a862550
+
+	* libibumad/ChangeLog: Add entry for previous change to umad.c:umad_open_port to fix the declaration of the return value from dev_to_umad_id
+
+Tue Apr 24 10:11:19 2007 -0400 Roland Dreier
+436f19f4fbdcc404d9cc7f4754bb1699a1ee8712
+
+	* libibumad/umad.c: In umad_open_port, fix declaration of return value from dev_to_umad_id
+
+Tue Apr 24 09:52:33 2007 -0400 Hal Rosenstock
+78b3a0d0fd6ab7358899de0ac466012a1df21894
+
+	* libibumad/umad.c: In get_ca, remove no longer needed assignments
+
+Tue Apr 24 09:41:04 2007 -0400 Hal Rosenstock
+9409d4167c1f303065111fb6176a065935132652
+
+	* libibumad/umad.c: /umad,c: In get_ca, handle drivers which do not support SYS_CA_HW_VERS or SYS_CA_TYPE
+
+Thu Apr 12 16:52:49 2007 -0400 Hal Rosenstock
+a552c15d0f5eec35485c6d7f467046fdbf1cdbf4
+
+	* Diags: Renamed openib-diags to infiniband-diags Also, some other changes based on this (openib-diags.spec.in moved to infiniband-diags.spec.in, openib-diags.spec moved to infiniband-diags.spec, and Makefile.am changed for this)
+
+Tue Apr 3 16:47:44 2007 -0400 Doug Ledford
+eb8cf62499f43b709fb9152739d46e50570b4d56
+
+	* Version change in spec files
+
+Tue Apr 3 15:12:07 2007 -0400 Doug Ledford
+290417ff490d372e945384cc2109a67ac026a573
+
+	* More mailing list updates
+
+Tue Apr 3 13:47:15 2007 -0400 Doug Ledford
+097baf8a69d6d76c7270e85f75ff2fb1fc2b9112
+
+	* Automatic check-in of target spec files after version processing
+
+Mon Apr 2 18:43:08 2007 -0400 Doug Ledford
+7adf2540c520688425d73210ffe4ed6c9c4ba85e
+
+	* Update all the various spec files Make spec files work with new make.dist script Add make dist script to ease the process of releasing tarballs
+
+Thu Mar 29 09:20:19 2007 -0500 Hal Rosenstock
+96c19690fd8fc5d212f34467bbfd0608d6c8cff5
+
+	* libibumad: Updated to version 1.1.0
+
+Sat Mar 24 11:59:05 2007 -0500 Hal Rosenstock
+9b563346f40dc2d5ecd063231f904305252aa6d1
+
+	* libibumad/umad.c: Cosmetic formatting change
+
+Fri Mar 23 09:11:44 2007 -0500 Hal Rosenstock
+b63512581707ce1c4d6030a596b7edf8f55c9798
+
+	* libibumad/umad.c: Implement GRH support in umad_set_grh
+
+Fri Mar 23 09:04:54 2007 -0500 Hal Rosenstock
+37598fa0ac4ff70e355849d80062121e66d3fc1d
+
+	* libibumad/umad.(h c): Cosmetic changes
+
+Mon Mar 12 20:49:39 2007 -0500 Dotan Barak
+4a9d682d70da61ebeb85fe59774300328626d736
+
+	* libibumad/man: Updates to initial man pages from Dotan based on changes Roland made to libibverbs man pages
+
+Mon Mar 12 11:10:40 2007 -0500 Hal Rosenstock
+e7b46dcaebedc2de875bd75efd7228e147956766
+
+	* libibumad/ChangeLog: Add log entry for change to umad.c:umad_get_ca_portguids to add release_ca call in error flow to prevent resource leak
+
+Mon Mar 12 11:07:47 2007 -0500 Dotan Barak
+2600ff345510c5e3cd89de0231187e9a22bf995c
+
+	* libibumad/src/umad.c: In umad_get_ca_portguids, add release_ca call in error flow to prevent resource leak
+
+Wed Feb 14 10:37:10 2007 -0500 Dotan Barak
+9446558443c0eef4f51aca539ed6f80ce5d069ad
+
+	* libibumad/man: Add initial libibumad man pages
+
+Mon Jan 29 10:04:58 2007 -0500 Hal Rosenstock
+f335e3de3b7517396feb6452c2e6573d65842e86
+
+	* management/libibumad: Release 1.0.2
+
+Wed Jan 24 09:33:15 2007 -0500 Hal Rosenstock
+be676e0f710c197473050ee012a164e7df7ceb2e
+
+	* libibumad/libibumad.spec.in: Add doc files
+
+Wed Jan 24 09:19:30 2007 -0500 Hal Rosenstock
+0d649bcc51ef381829f4aeb365c9771ae7c37746
+
+	* Management libraries: Added AUTHORS and COPYING to libibcommon, libibumad, and libibmad
+
+Mon Dec 4 11:55:20 2006 -0500 Hal Rosenstock
+6919b97f474476d6daccf78a3bf0a22bd797be54
+
+	* Remove unneeded $Id$ from the rest of management
+
+Mon Nov 20 12:07:25 2006 +0000 Sasha Khapyorsky
+dea8230e41f39233a73c4caa7a0a233003c17541
+
+	* r10124: libibumad/libibmad/diags: fix printf style uses
+
+Thu Nov 2 22:26:03 2006 +0000 Sasha Khapyorsky
+5aa3469051181e71f2b1126351d55a07230809a5
+
+	* r10050: management/libib*: Strip trailing whitespace
+
+Tue Oct 31 11:19:56 2006 +0000 Hal Rosenstock
+27976aad3e736446e484b8990bf95f2f851b916f
+
+	* r10010: libibumad/umad.c: In mad_set_addr_net, fix endian used in TRACE macro
+
+Fri Oct 20 12:44:05 2006 +0000 Hal Rosenstock
+6f10e64ccdbdc88a3f782ff54afd232418b6659e
+
+	* r9932: libibumad/configure.in: Update version (for previous change)
+
+Fri Oct 20 12:43:24 2006 +0000 Hal Rosenstock
+d8d993233bff27e793430942ff46b7b65e56aaad
+
+	* r9931: libibumad: Add change log
+
+Mon Oct 16 13:49:19 2006 +0000 Hal Rosenstock
+5b643b910f65ff2db6fd6b171111adac21df06e1
+
+	* r9827: management libraries: Added library versioning support (similar to OpenSM and it's libraries)
+
+Thu Sep 28 18:00:56 2006 +0000 Sasha Khapyorsky
+91c2c4b288405a7a14efb791eb0ede4d74b4c750
+
+	* r9663: libibumad/src/umad.c: In umad_open_port, show open()'s errno string
+
+Wed Aug 30 16:03:01 2006 +0000 Sasha Khapyorsky
+a977576a89956949cd1b3a03db0ce3b1e602ac50
+
+	* r9191: libibumad/src/umad.c: Fix some errnos and return codes
+
+Wed Aug 9 19:58:48 2006 +0000 Eitan Zahavi
+0ad5b763eb753064888aa25d6144028ba2bda83d
+
+	* r8856: libibumad/umad.c: nit on short mad read in umad_recv
+
+Wed May 3 20:07:39 2006 +0000 Ralph Campbell
+029787792d0f38f85bfc98d99867630ac6c7c4bb
+
+	* r6890: Fix core dump if umad_register() fails
+
+Fri Apr 7 17:17:25 2006 +0000 Hal Rosenstock
+351de3238fa62b1a5ea52df028bf8ca0c0c28b04
+
+	* r6315: In libibumad, cosmetic change to TRACE message
+
+Wed Mar 8 14:10:56 2006 +0000 Hal Rosenstock
+c1d29653c8b71fc4a52f57ad33d18dd14637f311
+
+	* r5683: Merge management packaging changes from 1.0 back to trunk
+
+Mon Feb 27 13:31:21 2006 +0000 Hal Rosenstock
+2340a3c46b162395069130630f46eec451873311
+
+	* r5508: Updated version identifiers for release candidate
+
+Tue Feb 21 12:26:37 2006 +0000 Hal Rosenstock
+dc5b8a9a9681d4da1f2689826ac8d1fd6563400c
+
+	* r5451: In libibumad, fix some size_t issues related to memory allocation
+
+Fri Feb 10 15:58:06 2006 +0000 Sasha Khapyorsky
+ca1cf640d4b05894cfcdb88bb6d8cd78e631f4b4
+
+	* r5358: management/*/autogen.sh: config dir test and creation
+
+Mon Jan 30 15:08:38 2006 +0000 Hal Rosenstock
+cbd69aab47bc830daf9e1c0846360c25d20acf1f
+
+	* r5209: More cosmetic change from hca to ca
+
+Wed Jan 11 18:55:47 2006 +0000 Hal Rosenstock
+2544451d8c1ac14415873aa0d6216ee4c794afdc
+
+	* r4934: In libibumad/umad,c::resolve_ca_port, default algorithm is to prefer ports which are active, then those whose physical state is link up, and finally those ports whose physical state is not disabled.
+
+Wed Jan 11 00:01:56 2006 +0000 Ralph Campbell
+8d515684c56209de85dec171c4ff8eb15eed5243
+
+	* r4904: opensm fails to find HCA if port is down
+
+Tue Jan 10 11:52:00 2006 +0000 Ralph Campbell
+8df6a59ca1fcc9dba9da80db60333aba7cf801f2
+
+	* r4879: Fix bad free() in libibumad
+
+Fri Dec 16 18:31:58 2005 +0000 Hal Rosenstock
+6c3fb820c838b763121c80de99e0eaf85aba9e4f
+
+	* r4507: In libibmad and libibumad, eliminate compile warnings with gcc version4.0.0 20050519 (Red Hat 4.0.0-8)
+
+Tue Dec 6 21:03:52 2005 +0000 Hal Rosenstock
+8d55619c8e4e72bbf12def91d666e3aa5cbb6c44
+
+	* r4334: Move struct ib_user_mad into umad.h (from umad.c)i (libibumad) Save and restore ib_user_mad header in rpc.c::_do_madrpc (libibmad) so retries sent to proper DLID and DQPN
+
+Tue Dec 6 20:59:09 2005 +0000 Hal Rosenstock
+b55cc0d8cdb186ac6c59dcb96f9911327193d8d5
+
+	* r4333: Cosmetic changes
+
+Sun Dec 4 23:10:08 2005 +0000 Hal Rosenstock
+5ef0364eb3940426d958c774c1816798d09af1ac
+
+	* r4292: Fix previous checkin for make dist change for libibmad & libibumad
+
+Sun Dec 4 23:04:47 2005 +0000 Hal Rosenstock
+5f47638fcb701e283ec4bd1698b66c88e8eda183
+
+	* r4291: fixed make dist for libibmad & libibumad
+
+Fri Oct 14 11:39:12 2005 +0000 Ralph Campbell
+d4bfdaf20a92cc1e3410914107032d7c55481539
+
+	* r3779: Fill in firmware version with null string for those drivers which do not support this. Not all IB devices have firmware so this should not be relied on.
+
+Mon Sep 26 13:03:50 2005 +0000 Hal Rosenstock
+35b8eb8998d28d95702933ca95d9bd0c3798bf6d
+
+	* r3540: Minor changes to diags and management libraries to eliminate possible naming conflicts warn becomes ibwarn, panic becomes ibpanic (also associated macros changed)
+
+Mon Aug 15 18:27:40 2005 +0000 Hal Rosenstock
+62277ecd08462105142d7be112eae786762e5091
+
+	* r3097: Remove a couple more instances of /usr/local/ib
+
+Mon Aug 15 17:16:13 2005 +0000 Hal Rosenstock
+bf26ab0bc955367c37722168557df348ca9a8461
+
+	* r3091: Remove special libdir to be in sync with OpenSM build change
+
+Tue Aug 9 13:54:08 2005 +0000 Michael S. Tsirkin
+afe6e02f950244d842886307adb225513b7e74b2
+
+	* r3036: Add option to skip infiniband library checks in libibumad.
+
+Mon Aug 8 13:53:49 2005 +0000 Michael S. Tsirkin
+d031bcc999c55cbf992a777c083896b96e52849e
+
+	* r3015: libibumad: dont assume that all headers are in the same directory.
+
+Tue Aug 2 15:09:59 2005 +0000 Hal Rosenstock
+c6951967dc7edb9f6f80008abb4b6988cd5f1d8c
+
+	* r2946: In umad_set_addr_net, fix format in debug message
+
+Wed Jul 6 19:15:24 2005 +0000 Hal Rosenstock
+163b17685a408a1dec8e959622ab4ff3a93780f7
+
+	* r2815: Initial changes for receive side RMPP Also, some minor bug fixes and changed a couple of messages
+
+Wed Jun 29 13:41:16 2005 +0000 Hal Rosenstock
+f0947adf158743630d84b86ba1a71124e48e8fca
+
+	* r2748: Make length output as well as input parameter to umad_recv in order to get ready for receive side RMPP
+
+Tue Jun 28 15:28:47 2005 +0000 Hal Rosenstock
+00661eacb3e3c4e784ac92bf0e336ab2d2c842f6
+
+	* r2727: Add length parameter to umad_recv in preparation for receive side RMPP support
+
+Mon Jun 27 16:50:00 2005 +0000 Hal Rosenstock
+43b2fc97c33a8b25fb8f9da87236a79360c2ebba
+
+	* r2720: Set errno in umad_recv and umad_send
+
+Fri Jun 10 21:27:19 2005 +0000 Hal Rosenstock
+1726ddeefc4db5ab728320f3b813cf1493ae2fd0
+
+	* r2586: In osm_vendor_init, fix an initialization bug. Also, in umad_get_cas_names, only free namelist if scandir worked. Pointed out by Bernhard Fischer <rep.nop@aon.at>
+
+Tue Jun 7 11:21:44 2005 +0000 Hal Rosenstock
+eb965aa820b13e62537a4e9a4f0a0d20a8201eed
+
+	* r2566: Add retries to umad_send ABI_VERSION is now 4
+
+Thu Jun 2 18:49:59 2005 +0000 Hal Rosenstock
+46f12da5b1eedea288f3584ccb6adc7eb47dbc7e
+
+	* r2528: Add umad_get_fd routine to libibumad
+
+Wed Jun 1 20:35:25 2005 +0000 Hal Rosenstock
+d931e0ade73ee90dcadf1f112af26f6fd6196d3d
+
+	* r2519: Made ports static Also, a formatting and commentary change
+
+Tue May 24 12:59:47 2005 +0000 Hal Rosenstock
+8f74e5c669c3f5ec00b7e48c8d509317134b04c5
+
+	* r2466: Remove config.h.in files which should be generated but not part of tree
+
+Mon May 23 16:33:46 2005 +0000 Hal Rosenstock
+656902ff8990194a799d90becfd427d0cf900c64
+
+	* r2456: Changes to support send side RMPP (needs change to linux-kernel/infiniband/core/user_mad.c) ABI_VERSION is now 3 RMPP is enabled in build SA GetTable is now supported properly (within current RMPP limitations)
+
+Thu May 19 14:42:33 2005 +0000 Michael S. Tsirkin
+f41cef9870b8ad5087c87c5b4714c645dcd3ff73
+
+	* r2413: Management libraries leak resources (memory, file/directory handles). Also a trailing whitespace fix in one place in libibcommon.
+
+Wed May 18 21:27:37 2005 +0000 Hal Rosenstock
+052c319fa398b623ae2ba45473f3bb80f4c6b516
+
+	* r2398: Another change to use standard type
+
+Wed May 18 19:54:08 2005 +0000 Hal Rosenstock
+16962c7453ed1bc8f3c51c8b172c9b2e3644488a
+
+	* r2393: Start converting to standard integer types
+
+Wed May 18 19:42:05 2005 +0000 Hal Rosenstock
+c9d0cfed109f2fbeef0f2737ff2cf1b5375b1b49
+
+	* r2391: Converted C++ style comments to C Also, some formatting changes
+
+Wed May 18 19:30:13 2005 +0000 Hal Rosenstock
+359008151dc1062bab1605f114a58cf6dd6cef6e
+
+	* r2389: Remove already included include
+
+Tue Mar 29 16:55:56 2005 +0000 Hal Rosenstock
+2393a1bc772796902c6b65663b4e4a207d4702a3
+
+	* r2066: Enhance DEBUG output
+
+Mon Mar 28 09:00:13 2005 +0000 Shahar Frank
+1994cfd01ef93af9f8ca6d3f45ac6cbd95577c72
+
+	* r2053: change semantics of reveive timeout + cleanup
+
+Tue Mar 22 17:12:42 2005 +0000 Shahar Frank
+b99dd16a968c0af971858b3ad05aceb0a860eebd
+
+	* r2034: change umad_recv and mad_receive semantics - timeout 0 mean do not block
+
+Wed Mar 16 17:57:39 2005 +0000 Shahar Frank
+87a73155e32313dab38b4be21e1023a20c33378c
+
+	* r2006: add multi hca/port support
+
+Sun Feb 20 15:55:52 2005 +0000 Hal Rosenstock
+2e0f10e4cf788577cedcadc956b436dc71b48a0b
+
+	* r1843: Cosmetic changes
+
+Sun Feb 20 12:52:52 2005 +0000 Shahar Frank
+77dd726837cf8fc856718155ede8d4d03129c4ad
+
+	* r1841: debuggging
+
+Mon Feb 14 17:43:42 2005 +0000 Shahar Frank
+16858bd43153f62489fa555d316073be3ceba8ff
+
+	* r1784: add oui registration
+
+Thu Feb 10 11:43:35 2005 +0000 Shahar Frank
+08abe5f2231fc3abc9bbef5ffbf2e25fbf3ea219
+
+	* r1761: add umad & mad_addr dump functions
+
+Thu Feb 3 17:13:05 2005 +0000 Shahar Frank
+e4ce8e4c0b8812d93e64ad90cae55d6da78d7154
+
+	* r1726: remove packet attr from ib_user_mad_t
+
+Sat Jan 29 18:36:29 2005 +0000 Hal Rosenstock
+3df6337141651afc4bcd11260a3627184ef8ae69
+
+	* r1699: Initial cutover to autotools for diags including update of README directions
+
+Sat Jan 29 18:01:07 2005 +0000 Hal Rosenstock
+e53e44d1d3e8aaa58e25f848cd1bc27b087e12ba
+
+	* r1698: Add IB header and library dependencies in for autotools
+
+Fri Jan 28 20:49:06 2005 +0000 Hal Rosenstock
+b00a971d3b484fe2fa34f300703869ff8d0bb7d5
+
+	* r1693: Final preparations for autotools switchover for management libraries and diagnostics (but not OpenSM and its libraries as yet)
+
+Tue Jan 25 23:31:32 2005 +0000 Hal Rosenstock
+acc91b04310906db989d9a8a56364f0c92bc159f
+
+	* r1652: Cleanup undeleted files which were previously moved to src subdirectories
+
+Tue Jan 25 23:17:25 2005 +0000 Hal Rosenstock
+293ad7d250186cb474dcb4d630ad53ffd892adc4
+
+	* r1651: Install public headers in /usr/local/include/infiniband
+
+Tue Jan 25 22:19:06 2005 +0000 Hal Rosenstock
+02aaadaf69343042c2891d03dbc968c84b8ff828
+
+	* r1649: More changes to ready management directory for autotools switchover

@@ -1,0 +1,11 @@
+ofed-scripts (2.3-OFED.2.3.2.0.0) unstable; urgency=low
+
+  * Roll 2.1-1 release
+
+ -- Vladimir Sokolovsky <vlad@mellanox.com>  Mon, 25 Feb 2013 21:00:00 +0200
+
+ofed-scripts (2.0-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Vladimir Sokolovsky <vlad@mellanox.com>  Mon, 25 Feb 2013 21:00:00 +0200

@@ -1,0 +1,37 @@
+=head1 NAME
+
+B<mkSimNodeDir> -  Create a /proc like files for a simulated node
+
+=head1 SYNOPSYS
+
+mkSimNodeDir -n node-name [-g sim-guids-file]
+
+=head1 DESCRIPTION
+
+This utility build the /proc like file tree for the given node
+based on the guids dump file produced by the simulator.
+
+=head1 ARGUMENTS
+
+=over
+
+=item -n node-name
+
+The node name to create the files for.
+
+=item -g sim-guids-file
+
+Dump file to use. default is ./ibmgtsim.guids.txt
+
+=back
+
+=head1 LIMITATIONS
+
+Only HCAs are supported.
+
+Single HCA per guid.
+
+=head1 AUTHOR
+
+Eitan Zahavi, Mellanox Technologies LTD, eitan@mellanox.co.il
+

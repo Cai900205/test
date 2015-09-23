@@ -1,0 +1,5 @@
+rds-tools (2.0.7-OFED.2.2.1.13.g28ecf58) unstable; urgency=low
+
+  * Initial release (Closes: #539832)
+
+ -- Benoit Mortier <benoit.mortier@opensides.be>  Mon, 29 Mar 2010 18:47:00 +0100

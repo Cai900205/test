@@ -1,0 +1,83 @@
+#---------------------------------------------------------------------
+#  DEMO FAT TREE CREDIT LOOPS: 16 Nodes with two Gnus
+#---------------------------------------------------------------------
+
+MTS400 SW_L2_1
+   P1 -> Cougar H-1 P1
+   P2 -> Cougar H-2 P1
+   P3 -> MTS400 SW_L1_1 P1
+   P4 -> MTS400 SW_L1_8 P2
+
+MTS400 SW_L2_2
+   P1 -> Cougar H-3 P1
+   P2 -> Cougar H-4 P1
+   P3 -> MTS400 SW_L1_2 P1
+   P4 -> MTS400 SW_L1_5 P2
+
+MTS400 SW_L2_3
+   P1 -> Cougar H-5 P1
+   P2 -> Cougar H-6 P1
+   P3 -> MTS400 SW_L1_3 P1
+   P4 -> MTS400 SW_L1_6 P2
+
+MTS400 SW_L2_4
+   P1 -> Cougar H-7 P1
+   P2 -> Cougar H-8 P1
+   P3 -> MTS400 SW_L1_4 P1
+   P4 -> MTS400 SW_L1_7 P2
+
+MTS400 SW_L2_5
+   P1 -> Cougar H-9 P1
+   P2 -> Cougar H-10 P1
+   P3 -> MTS400 SW_L1_5 P1
+   P4 -> MTS400 SW_L1_1 P2
+
+MTS400 SW_L2_6
+   P1 -> Cougar H-11 P1
+   P2 -> Cougar H-12 P1
+   P3 -> MTS400 SW_L1_6 P1
+   P4 -> MTS400 SW_L1_2 P2
+
+MTS400 SW_L2_7
+   P1 -> Cougar H-13 P1
+   P2 -> Cougar H-14 P1
+   P3 -> MTS400 SW_L1_7 P1
+   P4 -> MTS400 SW_L1_3 P2
+
+MTS400 SW_L2_8
+   P1 -> Cougar H-15 P1
+   P2 -> Cougar H-16 P1
+   P3 -> MTS400 SW_L1_8 P1
+   P4 -> MTS400 SW_L1_4 P2
+
+MTS400 SW_L1_1
+   P3 -> MTS400 SW_L0_1 P1
+   P4 -> MTS400 SW_L0_2 P1
+
+MTS400 SW_L1_2
+   P3 -> MTS400 SW_L0_1 P2
+   P4 -> MTS400 SW_L0_2 P2
+
+MTS400 SW_L1_3
+   P3 -> MTS400 SW_L0_1 P3
+   P4 -> MTS400 SW_L0_2 P3
+
+MTS400 SW_L1_4
+   P3 -> MTS400 SW_L0_1 P4
+   P4 -> MTS400 SW_L0_2 P4
+
+MTS400 SW_L1_5
+   P3 -> MTS400 SW_L0_3 P1
+   P4 -> MTS400 SW_L0_4 P1
+
+MTS400 SW_L1_6
+   P3 -> MTS400 SW_L0_3 P2
+   P4 -> MTS400 SW_L0_4 P2
+
+MTS400 SW_L1_7
+   P3 -> MTS400 SW_L0_3 P3
+   P4 -> MTS400 SW_L0_4 P3
+
+MTS400 SW_L1_8
+   P3 -> MTS400 SW_L0_3 P4
+   P4 -> MTS400 SW_L0_4 P4

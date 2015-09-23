@@ -1,0 +1,341 @@
+=head1 NAME
+
+B<ibdiagnet - IB diagnostic net>
+
+=head1 SYNOPSYS
+
+ibdiagnet [-c <count>] [-v] [-r] [-vlr] [-u] [-o <out-dir>]
+  [-t <topo-file>] [-s <sys-name>] [-i <dev-index>] [-p <port-num>] [-wt]
+  [-pm] [-pc] [-P <<PM>=<Value>>]
+  [-lw <1x|4x|12x>] [-ls <2.5|5|10>]
+  [-skip <ibdiag_check/s>] [-load_db <db_file>]
+
+=head1 DESCRIPTION
+
+ibdiagnet scans the fabric using directed route packets and extracts all the available information regarding its connectivity and devices.
+It then produces the following files in the output directory (which defined by the -o option (see below)).
+
+=head1 FILES
+
+=over
+
+=item F<ibdiagnet.log> -
+
+A dump of all the application reports generate according to the provided flags
+
+=item F<ibdiagnet.lst> -
+
+List of all the nodes, ports and links in the fabric
+
+=item F<ibdiagnet.fdbs> -
+
+A dump of the unicast forwarding tables of the fabric switches
+
+=item F<ibdiagnet.mcfdbs> -
+
+A dump of the multicast forwarding tables of the fabric switches
+
+=item F<ibdiagnet.masks> -
+
+In case of duplicate port/node Guids, these file include the map between masked Guid and real Guids
+
+=item F<ibdiagnet.sm> -
+
+List of all the SM (state and priority) in the fabric
+
+=item F<ibdiagnet.pm> -
+
+A dump of the pm Counters values, of the fabric links
+
+=item F<ibdiagnet.pkey> -
+
+A dump of the the existing partitions and their member host ports
+
+=item F<ibdiagnet.mcgs> -
+
+A dump of the multicast groups, their properties and member host ports
+
+=item F<ibdiagnet.psl> -
+
+A dump of the path record SL of each possible source node guid and DLID pairs.
+Created only if -vlr option is provided
+
+=item F<ibdiagnet.slvl> -
+
+A dump of the SL2VL Tables from all the switches.
+Created only if -vlr option is provided
+
+=item F<ibdiagnet.db> -
+
+A dump of the internal subnet database. This file can be loaded in later runs using the -load_db option
+
+=back
+
+In addition to generating the files above, the discovery phase also checks for duplicate node/port GUIDs in the IB fabric. If such an error is detected, it is displayed on the standard output. After the discovery phase is completed, directed route packets are sent multiple times (according to the -c option) to detect possible problematic paths on which packets may be lost. Such paths are explored, and a report of the suspected bad links is displayed on the standard output.
+
+After scanning the fabric, if the -r option is provided, a full report of the fabric qualities is displayed.
+This report includes:
+
+=over
+
+=item *
+B<SM report>
+
+=item *
+B<Number of nodes and systems>
+
+=item *
+B<Hop-count information>
+
+=over
+
+=item
+maximal hop-count, an example path, and a hop-count histogram
+
+=back
+
+=item *
+B<All CA-to-CA paths traced>
+
+=item *
+B<Credit loop report>
+
+=item *
+B<mgid-mlid-HCAs multicast group and report>
+
+=item *
+B<Partitions report>
+
+=item *
+B<IPoIB report>
+
+=back
+
+Note: In case the IB fabric includes only one CA, then CA-to-CA paths are not reported.
+Furthermore, if a topology file is provided, ibdiagnet uses the names defined in it for the output reports.
+
+=head1 OPTIONS
+
+=over
+
+=item B<-c <count>>      :
+
+=over
+
+=item
+Min number of packets to be sent across each link (default = 10)
+
+=back
+
+=item B<-v>              :
+
+=over
+
+=item
+Enable verbose mode
+
+=back
+
+=item B<-r>              :
+
+=over
+
+=item
+Provides a report of the fabric qualities
+
+=back
+
+=item B<-u>              :
+
+=over
+
+=item
+Credit loop check based on UpDown rules
+
+=back
+
+=item B<-t <topo-file>>  :
+
+=over
+
+=item
+Specifies the topology file name
+
+=back
+
+=item B<-s <sys-name>>   :
+
+=over
+
+=item
+Specifies the local system name. Meaningful only if a topology file is specified
+
+=back
+
+=item B<-i <dev-index>>  :
+
+=over
+
+=item
+Specifies the index of the device of the port used to connect to the IB fabric (in case of multiple devices on the local system)
+
+=back
+
+=item B<-p <port-num>>   :
+
+=over
+
+=item
+Specifies the local device's port num used to connect to the IB fabric
+
+=back
+
+=item B<-o <out-dir>>    :
+
+=over
+
+=item
+Specifies the directory where the output files will be placed (default = /tmp)
+
+=back
+
+=item B<-lw <1x|4x|12x>> :
+
+=over
+
+=item
+Specifies the expected link width
+
+=back
+
+=item B<-ls <2.5|5|10>>  :
+
+=over
+
+=item
+Specifies the expected link speed
+
+=back
+
+=item B<-pm>             :
+
+=over
+
+=item
+Dump all the fabric links, pm Counters into ibdiagnet.pm
+
+=back
+
+=item B<-pc>             :
+
+=over
+
+=item
+Reset all the fabric links pmCounters
+
+=back
+
+=item B<-P> <PM=<Trash>> :
+
+=over
+
+=item
+If any of the provided pm is greater then its provided value, print it to screen
+
+=back
+
+=item B<-skip <skip-option(s)>> :
+
+=over
+
+=item
+Skip the executions of the selected checks.
+Skip options (one or more can be specified) : dup_guids  zero_guids pm logical_state part ipoib all
+
+=back
+
+=item B<-wt> <file-name>> :
+
+=over
+
+=item
+Write out the discovered topology into the given file. This flag is useful if you later want to check for changes from the current state of the fabric.
+A directory named ibdiag_ibnl is also created by this option, and holds the IBNL files required to load this topology. To use these files you will need to set the environment variable named IBDM_IBNL_PATH to that directory. The directory is located in /tmp or in the output directory provided by the -o flag.
+
+=back
+
+=item B<-load_db> <file-name>> :
+
+=over
+
+=item
+Load subnet data from the given .db file, and skip subnet discovery stage.
+Note: Some of the checks require actual subnet discovery, and therefore would not run when load_db is specified. These checks are
+: Duplicated/zero guids, link state, SMs status.
+
+=back
+
+=item B<-vlr> :
+
+=over
+
+=item
+VL based Routing - provide this option to create the paths SL file (psl), SL2VL file (slvl)
+and use them in credit loops check (if -r option is provided).
+
+NOTE: Since number of paths is N^2 extracting the PSL file may take some time.
+
+=back
+
+=item B<-h|--help>       :
+
+=over
+
+=item
+Prints the help page information
+
+=back
+
+=item B<-V|--version>    :
+
+=over
+
+=item
+Prints the version of the tool
+
+=back
+
+=item B<--vars>          :
+
+=over
+
+=item
+Prints the tool's environment variables and their values
+
+=back
+
+=back
+
+=head1 ERROR CODES
+
+=over
+
+=item 1 -
+Failed to fully discover the fabric
+
+=item 2 -
+Failed to parse command line options
+
+=item 3 -
+Failed to intract with IB fabric
+
+=item 4 -
+Failed to use local device or local port
+
+=item 5 -
+Failed to use Topology File
+
+=item 6 -
+Failed to load requierd Package
+
+=back

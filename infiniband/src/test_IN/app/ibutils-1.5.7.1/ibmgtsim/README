@@ -1,0 +1,106 @@
+SOFTWARE DEPENDENCIES
+---------------------
+IBMgtSim depends on:
+* autoconf > 2.59
+* automake > 1.9.3
+* libtool > 1.4.2
+* tcl8.3/8.4 (dev-rpm or source)
+* OpenSM 1.7.0(or later) and
+* ibdm 1.0 or later
+
+During configuration you will need to provide paths to these
+packages if not installed in their "standard location".
+
+To do that please provide the following falgs to the configure command:
+1. tclsh path
+--with-tclsh=<tclsh executable>
+E.g.
+--with-tclsh=/usr/bin/tclsh8.4
+
+2. OpenSM path:
+--with-osm=<path to opensm executable>
+E.g.
+--with-osm=/usr/mellanox/osm-sim/bin/opensm
+
+3. ibdm path:
+--with-ibdm=<path to ibdm installation dir>
+E.g.
+--with-ibdm=/usr
+
+HOWTO BUILD
+-----------
+
+1. bootstrap:
+   In a fresh git co directory you need to run ./autogen.sh
+   Make sure the autoconf -V is version 2.59 or newer.
+
+2. configure:
+   ./configure --with-osm=<opensm install path> --prefix=<where ever you want>
+
+   Optionally you can add:
+   --enable-debug --enable-maintainer-mode
+
+   If there there is no IBDM installed on the machine you will need to provide:
+   --with-ibdm=<where ever you did install it>
+
+   NOTE: the pointer to the osm install path can be to any osm (not just the
+   one compiled with the simulator interface vendor layer. e.g. /usr)
+
+   --enable-maintainer-mode - will enable updating fo teh TCL API (by running
+     swig) after modifications to any of the .i files. It also enables update
+    of the ibnl_parser.cc, ibnl_parser.h after changes to ibnl_parser.yy and
+    similarly updates to ibnl_scanner.cc after modification of ibnl_scanner.ll
+
+   Example:
+    ./configure --enable-debug --enable-maintainer-mode \
+        --with-osm=/home/eitan/SW/osm/linuxuser/bin/x86/2.6.5/debug \
+        --prefix=/home/eitan/SW/cvsroot/IBMgtSim/usr \
+        --with-ibdm=/home/eitan/SW/ibdm_build/usr
+
+3. make:
+   simply 'make'
+
+4. install:
+   make install
+
+The following steps 5-7 describe the manual way to start the Simulator server
+and OpenSM. This information is provided mainly for reference, as the most
+practical way to run the Simulator is to use RunSimTest which is described in
+step 8.
+
+5. run the server:
+   setenv IBMGTSIM_DIR <some dir used by the server and its clients>
+   set path = ($path <prefix>/bin)
+   usr/bin/IBMgtSim -t <topology-file>
+   See more options using -h.
+
+6. create some dummy /proc file system for some nodes:
+   usr/bin/mkSimNodeDir -n <host-name(H-1)> -g $IBMGTSIM_DIR/ibmgtsim.guids.txt
+
+7. to run OpenSM with the simulator:
+   OpenSM with support for a special vendor - i.e. the simulator
+   should be built separatly. To do that you need to provide the
+   -b sim to the OpenSM install script and also define IBMGTSIMHOME
+   pointing to the prefix where the simulator was installed (above the bin
+   dir).
+
+   setenv IBMGTSIM_DIR <some dir used by the server and its clients>
+   setenv IBMGTSIM_NODE <one of the node names you generated /proc for>
+
+   Invoke OpenSM ...
+
+8. RunSimTest - a script to fire off the simulator and invoke a "simulation"
+   flow (in the simulator shell) as well as a "checker" flow that starts OpenSM
+   or any other client and validates teh results.
+
+   RunSimTest takes 3 parameters:
+   -f <sim flow> = name of a TCL file that runs in the simulator core.
+      You can use it to automate tasks like assigning "drop rate" for
+      links, disconnecting cables, reassign lids, etc.
+   -c <checker flow> = name of a TCL file that starts OpenSM or any
+      other client and communicate with the simulator shell via TCP/IP
+   -t <topology file> = the file holding the topology definition of the
+      fabric to be simulated.
+
+   The directory named "tests" holds several such files. Please see the
+   "tests/README" file for more details.

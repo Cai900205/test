@@ -1,0 +1,91 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+#
+# This version is for a hypothetical package that can build a kernel modules
+# architecture-dependant package via make-kpkg, as well as an
+# architecture-independent module source package, and other packages
+# either dep/indep for things like common files or userspace components
+# needed for the kernel modules.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+pname:=knem
+psource:=$(pname)-source
+pdkms:=$(pname)-dkms
+
+pversion := $(shell dpkg-parsechangelog | sed -n 's/^Version: *\([^-]\+\)-.\+/\1/p')
+
+export INSTALL_MOD_DIR:=updates
+export INSTALL_MOD_PATH:=$(CURDIR)/debian/$(pname)
+
+DIST_NAME := $(shell lsb_release -si)
+DIST_RELEASE := $(DIST_NAME)/$(shell lsb_release -sc)
+ifndef KVERS
+	KVERS := $(shell uname -r)
+endif
+
+%:
+	dh $@ --with dkms
+
+override_dh_auto_clean:
+
+override_dh_auto_configure:
+	./configure --prefix=/opt/$(pname)-$(pversion)
+
+override_dh_auto_build:
+	make
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	# For dkms
+	dh_installdirs -p$(pdkms)  usr/src/$(pname)-$(pversion)
+	cp -a common 		debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp -a driver    	debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp -a tools	     	debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp -a doc               debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp autogen.sh 	 	debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp aclocal.m4		debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp config.guess		debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp config.sub		debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp configure		debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp configure.ac		debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp depcomp		debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp install-sh		debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp Makefile.in		debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp Makefile.am          debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp dkms.conf            debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp missing              debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	cp knem.pc.in           debian/$(pdkms)/usr/src/$(pname)-$(pversion)
+	# For tools
+	dh_installdirs -p$(pname)  opt/$(pname)-$(pversion)
+	dh_installdirs -p$(pname)  opt/$(pname)-$(pversion)/bin
+	dh_installdirs -p$(pname)  opt/$(pname)-$(pversion)/lib/pkgconfig
+	install -m 0755 tools/knem_collectives        debian/$(pname)/opt/$(pname)-$(pversion)/bin/knem_collectives
+	install -m 0755 tools/knem_cost               debian/$(pname)/opt/$(pname)-$(pversion)/bin/knem_cost
+	install -m 0755 tools/knem_loopback           debian/$(pname)/opt/$(pname)-$(pversion)/bin/knem_loopback
+	install -m 0755 tools/knem_multifd_test       debian/$(pname)/opt/$(pname)-$(pversion)/bin/knem_multifd_test
+	install -m 0755 tools/knem_notify_fd_test     debian/$(pname)/opt/$(pname)-$(pversion)/bin/knem_notify_fd_test
+	install -m 0755 tools/knem_pingpong           debian/$(pname)/opt/$(pname)-$(pversion)/bin/knem_pingpong
+	install -m 0755 tools/knem_region_cost        debian/$(pname)/opt/$(pname)-$(pversion)/bin/knem_region_cost
+	install -m 0755 tools/knem_status_test        debian/$(pname)/opt/$(pname)-$(pversion)/bin/knem_status_test
+	install -m 0755 tools/knem_vect_test          debian/$(pname)/opt/$(pname)-$(pversion)/bin/knem_vect_test
+	dh_installdirs -p$(pname)  opt/$(pname)-$(pversion)/etc
+	install -m 0644 tools/10-knem.rules           debian/$(pname)/opt/$(pname)-$(pversion)/etc/10-knem.rules
+	dh_installdirs -p$(pname)  etc/udev/rules.d/
+	install -m 0644 tools/10-knem.rules           debian/$(pname)/etc/udev/rules.d/10-knem.rules
+	dh_installdirs -p$(pname)  opt/$(pname)-$(pversion)/share/doc/knem
+	install -m 0644 doc/knem-api.html             debian/$(pname)/opt/$(pname)-$(pversion)/share/doc/knem/knem-api.html
+	install -m 0644 doc/knem.html                 debian/$(pname)/opt/$(pname)-$(pversion)/share/doc/knem/knem.html
+	dh_installdirs -p$(pname)  opt/$(pname)-$(pversion)/sbin
+	install -m 0755 tools/knem_local_install      debian/$(pname)/opt/$(pname)-$(pversion)/sbin/knem_local_install
+	dh_installdirs -p$(pname)  opt/$(pname)-$(pversion)/include
+	install -m 0644 common/knem_io.h              debian/$(pname)/opt/$(pname)-$(pversion)/include/knem_io.h
+
+override_dh_installinit:

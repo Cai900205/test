@@ -1,0 +1,32 @@
+eval '(exit $?0)' &&
+  eval 'exec perl -S $0 ${1+"$@"}' &&
+  eval 'exec perl -S $0 $argv:q'
+  if 0;
+
+use Pod::Man;
+$VERSION = "IBMGTSIM 1.0";
+$CENTER = "IB MANAGEMENT SIMULATOR";
+my $parser = Pod::Man->new (release => $VERSION, center => $CENTER);
+
+if (scalar(@ARGV) < 1) {
+   print "Usage $0 podFile [outFile]\n";
+   exit(1);
+}
+$inFile = $ARGV[0];
+if ($inFile !~ m/(.*)\.pod$/) {
+   print "Usage $0 podFile [outFile]\n";
+   print "Given podFile:$inFile extension != .pod\n";
+   exit(1);
+} else {
+   $base = $1;
+}
+
+if (scalar(@ARGV) > 1) {
+   $outFile = $ARGV[1];
+} else {
+   $outFile = "$base.1";
+}
+
+# Read POD from file.pod and write to file.1.
+$parser->parse_from_file ($inFile, $outFile);
+exit(0);

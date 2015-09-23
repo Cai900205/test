@@ -1,0 +1,11 @@
+opt/bin/ibdiagnet
+opt/bin/ibdiagpath
+opt/bin/ibdiagui
+opt/bin/ibdmchk
+opt/bin/ibdmsh
+opt/bin/ibdmtr
+opt/bin/ibis
+opt/bin/ibnlparse
+opt/bin/ibtopodiff
+opt/bin/dump2slvl.pl
+opt/bin/dump2psl.pl

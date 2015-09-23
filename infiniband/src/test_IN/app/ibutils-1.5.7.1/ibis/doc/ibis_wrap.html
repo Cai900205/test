@@ -1,0 +1,3871 @@
+<HTML>
+<HEAD>
+<TITLE>
+IBIS Tcl Extension</TITLE>
+<BODY BGCOLOR="#ffffff">
+<H1>IBIS Tcl Extension</H1>
+
+<HR><H1> Contents </H1>
+<UL><LI> <A HREF="#s1_">1. IBCR Functions</A>
+<LI> <A HREF="#s2_">2. IBPM Functions</A>
+<LI> <A HREF="#s3_">3. IB Vendor Specific Functions</A>
+<LI> <A HREF="#s4_">4. IBBBM Functions</A>
+<LI> <A HREF="#s5_">5. IBSAC Constants</A>
+<LI> <A HREF="#s6_">6. IBSAC Objects</A>
+<UL><LI> <A HREF="#s6_1_">6.1. class sacNodeInfo</A>
+<LI> <A HREF="#s6_2_">6.2. class sacNodeRec</A>
+<LI> <A HREF="#s6_3_">6.3. class sacPortInfo</A>
+<LI> <A HREF="#s6_4_">6.4. class sacPortRec</A>
+<LI> <A HREF="#s6_5_">6.5. class sacSmInfo</A>
+<LI> <A HREF="#s6_6_">6.6. class sacSmRec</A>
+<LI> <A HREF="#s6_7_">6.7. class sacSwInfo</A>
+<LI> <A HREF="#s6_8_">6.8. class sacSwRec</A>
+<LI> <A HREF="#s6_9_">6.9. class sacLinkRec</A>
+<LI> <A HREF="#s6_10_">6.10. class sacPathRec</A>
+<LI> <A HREF="#s6_11_">6.11. class sacLFTRec</A>
+<LI> <A HREF="#s6_12_">6.12. class sacMCMRec</A>
+<LI> <A HREF="#s6_13_">6.13. class sacClassPortInfo</A>
+<LI> <A HREF="#s6_14_">6.14. class sacInformInfo</A>
+<LI> <A HREF="#s6_15_">6.15. class sacInformInfo_g_or_v</A>
+<LI> <A HREF="#s6_16_">6.16. class sacInformInfo_g_or_v_generic</A>
+<LI> <A HREF="#s6_17_">6.17. class sacInformInfo_g_or_v_vend</A>
+<LI> <A HREF="#s6_18_">6.18. class sacServiceRec</A>
+<LI> <A HREF="#s6_19_">6.19. class sacSlVlTbl</A>
+<LI> <A HREF="#s6_20_">6.20. class sacSlVlRec</A>
+<LI> <A HREF="#s6_21_">6.21. class sacVlArbRec</A>
+<LI> <A HREF="#s6_22_">6.22. class sacPKeyTbl</A>
+<LI> <A HREF="#s6_23_">6.23. class sacPKeyRec</A>
+</UL><LI> <A HREF="#s7_">7. IBSM Constants</A>
+<LI> <A HREF="#s8_">8. IBSM Objects</A>
+<UL><LI> <A HREF="#s8_1_">8.1. class smNodeInfo</A>
+<LI> <A HREF="#s8_2_">8.2. class smPortInfo</A>
+<LI> <A HREF="#s8_3_">8.3. class smSwInfo</A>
+<LI> <A HREF="#s8_4_">8.4. class smLftBlock</A>
+<LI> <A HREF="#s8_5_">8.5. class smMftBlock</A>
+<LI> <A HREF="#s8_6_">8.6. class smGuidInfo</A>
+<LI> <A HREF="#s8_7_">8.7. class smPkeyTable</A>
+<LI> <A HREF="#s8_8_">8.8. class smSlVlTable</A>
+<LI> <A HREF="#s8_9_">8.9. class smVlArbTable</A>
+<LI> <A HREF="#s8_10_">8.10. class smNodeDesc</A>
+<LI> <A HREF="#s8_11_">8.11. class smSMInfo</A>
+<LI> <A HREF="#s8_12_">8.12. class smNotice</A>
+<LI> <A HREF="#s8_13_">8.13. class smNotice_g_or_v</A>
+<LI> <A HREF="#s8_14_">8.14. class smNotice_data_details</A>
+<LI> <A HREF="#s8_15_">8.15. class smNotice_g_or_v_generic</A>
+<LI> <A HREF="#s8_16_">8.16. class smNotice_g_or_v_vend</A>
+<LI> <A HREF="#s8_17_">8.17. class smNotice_data_details_raw_data</A>
+<LI> <A HREF="#s8_18_">8.18. class smNotice_data_details_ntc_64_67</A>
+<LI> <A HREF="#s8_19_">8.19. class smNotice_data_details_ntc_128</A>
+<LI> <A HREF="#s8_20_">8.20. class smNotice_data_details_ntc_129_131</A>
+<LI> <A HREF="#s8_21_">8.21. class smNotice_data_details_ntc_144</A>
+<LI> <A HREF="#s8_22_">8.22. class smNotice_data_details_ntc_145</A>
+<LI> <A HREF="#s8_23_">8.23. class smNotice_data_details_ntc_256</A>
+<LI> <A HREF="#s8_24_">8.24. class smNotice_data_details_ntc_257_258</A>
+<LI> <A HREF="#s8_25_">8.25. class smNotice_data_details_ntc_259</A>
+</UL><LI> <A HREF="#s9_">9. IBCC Constants</A>
+<LI> <A HREF="#s10_">10. IBCC Objects</A>
+<UL><LI> <A HREF="#s10_1_">10.1. class ccClassPortInfo</A>
+<LI> <A HREF="#s10_2_">10.2. class ccNotice</A>
+<LI> <A HREF="#s10_3_">10.3. class ccCongestionInfo</A>
+<LI> <A HREF="#s10_4_">10.4. class ccCongestionKeyInfo</A>
+<LI> <A HREF="#s10_5_">10.5. class ib_cong_log_event_sw_t</A>
+<LI> <A HREF="#s10_6_">10.6. class ib_cong_log_event_ca_t</A>
+<LI> <A HREF="#s10_7_">10.7. class ccSWCongestionLog</A>
+<LI> <A HREF="#s10_8_">10.8. class ccCACongestionLog</A>
+<LI> <A HREF="#s10_9_">10.9. class ccSWCongestionSetting</A>
+<LI> <A HREF="#s10_10_">10.10. class ib_sw_port_cong_setting_element_t</A>
+<LI> <A HREF="#s10_11_">10.11. class ccSWPortCongestionSetting</A>
+<LI> <A HREF="#s10_12_">10.12. class ib_ca_cong_entry_t</A>
+<LI> <A HREF="#s10_13_">10.13. class ccCACongestionSetting</A>
+<LI> <A HREF="#s10_14_">10.14. class ib_cc_tbl_entry_t</A>
+<LI> <A HREF="#s10_15_">10.15. class ccTable</A>
+<LI> <A HREF="#s10_16_">10.16. class ccTimeStamp</A>
+</UL><LI> <A HREF="#s11_">11. IBIS Constants</A>
+<UL><LI> <A HREF="#s11_1_">11.1. Log Verbosity Flags</A>
+</UL><LI> <A HREF="#s12_">12. IBIS Execution Flags</A>
+<LI> <A HREF="#s13_">13. IBIS Functions</A>
+<UL><LI> <A HREF="#s13_1_">13.1. class ibis_opt_t</A>
+</UL>
+</UL>
+
+<A name="s1_">
+<HR><H2>1. IBCR Functions</H2></A>
+<PRE>   IBCR UI functions   
+
+</PRE>
+<P><PRE>
+This section provide the details about the functions IBCR exposes.
+They all return 0 on succes.</PRE>
+
+<P><TT><B>crDestroy </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>crMultiMaxGet </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>crRead lid address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>crWrite lid data address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>crReadMulti num lid_list address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>crWriteMulti num lid_list data address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s2_">
+<HR><H2>2. IBPM Functions</H2></A>
+<PRE>   IBPM UI functions   
+
+</PRE>
+<P><PRE>
+This section provide the details about the functions IBPM exposes.
+They all return 0 on succes.</PRE>
+
+<P><TT><B>pmMultiMaxGet </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>pmGetPortCounters lid port_select </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>pmGetPortCountersMulti num lid_list port_select_list </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>pmGetExtPortCountersMulti num lid_list port_select_list </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>pmClrAllCounters lid port_select </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>pmClrAllCountersMulti num lid_list port_select_list </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s3_">
+<HR><H2>3. IB Vendor Specific Functions</H2></A>
+<PRE>   IBVS UI functions   
+
+</PRE>
+<P><PRE>
+This section provide the details about the functions IBVS exposes.
+They all return 0 on succes.</PRE>
+
+<P><TT><B>vsMultiMaxGet </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsCpuRead lid size cpu_traget_size address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsCpuWrite lid size cpu_traget_size data address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsI2cRead lid port_num device_id size address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsI2cWrite lid port_num device_id size address data </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsI2cReadMulti num lid_list port_num device_id size address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsI2cWriteMulti num lid_list port_num device_id size address data </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsGpioRead lid </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsGpioWrite lid gpio_mask gpio_data </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsSWReset num lid_list </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsFlashStartMulti num lid_list last size address data </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsFlashStopMulti num lid_list force </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsFlashSetBankMulti num lid_list address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsFlashEraseSectorMulti num lid_list address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsFlashReadSectorMulti num lid_list size address </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsFlashWriteSectorMulti num lid_list size address data </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsMirrorRead lid </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsMirrorWrite lid rx_mirror tx_mirror </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsGetGeneralInfo lid </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>vsGetPrivateLFTMap lid upper_ports </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s4_">
+<HR><H2>4. IBBBM Functions</H2></A>
+<PRE>   IBBBM UI functions   
+
+</PRE>
+<P><PRE>
+This section provide the details about the functions IBBBM exposes.
+They all return 0 on succes.</PRE>
+
+<P><TT><B>bbmVpdRead lid vpd_device_selector bytes_num offset </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>bbmVpdWrite lid vpd_device_selector bytes_num offset p_data </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>bbmVSDRead lid </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>bbmBSNRead lid </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>bbmModRead lid </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>bbmChaRead lid </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>bbmFWVerRead lid </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s5_">
+<HR><H2>5. IBSAC Constants</H2></A>
+   These constants are provided by IBIS:   
+
+<A name="s6_">
+<HR><H2>6. IBSAC Objects</H2></A>
+<PRE>   This section describes the various object types exposed by IBSAC.   
+
+</PRE>
+<P><PRE>
+
+  IBSAC exposes some of its internal subnet objects. The objects
+  identifiers returned by the various function calls are formatted
+  acording to the following rules:
+  ni:&lt;idx&gt; = node info objects
+
+  IBIS Objects are standard Swig-Tcl objects.
+  As such they have two flavors for their usage: Variables, Objects.
+
+  Variables:
+     For each object attribute a &quot;get&quot; and &quot;set&quot; methods are provided.
+	  The format of the methods is: &lt;class&gt;_&lt;attribute&gt;_&lt;get|set&gt;.
+     The &quot;set&quot; method is only available for read/write attributes.
+
+  Example:
+  ib_node_info_t_port_guid_get ni:1
+
+  Objects:
+     Given an object identifier one can convert it to a Tcl &quot;Object&quot;
+	  using the following command:
+     &lt;class&gt; &lt;obj_name&gt; -this &lt;obj identifier&gt;
+
+     Once declared the &lt;obj-name&gt; can be used in conjunction to
+     with the standard &quot;configure&quot; and &quot;cget&quot; commands.
+
+  Example: (following the previous one):
+		 ib_node_info_t nodeRecNI -this ni:1
+</PRE>
+
+<P><TT><B>$IB_NR_COMPMASK_LID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_RESERVED1 = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_BASEVERSION = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_CLASSVERSION = 0x8</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_NODETYPE = 0x10</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_NUMPORTS = 0x20</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_SYSIMAGEGUID = 0x40</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_NODEGUID = 0x80</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_PORTGUID = 0x100</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_PARTCAP = 0x200</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_DEVID = 0x400</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_REV = 0x800</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_PORTNUM = 0x1000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_VENDID = 0x2000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_NR_COMPMASK_NODEDESC = 0x4000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_1_">
+<H3>6.1. class sacNodeInfo</H3></A>
+<PRE>[ created from struct sacNodeInfo ]
+</PRE>
+<P><TT><B>-base_version
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-class_version
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-node_type
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-num_ports
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sys_guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-node_guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-partition_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-device_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-revision
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_num_vendor_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_2_">
+<H3>6.2. class sacNodeRec</H3></A>
+<PRE>[ created from struct sacNodeRec ]
+</PRE>
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-node_info
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sacNodeInfo * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-node_desc
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_node_desc_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_PORTNUM = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_RESV1 = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_MKEY = 0x8</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_GIDPRE = 0x10</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_BASELID = 0x20</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_SMLID = 0x40</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_CAPMASK = 0x80</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_DIAGCODE = 0x100</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_MKEYLEASEPRD = 0x200</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LOCALPORTNUM = 0x400</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LNKWIDTHSUPPORT = 0x800</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LNKWIDTHACTIVE = 0x1000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LINKWIDTHENABLED = 0x2000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LNKSPEEDSUPPORT = 0x4000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_PORTSTATE = 0x10000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_PORTPHYSTATE = 0x20000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LINKDWNDFLTSTATE = 0x40000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_MKEYPROTBITS = 0x80000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LMC = 0x100000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LINKSPEEDACTIVE = 0x200000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LINKSPEEDENABLE = 0x400000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_NEIGHBORMTU = 0x800000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_MASTERSMSL = 0x1000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_VLCAP = 0x2000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_INITTYPE = 0x4000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_VLHIGHLIMIT = 0x8000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_VLARBHIGHCAP = 0x10000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_VLARBLOWCAP = 0x20000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_INITTYPEREPLY = 0x40000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_MTUCAP = 0x80000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_VLSTALLCNT = 0x100000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_HOQLIFE = 0x200000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_OPVLS = 0x400000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_PARENFIN = 0x800000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_PARENFOUT = 0x1000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_FILTERRAWIN = 0x2000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_FILTERRAWOUT = 0x4000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_MKEYVIO = 0x8000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_PKEYVIO = 0x10000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_QKEYVIO = 0x20000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_GUIDCAP = 0x40000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_RESV2 = 0x80000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_SUBNTO = 0x100000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_RESV3 = 0x200000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_RESPTIME = 0x400000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_LOCALPHYERR = 0x800000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PIR_COMPMASK_OVERRUNERR = 0x1000000000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_3_">
+<H3>6.3. class sacPortInfo</H3></A>
+<PRE>[ created from struct sacPortInfo ]
+</PRE>
+<P><TT><B>-m_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-subnet_prefix
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-base_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-master_sm_base_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-capability_mask
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-diag_code
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-m_key_lease_period
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-local_port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-link_width_enabled
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-link_width_supported
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-link_width_active
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-state_info1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+LinkSpeedSupported and PortState
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-state_info2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+PortPhysState and LinkDownDefaultState
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mkey_lmc
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-link_speed
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+LinkSpeedEnabled and LinkSpeedActive
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mtu_smsl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+VlCap and InitType
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_high_limit
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_arb_high_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_arb_low_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mtu_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_stall_life
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_enforce
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-m_key_violations
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-p_key_violations
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-q_key_violations
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-guid_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-subnet_timeout
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resp_time_value
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-error_threshold
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_4_">
+<H3>6.4. class sacPortRec</H3></A>
+<PRE>[ created from struct sacPortRec ]
+</PRE>
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_info
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sacPortInfo * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SMR_COMPMASK_LID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SMR_COMPMASK_GUID = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SMR_COMPMASK_SM_KEY = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SMR_COMPMASK_ACT_COUNT = 0x8</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SMR_COMPMASK_STATE = 0x10</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SMR_COMPMASK_PRI = 0x20</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_5_">
+<H3>6.5. class sacSmInfo</H3></A>
+<PRE>[ created from struct sacSmInfo ]
+</PRE>
+<P><TT><B>-guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sm_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-act_count
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pri_state
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_6_">
+<H3>6.6. class sacSmRec</H3></A>
+<PRE>[ created from struct sacSmRec ]
+</PRE>
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sm_info
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sacSmInfo * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_LID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_LIN_CAP = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_RAND_CAP = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_MCAST_CAP = 0x8</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_LIN_TOP = 0x10</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_DEF_PORT = 0x20</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_DEF_MCAST_PRI = 0x40</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_DEF_MCAST_NOT = 0x80</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_STATE = 0x100</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_LIFE = 0x200</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_LMC = 0x400</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_ENFORCE_CAP = 0x800</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SWR_COMPMASK_FLAGS = 0x1000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_7_">
+<H3>6.7. class sacSwInfo</H3></A>
+<PRE>[ created from struct sacSwInfo ]
+</PRE>
+<P><TT><B>-lin_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-rand_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mcast_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lin_top
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-def_port
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-def_mcast_pri_port
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-def_mcast_not_port
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-life_state
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lids_per_port
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-enforce_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-flags
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_8_">
+<H3>6.8. class sacSwRec</H3></A>
+<PRE>[ created from struct sacSwRec ]
+</PRE>
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-switch_info
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sacSwInfo * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_LR_COMPMASK_FROM_LID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_LR_COMPMASK_FROM_PORT = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_LR_COMPMASK_TO_PORT = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_LR_COMPMASK_TO_LID = 0x8</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_9_">
+<H3>6.9. class sacLinkRec</H3></A>
+<PRE>[ created from struct sacLinkRec ]
+</PRE>
+<P><TT><B>-from_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-from_port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-to_port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-to_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_DGID = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_SGID = 0x8</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_DLID = 0x10</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_SLID = 0x20</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_RAWTRAFIC = 0x40</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_RESV0 = 0x80</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_FLOWLABEL = 0x100</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_HOPLIMIT = 0x200</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_TCLASS = 0x400</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_REVERSIBLE = 0x800</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_NUMBPATH = 0x1000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_PKEY = 0x2000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_RESV1 = 0x4000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_SL = 0x8000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_MTUSELEC = 0x10000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_MTU = 0x20000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_RATESELEC = 0x40000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_RATE = 0x80000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_PKTLIFETIMESELEC = 0x100000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PR_COMPMASK_PFTLIFETIME = 0x200000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_10_">
+<H3>6.10. class sacPathRec</H3></A>
+<PRE>[ created from struct sacPathRec ]
+</PRE>
+<P><TT><B>-service_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-dgid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sgid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-dlid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-slid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-hop_flow_raw
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-tclass
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-num_path
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-qos_class_sl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mtu
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-rate
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pkt_life
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-preference
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_LFT_COMPMASK_LID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_LFT_COMPMASK_BLOCK = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_11_">
+<H3>6.11. class sacLFTRec</H3></A>
+<PRE>[ created from struct sacLFTRec ]
+</PRE>
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-block_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lft
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_lft_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_GID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_MGID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_PORT_GID = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_QKEY = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_MLID = 0x8</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_MTU_SEL = 0x10</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_MTU = 0x20</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_TCLASS = 0x40</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_PKEY = 0x80</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_RATE_SEL = 0x100</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_RATE = 0x200</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_LIFE_SEL = 0x400</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_LIFE = 0x800</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_SL = 0x1000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_FLOW = 0x2000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_HOP = 0x4000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_SCOPE = 0x8000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_JOIN_STATE = 0x10000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_MCR_COMPMASK_PROXY = 0x20000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_12_">
+<H3>6.12. class sacMCMRec</H3></A>
+<PRE>[ created from struct sacMCMRec ]
+</PRE>
+<P><TT><B>-mgid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-qkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mlid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mtu
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-tclass
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-rate
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pkt_life
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sl_flow_hop
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-scope_state
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+uint8_t                              proxy_join:1; bit fields are not supported.
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>set comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>del comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>proxy_join_get </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>proxy_join_set proxy_join </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>obj_delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_13_">
+<H3>6.13. class sacClassPortInfo</H3></A>
+<PRE>[ created from struct sacClassPortInfo ]
+</PRE>
+<P><TT><B>-base_ver
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-class_ver
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-cap_mask
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-cap_mask2_resp_time
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_tc_sl_fl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_pkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_qp
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_qkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_tc_sl_fl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_pkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_hop_qp
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_qkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_14_">
+<H3>6.14. class sacInformInfo</H3></A>
+<PRE>[ created from struct sacInformInfo ]
+</PRE>
+<P><TT><B>-gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid_range_begin
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid_range_end
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-reserved1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-is_generic
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-subscribe
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_type
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-g_or_v
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sacInformInfo_g_or_v * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>set </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_15_">
+<H3>6.15. class sacInformInfo_g_or_v</H3></A>
+<PRE>[ created from union sacInformInfo_g_or_v ]
+</PRE>
+<P><TT><B>-generic
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sacInformInfo_g_or_v_generic * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vend
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sacInformInfo_g_or_v_vend * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_16_">
+<H3>6.16. class sacInformInfo_g_or_v_generic</H3></A>
+<PRE>[ created from struct sacInformInfo_g_or_v_generic ]
+</PRE>
+<P><TT><B>-trap_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-qpn_resp_time_val
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-reserved2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-node_type_msb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-node_type_lsb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_17_">
+<H3>6.17. class sacInformInfo_g_or_v_vend</H3></A>
+<PRE>[ created from struct sacInformInfo_g_or_v_vend ]
+</PRE>
+<P><TT><B>-dev_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-qpn_resp_time_val
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-reserved2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vendor_id_msb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vendor_id_lsb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SGID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SPKEY = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_RES1 = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SLEASE = 0x8</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SKEY = 0x10</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SNAME = 0x20</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_0 = 0x40</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_1 = 0x80</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_2 = 0x100</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_3 = 0x200</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_4 = 0x400</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_5 = 0x800</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_6 = 0x1000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_7 = 0x2000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_8 = 0x4000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_9 = 0x8000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_10 = 0x10000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_11 = 0x20000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_12 = 0x40000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_13 = 0x80000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_14 = 0x100000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA8_15 = 0x200000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA16_0 = 0x400000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA16_1 = 0x800000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA16_2 = 0x1000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA16_3 = 0x2000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA16_4 = 0x4000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA16_5 = 0x8000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA16_6 = 0x10000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA16_7 = 0x20000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA32_0 = 0x40000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA32_1 = 0x80000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA32_2 = 0x100000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA32_3 = 0x200000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA64_0 = 0x400000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SR_COMPMASK_SDATA64_1 = 0x800000000</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_18_">
+<H3>6.18. class sacServiceRec</H3></A>
+<PRE>[ created from struct sacServiceRec ]
+</PRE>
+<P><TT><B>-service_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-service_gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-service_pkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resv
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-service_lease
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-service_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-service_name
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_svc_name_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-service_data8
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-service_data16
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-service_data32
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-service_data64
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>set comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>obj_delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SLVL_COMPMASK_LID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SLVL_COMPMASK_IN_PORT = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_SLVL_COMPMASK_OUT_PORT = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_19_">
+<H3>6.19. class sacSlVlTbl</H3></A>
+<PRE>[ created from struct sacSlVlTbl ]
+</PRE>
+<P><TT><B>-raw_vl_by_sl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_20_">
+<H3>6.20. class sacSlVlRec</H3></A>
+<PRE>[ created from struct sacSlVlRec ]
+</PRE>
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+for CA: lid of port, for switch lid of port 0
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-in_port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+reserved for CA's
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-out_port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+reserved for CA's
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resv
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-slvl_tbl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sacSlVlTbl * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_VLA_COMPMASK_LID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_VLA_COMPMASK_OUT_PORT = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_VLA_COMPMASK_BLOCK = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_21_">
+<H3>6.21. class sacVlArbRec</H3></A>
+<PRE>[ created from struct sacVlArbRec ]
+</PRE>
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+for CA: lid of port, for switch lid of port 0
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-block_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-reserved
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_arb_tbl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sac_vl_arb_tbl_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PKEY_COMPMASK_LID = 0x1</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PKEY_COMPMASK_BLOCK = 0x2</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IB_PKEY_COMPMASK_PORT = 0x4</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : char * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_22_">
+<H3>6.22. class sacPKeyTbl</H3></A>
+<PRE>[ created from struct sacPKeyTbl ]
+</PRE>
+<P><TT><B>-pkey_entry
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s6_23_">
+<H3>6.23. class sacPKeyRec</H3></A>
+<PRE>[ created from struct sacPKeyRec ]
+</PRE>
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+for CA: lid of port, for switch lid of port 0
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-block_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+for switch: port number, for CA: reserved
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-reserved1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-reserved2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pkey_tbl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns sacPKeyTbl * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>get comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getTable comp_mask </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns char * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>delete </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns void  ]
+</PRE></BLOCKQUOTE>
+
+<P><PRE>
+
+  Subnet Management:
+    The SM interface supports sending Subnet Management Packets to
+    the fabric devices.
+
+    A set of object types is defined. The user can allocate a new attribute
+    object. Then the object can be set using configure or the direct
+    manipulation methods.
+
+    Extra methods are provided for each object:
+    setByDr &lt;dr&gt; &lt;attrMod&gt;
+    getByDr &lt;dr&gt; &lt;attrMod&gt;
+    setByLid &lt;lid&gt; &lt;attrMod&gt;
+    getByLid &lt;lid&gt; &lt;attrMod&gt;</PRE>
+
+<A name="s7_">
+<HR><H2>7. IBSM Constants</H2></A>
+   These constants are provided by IBSM:   
+
+<A name="s8_">
+<HR><H2>8. IBSM Objects</H2></A>
+<PRE>   This section describes the various object types exposed by IBSM.   
+
+</PRE>
+<P><PRE>
+</PRE>
+
+<A name="s8_1_">
+<H3>8.1. class smNodeInfo</H3></A>
+<PRE>[ created from struct smNodeInfo ]
+</PRE>
+<P><TT><B>-base_version
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-class_version
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-node_type
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-num_ports
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sys_guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-node_guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-partition_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-device_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-revision
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_num_vendor_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_2_">
+<H3>8.2. class smPortInfo</H3></A>
+<PRE>[ created from struct smPortInfo ]
+</PRE>
+<P><TT><B>-m_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-subnet_prefix
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-base_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-master_sm_base_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-capability_mask
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-diag_code
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-m_key_lease_period
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-local_port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-link_width_enabled
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-link_width_supported
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-link_width_active
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-state_info1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+LinkSpeedSupported and PortState
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-state_info2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+PortPhysState and LinkDownDefaultState
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mkey_lmc
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-link_speed
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+LinkSpeedEnabled and LinkSpeedActive
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mtu_smsl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+VlCap and InitType
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_high_limit
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_arb_high_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_arb_low_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mtu_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_stall_life
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vl_enforce
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-m_key_violations
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-p_key_violations
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-q_key_violations
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-guid_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-subnet_timeout
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resp_time_value
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-error_threshold
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr portNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr portNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid portNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid portNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_3_">
+<H3>8.3. class smSwInfo</H3></A>
+<PRE>[ created from struct smSwInfo ]
+</PRE>
+<P><TT><B>-lin_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-rand_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mcast_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lin_top
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-def_port
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-def_mcast_pri_port
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-def_mcast_not_port
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-life_state
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lids_per_port
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-enforce_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-flags
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_4_">
+<H3>8.4. class smLftBlock</H3></A>
+<PRE>[ created from struct smLftBlock ]
+</PRE>
+<P><TT><B>-lft
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_5_">
+<H3>8.5. class smMftBlock</H3></A>
+<PRE>[ created from struct smMftBlock ]
+</PRE>
+<P><TT><B>-mft
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr startLid startPort </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr startLid startPort </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid startLid startPort </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid startLid startPort </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_6_">
+<H3>8.6. class smGuidInfo</H3></A>
+<PRE>[ created from struct smGuidInfo ]
+</PRE>
+<P><TT><B>-guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_7_">
+<H3>8.7. class smPkeyTable</H3></A>
+<PRE>[ created from struct smPkeyTable ]
+</PRE>
+<P><TT><B>-pkey_entry
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr portNum blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr portNum blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid portNum blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid portNum blockNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_8_">
+<H3>8.8. class smSlVlTable</H3></A>
+<PRE>[ created from struct smSlVlTable ]
+</PRE>
+<P><TT><B>-raw_vl_by_sl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr inPortNum outPortNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr inPortNum outPortNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid inPortNum outPortNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid inPortNum outPortNum </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_9_">
+<H3>8.9. class smVlArbTable</H3></A>
+<PRE>[ created from struct smVlArbTable ]
+</PRE>
+<P><TT><B>-vl_entry
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_vl_arb_element_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr portNum block </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr portNum block </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid portNum block </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid portNum block </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_10_">
+<H3>8.10. class smNodeDesc</H3></A>
+<PRE>[ created from struct smNodeDesc ]
+</PRE>
+<P><TT><B>-description
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ibsm_node_desc_str_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_11_">
+<H3>8.11. class smSMInfo</H3></A>
+<PRE>[ created from struct smSMInfo ]
+</PRE>
+<P><TT><B>-guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sm_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-act_count
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pri_state
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByDr dr </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByDr dr </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_12_">
+<H3>8.12. class smNotice</H3></A>
+<PRE>[ created from struct smNotice ]
+</PRE>
+<P><TT><B>-generic_type
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-issuer_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-toggle_count
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-issuer_gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-g_or_v
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_g_or_v * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-data_details
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>trapByDr dr </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>trapByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_13_">
+<H3>8.13. class smNotice_g_or_v</H3></A>
+<PRE>[ created from union smNotice_g_or_v ]
+</PRE>
+<P><TT><B>-generic
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_g_or_v_generic * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vend
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_g_or_v_vend * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_14_">
+<H3>8.14. class smNotice_data_details</H3></A>
+<PRE>[ created from union smNotice_data_details ]
+</PRE>
+<P><TT><B>-raw_data
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details_raw_data * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc_64_67
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details_ntc_64_67 * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc_128
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details_ntc_128 * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc_129_131
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details_ntc_129_131 * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc_144
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details_ntc_144 * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc_145
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details_ntc_145 * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc_256
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details_ntc_256 * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc_257_258
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details_ntc_257_258 * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc_259
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns smNotice_data_details_ntc_259 * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_15_">
+<H3>8.15. class smNotice_g_or_v_generic</H3></A>
+<PRE>[ created from struct smNotice_g_or_v_generic ]
+</PRE>
+<P><TT><B>-prod_type_msb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-prod_type_lsb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_16_">
+<H3>8.16. class smNotice_g_or_v_vend</H3></A>
+<PRE>[ created from struct smNotice_g_or_v_vend ]
+</PRE>
+<P><TT><B>-vend_id_msb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-vend_id_lsb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-dev_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_17_">
+<H3>8.17. class smNotice_data_details_raw_data</H3></A>
+<PRE>[ created from struct smNotice_data_details_raw_data ]
+</PRE>
+<P><TT><B>-details
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_18_">
+<H3>8.18. class smNotice_data_details_ntc_64_67</H3></A>
+<PRE>[ created from struct smNotice_data_details_ntc_64_67 ]
+</PRE>
+<P><TT><B>-res
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+the Node or Multicast Group that came in/out
+</PRE></BLOCKQUOTE>
+
+<A name="s8_19_">
+<H3>8.19. class smNotice_data_details_ntc_128</H3></A>
+<PRE>[ created from struct smNotice_data_details_ntc_128 ]
+</PRE>
+<P><TT><B>-sw_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+the sw lid of which link state changed
+</PRE></BLOCKQUOTE>
+
+<A name="s8_20_">
+<H3>8.20. class smNotice_data_details_ntc_129_131</H3></A>
+<PRE>[ created from struct smNotice_data_details_ntc_129_131 ]
+</PRE>
+<P><TT><B>-pad
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+lid and port number of the violation
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_21_">
+<H3>8.21. class smNotice_data_details_ntc_144</H3></A>
+<PRE>[ created from struct smNotice_data_details_ntc_144 ]
+</PRE>
+<P><TT><B>-pad1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+lid where capability mask changed
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pad2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-new_cap_mask
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+new capability mask
+</PRE></BLOCKQUOTE>
+
+<A name="s8_22_">
+<H3>8.22. class smNotice_data_details_ntc_145</H3></A>
+<PRE>[ created from struct smNotice_data_details_ntc_145 ]
+</PRE>
+<P><TT><B>-pad1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+lid where sys guid changed
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pad2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-new_sys_guid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+new system image guid
+</PRE></BLOCKQUOTE>
+
+<A name="s8_23_">
+<H3>8.23. class smNotice_data_details_ntc_256</H3></A>
+<PRE>[ created from struct smNotice_data_details_ntc_256 ]
+</PRE>
+<P><TT><B>-pad1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pad2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-method
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-pad3
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-attr_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-attr_mod
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-mkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-dr_slid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-dr_trunc_hop
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-dr_rtn_path
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_24_">
+<H3>8.24. class smNotice_data_details_ntc_257_258</H3></A>
+<PRE>[ created from struct smNotice_data_details_ntc_257_258 ]
+</PRE>
+<P><TT><B>-pad1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-qp1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-qp2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-gid1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-gid2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s8_25_">
+<H3>8.25. class smNotice_data_details_ntc_259</H3></A>
+<PRE>[ created from struct smNotice_data_details_ntc_259 ]
+</PRE>
+<P><TT><B>-data_valid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lid2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-qp1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-qp2_msb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-qp2_lsb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-gid1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-gid2
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sw_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_no
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><PRE>
+
+  Congestion Control:
+    The CC interface supports sending Congestion Control Packets to
+    the fabric devices.
+
+    A set of object types is defined. The user can allocate a new attribute
+    object. Then the object can be set using configure or the direct
+    manipulation methods.
+
+    Extra methods are provided for each object:
+    setByLid &lt;lid&gt; &lt;attrMod&gt;
+    getByLid &lt;lid&gt; &lt;attrMod&gt;</PRE>
+
+<A name="s9_">
+<HR><H2>9. IBCC Constants</H2></A>
+   These constants are provided by IBCC:   
+
+<A name="s10_">
+<HR><H2>10. IBCC Objects</H2></A>
+<PRE>   This section describes the various object types exposed by IBCC.   
+
+</PRE>
+<P><PRE>
+</PRE>
+
+<A name="s10_1_">
+<H3>10.1. class ccClassPortInfo</H3></A>
+<PRE>[ created from struct ccClassPortInfo ]
+</PRE>
+<P><TT><B>-base_ver
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-class_ver
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-cap_mask
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-cap_mask2_resp_time
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_tc_sl_fl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_pkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_qp
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-redir_qkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_tc_sl_fl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_pkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_hop_qp
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trap_qkey
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_2_">
+<H3>10.2. class ccNotice</H3></A>
+<PRE>[ created from struct ccNotice ]
+</PRE>
+<P><TT><B>-generic_type
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-generic__prod_type_msb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-generic__prod_type_lsb
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-generic__trap_num
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-issuer_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-toggle_count
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__source_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+Source LID from offending packet LRH
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__method
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+Method, from common MAD header
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__resv0
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__attr_id
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+Attribute ID, from common MAD header
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__resv1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__attr_mod
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+Attribute Modif, from common MAD header
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__qp
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+8b pad, 24b dest QP from BTH
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__cc_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+CC key of the offending packet
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__source_gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+GID from GRH of the offending packet
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ntc0__padding
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+Padding - ignored on read
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-issuer_gid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_gid_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>trapByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_3_">
+<H3>10.3. class ccCongestionInfo</H3></A>
+<PRE>[ created from struct ccCongestionInfo ]
+</PRE>
+<P><TT><B>-cong_info
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resv
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ctrl_table_cap
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_4_">
+<H3>10.4. class ccCongestionKeyInfo</H3></A>
+<PRE>[ created from struct ccCongestionKeyInfo ]
+</PRE>
+<P><TT><B>-cc_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net64_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-protect_bit
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-lease_period
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-violations
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_5_">
+<H3>10.5. class ib_cong_log_event_sw_t</H3></A>
+<PRE>[ created from struct ib_cong_log_event_sw_t ]
+</PRE>
+<P><TT><B>-slid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-dlid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sl
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-time_stamp
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_6_">
+<H3>10.6. class ib_cong_log_event_ca_t</H3></A>
+<PRE>[ created from struct ib_cong_log_event_ca_t ]
+</PRE>
+<P><TT><B>-local_qp_resv0
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-remote_qp_sl_service_type
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-remote_lid
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resv1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-time_stamp
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_7_">
+<H3>10.7. class ccSWCongestionLog</H3></A>
+<PRE>[ created from struct ccSWCongestionLog ]
+</PRE>
+<P><TT><B>-log_type
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-cong_flags
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-event_counter
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-time_stamp
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-port_map
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-entry_list
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_cong_log_event_sw_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_8_">
+<H3>10.8. class ccCACongestionLog</H3></A>
+<PRE>[ created from struct ccCACongestionLog ]
+</PRE>
+<P><TT><B>-log_type
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-cong_flags
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-event_counter
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-event_map
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resv
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-time_stamp
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-log_event
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_cong_log_event_ca_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_9_">
+<H3>10.9. class ccSWCongestionSetting</H3></A>
+<PRE>[ created from struct ccSWCongestionSetting ]
+</PRE>
+<P><TT><B>-control_map
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-victim_mask
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-credit_mask
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_array_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-threshold_resv
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-packet_size
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-cs_threshold_resv
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-cs_return_delay
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-marking_rate
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_10_">
+<H3>10.10. class ib_sw_port_cong_setting_element_t</H3></A>
+<PRE>[ created from struct ib_sw_port_cong_setting_element_t ]
+</PRE>
+<P><TT><B>-valid_ctrl_type_res_threshold
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-packet_size
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-cong_param
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_11_">
+<H3>10.11. class ccSWPortCongestionSetting</H3></A>
+<PRE>[ created from struct ccSWPortCongestionSetting ]
+</PRE>
+<P><TT><B>-block
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_sw_port_cong_setting_element_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid block </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid block </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_12_">
+<H3>10.12. class ib_ca_cong_entry_t</H3></A>
+<PRE>[ created from struct ib_ca_cong_entry_t ]
+</PRE>
+<P><TT><B>-ccti_timer
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ccti_increase
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-trigger_threshold
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-ccti_min
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resv0
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resv1
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_13_">
+<H3>10.13. class ccCACongestionSetting</H3></A>
+<PRE>[ created from struct ccCACongestionSetting ]
+</PRE>
+<P><TT><B>-port_control
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-control_map
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-entry_list
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_ca_cong_entry_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_14_">
+<H3>10.14. class ib_cc_tbl_entry_t</H3></A>
+<PRE>[ created from struct ib_cc_tbl_entry_t ]
+</PRE>
+<P><TT><B>-shift_multiplier
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_15_">
+<H3>10.15. class ccTable</H3></A>
+<PRE>[ created from struct ccTable ]
+</PRE>
+<P><TT><B>-ccti_limit
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-resv
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net16_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-entry_list
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_cc_tbl_entry_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid sn </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>setByLid lid sn </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s10_16_">
+<H3>10.16. class ccTimeStamp</H3></A>
+<PRE>[ created from struct ccTimeStamp ]
+</PRE>
+<P><TT><B>-value
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns ib_net32_t * ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>getByLid lid </B></TT>
+<BLOCKQUOTE><PRE>[ Member : returns int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s11_">
+<HR><H2>11. IBIS Constants</H2></A>
+   These constants are provided by IBIS:   
+
+<A name="s11_1_">
+<H3>11.1. Log Verbosity Flags</H3></A>
+<PRE></PRE>
+<P><TT><B>$IBIS_LOG_NONE = 0x00</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IBIS_LOG_ERROR = 0x01</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IBIS_LOG_INFO = 0x02</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IBIS_LOG_VERBOSE = 0x04</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IBIS_LOG_DEBUG = 0x08</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IBIS_LOG_FUNCS = 0x10</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>$IBIS_LOG_FRAMES = 0x20</B></TT>
+<BLOCKQUOTE><PRE>[ Constant : int  ]
+</PRE></BLOCKQUOTE>
+
+<A name="s12_">
+<HR><H2>12. IBIS Execution Flags</H2></A>
+<PRE></PRE>
+<A name="s13_">
+<HR><H2>13. IBIS Functions</H2></A>
+<PRE>   IBIS UI functions   
+
+</PRE>
+<P><PRE>
+This section provide the details about the functions IBIS exposes.
+They all return 0 on succes.</PRE>
+
+<P><TT><B>ibis_puts verbosity msg </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+Append a message to the OpenSM log   
+</PRE></BLOCKQUOTE>
+
+<A name="s13_1_">
+<H3>13.1. class ibis_opt_t</H3></A>
+<PRE>[ created from struct ibis_opt_t ]
+IBIS Options:
+The IBIS options are available through the predefined object: ibis_opts.
+It can be manipulated using the standard Tcl methods: cget and configure.
+Examples: ibis_opts cget -force_log_flush
+          ibis_opts configure -force_log_flush TRUE   
+
+</PRE>
+<P><TT><B>-single_thread
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns boolean_t * ]
+run single threaded   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-force_log_flush
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns boolean_t * ]
+If TRUE - forces flash after each log message (TRUE).   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-log_flags
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint8_t * ]
+The log levels to be used   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-log_file
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns char * ]
+The name of the log file used (read only)   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-sm_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint64_t * ]
+The SM_Key to be used when sending SubnetMgt and SubnetAdmin MADs   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-m_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint64_t * ]
+The M_Key to be used when sending SubnetMgt   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>-v_key
+</B></TT>
+<BLOCKQUOTE><PRE>[ Member data: returns uint64_t * ]
+The Vendor Key to be used when sending Vendor Specific MADs.   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>ibis_init </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+Initialize ibis object   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>ibis_set_verbosity level </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+Change the log verbosity   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>ibis_set_port guid </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+Set the port IBIS is attached to and initialize all sub packages   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>ibis_get_port </B></TT>
+<BLOCKQUOTE><PRE>[ returns new_uint64_t  ]
+Provide the GUID of the port IBIS is attached to   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>ibis_set_transaction_timeout timeout_ms </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+Set the transaction time out in [msec]   
+</PRE></BLOCKQUOTE>
+
+<P><TT><B>ibis_exit </B></TT>
+<BLOCKQUOTE><PRE>[ returns int  ]
+Exit IBIS.   
+</PRE></BLOCKQUOTE>
+
+<P><PRE>
+ibis_get_local_ports_info
+   [return list]
+   Return the list of available IB ports with GUID, LID and State.</PRE>
+
+<P><TT><B>$ibisSourceVersion</B></TT>
+<BLOCKQUOTE><PRE>[ Global : char * ibisSourceVersion ]
+</PRE></BLOCKQUOTE>
+
+
+</BODY>
+</HTML>

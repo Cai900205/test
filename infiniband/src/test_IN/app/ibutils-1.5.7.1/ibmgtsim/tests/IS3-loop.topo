@@ -1,0 +1,67 @@
+MTS2400 SW1
+   P1 -> Cougar H-1 P1
+   P2 -> Cougar H-1-2 P1
+   P3 -> Cougar H-1-3 P1
+   P4 -> Cougar H-1-4 P1
+   P5 -> Cougar H-1-5 P1
+   P6 -> Cougar H-1-6 P1
+   P7 -> Cougar H-1-7 P1
+   P8 -> Cougar H-1-8 P1
+   P9 -> Cougar H-1-9 P1
+   P10 -> Cougar H-1-10 P1
+   P11 -> Cougar H-1-11 P1
+   P12 -> Cougar H-1-12 P1
+
+MTS2400 SW2
+   P1 -> Cougar H-2-1 P1
+   P2 -> Cougar H-2-2 P1
+   P3 -> Cougar H-2-3 P1
+   P4 -> Cougar H-2-4 P1
+   P5 -> Cougar H-2-5 P1
+   P6 -> Cougar H-2-6 P1
+   P7 -> Cougar H-2-7 P1
+   P8 -> Cougar H-2-8 P1
+   P9 -> Cougar H-2-9 P1
+   P10 -> Cougar H-2-10 P1
+   P11 -> Cougar H-2-11 P1
+   P12 -> Cougar H-2-12 P1
+
+MTS2400 SW3
+   P1 -> Cougar H-3-1 P1
+   P2 -> Cougar H-3-2 P1
+   P3 -> Cougar H-3-3 P1
+   P4 -> Cougar H-3-4 P1
+   P5 -> Cougar H-3-5 P1
+   P6 -> Cougar H-3-6 P1
+   P7 -> Cougar H-3-7 P1
+   P8 -> Cougar H-3-8 P1
+   P9 -> Cougar H-3-9 P1
+   P10 -> Cougar H-3-10 P1
+   P11 -> Cougar H-3-11 P1
+   P12 -> Cougar H-3-12 P1
+
+MTS14400 SW4 CFG: leaf3=R,leaf4=R,leaf5=R,leaf6=R,leaf7=R,leaf8=R,leaf9=R,leaf10=R,leaf11=R,leaf12=R
+   L1/P1 -> MTS2400 SW1 P13
+   L1/P2 -> MTS2400 SW1 P14
+   L1/P3 -> MTS2400 SW1 P15
+   L1/P4 -> MTS2400 SW1 P16
+   L1/P5 -> MTS2400 SW1 P17
+   L1/P6 -> MTS2400 SW1 P18
+   L1/P7 -> MTS2400 SW2 P13
+   L1/P8 -> MTS2400 SW2 P14
+   L1/P9 -> MTS2400 SW2 P15
+   L1/P10 -> MTS2400 SW2 P16
+   L1/P11 -> MTS2400 SW2 P17
+   L1/P12 -> MTS2400 SW2 P18
+   L2/P1 -> MTS2400 SW3 P13
+   L2/P2 -> MTS2400 SW3 P14
+   L2/P3 -> MTS2400 SW3 P15
+   L2/P4 -> MTS2400 SW3 P16
+   L2/P5 -> MTS2400 SW3 P17
+   L2/P6 -> MTS2400 SW3 P18
+   L2/P7 -> MTS2400 SW2 P19
+   L2/P8 -> MTS2400 SW2 P20
+   L2/P9 -> MTS2400 SW2 P21
+   L2/P10 -> MTS2400 SW2 P22
+   L2/P11 -> MTS2400 SW2 P23
+   L2/P12 -> MTS2400 SW2 P24

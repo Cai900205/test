@@ -1,0 +1,609 @@
+=head1 NAME
+
+B<ibdmsh> IB DATA MODEL - Extentended TCL shell
+
+=head1 DESCRIPTION
+
+B<ibdmsh> is a TCL shell extended with interface for the IB data model.
+To use this shell you will write TCL code that directly access the IB data model objects and functions.
+
+The following sub sections provide detailed definition for those objects and API.
+
+=head1 IBDM Constants
+
+=head2 Node Types
+
+The following constants are used by the node object type field
+
+=over 4
+
+[ Constant : int  ] $IB_UNKNOWN_NODE_TYPE = IB_UNKNOWN_NODE_TYPE
+
+[ Constant : int  ] $IB_SW_NODE = IB_SW_NODE
+
+[ Constant : int  ] $IB_CA_NODE = IB_CA_NODE
+
+=back 4
+
+=head2 Log Verbosity Flags
+
+The following constants are used as argument bits for the global variable $FabricUtilsVerboseLevel
+
+=over 4
+
+[ Constant : int  ] $FABU_LOG_NONE = 0x0
+
+[ Constant : int  ] $FABU_LOG_ERROR = 0x1
+
+[ Constant : int  ] $FABU_LOG_INFO = 0x2
+
+[ Constant : int  ]  $FABU_LOG_VERBOSE = 0x4
+
+=back 4
+
+=head1 IBDM Globals
+
+Log level: set to FABU_LOG* values
+
+=over 4
+
+[ Global : int ] $FabricUtilsVerboseLevel
+
+=back 4
+
+=head1 IBDM Objects
+
+This section decribes the various object types exposed by IBDM.
+
+
+IBDM exposes some of its internal objects. The objects identifiers returned by the various function calls are formatted according to the following rules:
+
+Fabric: fabric:<idx>
+
+System: system:<fab idx>:<sys name>
+
+SysPort: sysport:<fab idx>:<sys name>:<port name>
+
+Node: node:<fab idx>:<node name>
+
+Port: port:<fab idx>:<node name>/<port num>
+
+IBDM Objects are standard Swig-Tcl objects. As such they have two flavors for their usage: Variables, Objects.
+
+B<Variables/Pointers:>
+   For each object attribute a "get" and "set" methods are provided.
+   The format of the methods is: <class>_<attribute>_<get|set>.
+   The "set" method is only available for read/write attributes.
+
+   Example:
+   set nodes [ibdm_get_nodes]
+   set node  [lindex $nodes 0]
+   IBNode_numPorts_get $node
+
+B<Objects:>
+   Given an object pointer one can convert it to a Tcl "Object"
+   using the following command:
+   <class> <obj_name> -this <obj pointer>
+
+   Once declared the <obj-name> can be used in conjunction to
+   with the standard "configure" and "cget" commands.
+
+   Example (following the previous one):
+   IBFabric VaTech -this $fabric
+   VaTech cget -NodeByName
+
+   To delete an object symbol (and enable its mapping to another
+   pointer) use:
+   rename <obj name> ""
+   for example:
+   rename VaTech ""
+
+=head2 class IBPort
+
+The following are the different fields and methods of the IB Port class which describes an IB device (chip) physical port.
+
+=item [ Member data: returns IBPort * ] -p_remotePort
+
+Port connected on the other side of link
+
+=item [ Member data: returns IBSysPort * ] -p_sysPort
+
+The system port (if any) connected to
+
+=item [ Member data: returns IBNode * ] -p_node
+
+The node the port is part of.
+
+=item [ Member data: returns int ] -num
+
+Physical ports are identified by number.
+
+=item [ Member data: returns unsigned int  ] -base_lid
+
+The base lid assigned to the port.
+
+=item [ Member data: returns IBLinkWidth * ] -width
+
+The link width of the port
+
+=item [ Member data: returns IBLinkSpeed * ] -speed
+
+The link speed of the port
+
+=item [ Member data: returns unsigned int  ] -counter1
+
+A generic value to be used by various algorithms
+
+=item [ Constructor: returns IBPort * ] IBPort name p_nodePtr number
+
+IBPort constructor
+
+=item [ Member : returns new_uint64_t  ] guid_get
+
+Obtain the guid of the port
+
+=item [ Member : returns void  ] guid_set guid
+
+Modify the guid of the port
+
+=item [ Member : returns new_string  ] getName
+
+Get the port name: A device port connected to system port (front pannel) returns the front pannel port name.
+
+=item [ Member : returns void  ] connect p_otherPort ?width? ?speed?
+
+Connect the port to another node port with optional width and speed parameters
+
+=item [ Member : returns int  ] disconnect
+
+Disconnect the port. Return 0 if successful
+
+=head2 class IBNode
+
+The IB Node class represents a single IB Device (chip)
+
+=item [ Member data: returns string * ] -name
+
+Name of the node (instance name of the chip)
+
+=item [ Member data: returns IBNodeType  ] -type
+
+Either a $IB_SW_NODE or $IB_CA_NODE
+
+=item [ Member data: returns uint16_t * ] -devId
+
+The device ID of the node
+
+=item [ Member data: returns uint16_t * ] -revId
+
+The device revision Id.
+
+=item [ Member data: returns uint16_t * ] -vendId
+
+The device Vendor ID.
+
+=item [ Member data: returns string * ] -attributes
+
+Comma-sep string of arbitrary attributes k=v
+
+=item [ Member data: returns uint8_t ] -rank
+
+The rank of the node (0 is a root)
+
+=item [ Member data: returns IBSystem * ] -p_system
+
+What system we belong to
+
+=item [ Member data: returns IBFabric * ] -p_fabric
+
+What fabric we belong to.
+
+=item [ Member data: returns unsigned int  ] -numPorts
+
+Number of physical ports
+
+=item [ Member data: returns vec_pport * ] -Ports
+
+Vector of all the ports
+
+=item [ Member data: returns vec_vec_byte * ] -MinHopsTable
+
+A table of the number of hops required to get from each port to each target LID
+
+=item [ Member data: returns vec_byte * ] -LFT
+
+The LFT of this node (for switches only) which is a long vector of target ports - index is the LID
+
+=item [ Member : returns new_uint64_t  ] guid_get
+
+Obtain the node GUID
+
+=item [ Member : returns void  ] guid_set guid
+
+Set the node GUID
+
+=item [ Constructor: returns IBNode * ] IBNode name n p_fab p_sys t np
+
+Constractor
+
+=item [ Member : returns IBPort * ] makePort num
+
+Create a new port by its number (if required) return the port pointer
+
+=item [ Member : returns IBPort * ] getPort num
+
+Get a port by number num = 1..N:
+
+=item [ Member : returns void  ] setHops p_port lid hops
+
+Set the min hop for the given port (* is all) lid pair
+
+=item [ Member : returns int  ] getHops p_port lid
+
+Get the min number of hops defined for the given port or all
+
+=item [ Member : returns IBPort * ] getFirstMinHopPort lid
+
+Scan the node ports and find the first port with min hop to the lid
+
+=item [ Member : returns void  ] setLFTPortForLid lid portNum
+
+Set the Linear Forwarding Table for the given LID
+
+=item [ Member : returns int  ] getLFTPortForLid lid
+
+Get the LFT for a given LID
+
+=item [ Member : returns void  ] repHopTable
+
+Dump out the min hop table of the node
+
+=head2 class IBSysPort
+
+The IBSysPort class represents an IB plug on the system front or back pannels
+
+=item [ Member data: returns string * ] -name
+
+The front pannel name (silk) of the port
+
+=item [ Member data: returns IBSysPort * ] -p_remoteSysPort
+
+If connected the other side sys port
+
+=item [ Member data: returns IBSystem * ] -p_system
+
+System it benongs to
+
+=item [ Member data: returns IBPort * ] -p_nodePort
+
+The node port it connects to.
+
+=item [ Constructor: returns IBSysPort * ] IBSysPort name n p_sys
+
+Constructor
+
+=item [ Member : returns void  ] connect p_otherSysPort ?width? ?speed?
+
+Connect two SysPorts
+
+=item [ Member : returns int  ] disconnect
+
+Disconnect the SysPort (and ports). Return 0 if successful
+
+=head2 class IBSystem
+
+The IBSystem class represents an entire chassis
+
+=item [ Member data: returns string * ] -name
+
+The "host" name of the system
+
+=item [ Member data: returns string * ] -type
+
+What is the type i.e. Cougar, Buffalo, MTS2400, etc. A corresponding IBNL file should exist - defining this system type
+
+=item [ Member data: returns IBFabric * ] -p_fabric
+
+Fabric the system belongs to
+
+=item [ Member data: returns map_str_pnode * ] -NodeByName
+
+Provide the node pointer by its name
+
+=item [ Member data: returns map_str_psysport * ] -PortByName
+
+A map provising pointer to the SysPort by name
+
+=item [ Constructor: returns IBSystem * ] IBSystem name n p_fab t
+
+Constractor
+
+=item [ Member : returns new_uint64_t  ] guid_get
+
+Obtain the system image GUID
+
+=item [ Member : returns void  ] guid_set guid
+
+Set the system image GUID
+
+=item [ Member : returns IBSysPort * ] makeSysPort pName
+
+Make sure we got the port defined (so define it if not)
+
+=item [ Member : returns IBPort * ] getSysPortNodePortByName sysPortName
+
+Get the node port for the given sys port by name
+
+=item [ Member : returns IBSysPort * ] getSysPort name
+
+Get a Sys Port by name
+
+=head2 class IBFabric
+
+Represents an entire IB subnet made of systems
+
+=item [ Member data: returns map_str_pnode * ] -NodeByName
+
+Provide a list of node name and pointer pairs
+
+=item [ Member data: returns map_str_psys * ] -SystemByName
+
+Provide a list of system name and pointer pairs
+
+=item [ Member data: returns vec_pport * ] -PortByLid
+
+Provides a list of system port name and pointer pairs
+
+=item [ Member data: returns map_guid_pnode * ] -NodeByGuid
+
+Provides a list of node guid and node pointer pairs
+
+=item [ Member data: returns map_guid_psys * ] -SystemByGuid
+
+Provides a list of system image guid and system pointer pairs
+
+=item [ Member data: returns map_guid_pport * ] -PortByGuid
+
+Provides a list of port guid and port pointer pairs
+
+=item [ Member data: returns unsigned int  ] -minLid
+
+Track min lid used.
+
+=item [ Member data: returns unsigned int  ] -maxLid
+
+Track max lid used.
+
+=item [ Member data: returns unsigned int  ] -lmc
+
+LMC value used
+
+=item [ Member : returns IBNode * ] makeNode n p_sys type numPorts
+
+Get the node by its name (create one of does not exist)
+
+=item [ Member : returns IBNode * ] getNode name
+
+Get the node by its name
+
+=item [ Member : returns list_pnode * ] getNodesByType type
+
+Return the list of node pointers matching the required type
+
+=item [ Member : returns IBSystem * ] makeGenericSystem name
+
+Create a new generic system - basically an empty container for nodes...
+
+=item [ Member : returns IBSystem * ] makeSystem name type
+
+Create a new system - the type must have a registed factory.
+
+=item [ Member : returns IBSystem * ] getSystem name
+
+Get system by name
+
+=item [ Member : returns IBSystem * ] getSystemByGuid guid
+
+get the system by its guid
+
+=item [ Member : returns IBNode * ] getNodeByGuid guid
+
+get the node by its guid
+
+=item [ Member : returns IBPort * ] getPortByGuid guid
+
+get the port by its guid
+
+=item [ Member : returns void  ] addCable t1 n1 p1 t2 n2 p2 ?width? ?speed?
+
+Adds a cable given two sets of node type, node name and port number. Optionally  use a given width and speed for the connection
+
+=item [ Member : returns int  ] parseCables fn
+
+Parse the cables file and build the fabric
+
+=item [ Member : returns int  ] parseTopology fn
+
+Parse Topology File and build the fabric
+
+=item [ Member : returns int  ] addLink type1 numPorts1 sysGuid1 nodeGuid1 portGuid1 vend1 devId1 rev1 desc1 lid1 portNum1 type2 numPorts2 sysGuid2 nodeGuid2 portGuid2 vend2 devId2 rev2 desc2 lid2 portNum2 ?width? ?speed?
+
+Add a link into the fabric - this will create system and nodes as required.
+
+=item [ Member : returns int  ] parseSubnetLinks fn
+
+Parse the OpenSM subnet.lst file and build the fabric from it.
+
+=item [ Member : returns int  ] parseFdbFile fn
+
+Parse OpenSM FDB dump file and fill in the switches LFT tables
+
+=item [ Member : returns int  ] parseMCFdbFile fn
+
+Parse an OpenSM MCFDBs file and set the MFT table accordingly
+
+=item [ Member : returns int  ] parsePSLFile fn
+
+Parse Path to SL mapping file. Each line with:
+src_node_guid DLID SL
+
+Used by credit loop check
+
+=item [ Member : returns int  ] parseSLVLFile fn
+
+Parse SLVL tables file. Each line holds:
+sw_node_guid in_port out_port 0x(sl0)(sl1) 0x(sl2)(sl3)...
+
+=item [ Member : returns void  ] setLidPort lid p_port
+
+Set a lid port
+
+=item [ Member : returns IBPort * ] getPortByLid lid
+
+Get a port by lid
+
+=item [ returns IBFabric * ] new_IBFabric
+
+Construct a new fabric
+
+=item [ returns void  ] delete_IBFabric p_fabric
+
+Destruct a fabric
+
+=head1 IBDM Functions
+
+This section provide the details about the functions IBDM exposes.
+The order follows the expected order in a regular IBDM flow.
+They all return 0 on succes.
+
+=head2  Subnet Utilities
+
+The file holds a set of utilities to be run on the subnet to mimic OpenSM initialization and analyze the results:
+
+=item [ returns int  ] ibdmAssignLids p_smNodePort ?lmc?
+
+Assign LIDs with an optional LMC (multiple LID per port)
+
+=item [ returns int  ] ibdmCalcMinHopTables p_fabric
+
+Calculate and populate the MinHopTables required for running OpenSM style routing.
+
+=item [ returns int  ] ibdmCalcUpDnMinHopTbls p_fabric rootNodesNameRex
+
+Calculate and populate the MinHopTables following Up/Down rule.
+
+=item [ returns int  ] ibdmOsmRoute p_fabric
+
+Route the fabric with OpenSM style routing
+
+=item [ returns int  ] ibdmEnhancedRoute p_fabric
+
+Route the fabric with OpenSM style routing enhanced with better support for LMC > 0
+
+=item [ returns int  ] ibdmFatTreeRoute p_fabric rootNodes
+
+Route the fabric using algorithm that fits only full fat trees
+
+=item [ returns int  ] ibdmFatTreeAnalysis p_fabric
+
+Analyze the fabric to see if it is a fat tree and route it if it is
+
+=item [ returns int  ] ibdmVerifyCAtoCARoutes p_fabric
+
+Make sure all (H)CAs are connected to each other based on the LFT settings
+
+=item [ returns int  ] ibdmVerifyAllPaths p_fabric
+
+Make sure all Switches and (H)CAs are connected to each other based on the LFT settings
+
+=item [ returns int  ] ibdmAnalyzeLoops p_fabric
+
+A rigorous check for credit loops. This algorithm does a full and accurate check but its reporting of credit loop paths is hard to interpret. If you know the roots of the tree (or the tree is symmetrical) it is preferable to use the ibdmReportNonUpDownCa2CaPaths
+
+=item [ returns list_pnode  ] ibdmFindSymmetricalTreeRoots p_fabric
+
+Analyze the tree topology and find the roots of the tree based on its symmetry
+
+=item [ returns list_pnode  ] ibdmFindRootNodesByMinHop p_fabric
+
+Based on the MinHopTable find the roots of the tree. A 5% assymetry is allowed
+
+=item [ returns int  ] ibdmRankFabricByRoots p_fabric rootNodes
+
+Given the list of root nodes (names) rank the nodes (root = 0)
+
+=item [ returns int  ] ibdmReportNonUpDownCa2CaPaths p_fabric rootNodes
+
+Analyze the routes to make sure Up/Down rule is maintained
+
+=item [ returns int  ] ibdmCheckMulticastGroups p_fabric
+
+Verify connectivity of multicast routing
+
+=item [ returns int  ] ibdmCheckFabricMCGrpsForCreditLoopPotential p_fabric rootNodes
+
+Analyze multicast routing to make sure it obeys Up/Down rule
+
+=item [ returns int  ] ibdmLinkCoverageAnalysis p_fabric rootNodes
+
+Prepare a schedule for transmission from a set of sources to destinations such that in each stage there are no links that are over subscribed and after all stages all the links of the fabric were excersized
+
+=head2  Tracing Utilities
+
+These functions allows tracing paths reporting back the visited nodes
+
+=item [ returns int  ] ibdmTraceDRPathRoute p_smNodePort drPathPortNums
+
+Trace a directed route path from the given port
+
+=item [ returns int  ] ibdmTraceRouteByMinHops p_fabric slid dlid
+
+Trace a path along the MinHop from the source to destination LIDs
+
+=item [ returns int  ] ibdmTraceRouteByLFT p_fabric slid dlid hops p_nodesList
+
+Trace a path following the LFT updating the hops and node list variables
+
+=head2 Topology Matching Utilities
+
+The following utilities matches two fabrics providing both missmatch messages and a unified fabric
+
+=item [ returns int  ] ibdmMatchFabrics p_spec_fabric p_discovered_fabric anchorNodeName anchorPortNum anchorPortGuid
+
+Match a topology based fabric with a discovered one starting at the enchor port
+
+=item [ returns int  ] ibdmBuildMergedFabric p_spec_fabric p_discovered_fabric p_merged_fabric
+
+After matching using ibdmMatchFabrics populate the "merged fabric" with information merged for the matched nodes
+
+=head2 Congestion Analysis Utilities
+
+Provide ability to track and report link oversubscription
+
+=item [ returns int  ] ibdmCongInit p_fabric
+
+Initialize the tracking system
+
+=item [ returns int  ] ibdmCongCleanup p_fabric
+
+Cleanup the counters and deallocate
+
+=item [ returns int  ] ibdmCongClear p_fabric
+
+Cleanup counters
+
+=item [ returns int  ] ibdmCongTrace p_fabric srcLid dstLid
+
+Trace a path between the LIDs updating link usage info
+
+=item [ returns int  ] ibdmCongReport p_fabric
+
+Report the resulting congestion information
+
+=item [ returns int  ] ibdmCongDump p_fabric
+
+Dump all congestion tracking info
+
+=head1 AUTHOR
+
+Eitan Zahavi, Mellanox Technologies LTD, eitan@mellanox.co.il

@@ -1,0 +1,338 @@
+From: Vladimir Sokolovsky <vlad@mellanox.com>
+Subject: [PATCH] BACKPORT: nfsrdma
+
+Signed-off-by: Vladimir Sokolovsky <vlad@mellanox.com>
+---
+ net/sunrpc/xprtrdma/rpc_rdma.c           |   24 ++++++++++++++
+ net/sunrpc/xprtrdma/svc_rdma_recvfrom.c  |   13 ++++++++
+ net/sunrpc/xprtrdma/svc_rdma_sendto.c    |    8 +++++
+ net/sunrpc/xprtrdma/svc_rdma_transport.c |    4 ++
+ net/sunrpc/xprtrdma/transport.c          |   49 ++++++++++++++++++++++++++++++
+ net/sunrpc/xprtrdma/xprt_rdma.h          |   15 +++++++++
+ 6 files changed, 113 insertions(+), 0 deletions(-)
+
+diff --git a/net/sunrpc/xprtrdma/rpc_rdma.c b/net/sunrpc/xprtrdma/rpc_rdma.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/net/sunrpc/xprtrdma/rpc_rdma.c
++++ b/net/sunrpc/xprtrdma/rpc_rdma.c
+@@ -171,7 +171,11 @@ rpcrdma_create_chunks(struct rpc_rqst *rqst, struct xdr_buf *target,
+ 		struct rpcrdma_msg *headerp, enum rpcrdma_chunktype type)
+ {
+ 	struct rpcrdma_req *req = rpcr_to_rdmar(rqst);
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,9,0))
+ 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(rqst->rq_task->tk_xprt);
++#else
++	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(rqst->rq_xprt);
++#endif
+ 	int nsegs, nchunks = 0;
+ 	unsigned int pos;
+ 	struct rpcrdma_mr_seg *seg = req->rl_segments;
+@@ -338,9 +342,17 @@ rpcrdma_inline_pullup(struct rpc_rqst *rqst, int pad)
+ 			curlen = copy_len;
+ 		dprintk("RPC:       %s: page %d destp 0x%p len %d curlen %d\n",
+ 			__func__, i, destp, copy_len, curlen);
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0))
+ 		srcp = kmap_atomic(ppages[i]);
++#else
++		srcp = kmap_atomic(ppages[i], KM_SKB_SUNRPC_DATA);
++#endif
+ 		memcpy(destp, srcp+page_base, curlen);
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0))
+ 		kunmap_atomic(srcp);
++#else
++		kunmap_atomic(srcp, KM_SKB_SUNRPC_DATA);
++#endif
+ 		rqst->rq_svec[0].iov_len += curlen;
+ 		destp += curlen;
+ 		copy_len -= curlen;
+@@ -366,7 +378,11 @@ rpcrdma_inline_pullup(struct rpc_rqst *rqst, int pad)
+ int
+ rpcrdma_marshal_req(struct rpc_rqst *rqst)
+ {
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,9,0))
+ 	struct rpc_xprt *xprt = rqst->rq_task->tk_xprt;
++#else
++	struct rpc_xprt *xprt = rqst->rq_xprt;
++#endif
+ 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(xprt);
+ 	struct rpcrdma_req *req = rpcr_to_rdmar(rqst);
+ 	char *base;
+@@ -639,10 +655,18 @@ rpcrdma_inline_fixup(struct rpc_rqst *rqst, char *srcp, int copy_len, int pad)
+ 			dprintk("RPC:       %s: page %d"
+ 				" srcp 0x%p len %d curlen %d\n",
+ 				__func__, i, srcp, copy_len, curlen);
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0))
+ 			destp = kmap_atomic(ppages[i]);
++#else
++			destp = kmap_atomic(ppages[i], KM_SKB_SUNRPC_DATA);
++#endif
+ 			memcpy(destp + page_base, srcp, curlen);
+ 			flush_dcache_page(ppages[i]);
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0))
+ 			kunmap_atomic(destp);
++#else
++			kunmap_atomic(destp, KM_SKB_SUNRPC_DATA);
++#endif
+ 			srcp += curlen;
+ 			copy_len -= curlen;
+ 			if (copy_len == 0)
+diff --git a/net/sunrpc/xprtrdma/svc_rdma_recvfrom.c b/net/sunrpc/xprtrdma/svc_rdma_recvfrom.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/net/sunrpc/xprtrdma/svc_rdma_recvfrom.c
++++ b/net/sunrpc/xprtrdma/svc_rdma_recvfrom.c
+@@ -520,12 +520,21 @@ next_sge:
+ 	for (ch_no = 0; &rqstp->rq_pages[ch_no] < rqstp->rq_respages; ch_no++)
+ 		rqstp->rq_pages[ch_no] = NULL;
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 12, 0))
+ 	/*
+ 	 * Detach res pages. svc_release must see a resused count of
+ 	 * zero or it will attempt to put them.
+ 	 */
+ 	while (rqstp->rq_resused)
+ 		rqstp->rq_respages[--rqstp->rq_resused] = NULL;
++#else
++	/*
++	 * Detach res pages. If svc_release sees any it will attempt to
++	 * put them.
++	 */
++	while (rqstp->rq_next_page != rqstp->rq_respages)
++		*(--rqstp->rq_next_page) = NULL;
++#endif
+ 
+ 	return err;
+ }
+@@ -550,7 +559,11 @@ static int rdma_read_complete(struct svc_rqst *rqstp,
+ 
+ 	/* rq_respages starts after the last arg page */
+ 	rqstp->rq_respages = &rqstp->rq_arg.pages[page_no];
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 12, 0))
+ 	rqstp->rq_resused = 0;
++#else
++	rqstp->rq_next_page = &rqstp->rq_arg.pages[page_no];
++#endif
+ 
+ 	/* Rebuild rq_arg head and tail. */
+ 	rqstp->rq_arg.head[0] = head->arg.head[0];
+diff --git a/net/sunrpc/xprtrdma/svc_rdma_sendto.c b/net/sunrpc/xprtrdma/svc_rdma_sendto.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/net/sunrpc/xprtrdma/svc_rdma_sendto.c
++++ b/net/sunrpc/xprtrdma/svc_rdma_sendto.c
+@@ -548,6 +548,9 @@ static int send_reply(struct svcxprt_rdma *rdma,
+ 	int sge_no;
+ 	int sge_bytes;
+ 	int page_no;
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 12, 0))
++	int pages;
++#endif
+ 	int ret;
+ 
+ 	/* Post a recv buffer to handle another request. */
+@@ -611,7 +614,12 @@ static int send_reply(struct svcxprt_rdma *rdma,
+ 	 * respages array. They are our pages until the I/O
+ 	 * completes.
+ 	 */
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 12, 0))
++	pages = rqstp->rq_next_page - rqstp->rq_respages;
++	for (page_no = 0; page_no < pages; page_no++) {
++#else
+ 	for (page_no = 0; page_no < rqstp->rq_resused; page_no++) {
++#endif
+ 		ctxt->pages[page_no+1] = rqstp->rq_respages[page_no];
+ 		ctxt->count++;
+ 		rqstp->rq_respages[page_no] = NULL;
+diff --git a/net/sunrpc/xprtrdma/svc_rdma_transport.c b/net/sunrpc/xprtrdma/svc_rdma_transport.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/net/sunrpc/xprtrdma/svc_rdma_transport.c
++++ b/net/sunrpc/xprtrdma/svc_rdma_transport.c
+@@ -445,7 +445,11 @@ static struct svcxprt_rdma *rdma_create_xprt(struct svc_serv *serv,
+ 
+ 	if (!cma_xprt)
+ 		return NULL;
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0))
+ 	svc_xprt_init(&init_net, &svc_rdma_class, &cma_xprt->sc_xprt, serv);
++#else
++	svc_xprt_init(&svc_rdma_class, &cma_xprt->sc_xprt, serv);
++#endif
+ 	INIT_LIST_HEAD(&cma_xprt->sc_accept_q);
+ 	INIT_LIST_HEAD(&cma_xprt->sc_dto_q);
+ 	INIT_LIST_HEAD(&cma_xprt->sc_rq_dto_q);
+diff --git a/net/sunrpc/xprtrdma/transport.c b/net/sunrpc/xprtrdma/transport.c
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/net/sunrpc/xprtrdma/transport.c
++++ b/net/sunrpc/xprtrdma/transport.c
+@@ -51,6 +51,9 @@
+ #include <linux/init.h>
+ #include <linux/slab.h>
+ #include <linux/seq_file.h>
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,9,0))
++#include <linux/sunrpc/addr.h>
++#endif
+ 
+ #include "xprt_rdma.h"
+ 
+@@ -85,7 +88,11 @@ static unsigned int max_memreg = RPCRDMA_LAST - 1;
+ 
+ static struct ctl_table_header *sunrpc_table_header;
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,11,0))
+ static ctl_table xr_tunables_table[] = {
++#else
++static struct ctl_table xr_tunables_table[] = {
++#endif
+ 	{
+ 		.procname	= "rdma_slot_table_entries",
+ 		.data		= &xprt_rdma_slot_table_entries,
+@@ -137,7 +144,11 @@ static ctl_table xr_tunables_table[] = {
+ 	{ },
+ };
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,11,0))
+ static ctl_table sunrpc_table[] = {
++#else
++static struct ctl_table sunrpc_table[] = {
++#endif
+ 	{
+ 		.procname	= "sunrpc",
+ 		.mode		= 0555,
+@@ -277,8 +288,14 @@ xprt_setup_rdma(struct xprt_create *args)
+ 		return ERR_PTR(-EBADF);
+ 	}
+ 
++#ifdef CONFIG_COMPAT_XPRTRDMA_NEEDED
+ 	xprt = xprt_alloc(args->net, sizeof(struct rpcrdma_xprt),
++#ifdef CONFIG_COMPAT_XPRT_ALLOC_4PARAMS
+ 			xprt_rdma_slot_table_entries,
++#endif
++#else
++	xprt = xprt_alloc(sizeof(struct rpcrdma_xprt),
++#endif
+ 			xprt_rdma_slot_table_entries);
+ 	if (xprt == NULL) {
+ 		dprintk("RPC:       %s: couldn't allocate rpcrdma_xprt\n",
+@@ -425,10 +442,16 @@ xprt_rdma_set_port(struct rpc_xprt *xprt, u16 port)
+ 	dprintk("RPC:       %s: %u\n", __func__, port);
+ }
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,9,0))
+ static void
+ xprt_rdma_connect(struct rpc_task *task)
+ {
+ 	struct rpc_xprt *xprt = (struct rpc_xprt *)task->tk_xprt;
++#else
++static void
++xprt_rdma_connect(struct rpc_xprt *xprt, struct rpc_task *task)
++{
++#endif
+ 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(xprt);
+ 
+ 	if (r_xprt->rx_ep.rep_connected != 0) {
+@@ -448,8 +471,14 @@ xprt_rdma_connect(struct rpc_task *task)
+ }
+ 
+ static int
++#ifdef CONFIG_COMPAT_XPRTRDMA_NEEDED
+ xprt_rdma_reserve_xprt(struct rpc_xprt *xprt, struct rpc_task *task)
+ {
++#else
++xprt_rdma_reserve_xprt(struct rpc_task *task)
++{
++	struct rpc_xprt *xprt = task->tk_xprt;
++#endif
+ 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(xprt);
+ 	int credits = atomic_read(&r_xprt->rx_buf.rb_credits);
+ 
+@@ -461,7 +490,11 @@ xprt_rdma_reserve_xprt(struct rpc_xprt *xprt, struct rpc_task *task)
+ 		BUG_ON(r_xprt->rx_buf.rb_cwndscale <= 0);
+ 	}
+ 	xprt->cwnd = credits * r_xprt->rx_buf.rb_cwndscale;
++#ifdef CONFIG_COMPAT_XPRT_RESERVE_XPRT_CONG_2PARAMS
+ 	return xprt_reserve_xprt_cong(xprt, task);
++#else
++	return xprt_reserve_xprt_cong(task);
++#endif
+ }
+ 
+ /*
+@@ -475,7 +508,11 @@ xprt_rdma_reserve_xprt(struct rpc_xprt *xprt, struct rpc_task *task)
+ static void *
+ xprt_rdma_allocate(struct rpc_task *task, size_t size)
+ {
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,9,0))
+ 	struct rpc_xprt *xprt = task->tk_xprt;
++#else
++	struct rpc_xprt *xprt = task->tk_rqstp->rq_xprt;
++#endif
+ 	struct rpcrdma_req *req, *nreq;
+ 
+ 	req = rpcrdma_buffer_get(&rpcx_to_rdmax(xprt)->rx_buf);
+@@ -627,7 +664,11 @@ static int
+ xprt_rdma_send_request(struct rpc_task *task)
+ {
+ 	struct rpc_rqst *rqst = task->tk_rqstp;
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,9,0))
+ 	struct rpc_xprt *xprt = task->tk_xprt;
++#else
++	struct rpc_xprt *xprt = rqst->rq_xprt;
++#endif
+ 	struct rpcrdma_req *req = rpcr_to_rdmar(rqst);
+ 	struct rpcrdma_xprt *r_xprt = rpcx_to_rdmax(xprt);
+ 
+@@ -656,7 +697,13 @@ xprt_rdma_send_request(struct rpc_task *task)
+ 	if (rpcrdma_ep_post(&r_xprt->rx_ia, &r_xprt->rx_ep, req))
+ 		goto drop_connection;
+ 
++#ifdef CONFIG_COMPAT_XPRTRDMA_NEEDED
+ 	rqst->rq_xmit_bytes_sent += rqst->rq_snd_buf.len;
++#else
++#ifdef CONFIG_COMPAT_XPRT_TK_BYTES_SENT
++	task->tk_bytes_sent += rqst->rq_snd_buf.len;
++#endif
++#endif
+ 	rqst->rq_bytes_sent = 0;
+ 	return 0;
+ 
+@@ -707,7 +754,9 @@ static void xprt_rdma_print_stats(struct rpc_xprt *xprt, struct seq_file *seq)
+ static struct rpc_xprt_ops xprt_rdma_procs = {
+ 	.reserve_xprt		= xprt_rdma_reserve_xprt,
+ 	.release_xprt		= xprt_release_xprt_cong, /* sunrpc/xprt.c */
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
+ 	.alloc_slot		= xprt_alloc_slot,
++#endif
+ 	.release_request	= xprt_release_rqst_cong,       /* ditto */
+ 	.set_retrans_timeout	= xprt_set_retrans_timeout_def, /* ditto */
+ 	.rpcbind		= rpcb_getport_async,	/* sunrpc/rpcb_clnt.c */
+diff --git a/net/sunrpc/xprtrdma/xprt_rdma.h b/net/sunrpc/xprtrdma/xprt_rdma.h
+index xxxxxxx..xxxxxxx xxxxxx
+--- a/net/sunrpc/xprtrdma/xprt_rdma.h
++++ b/net/sunrpc/xprtrdma/xprt_rdma.h
+@@ -234,14 +234,29 @@ struct rpcrdma_create_data_internal {
+ 	unsigned int	padding;	/* non-rdma write header padding */
+ };
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,9,0))
+ #define RPCRDMA_INLINE_READ_THRESHOLD(rq) \
+ 	(rpcx_to_rdmad(rq->rq_task->tk_xprt).inline_rsize)
++#else
++#define RPCRDMA_INLINE_READ_THRESHOLD(rq) \
++	(rpcx_to_rdmad(rq->rq_xprt).inline_rsize)
++#endif
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,9,0))
+ #define RPCRDMA_INLINE_WRITE_THRESHOLD(rq)\
+ 	(rpcx_to_rdmad(rq->rq_task->tk_xprt).inline_wsize)
++#else
++#define RPCRDMA_INLINE_WRITE_THRESHOLD(rq)\
++	(rpcx_to_rdmad(rq->rq_xprt).inline_wsize)
++#endif
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,9,0))
+ #define RPCRDMA_INLINE_PAD_VALUE(rq)\
+ 	rpcx_to_rdmad(rq->rq_task->tk_xprt).padding
++#else
++#define RPCRDMA_INLINE_PAD_VALUE(rq)\
++	rpcx_to_rdmad(rq->rq_xprt).padding
++#endif
+ 
+ /*
+  * Statistics for RPCRDMA

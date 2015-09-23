@@ -1,0 +1,146 @@
+#!/bin/bash
+if [ "$1" == "-s" ]; then echo OFED-internal-2.3-2.0.0:;exit; fi
+cat << EOF
+OFED-internal-2.3-2.0.0:
+
+ar_mgr:
+ar_mgr/e338fbc05dd6b480f8505791e50700b7/ar_mgr-1.0-0.23.g20d8d45.tar.gz
+
+bupc:
+bupc/6b0f0c8b7d7ff2e258e600d65f6da291/bupc-2.18.0-421.src.rpm
+
+cc_mgr:
+cc_mgr/4a29eb085479e51b6bb278efcddfe379/cc_mgr-1.0-0.22.g20d8d45.tar.gz
+
+dapl:
+dapl.git mlnx_ofed
+commit 949cf71c548b235c648b1a1c58def33923e16cc8
+dump_pr:
+dump_pr/dcf9ad8e6635181f4e727e6005b54ff8/dump_pr-1.0-0.20.g20d8d45.tar.gz
+
+fabric-collector:
+fabric-collector/97b38af1b7eb4218c8a75b1f1832cd10/fabric-collector-1.1.0.MLNX20140410.51b267e.tar.gz
+
+fca:
+fca/733c4d431dbde37f8ed285fe5afe802f/fca-2.5.2403-1.src.rpm
+
+hcoll:
+hcoll/ebe83b6d92aa94af423bfa87ba66d118/hcoll-3.1.683-1.src.rpm
+
+ibacm:
+mlnx_ofed/ibacm.git mlnx_ofed_2_3
+commit 2ece8e002a7dd3c2e03f9a383654cc63cfa92d93
+ibdump:
+ibdump/ibdump-2.0.0-9.tgz
+
+ibsim:
+ibsim/b86c1bcf9ff3a1b0da9e082ab604dc2a/ibsim-0.5-0.6.gc67be6e.tar.gz
+
+ibutils:
+ibutils/0e10241f613a37b341864482b4910fc7/ibutils-1.5.7.1-0.10.g385f871.tar.gz
+
+ibutils2:
+ibutils2/86cfa483cac850135cf64612d492ea61/ibutils2-2.1.1-0.49.MLNX20141105.g0610340.tar.gz
+
+infiniband-diags:
+infiniband-diags/4b2700a78d694d0a97f11406997c70ed/infiniband-diags-1.6.4.MLNX20140817.10ee11a.tar.gz
+
+infinipath-psm:
+infinipath-psm/eb0d37475ec23b4e51f1f8d1069a412f/infinipath-psm-3.1-364.1140_open.tar.gz
+
+iser:
+mlnx_ofed/mlnx-ofed-2.x-kernel.git mlnx_ofed_2_3
+commit 7e4238cc2a2d6f27261ff9ba067650f8c103b73b
+kernel-mft:
+kernel-mft/d0178fc9ddc29cb109780c5475691c7c/kernel-mft-3.7.1-3.src.rpm
+
+knem:
+knem.git mellanox-master
+commit 1cdd89384df3fe299bdc753a2ea1c54af42d5d1e
+libibcm:
+mlnx_ofed/libibcm.git mlnx_ofed_2_0
+commit c8011c59dad53cda4b340eec54efd4e7ab4e5d24
+libibmad:
+libibmad/453a11ce362cee4684e52bd4fdb928a3/libibmad-1.3.11.MLNX20140817.fad53c6.tar.gz
+
+libibprof:
+libibprof/e790d3ae841951e9c7c71ad9f6462bbd/libibprof-1.0.98-1.src.rpm
+
+libibumad:
+libibumad/57bb5983769fce36537af65edd2c33da/libibumad-1.3.9.MLNX20140817.485ffa6.tar.gz
+
+libibverbs:
+mlnx_ofed/libibverbs.git mlnx_ofed_2_3
+commit 4d8b1793d416fedfcf9da2f47625d194149469ef
+libmlx4:
+mlnx_ofed/libmlx4.git mlnx_ofed_2_3
+commit 7960085656fd9e19a1580ed97fda2da1c06b2654
+libmlx5:
+mlnx_ofed/libmlx5.git mlnx_ofed_2_3
+commit 0d33feeef0d0ac75c3776010c7edd1107fa51be0
+librdmacm:
+mlnx_ofed/librdmacm.git mlnx_ofed_2_3
+commit c0b63e71ef5d6724a79644fc714f7e535ab14b24
+libsdp:
+libsdp/badedec1a5f310247e22fb686ddaeb67/libsdp-1.1.108-0.17.ga6958ef.src.rpm
+
+libvma:
+libvma/6b80f95fe34c8c50026a289afaa71c98/libvma-6.7.2-0.src.rpm
+
+mlnx-ofa_kernel:
+mlnx_ofed/mlnx-ofed-2.x-kernel.git 7e4238cc2a2d6f27261ff9ba067650f8c103b73b
+commit 7e4238cc2a2d6f27261ff9ba067650f8c103b73b
+
+mpi-selector:
+mpi-selector/33afc8610e3e68fc2575987a751f3f2e/mpi-selector-1.0.3-1.src.rpm
+
+mpitests:
+mpitests/4dd1ed615582e06d2254af136c5ef040/mpitests-3.2.14-20dd2f2.src.rpm
+
+mstflint:
+mstflint/7246471893dcd1d9c95255963a293719/mstflint-3.7.1-1.22.g4354a45.tar.gz
+
+mvapich2:
+mvapich2/50d2ca13fd8e5e483cb7797e5c69e84a/mvapich2-2.0-1.src.rpm
+
+mxm:
+mxm/91d1ef569885e50241fb3ac2a3880152/mxm-3.2.2972-1.src.rpm
+
+ofed-docs:
+docs.git mlnx_ofed-2.3
+commit 6dd03c7065b813e8117b3b0746e17f71d8a0a79c
+
+openmpi:
+openmpi/8b77e399f604bf138dac5c1f442a6e2e/openmpi-1.8.4rc1-1.src.rpm
+
+opensm:
+opensm/5c9db5d6d0d7eb8d183a897749838a75/opensm-4.2.5.MLNX20140828.7f05469.tar.gz
+
+perftest:
+perftest/6cd1cbb85e3a691edeccaef5e9f39df2/perftest-2.3-0.12.gcb5b746.tar.gz
+
+qperf:
+qperf/a9eea1953ee5379e57ae5fd7b09fecf2/qperf-0.4.9.tar.gz
+
+rds-tools:
+rds-tools.git mlnx_ofed_2_3
+commit 28ecf58c8459eabb38808a904d5d5a34012c5932
+sdpnetstat:
+sdpnetstat/e056eaa9f58d495b7d43671c965c47ef/sdpnetstat-1.60-0.4.gb6e7425.tar.gz
+
+srp:
+mlnx_ofed/mlnx-ofed-2.x-kernel.git mlnx_ofed_2_3
+commit 7e4238cc2a2d6f27261ff9ba067650f8c103b73b
+srptools:
+srptools/15f3c07ba1218065471d104e8020125a/srptools-1.0.1-OFED.2.3.77.g941df2f.src.rpm
+
+EOF
+
+echo
+echo Installed Packages:
+echo -------------------
+if [ -x /usr/bin/dpkg ]; then
+dpkg --list | grep -E "ar-mgr|cc-mgr|libdapl-dev|libdapl2|dapl2-utils|dump-pr|fca|ibacm|ibacm-dev|ibsim|ibsim-doc|ibutils2|ibutils|libibdm1|infiniband-diags|infiniband-diags-compat|infiniband-diags-guest|iser-dkms|knem|knem-dkms|libibcm-dev|libibcm1|libibmad-devel|libibmad-static|libibmad|libibumad-devel|libibumad-static|libibumad|libibverbs1|libibverbs-dev|libibverbs1-dbg|ibverbs-utils|libmlx4-1|libmlx4-dev|libmlx4-1-dbg|libmlx5-1|libmlx5-dev|libmlx5-1-dbg|librdmacm-dev|librdmacm1|librdmacm-utils|libvma|mlnx-ofed-kernel-utils|mlnx-ofed-kernel-dkms|mpitests|mstflint|mxm-dev|mxm|openmpi|opensm|opensm-doc|libopensm|libopensm-devel|perftest|rds-tools|srp-dkms|srptools"
+else
+rpm -qa | grep -E "kernel-ib|ar_mgr|bupc|cc_mgr|dapl|dump_pr|fabric-collector|fca|hcoll|ibacm|ibdump|ibsim|ibutils|ibutils2|infiniband-diags|infinipath-psm|^iser|kmod-iser|iser.*kmp|kernel-mft|knem|libibcm|libibmad|libibprof|libibumad|libibverbs|libmlx4|libmlx5|librdmacm|libsdp|libvma|mlnx-ofa_kernel|mpi-selector|mpitests|mstflint|mvapich2|mxm|ofed-docs|openmpi|opensm|perftest|qperf|rds-tools|sdpnetstat|^srp|kmod-srp|srp.*kmp|srptools"
+fi

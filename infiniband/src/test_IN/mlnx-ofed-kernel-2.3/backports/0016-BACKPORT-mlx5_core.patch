@@ -1,0 +1,48 @@
+From fe63fe97427c8dce4b7cb1f4f528020a021fcb64 Mon Sep 17 00:00:00 2001
+From: Majd Dibbiny <majd@mellanox.com>
+Date: Wed, 22 Oct 2014 15:51:50 +0200
+Subject: [PATCH] BACKPORT: mlx5_core
+
+Change-Id: I54b805308ecaf40f7ed272a97660553906b4f57b
+Signed-off-by: Majd Dibbiny <majd@mellanox.com>
+---
+ drivers/net/ethernet/mellanox/mlx5/core/main.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/net/ethernet/mellanox/mlx5/core/main.c b/drivers/net/ethernet/mellanox/mlx5/core/main.c
+index f1529ec..a871685 100644
+--- a/drivers/net/ethernet/mellanox/mlx5/core/main.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/main.c
+@@ -925,6 +925,7 @@ static void remove_one(struct pci_dev *pdev)
+ 	mlx5_unregister_debugfs();
+ }
+ 
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 27))
+ #ifdef CONFIG_PM
+ static int suspend(struct device *device)
+ {
+@@ -996,6 +997,7 @@ static const struct dev_pm_ops mlnx_pm = {
+ 	.resume = resume,
+ };
+ #endif	/* CONFIG_PM */
++#endif
+ 
+ static pci_ers_result_t mlx5_pci_err_detected(struct pci_dev *pdev,
+ 					      pci_channel_state_t state)
+@@ -1087,11 +1089,13 @@ MODULE_DEVICE_TABLE(pci, mlx5_core_pci_table);
+ static struct pci_driver mlx5_core_driver = {
+ 	.name           = DRIVER_NAME,
+ 	.id_table       = mlx5_core_pci_table,
++#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 27))
+ #ifdef CONFIG_PM
+ 	.driver = {
+ 		.pm	= &mlnx_pm,
+ 	},
+ #endif /* CONFIG_PM */
++#endif
+ 	.probe          = init_one,
+ 	.remove         = remove_one,
+ 	.shutdown	= shutdown,
+-- 
+1.7.12.4
+

@@ -1,0 +1,5559 @@
+infiniband-diags (1.6.4.MLNX20140817.10ee11a) unstable; urgency=low
+
+  * MOFED: gen_chlog.sh: Eliminate commit objects ancestors comparison for debian
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Sun, 17 Aug 2014 16:35:44 +0300
+
+infiniband-diags (1.6.4.MLNX20140817.923b974) unstable; urgency=low
+
+  * debian: Update version number to 1.6.4
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Sun, 17 Aug 2014 13:25:53 +0300
+
+infiniband-diags (1.6.4.MLNX20140610.1cc530f) unstable; urgency=low
+
+  * ibportstate.c: Cosmetic changes to MLNX Extended PortInfo
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 10 Jun 2014 14:23:13 -0400
+
+infiniband-diags (1.6.4.MLNX20140419.cffc850) unstable; urgency=low
+
+  * infiniband-diags: If rst2man is available fix missing source dir in configure
+
+ --  Ira Weiny <ira.weiny@intel.com>  Sat, 19 Apr 2014 15:14:08 -0700
+
+infiniband-diags (1.6.4.MLNX20140331.539a03b) unstable; urgency=low
+
+  * Fix missing source dir in configure.ac
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Mon, 31 Mar 2014 10:03:19 +0300
+
+infiniband-diags (1.6.4.MLNX20140410.72a6032) unstable; urgency=low
+
+  * OFA: saquery:Add GRH support into saquery
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Thu, 10 Apr 2014 08:21:10 +0300
+
+infiniband-diags (1.6.4.MLNX20140401.df01b43) unstable; urgency=low
+
+  * OFA: ibdiag_common.c: fix invalid ca port -1
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Tue, 1 Apr 2014 17:00:40 +0300
+
+infiniband-diags (1.6.4.MLNX20140226.4759e75) unstable; urgency=low
+
+  * saquery.c: In query_sa_cpi, make error message consistent
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 26 Feb 2014 10:25:43 -0500
+
+infiniband-diags (1.6.4.MLNX20140226.964c9f9) unstable; urgency=low
+
+  * saquery.c: In print_node_record, change LID print format
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 26 Feb 2014 10:25:06 -0500
+
+infiniband-diags (1.6.4.MLNX20140125.73809e0) unstable; urgency=low
+
+  * update README for 1.6.4
+
+ --  Ira Weiny <ira.weiny@intel.com>  Sat, 25 Jan 2014 22:10:28 -0800
+
+infiniband-diags (1.6.4.MLNX20140125.51a8612) unstable; urgency=low
+
+  * Revert "libibnetdisc/ibnetdisc.c: improve log information to stdout"
+
+ --  Ira Weiny <ira.weiny@intel.com>  Sat, 25 Jan 2014 22:01:39 -0800
+
+infiniband-diags (1.6.4.MLNX20140124.1091479) unstable; urgency=low
+
+  * update README for 1.6.3
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 24 Jan 2014 19:34:22 -0800
+
+infiniband-diags (1.6.4.MLNX20140124.07b158a) unstable; urgency=low
+
+  * ibtracert.8.in: change default pre-built man page
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 24 Jan 2014 19:39:10 -0800
+
+infiniband-diags (1.6.4.MLNX20140121.6189aa2) unstable; urgency=low
+
+  * infiniband-diags: Check node-name-map strings when querying by name
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 21 Jan 2014 17:15:13 -0800
+
+infiniband-diags (1.6.4.MLNX20140304.2ae82ce) unstable; urgency=low
+
+  * MOFED: Added configuration flag to disable perl utils
+
+ --  Alex Netes <alexne@mellanox.com>  Tue, 4 Mar 2014 17:22:05 +0200
+
+infiniband-diags (1.6.4.MLNX20140101.75418e1) unstable; urgency=low
+
+  * ibnetdisc.c: improve log information to stdout
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Wed, 1 Jan 2014 10:06:23 +0200
+
+infiniband-diags (1.6.4.MLNX20131223.744ec44) unstable; urgency=low
+
+  * infiniband-diags/ibnetdisc.c: fix insert invalid lid number 65535 into lid_port hash_table.
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Mon, 23 Dec 2013 08:06:00 +0200
+
+infiniband-diags (1.6.4.MLNX20131013.eea5b26) unstable; urgency=low
+
+  * ibtracert.c: Add 'force' flag to man page
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Sun, 13 Oct 2013 09:48:36 +0200
+
+infiniband-diags (1.6.4.MLNX20131217.37bd59d) unstable; urgency=low
+
+  * infiniband-diags/vendstat: Fix GeneralInfo SW version
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Tue, 17 Dec 2013 17:27:24 +0200
+
+infiniband-diags (1.6.4.MLNX20131111.c6f9140) unstable; urgency=low
+
+  * Fixes for debian packaging
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Mon, 11 Nov 2013 07:34:04 +0200
+
+infiniband-diags (1.6.4.MLNX20131110.34daf8d) unstable; urgency=low
+
+  * ibpm: remove IBPM utility
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Sun, 10 Nov 2013 14:18:50 +0200
+
+infiniband-diags (1.6.4.MLNX20131020.f4433b3) unstable; urgency=low
+
+  * ibportstate: on/off option is missing in help
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Sun, 20 Oct 2013 10:39:23 +0200
+
+infiniband-diags (1.6.4.MLNX20131010.cfa4a72) unstable; urgency=low
+
+  * iblinkinfo: Remove "-R" option from man page
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Thu, 10 Oct 2013 16:21:12 +0200
+
+infiniband-diags (1.6.4.MLNX20131010.ed1afd8) unstable; urgency=low
+
+  * ibaddr: Add missing -t option to manpage
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Thu, 10 Oct 2013 15:29:12 +0200
+
+infiniband-diags (1.6.4.MLNX20130916.a307769) unstable; urgency=low
+
+  * ibdiag_sa.c: Output attribute ID in hex rather than decimal
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 16 Sep 2013 10:19:58 -0400
+
+infiniband-diags (1.6.4.MLNX20131009.10cf0d3) unstable; urgency=low
+
+  * ibmirror: convert IBERROR to IBEXIT
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Wed, 9 Oct 2013 08:40:24 +0200
+
+infiniband-diags (1.6.4.MLNX20130822.9b4a51a) unstable; urgency=low
+
+  * MOFED: fixing man pages installation on Debian OS
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Thu, 22 Aug 2013 17:24:40 +0300
+
+infiniband-diags (1.6.4.MLNX20130821.fdf9613) unstable; urgency=low
+
+  * MOFED: debian/control: changing 'opensm-devel' to 'libopensm-devel'
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Wed, 21 Aug 2013 09:09:14 +0300
+
+infiniband-diags (1.6.4.MLNX20130820.476483f) unstable; urgency=low
+
+  * MOFED: debian/control: fixing packages definitions
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Tue, 20 Aug 2013 16:09:01 +0300
+
+infiniband-diags (1.6.4.MLNX20130716.767929a) unstable; urgency=low
+
+  * debian/rules: remove unnecessary "="
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Tue, 16 Jul 2013 11:10:39 +0300
+
+infiniband-diags (1.6.4.MLNX20130716.aa0aa64) unstable; urgency=low
+
+  * debian/rules: adding "--exec-prefix" to configure args
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Tue, 16 Jul 2013 09:48:41 +0300
+
+infiniband-diags (1.6.4.MLNX20130703.9bdf54c) unstable; urgency=low
+
+  * OFA: infiniband-diags/ibpm.c: Fix get port-counters for port 37
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Wed, 3 Jul 2013 14:02:33 +0300
+
+infiniband-diags (1.6.4.MLNX20130626.027b564) unstable; urgency=low
+
+  * OFA: infiniband-diags/ibpm.c: Physically clear error counters as well as commulative counters
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Wed, 26 Jun 2013 14:58:32 +0300
+
+infiniband-diags (1.6.4.MLNX20121220.a9a399a) unstable; urgency=low
+
+  * ibpm use SL [RM #101973]
+
+ --  Tamir Ronen <tamirr@mellanox.com>  Thu, 20 Dec 2012 12:58:50 +0200
+
+infiniband-diags (1.6.4.MLNX20130526.b16c3d4) unstable; urgency=low
+
+  * debian/infiniband-diags.install: adding ibpm
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Sun, 26 May 2013 15:00:10 +0300
+
+infiniband-diags (1.6.4.MLNX20130226.63620f3) unstable; urgency=low
+
+  * MOFED: adding support for Debian packaging.
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Tue, 26 Feb 2013 18:12:16 +0200
+
+infiniband-diags (1.6.4.MLNX20130129.97deb11) unstable; urgency=low
+
+  * MOFED: infiniband-diags.spec.in: changing manual pages suffix
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Tue, 29 Jan 2013 17:32:37 +0200
+
+infiniband-diags (1.6.4.MLNX20130124.ea3d5d1) unstable; urgency=low
+
+  * MOFED: gen_chlog.sh: Changing tags commit extraction method.
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Thu, 24 Jan 2013 12:09:29 +0200
+
+infiniband-diags (1.6.4.MLNX20130113.7539a09) unstable; urgency=low
+
+  * MOFED: infiniband-diags.spec.in: adding ibmirror, ibpm utilities
+
+ --  root <root@r-tmp03.lab.mtl.com>  Sun, 13 Jan 2013 13:49:01 +0200
+
+infiniband-diags (1.6.4.MLNX20110828.15280d6) unstable; urgency=low
+
+  * Fix ibpm BUG in counters simulation mode Add counter simutation for xmitwait
+
+ --  Tamir Ronen <tamirr@mellanox.com>  Sun, 28 Aug 2011 09:43:42 +0300
+
+infiniband-diags (1.6.4.MLNX20121114.45b3a23) unstable; urgency=low
+
+  * Addition to Fix Bug:#97724: IBPM reports invalid record time
+
+ --  Tamir Ronen <tamirr@mellanox.com>  Wed, 14 Nov 2012 18:50:10 +0200
+
+infiniband-diags (1.6.4.MLNX20121105.75f82dc) unstable; urgency=low
+
+  * Fix BUG #97723 IBPM failes to collect counters for all lids in conf file.
+
+ --  Tamir Ronen <tamirr@mellanox.com>  Mon, 5 Nov 2012 11:21:17 +0200
+
+infiniband-diags (1.6.4.MLNX20121031.48fdc8d) unstable; urgency=low
+
+  * Fix Bug:#97724: IBPM reports invalid record time this lead to invalid rate calculation in UFM
+
+ --  Tamir Ronen <tamirr@mellanox.com>  Wed, 31 Oct 2012 12:21:23 +0200
+
+infiniband-diags (1.6.4.MLNX20120612.db32612) unstable; urgency=low
+
+  * Fix bug in ibdm log file - wrong month tm_mon - The number of months since January, in the range 0 to 11.
+
+ --  Tamir Ronen <tamirr@mellanox.com>  Tue, 12 Jun 2012 14:37:37 +0300
+
+infiniband-diags (1.6.4.MLNX20111220.721e41d) unstable; urgency=low
+
+  * Fix crash in ibpm add_suffix
+
+ --  Tamir Ronen <tamirr@mellanox.com>  Tue, 20 Dec 2011 11:06:44 +0200
+
+infiniband-diags (1.6.4.MLNX20111107.e676fd8) unstable; urgency=low
+
+  * Fix ibpm chrash Ignore vendor record in ibpm_report
+
+ --  Tamir Ronen <tamirr@mellanox.com>  Mon, 7 Nov 2011 11:58:15 +0200
+
+infiniband-diags (1.6.4.MLNX20121028.081e052) unstable; urgency=low
+
+  * UFM : infiniband-diags/src/ibpm.c : fix uninitialized variable
+
+ --  Dan Ben Yosef <danby@dev.mellanox.co.il>  Sun, 28 Oct 2012 13:58:42 +0200
+
+infiniband-diags (1.6.4.MLNX20120424.f916727) unstable; urgency=low
+
+  * Add ibpm utility
+
+ --  Alex Netes <alexne@mellanox.com>  Tue, 24 Apr 2012 14:51:02 +0300
+
+infiniband-diags (1.6.4.MLNX20120424.bea050f) unstable; urgency=low
+
+  * Add ibmirror utility
+
+ --  Alex Netes <alexne@mellanox.com>  Tue, 24 Apr 2012 14:16:44 +0300
+
+infiniband-diags (1.6.4.MLNX20120424.296fcca) unstable; urgency=low
+
+  * MOFED: infiniband-diags/infiniband-diags.spec.in: Add guest package
+
+ --  Alex Netes <alexne@mellanox.com>  Tue, 24 Apr 2012 14:38:34 +0300
+
+infiniband-diags (1.6.4.MLNX20111002.aaf64a9) unstable; urgency=low
+
+  * MOFED: ibnetdiscover changes for extended speeds
+
+ --  Daniel Klein <danielk@mellanox.com>  Sun, 2 Oct 2011 16:30:06 +0200
+infiniband-diags (1.6.3.MLNX20140125.9a2cb33) unstable; urgency=low
+
+  * update README for 1.6.4
+
+ --  Ira Weiny <ira.weiny@intel.com>  Sat, 25 Jan 2014 22:10:28 -0800
+
+infiniband-diags (1.6.3.MLNX20140125.4b2d641) unstable; urgency=low
+
+  * Revert "libibnetdisc/ibnetdisc.c: improve log information to stdout"
+
+ --  Ira Weiny <ira.weiny@intel.com>  Sat, 25 Jan 2014 22:01:39 -0800
+infiniband-diags (1.6.2.MLNX20140124.e0d80aa) unstable; urgency=low
+
+  * update README for 1.6.3
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 24 Jan 2014 19:34:22 -0800
+
+infiniband-diags (1.6.2.MLNX20140124.5b0c23e) unstable; urgency=low
+
+  * ibtracert.8.in: change default pre-built man page
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 24 Jan 2014 19:39:10 -0800
+
+infiniband-diags (1.6.2.MLNX20140121.21efdf6) unstable; urgency=low
+
+  * infiniband-diags: Check node-name-map strings when querying by name
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 21 Jan 2014 17:15:13 -0800
+
+infiniband-diags (1.6.2.MLNX20140102.a3f2fcd) unstable; urgency=low
+
+  * libibnetdisc/ibnetdisc.c: improve log information to stdout
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Thu, 2 Jan 2014 08:44:15 +0200
+
+infiniband-diags (1.6.2.MLNX20131230.ab0551a) unstable; urgency=low
+
+  * libibnetdisc/ibnetdisc.c: fix insert of invalid lid 0xFFFF into lid_port hash_table
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Mon, 30 Dec 2013 09:50:59 -0500
+
+infiniband-diags (1.6.2.MLNX20131013.59aab49) unstable; urgency=low
+
+  * ibtracert.c: Add 'force' flag to man page
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Sun, 13 Oct 2013 09:48:36 +0200
+
+infiniband-diags (1.6.2.MLNX20131217.affc76f) unstable; urgency=low
+
+  * infiniband-diags/vendstat: Fix GeneralInfo SW version
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Tue, 17 Dec 2013 17:27:24 +0200
+
+infiniband-diags (1.6.2.MLNX20131020.b4216ab) unstable; urgency=low
+
+  * ibportstate: on/off option is missing in help
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Sun, 20 Oct 2013 10:39:23 +0200
+
+infiniband-diags (1.6.2.MLNX20131010.0d270e4) unstable; urgency=low
+
+  * iblinkinfo: Remove "-R" option from man page
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Thu, 10 Oct 2013 16:21:12 +0200
+
+infiniband-diags (1.6.2.MLNX20131010.11adcf2) unstable; urgency=low
+
+  * ibaddr: Add missing -t option to manpage
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Thu, 10 Oct 2013 15:29:12 +0200
+
+infiniband-diags (1.6.2.MLNX20130916.ca5b23d) unstable; urgency=low
+
+  * ibdiag_sa.c: Output attribute ID in hex rather than decimal
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 16 Sep 2013 10:19:58 -0400
+
+infiniband-diags (1.6.2.MLNX20130820.914f4c0) unstable; urgency=low
+
+  * infiniband-diags: fail configure if glib2 is not found
+
+ --  Ira Weiny <ira.weiny@intel.com>  Tue, 20 Aug 2013 08:10:59 -0700
+
+infiniband-diags (1.6.2.MLNX20130818.a5f9dc0) unstable; urgency=low
+
+  * Fix errors triggered by autoregen.sh
+
+ --  Bart Van Assche <bvanassche@acm.org>  Sun, 18 Aug 2013 10:51:50 +0200
+
+infiniband-diags (1.6.2.MLNX20130818.cfca87c) unstable; urgency=low
+
+  * get_lid_from_name(): Remove an unused variable
+
+ --  Bart Van Assche <bvanassche@acm.org>  Sun, 18 Aug 2013 10:57:07 +0200
+infiniband-diags (1.6.1.MLNX20130818.df1eac5) unstable; urgency=low
+
+  * Update README and version to 1.6.2
+
+ --  Ira Weiny <ira.weiny@intel.com>  Sun, 18 Aug 2013 00:37:02 -0700
+
+infiniband-diags (1.6.1.MLNX20130801.1d79ffd) unstable; urgency=low
+
+  * perfquery.c: Fix dumping of PortSamplesControl
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 1 Aug 2013 14:11:06 -0400
+
+infiniband-diags (1.6.1.MLNX20130715.374fd66) unstable; urgency=low
+
+  * infiniband-diags: Eliminate unneeded clean_nodedesc calls
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 15 Jul 2013 10:32:40 -0400
+
+infiniband-diags (1.6.1.MLNX20130705.6825acd) unstable; urgency=low
+
+  * infiniband-diags: convert IBERROR to IBEXIT
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 5 Jul 2013 07:59:04 -0700
+
+infiniband-diags (1.6.1.MLNX20130705.bae2ff4) unstable; urgency=low
+
+  * infiniband-diags: umad_init needs to be called before sa_get_handle
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 5 Jul 2013 10:24:47 -0400
+
+infiniband-diags (1.6.1.MLNX20130622.08635c3) unstable; urgency=low
+
+  * saquery: Add SMInfoRecord support
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Sat, 22 Jun 2013 10:07:27 -0400
+
+infiniband-diags (1.6.1.MLNX20130525.9e3446c) unstable; urgency=low
+
+  * infiniband-diags: saquery: Dump SwitchInfoRecord based on IsSetMulticastFDBTopSupported SA capability
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Sat, 25 May 2013 09:36:27 -0400
+
+infiniband-diags (1.6.1.MLNX20130613.6ac17c9) unstable; urgency=low
+
+  * ibnetdiscover: Output vlcap in full output format
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 13 Jun 2013 14:26:48 -0700
+
+infiniband-diags (1.6.1.MLNX20130613.5e4fe8c) unstable; urgency=low
+
+  * ibnetdiscover: Add missing -f option to manpage
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 13 Jun 2013 14:26:34 -0700
+
+infiniband-diags (1.6.1.MLNX20130612.eb5b498) unstable; urgency=low
+
+  * infiniband-diags: ibstat fix strncpy coverity check and -l bug
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 12 Jun 2013 16:39:56 -0700
+
+infiniband-diags (1.6.1.MLNX20130612.e597637) unstable; urgency=low
+
+  * saquery.c: resource leak
+
+ --  Dan Ben Yosef <danby@dev.mellanox.co.il>  Wed, 12 Jun 2013 09:55:53 -0400
+
+infiniband-diags (1.6.1.MLNX20130612.37ca525) unstable; urgency=low
+
+  * ibtracert.c: Uninitialized variable
+
+ --  Dan Ben Yosef <danby@dev.mellanox.co.il>  Wed, 12 Jun 2013 09:55:48 -0400
+
+infiniband-diags (1.6.1.MLNX20130612.914ebfe) unstable; urgency=low
+
+  * ibsysstat.c: fix resource leak
+
+ --  Dan Ben Yosef <danby@dev.mellanox.co.il>  Wed, 12 Jun 2013 09:55:43 -0400
+
+infiniband-diags (1.6.1.MLNX20130612.fa7e7a6) unstable; urgency=low
+
+  * ibtracert.c: fix resource leak
+
+ --  Dan Ben Yosef <danby@dev.mellanox.co.il>  Wed, 12 Jun 2013 09:55:26 -0400
+
+infiniband-diags (1.6.1.MLNX20130612.2745080) unstable; urgency=low
+
+  * libibnetdisc/Makefile.am: Add missing makefile dependency
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 12 Jun 2013 07:04:15 -0400
+
+infiniband-diags (1.6.1.MLNX20130529.77b2354) unstable; urgency=low
+
+  * infiniband-diags: Fix gen_ver.sh for use with new Autoconf file
+
+ --  Ira Weiny <ira.weiny@intel.com>  Wed, 29 May 2013 08:22:18 -0700
+
+infiniband-diags (1.6.1.MLNX20130521.c61ca16) unstable; urgency=low
+
+  * saquery: Add SwitchInfoRecord support
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 21 May 2013 15:57:18 -0400
+
+infiniband-diags (1.6.1.MLNX20130419.43074c0) unstable; urgency=low
+
+  * infiniband-diags: remove doc/man/ibclearcounters.8.in
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 19 Apr 2013 10:03:00 -0700
+
+infiniband-diags (1.6.1.MLNX20130419.a6f5884) unstable; urgency=low
+
+  * infiniband-diags: add .gitignore
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 19 Apr 2013 09:38:33 -0700
+
+infiniband-diags (1.6.1.MLNX20130403.91fda21) unstable; urgency=low
+
+  * infiniband-diags: updates for new autoconf tools
+
+ --  Ira Weiny <ira.weiny@intel.com>  Wed, 3 Apr 2013 13:01:01 -0700
+
+infiniband-diags (1.6.1.MLNX20130328.75f8e82) unstable; urgency=low
+
+  * infiniband-diags/dump_fts: fix block calculation for LFT's
+
+ --  Ira Weiny <ira.weiny@intel.com>  Thu, 28 Mar 2013 08:44:59 -0700
+
+infiniband-diags (1.6.1.MLNX20130328.04a2cc0) unstable; urgency=low
+
+  * infiniband-diags/ibroute.c: fix pull extra block for LFT
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Thu, 28 Mar 2013 07:55:40 +0000
+
+infiniband-diags (1.6.1.MLNX20130319.7d5c35a) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Add ON and OFF options.
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Tue, 19 Mar 2013 13:12:55 +0000
+
+infiniband-diags (1.6.1.MLNX20130313.12258fb) unstable; urgency=low
+
+  * infiniband-diags: update emails in default pages
+
+ --  Ira Weiny <ira.weiny@intel.com>  Wed, 13 Mar 2013 08:04:00 -0700
+
+infiniband-diags (1.6.1.MLNX20130313.b08937c) unstable; urgency=low
+
+  * infiniband-diags: update emails
+
+ --  Ira Weiny <ira.weiny@intel.com>  Wed, 13 Mar 2013 06:10:32 -0700
+
+infiniband-diags (1.6.1.MLNX20130308.a58cd2a) unstable; urgency=low
+
+  * infiniband-diags: fix rst2man when using upstream docutils
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 8 Mar 2013 18:07:42 -0800
+
+infiniband-diags (1.6.1.MLNX20130318.4649be5) unstable; urgency=low
+
+  * infiniband-diags: add skip-sl to default ibqueryerrors.8.in
+
+ --  Ira Weiny <ira.weiny@intel.com>  Mon, 18 Mar 2013 14:36:29 -0700
+
+infiniband-diags (1.6.1.MLNX20130314.85f3175) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: obtain destination sl before perf query
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Thu, 14 Mar 2013 14:52:46 +0000
+
+infiniband-diags (1.6.1.MLNX20130220.d40ad00) unstable; urgency=low
+
+  * infiniband-diags: fix rpm requires for glib2
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 20 Feb 2013 13:56:36 -0500
+
+infiniband-diags (1.6.1.MLNX20130207.cd53e8a) unstable; urgency=low
+
+  * infiniband-diags: check_lft_balanc: support either DR or Lid based dump lfts output
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 7 Feb 2013 16:37:52 -0500
+
+infiniband-diags (1.6.1.MLNX20130203.209bf9d) unstable; urgency=low
+
+  * infiniband-diags: deprecate dump_[m|l]fts.sh scripts
+
+ --  Ira Weiny <weiny2@llnl.gov>  Sun, 3 Feb 2013 19:33:06 -0500
+
+infiniband-diags (1.6.1.MLNX20130201.0ca4d89) unstable; urgency=low
+
+  * infiniband-diags: add dump_fts tool
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 1 Feb 2013 18:13:59 -0500
+
+infiniband-diags (1.6.1.MLNX20130201.3c03a55) unstable; urgency=low
+
+  * infiniband-diags: libibnetdisc add find node by lid
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 1 Feb 2013 17:32:47 -0500
+
+infiniband-diags (1.6.1.MLNX20130215.35bc343) unstable; urgency=low
+
+  * infiniband-diags: add change to pregenerated saquery.8.in
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 15 Feb 2013 11:08:35 -0500
+
+infiniband-diags (1.6.1.MLNX20130213.33b590b) unstable; urgency=low
+
+  * infiniband-diags/saquery: Add support for ServiceID in PathRecord querying
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 13 Feb 2013 19:43:27 -0500
+
+infiniband-diags (1.6.1.MLNX20130213.7d3e844) unstable; urgency=low
+
+  * infiniband-diags: fix saquery rst/man page
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Feb 2013 18:29:38 -0500
+
+infiniband-diags (1.6.1.MLNX20130213.de97757) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Display NodeRecord LID in decimal
+
+ --  Hal Rosenstock <hal@mellanox.com>  Wed, 13 Feb 2013 17:16:10 -0500
+
+infiniband-diags (1.6.1.MLNX20130206.6ee7530) unstable; urgency=low
+
+  * infiniband-diags: add comment for path_portid
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 6 Feb 2013 18:20:10 -0500
+
+infiniband-diags (1.6.1.MLNX20130203.47dc80e) unstable; urgency=low
+
+  * infiniband-diags: ibroute: add MAD status to query failure message
+
+ --  Ira Weiny <weiny2@llnl.gov>  Sun, 3 Feb 2013 17:30:11 -0500
+
+infiniband-diags (1.6.1.MLNX20130122.7bf6e54) unstable; urgency=low
+
+  * infiniband-diags: ibroute fix resolve failure message
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 22 Jan 2013 14:39:18 -0800
+
+infiniband-diags (1.6.1.MLNX20121214.4f572bf) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Fix PortInfo sets with extended speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Fri, 14 Dec 2012 09:11:14 -0500
+
+infiniband-diags (1.6.1.MLNX20121108.9308516) unstable; urgency=low
+
+  * infiniband-diags: Support node-name-map in ibroute
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 8 Nov 2012 17:01:44 -0800
+
+infiniband-diags (1.6.1.MLNX20121115.b68bef7) unstable; urgency=low
+
+  * infiniband-diags: add make check target for shell scripts
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 15 Nov 2012 18:57:52 -0500
+
+infiniband-diags (1.6.1.MLNX20121105.b57ae89) unstable; urgency=low
+
+  * Remove bashisms from infiniband-diags
+
+ --  Garrett Cooper <yanegomi@gmail.com>  Mon, 5 Nov 2012 19:02:40 -0800
+
+infiniband-diags (1.6.1.MLNX20121104.f381c21) unstable; urgency=low
+
+  * infiniband-diags: Fix ibsysstat man page
+
+ --  Ira Weiny <weiny2@llnl.gov>  Sun, 4 Nov 2012 23:19:18 -0500
+
+infiniband-diags (1.6.1.MLNX20121101.2101a9f) unstable; urgency=low
+
+  * infiniband-diags/ibsysstat.c: Fix non default OUI operation
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 1 Nov 2012 08:35:41 -0400
+
+infiniband-diags (1.6.1.MLNX20121016.fa3b687) unstable; urgency=low
+
+  * infiniband-diags/src/saquery.c: New option to saquery InformInfoRecord (IIR)
+
+ --  Dan Ben Yosef <danby@mellanox.com>  Tue, 16 Oct 2012 11:45:25 +0200
+
+infiniband-diags (1.6.1.MLNX20120921.8f81201) unstable; urgency=low
+
+  * infiniband-diags: Fix SA error reporting for common MAD errors
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 21 Sep 2012 17:36:12 -0400
+
+infiniband-diags (1.6.1.MLNX20120920.2263d7e) unstable; urgency=low
+
+  * infiniband-diags: fix bug with loop ports where SMP queries are needed
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 20 Sep 2012 23:59:48 -0400
+
+infiniband-diags (1.6.1.MLNX20120921.a9ae8f7) unstable; urgency=low
+
+  * infiniband-diags: move sa query code into it's own common file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 21 Sep 2012 11:59:18 -0400
+
+infiniband-diags (1.6.1.MLNX20120913.75d54e8) unstable; urgency=low
+
+  * infiniband-diags/src/perfquery.c: Fix all_ports corner case
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 13 Sep 2012 16:53:50 -0700
+
+infiniband-diags (1.6.1.MLNX20120913.81c48ed) unstable; urgency=low
+
+  * infiniband-diags: Allow user to specify multiple ports
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 13 Sep 2012 16:13:05 -0700
+
+infiniband-diags (1.6.1.MLNX20120815.469d081) unstable; urgency=low
+
+  * infiniband-diags: add default <man>.in files
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 15 Aug 2012 13:50:05 -0400
+
+infiniband-diags (1.6.1.MLNX20120724.0afac22) unstable; urgency=low
+
+  * infiniband-diags: combine common alias option processing
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 24 Jul 2012 13:45:53 -0400
+infiniband-diags (.MLNX20120730.f1fa20e) unstable; urgency=low
+
+  * infiniband-diags: update README and configure.in for 1.6.1 release
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 30 Jul 2012 16:20:55 -0400
+infiniband-diags (.MLNX20120724.938dba3) unstable; urgency=low
+
+  * update META
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 24 Jul 2012 20:24:59 -0400
+
+infiniband-diags (.MLNX20110823.c93a3d6) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (.MLNX20110713.862373f) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+infiniband-diags (.MLNX20120724.2f73c5b) unstable; urgency=low
+
+  * tag for next release
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 24 Jul 2012 14:55:59 -0400
+
+infiniband-diags (.MLNX20110823.eacf29e) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (.MLNX20110713.b0a08a5) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (.MLNX20110427.a79222f) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+
+infiniband-diags (.MLNX20111027.0533c41) unstable; urgency=low
+
+  * Add META for chaos build bot
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 27 Oct 2011 00:16:23 -0700
+
+infiniband-diags (.MLNX20120723.6356b64) unstable; urgency=low
+
+  * infiniband-diags: Fix command line parsing bug in ibccconfig, ibccquery, saquery, and smpquery.
+
+ --  Albert Chu <chu11@llnl.gov>  Mon, 23 Jul 2012 16:45:33 -0700
+
+infiniband-diags (.MLNX20120712.e72ca56) unstable; urgency=low
+
+  * infiniband-diags/vendstat.c: Commentary change
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 12 Jul 2012 10:35:13 +0000
+
+infiniband-diags (.MLNX20120711.370f233) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Fix compile warning
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 11 Jul 2012 14:05:37 +0000
+
+infiniband-diags (.MLNX20120710.9ccd468) unstable; urgency=low
+
+  * Subject: [PATCHv2] infiniband-diags/vendstat: updated devices supporting extended fw info
+
+ --  Daniel Klein <danielk@dev.mellanox.co.il>  Tue, 10 Jul 2012 15:24:33 +0000
+
+infiniband-diags (.MLNX20120708.3b22454) unstable; urgency=low
+
+  * infiniband-diags: Support MLNX ExtendedPortInfo for ConnectIB device
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Sun, 8 Jul 2012 17:49:37 +0000
+
+infiniband-diags (.MLNX20120705.4e3a907) unstable; urgency=low
+
+  * iblinkinfo: fix no port 0 info segmentation fault
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 5 Jul 2012 12:45:20 -0400
+
+infiniband-diags (.MLNX20120705.1b78dc5) unstable; urgency=low
+
+  * mcm_rereg_test.c: Fix a couple of output messages
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 5 Jul 2012 14:25:50 -0400
+
+infiniband-diags (.MLNX20120705.b18dbe3) unstable; urgency=low
+
+  * ibnetdiscover: fix not showing FDR10 speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 5 Jul 2012 12:42:53 -0400
+
+infiniband-diags (.MLNX20120628.1d88102) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover: fix no port 0 info segmentation fault
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 28 Jun 2012 13:13:07 -0400
+
+infiniband-diags (.MLNX20120601.30cdb87) unstable; urgency=low
+
+  * infiniband-diags: saquery avoid a potential seg fault in libibmad
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 1 Jun 2012 15:44:46 -0700
+
+infiniband-diags (.MLNX20120531.370ee06) unstable; urgency=low
+
+  * infiniband-diags: update README for 1.6.0 release
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 31 May 2012 17:48:04 -0700
+
+infiniband-diags (.MLNX20120531.47e95f6) unstable; urgency=low
+
+  * infiniband-diags: udpate smp documentation in infiniband-diags page
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 31 May 2012 16:59:12 -0700
+
+infiniband-diags (.MLNX20120529.8dbb41c) unstable; urgency=low
+
+  * infiniband-diags: Add SMP/QP0 usage explanation to general man page
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 29 May 2012 20:54:33 -0700
+
+infiniband-diags (.MLNX20120531.9ca4c03) unstable; urgency=low
+
+  * infiniband-diags: saquery clarify default smkey option value
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 31 May 2012 15:10:54 -0700
+
+infiniband-diags (.MLNX20120530.a27e2e1) unstable; urgency=low
+
+  * infiniband-diags: Add SA smkey option to config file
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 15:15:14 -0700
+
+infiniband-diags (.MLNX20120530.1ff0e51) unstable; urgency=low
+
+  * ib-diags/saquery: Fix smkey handling
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 15:14:20 -0700
+
+infiniband-diags (.MLNX20120530.c361d33) unstable; urgency=low
+
+  * infiniband-diags: Add m_key option to config file
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:35 -0700
+
+infiniband-diags (.MLNX20120530.32a72dd) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Support changing MKey, lease, and protect bits
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:34 -0700
+
+infiniband-diags (.MLNX20120531.ced1cd4) unstable; urgency=low
+
+  * infiniband-diags: Allow specification of an mkey to use on the command line
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 31 May 2012 12:11:33 -0700
+
+infiniband-diags (.MLNX20120530.05de760) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Display MKey, lease, and protect bits
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:32 -0700
+
+infiniband-diags (.MLNX20120530.a259b9a) unstable; urgency=low
+
+  * infiniband-diags: install config file mode 400
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:31 -0700
+
+infiniband-diags (.MLNX20120530.546ecba) unstable; urgency=low
+
+  * infiniband-diags: Obfuscate sensitive output by default
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:30 -0700
+
+infiniband-diags (.MLNX20120530.91277f7) unstable; urgency=low
+
+  * infiniband-diags: clean up exclude arguments to ibdiag_process_opts()
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:09:02 -0700
+
+infiniband-diags (.MLNX20120529.42a7b27) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Remove an extra space from warning message
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 29 May 2012 10:04:03 -0700
+
+infiniband-diags (.MLNX20120524.c7c22d1) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Add newly added options to usage
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 24 May 2012 13:42:29 -0400
+
+infiniband-diags (.MLNX20120515.4d1fab5) unstable; urgency=low
+
+  * infiniband-diags: fix autogen with new rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 15 May 2012 15:52:26 -0700
+
+infiniband-diags (.MLNX20120503.5f8679d) unstable; urgency=low
+
+  * infiniband-diags: move man/check_lft_balance,ibcacheedit,ibstatus,ibidsverify to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 3 May 2012 17:13:32 -0700
+
+infiniband-diags (.MLNX20120503.09627e9) unstable; urgency=low
+
+  * infiniband-diags: move man/saquery,vendstat,ibsysstat,ibfindnodesusing to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 3 May 2012 14:20:56 -0700
+
+infiniband-diags (.MLNX20120503.15bea0d) unstable; urgency=low
+
+  * infiniband-diags: move man/perfquery,sminfo,smpdump,smpquery to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 3 May 2012 09:48:39 -0700
+
+infiniband-diags (.MLNX20120502.7bdba73) unstable; urgency=low
+
+  * infiniband-diags: move man/ibportstate,ibstat,ibroute,ibtracert to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 2 May 2012 17:01:34 -0700
+
+infiniband-diags (.MLNX20120502.71634f0) unstable; urgency=low
+
+  * infiniband-diags: move man/ibping,ibnodes,ibhosts,ibswitches,ibrouters to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 2 May 2012 11:27:32 -0700
+
+infiniband-diags (.MLNX20120509.c8c9818) unstable; urgency=low
+
+  * infiniband-diags: move man/ibcc[config|query] to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 9 May 2012 14:41:50 -0700
+
+infiniband-diags (.MLNX20120509.2a81766) unstable; urgency=low
+
+  * infiniband-diags: move man/dump_[ml]fts to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 9 May 2012 14:39:08 -0700
+
+infiniband-diags (.MLNX20120509.818ed87) unstable; urgency=low
+
+  * infiniband-diags: convert documentation from nroff to rst
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 9 May 2012 14:30:22 -0700
+
+infiniband-diags (.MLNX20120509.3bca843) unstable; urgency=low
+
+  * infiniband-diags: check_lft_balance.pl remove unused options
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 9 May 2012 14:13:57 -0700
+
+infiniband-diags (.MLNX20120504.6de4c35) unstable; urgency=low
+
+  * infiniband-diags: ibidsverify exit status 1 on errors found
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 4 May 2012 12:08:57 -0700
+
+infiniband-diags (.MLNX20120504.c8cba00) unstable; urgency=low
+
+  * infiniband-diags: fix ibidsverify portguid validation.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 4 May 2012 11:51:58 -0700
+
+infiniband-diags (.MLNX20120504.97f0f6b) unstable; urgency=low
+
+  * infiniband-diags: move ibidsverify man page to main rpm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 4 May 2012 10:34:30 -0700
+
+infiniband-diags (.MLNX20120504.9909176) unstable; urgency=low
+
+  * infiniband-diags: move deprecated scripts to "compat" rpm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 4 May 2012 09:20:20 -0700
+
+infiniband-diags (.MLNX20120502.b4cfdf3) unstable; urgency=low
+
+  * infiniband-diags: update ib[hosts|switches|routers] to standard options
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 2 May 2012 16:13:19 -0700
+
+infiniband-diags (.MLNX20120503.d5181ea) unstable; urgency=low
+
+  * infiniband-diags: smpdump fix option 'string'
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 3 May 2012 10:26:58 -0700
+
+infiniband-diags (.MLNX20120502.b04f511) unstable; urgency=low
+
+  * infiniband-diags: remove -u common option
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 2 May 2012 17:26:07 -0700
+
+infiniband-diags (.MLNX20120427.a4cedde) unstable; urgency=low
+
+  * infiniband-diags: remove SMI class registration where possible
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 27 Apr 2012 15:53:15 -0700
+
+infiniband-diags (.MLNX20120427.5748256) unstable; urgency=low
+
+  * infiniband-diags: remove mad.h from ibstat
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 27 Apr 2012 14:33:30 -0700
+
+infiniband-diags (.MLNX20120430.7ed1cf6) unstable; urgency=low
+
+  * infiniband-diags ibcconfig: Update documentation examples
+
+ --  Albert Chu <chu11@llnl.gov>  Mon, 30 Apr 2012 17:27:57 -0700
+
+infiniband-diags (.MLNX20120426.71c0767) unstable; urgency=low
+
+  * infiniband-diags/src/ibccquery.c: Fix CACongestionSetting inputs
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 26 Apr 2012 14:43:13 -0700
+
+infiniband-diags (.MLNX20110926.7cdad90) unstable; urgency=low
+
+  * infiniband-diags: move deprecated scripts to "compat" rpm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 26 Sep 2011 16:47:21 -0700
+
+infiniband-diags (.MLNX20110420.c670c59) unstable; urgency=low
+
+  * infiniband-diags: mark duplicate/lower performing scripts as deprecated.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 20 Apr 2011 23:30:27 -0700
+
+infiniband-diags (.MLNX20120418.d5df245) unstable; urgency=low
+
+  * infiniband-diags/vendstat.c: Support IS4/SX firmware version info
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 18 Apr 2012 09:01:21 -0400
+
+infiniband-diags (.MLNX20120417.3ff5a79) unstable; urgency=low
+
+  * infiniband-diags: preserve long_opts global for use in ibdiag_show_usage
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 17 Apr 2012 10:55:13 -0700
+
+infiniband-diags (.MLNX20120412.288234a) unstable; urgency=low
+
+  * infiniband-diags: migrate resolve_portid_str in from libibmad
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:45 -0700
+
+infiniband-diags (.MLNX20120412.16f11b3) unstable; urgency=low
+
+  * infiniband-diags: Remove dependencies on ib_resolve_smlid/ib_resolve_self
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:44 -0700
+
+infiniband-diags (.MLNX20120412.7cdde53) unstable; urgency=low
+
+  * infiniband-diags/mcm_rereg_test.c: Include ib_types.h
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:43 -0700
+
+infiniband-diags (.MLNX20120412.ec94c8f) unstable; urgency=low
+
+  * infiniband-diags/mcm_rereg_test.c: dead code removal
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:42 -0700
+
+infiniband-diags (.MLNX20120412.18fe6ba) unstable; urgency=low
+
+  * infiniband-diags/ibroute.c: Dead code removal
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:41 -0700
+
+infiniband-diags (.MLNX20120305.5370dfd) unstable; urgency=low
+
+  * infiniband-diags: saquery further error value clean up.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 5 Mar 2012 13:29:13 -0800
+
+infiniband-diags (.MLNX20120227.c1a428f) unstable; urgency=low
+
+  * infiniband-diags: remove unused options from check_lft_balance.pl
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 27 Feb 2012 14:18:09 -0800
+
+infiniband-diags (.MLNX20120220.3179ae8) unstable; urgency=low
+
+  * infiniband-diags: remove ib_resolve_smlid_via requirement for sa queries
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 20 Feb 2012 08:17:20 -0800
+
+infiniband-diags (.MLNX20120217.0810a52) unstable; urgency=low
+
+  * infiniband-diags: Fix saquery error reporting
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 17 Feb 2012 22:25:42 -0800
+
+infiniband-diags (.MLNX20120208.8146868) unstable; urgency=low
+
+  * Fix ibping server when client stops sending.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 8 Feb 2012 10:17:20 -0800
+
+infiniband-diags (.MLNX20111103.4ac4392) unstable; urgency=low
+
+  * infiniband-diags: Support ibccconfig, congestion control setting tool
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 3 Nov 2011 14:42:34 -0700
+
+infiniband-diags (.MLNX20120111.8aadc8a) unstable; urgency=low
+
+  * ibswitches: fix output when switch names have "base" or "enhanced" in them
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 11 Jan 2012 23:39:45 -0800
+
+infiniband-diags (.MLNX20120110.cb92b98) unstable; urgency=low
+
+  * infiniband-diags/configure.in: Fix typo
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 10 Jan 2012 12:22:58 -0800
+infiniband-diags (.MLNX20120417.23703e7) unstable; urgency=low
+
+  * tag 1.6.0-5chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 17 Apr 2012 11:07:37 -0700
+
+infiniband-diags (.MLNX20120417.4286d05) unstable; urgency=low
+
+  * infiniband-diags: preserve long_opts global for use in ibdiag_show_usage
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 17 Apr 2012 10:55:13 -0700
+infiniband-diags (.MLNX20111206.1f0b276) unstable; urgency=low
+
+  * tag 1.6.0-4chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 6 Dec 2011 12:08:05 -0800
+
+infiniband-diags (.MLNX20111204.78ec248) unstable; urgency=low
+
+  * infiniband-diags/ibccquery Fix field name
+
+ --  Ira Weiny <weiny2@llnl.gov>  Sun, 4 Dec 2011 19:37:00 -0800
+
+infiniband-diags (.MLNX20111202.4fabac9) unstable; urgency=low
+
+  * infiniband-diags/src/ibccquery.c: Fix off by one output bug, ccti_limit is 0 based not 1 based
+
+ --  Albert Chu <chu11@llnl.gov>  Fri, 2 Dec 2011 16:00:10 -0800
+
+infiniband-diags (.MLNX20111202.d8648e9) unstable; urgency=low
+
+  * infiniband-diags: add config file option for Mellanox ExtPortInfo queries
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 2 Dec 2011 11:52:27 -0800
+
+infiniband-diags (.MLNX20111202.3d726a8) unstable; urgency=low
+
+  * infiniband-diags: move is_mlnx_ext_port_info_supported to common code
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 2 Dec 2011 11:50:31 -0800
+
+infiniband-diags (.MLNX20111202.72f1eb2) unstable; urgency=low
+
+  * infiniband-diags: fix printing of extended speeds when port is down
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 2 Dec 2011 13:38:17 -0800
+
+infiniband-diags (.MLNX20111201.7db86c3) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Fix reset for PortExtendedSpeedsCounters
+
+ --  Hal Rosenstock <hal@mellanox.com>  Thu, 1 Dec 2011 11:33:09 -0800
+
+infiniband-diags (.MLNX20111201.389da63) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Fix display of PortExtendedSpeedsCounters
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 1 Dec 2011 08:21:12 -0800
+
+infiniband-diags (.MLNX20111130.3c1b21f) unstable; urgency=low
+
+  * Fix typo in ibccquery manpage
+
+ --  Albert Chu <chu11@llnl.gov>  Wed, 30 Nov 2011 14:09:52 -0800
+infiniband-diags (.MLNX20111129.a9f29f2) unstable; urgency=low
+
+  * tag 1.6.0-3chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 29 Nov 2011 23:05:56 -0800
+
+infiniband-diags (.MLNX20110926.10fa604) unstable; urgency=low
+
+  * infiniband-diags: move deprecated scripts to compat rpm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 26 Sep 2011 16:47:21 -0700
+
+infiniband-diags (.MLNX20110420.7792b37) unstable; urgency=low
+
+  * infiniband-diags: mark duplicate/lower performing scripts as deprecated.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 20 Apr 2011 23:30:27 -0700
+
+infiniband-diags (.MLNX20110823.4d677a3) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (.MLNX20110713.45e2bc0) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (.MLNX20110427.7a00765) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+
+infiniband-diags (.MLNX20111107.5286c74) unstable; urgency=low
+
+  * infiniband-diags: check_lft_balance.pl add -C/-P options
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 7 Nov 2011 08:47:43 -0800
+
+infiniband-diags (.MLNX20111107.8433719) unstable; urgency=low
+
+  * check_lft_balance.pl: Add extra check when using -e heuristic flag in check_lft_balance.pl
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 7 Nov 2011 07:42:19 -0800
+
+infiniband-diags (.MLNX20111012.4ed1bbb) unstable; urgency=low
+
+  * Add -e heuristic flag to check_lft_balance.pl to detect common scenarios where unbalanced routing will occur.
+
+ --  Albert L.Chu <chu11@llnl.gov>  Wed, 12 Oct 2011 17:17:08 -0700
+
+infiniband-diags (.MLNX20111012.ff9b775) unstable; urgency=low
+
+  * Update check_lft_balance.pl to work with newer infiniband-diag tools
+
+ --  Albert L.Chu <chu11@llnl.gov>  Wed, 12 Oct 2011 15:43:01 -0700
+infiniband-diags (.MLNX20111101.8abd86f) unstable; urgency=low
+
+  * tag 1.6.0-2chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 1 Nov 2011 23:01:37 -0700
+
+infiniband-diags (.MLNX20110926.78c65c1) unstable; urgency=low
+
+  * infiniband-diags: move deprecated scripts to compat rpm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 26 Sep 2011 16:47:21 -0700
+
+infiniband-diags (.MLNX20110420.530154d) unstable; urgency=low
+
+  * infiniband-diags: mark duplicate/lower performing scripts as deprecated.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 20 Apr 2011 23:30:27 -0700
+
+infiniband-diags (.MLNX20110823.9fb428d) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (.MLNX20110713.6644a79) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (.MLNX20110427.9caf457) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+
+infiniband-diags (.MLNX20111031.7f38b58) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors: don't exit on reset error
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 31 Oct 2011 22:48:12 -0700
+infiniband-diags (1.6.0.MLNX20111027.3a95ad7) unstable; urgency=low
+
+  * Add META for chaos build bot
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 27 Oct 2011 00:16:23 -0700
+
+infiniband-diags (1.6.0.MLNX20110926.a9989da) unstable; urgency=low
+
+  * infiniband-diags: move deprecated scripts to compat rpm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 26 Sep 2011 16:47:21 -0700
+
+infiniband-diags (1.6.0.MLNX20110420.9f8437d) unstable; urgency=low
+
+  * infiniband-diags: mark duplicate/lower performing scripts as deprecated.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 20 Apr 2011 23:30:27 -0700
+
+infiniband-diags (1.6.0.MLNX20110823.f045cf9) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (1.6.0.MLNX20110713.4520f00) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (1.6.0.MLNX20110427.f09b947) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+infiniband-diags (.MLNX20120531.370ee06) unstable; urgency=low
+
+  * infiniband-diags: update README for 1.6.0 release
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 31 May 2012 17:48:04 -0700
+
+infiniband-diags (.MLNX20120531.47e95f6) unstable; urgency=low
+
+  * infiniband-diags: udpate smp documentation in infiniband-diags page
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 31 May 2012 16:59:12 -0700
+
+infiniband-diags (.MLNX20120529.8dbb41c) unstable; urgency=low
+
+  * infiniband-diags: Add SMP/QP0 usage explanation to general man page
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 29 May 2012 20:54:33 -0700
+
+infiniband-diags (.MLNX20120531.9ca4c03) unstable; urgency=low
+
+  * infiniband-diags: saquery clarify default smkey option value
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 31 May 2012 15:10:54 -0700
+
+infiniband-diags (.MLNX20120530.a27e2e1) unstable; urgency=low
+
+  * infiniband-diags: Add SA smkey option to config file
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 15:15:14 -0700
+
+infiniband-diags (.MLNX20120530.1ff0e51) unstable; urgency=low
+
+  * ib-diags/saquery: Fix smkey handling
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 15:14:20 -0700
+
+infiniband-diags (.MLNX20120530.c361d33) unstable; urgency=low
+
+  * infiniband-diags: Add m_key option to config file
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:35 -0700
+
+infiniband-diags (.MLNX20120530.32a72dd) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Support changing MKey, lease, and protect bits
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:34 -0700
+
+infiniband-diags (.MLNX20120531.ced1cd4) unstable; urgency=low
+
+  * infiniband-diags: Allow specification of an mkey to use on the command line
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 31 May 2012 12:11:33 -0700
+
+infiniband-diags (.MLNX20120530.05de760) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Display MKey, lease, and protect bits
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:32 -0700
+
+infiniband-diags (.MLNX20120530.a259b9a) unstable; urgency=low
+
+  * infiniband-diags: install config file mode 400
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:31 -0700
+
+infiniband-diags (.MLNX20120530.546ecba) unstable; urgency=low
+
+  * infiniband-diags: Obfuscate sensitive output by default
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:21:30 -0700
+
+infiniband-diags (.MLNX20120530.91277f7) unstable; urgency=low
+
+  * infiniband-diags: clean up exclude arguments to ibdiag_process_opts()
+
+ --  Jim Foraker <foraker1@llnl.gov>  Wed, 30 May 2012 10:09:02 -0700
+
+infiniband-diags (.MLNX20120529.42a7b27) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Remove an extra space from warning message
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 29 May 2012 10:04:03 -0700
+
+infiniband-diags (.MLNX20120524.c7c22d1) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Add newly added options to usage
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 24 May 2012 13:42:29 -0400
+
+infiniband-diags (.MLNX20120515.4d1fab5) unstable; urgency=low
+
+  * infiniband-diags: fix autogen with new rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 15 May 2012 15:52:26 -0700
+
+infiniband-diags (.MLNX20120503.5f8679d) unstable; urgency=low
+
+  * infiniband-diags: move man/check_lft_balance,ibcacheedit,ibstatus,ibidsverify to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 3 May 2012 17:13:32 -0700
+
+infiniband-diags (.MLNX20120503.09627e9) unstable; urgency=low
+
+  * infiniband-diags: move man/saquery,vendstat,ibsysstat,ibfindnodesusing to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 3 May 2012 14:20:56 -0700
+
+infiniband-diags (.MLNX20120503.15bea0d) unstable; urgency=low
+
+  * infiniband-diags: move man/perfquery,sminfo,smpdump,smpquery to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 3 May 2012 09:48:39 -0700
+
+infiniband-diags (.MLNX20120502.7bdba73) unstable; urgency=low
+
+  * infiniband-diags: move man/ibportstate,ibstat,ibroute,ibtracert to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 2 May 2012 17:01:34 -0700
+
+infiniband-diags (.MLNX20120502.71634f0) unstable; urgency=low
+
+  * infiniband-diags: move man/ibping,ibnodes,ibhosts,ibswitches,ibrouters to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 2 May 2012 11:27:32 -0700
+
+infiniband-diags (.MLNX20120509.c8c9818) unstable; urgency=low
+
+  * infiniband-diags: move man/ibcc[config|query] to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 9 May 2012 14:41:50 -0700
+
+infiniband-diags (.MLNX20120509.2a81766) unstable; urgency=low
+
+  * infiniband-diags: move man/dump_[ml]fts to rst documentation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 9 May 2012 14:39:08 -0700
+
+infiniband-diags (.MLNX20120509.818ed87) unstable; urgency=low
+
+  * infiniband-diags: convert documentation from nroff to rst
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 9 May 2012 14:30:22 -0700
+
+infiniband-diags (.MLNX20120509.3bca843) unstable; urgency=low
+
+  * infiniband-diags: check_lft_balance.pl remove unused options
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 9 May 2012 14:13:57 -0700
+
+infiniband-diags (.MLNX20120504.6de4c35) unstable; urgency=low
+
+  * infiniband-diags: ibidsverify exit status 1 on errors found
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 4 May 2012 12:08:57 -0700
+
+infiniband-diags (.MLNX20120504.c8cba00) unstable; urgency=low
+
+  * infiniband-diags: fix ibidsverify portguid validation.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 4 May 2012 11:51:58 -0700
+
+infiniband-diags (.MLNX20120504.97f0f6b) unstable; urgency=low
+
+  * infiniband-diags: move ibidsverify man page to main rpm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 4 May 2012 10:34:30 -0700
+
+infiniband-diags (.MLNX20120504.9909176) unstable; urgency=low
+
+  * infiniband-diags: move deprecated scripts to "compat" rpm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 4 May 2012 09:20:20 -0700
+
+infiniband-diags (.MLNX20120502.b4cfdf3) unstable; urgency=low
+
+  * infiniband-diags: update ib[hosts|switches|routers] to standard options
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 2 May 2012 16:13:19 -0700
+
+infiniband-diags (.MLNX20120503.d5181ea) unstable; urgency=low
+
+  * infiniband-diags: smpdump fix option 'string'
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 3 May 2012 10:26:58 -0700
+
+infiniband-diags (.MLNX20120502.b04f511) unstable; urgency=low
+
+  * infiniband-diags: remove -u common option
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 2 May 2012 17:26:07 -0700
+
+infiniband-diags (.MLNX20120427.a4cedde) unstable; urgency=low
+
+  * infiniband-diags: remove SMI class registration where possible
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 27 Apr 2012 15:53:15 -0700
+
+infiniband-diags (.MLNX20120427.5748256) unstable; urgency=low
+
+  * infiniband-diags: remove mad.h from ibstat
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 27 Apr 2012 14:33:30 -0700
+
+infiniband-diags (.MLNX20120430.7ed1cf6) unstable; urgency=low
+
+  * infiniband-diags ibcconfig: Update documentation examples
+
+ --  Albert Chu <chu11@llnl.gov>  Mon, 30 Apr 2012 17:27:57 -0700
+
+infiniband-diags (.MLNX20120426.71c0767) unstable; urgency=low
+
+  * infiniband-diags/src/ibccquery.c: Fix CACongestionSetting inputs
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 26 Apr 2012 14:43:13 -0700
+
+infiniband-diags (.MLNX20110926.7cdad90) unstable; urgency=low
+
+  * infiniband-diags: move deprecated scripts to "compat" rpm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 26 Sep 2011 16:47:21 -0700
+
+infiniband-diags (.MLNX20110420.c670c59) unstable; urgency=low
+
+  * infiniband-diags: mark duplicate/lower performing scripts as deprecated.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 20 Apr 2011 23:30:27 -0700
+
+infiniband-diags (.MLNX20120418.d5df245) unstable; urgency=low
+
+  * infiniband-diags/vendstat.c: Support IS4/SX firmware version info
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 18 Apr 2012 09:01:21 -0400
+
+infiniband-diags (.MLNX20120417.3ff5a79) unstable; urgency=low
+
+  * infiniband-diags: preserve long_opts global for use in ibdiag_show_usage
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 17 Apr 2012 10:55:13 -0700
+
+infiniband-diags (.MLNX20120412.288234a) unstable; urgency=low
+
+  * infiniband-diags: migrate resolve_portid_str in from libibmad
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:45 -0700
+
+infiniband-diags (.MLNX20120412.16f11b3) unstable; urgency=low
+
+  * infiniband-diags: Remove dependencies on ib_resolve_smlid/ib_resolve_self
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:44 -0700
+
+infiniband-diags (.MLNX20120412.7cdde53) unstable; urgency=low
+
+  * infiniband-diags/mcm_rereg_test.c: Include ib_types.h
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:43 -0700
+
+infiniband-diags (.MLNX20120412.ec94c8f) unstable; urgency=low
+
+  * infiniband-diags/mcm_rereg_test.c: dead code removal
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:42 -0700
+
+infiniband-diags (.MLNX20120412.18fe6ba) unstable; urgency=low
+
+  * infiniband-diags/ibroute.c: Dead code removal
+
+ --  Jim Foraker <foraker1@llnl.gov>  Thu, 12 Apr 2012 18:09:41 -0700
+
+infiniband-diags (.MLNX20120305.5370dfd) unstable; urgency=low
+
+  * infiniband-diags: saquery further error value clean up.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 5 Mar 2012 13:29:13 -0800
+
+infiniband-diags (.MLNX20120227.c1a428f) unstable; urgency=low
+
+  * infiniband-diags: remove unused options from check_lft_balance.pl
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 27 Feb 2012 14:18:09 -0800
+
+infiniband-diags (.MLNX20120220.3179ae8) unstable; urgency=low
+
+  * infiniband-diags: remove ib_resolve_smlid_via requirement for sa queries
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 20 Feb 2012 08:17:20 -0800
+
+infiniband-diags (.MLNX20120217.0810a52) unstable; urgency=low
+
+  * infiniband-diags: Fix saquery error reporting
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 17 Feb 2012 22:25:42 -0800
+
+infiniband-diags (.MLNX20120208.8146868) unstable; urgency=low
+
+  * Fix ibping server when client stops sending.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 8 Feb 2012 10:17:20 -0800
+
+infiniband-diags (.MLNX20111103.4ac4392) unstable; urgency=low
+
+  * infiniband-diags: Support ibccconfig, congestion control setting tool
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 3 Nov 2011 14:42:34 -0700
+
+infiniband-diags (.MLNX20120111.8aadc8a) unstable; urgency=low
+
+  * ibswitches: fix output when switch names have "base" or "enhanced" in them
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 11 Jan 2012 23:39:45 -0800
+
+infiniband-diags (.MLNX20120110.cb92b98) unstable; urgency=low
+
+  * infiniband-diags/configure.in: Fix typo
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 10 Jan 2012 12:22:58 -0800
+
+infiniband-diags (.MLNX20111204.78ec248) unstable; urgency=low
+
+  * infiniband-diags/ibccquery Fix field name
+
+ --  Ira Weiny <weiny2@llnl.gov>  Sun, 4 Dec 2011 19:37:00 -0800
+
+infiniband-diags (.MLNX20111202.4fabac9) unstable; urgency=low
+
+  * infiniband-diags/src/ibccquery.c: Fix off by one output bug, ccti_limit is 0 based not 1 based
+
+ --  Albert Chu <chu11@llnl.gov>  Fri, 2 Dec 2011 16:00:10 -0800
+
+infiniband-diags (.MLNX20111202.d8648e9) unstable; urgency=low
+
+  * infiniband-diags: add config file option for Mellanox ExtPortInfo queries
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 2 Dec 2011 11:52:27 -0800
+
+infiniband-diags (.MLNX20111202.3d726a8) unstable; urgency=low
+
+  * infiniband-diags: move is_mlnx_ext_port_info_supported to common code
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 2 Dec 2011 11:50:31 -0800
+
+infiniband-diags (.MLNX20111202.72f1eb2) unstable; urgency=low
+
+  * infiniband-diags: fix printing of extended speeds when port is down
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 2 Dec 2011 13:38:17 -0800
+
+infiniband-diags (.MLNX20111201.7db86c3) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Fix reset for PortExtendedSpeedsCounters
+
+ --  Hal Rosenstock <hal@mellanox.com>  Thu, 1 Dec 2011 11:33:09 -0800
+
+infiniband-diags (.MLNX20111201.389da63) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Fix display of PortExtendedSpeedsCounters
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 1 Dec 2011 08:21:12 -0800
+
+infiniband-diags (.MLNX20111130.3c1b21f) unstable; urgency=low
+
+  * Fix typo in ibccquery manpage
+
+ --  Albert Chu <chu11@llnl.gov>  Wed, 30 Nov 2011 14:09:52 -0800
+
+infiniband-diags (.MLNX20111107.5286c74) unstable; urgency=low
+
+  * infiniband-diags: check_lft_balance.pl add -C/-P options
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 7 Nov 2011 08:47:43 -0800
+
+infiniband-diags (.MLNX20111107.8433719) unstable; urgency=low
+
+  * check_lft_balance.pl: Add extra check when using -e heuristic flag in check_lft_balance.pl
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 7 Nov 2011 07:42:19 -0800
+
+infiniband-diags (.MLNX20111012.4ed1bbb) unstable; urgency=low
+
+  * Add -e heuristic flag to check_lft_balance.pl to detect common scenarios where unbalanced routing will occur.
+
+ --  Albert L.Chu <chu11@llnl.gov>  Wed, 12 Oct 2011 17:17:08 -0700
+
+infiniband-diags (.MLNX20111012.ff9b775) unstable; urgency=low
+
+  * Update check_lft_balance.pl to work with newer infiniband-diag tools
+
+ --  Albert L.Chu <chu11@llnl.gov>  Wed, 12 Oct 2011 15:43:01 -0700
+
+infiniband-diags (.MLNX20111031.7f38b58) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors: don't exit on reset error
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 31 Oct 2011 22:48:12 -0700
+
+infiniband-diags (.MLNX20111013.2a8f55f) unstable; urgency=low
+
+  * infiniband-diags: add a general config file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 13 Oct 2011 15:35:59 -0700
+
+infiniband-diags (.MLNX20111027.117d3ba) unstable; urgency=low
+
+  * infiniband-diags: add ibccquery man page to build
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 27 Oct 2011 00:02:33 -0700
+
+infiniband-diags (.MLNX20111026.a717450) unstable; urgency=low
+
+  * infiniband-diags: clean up build
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 26 Oct 2011 14:24:46 -0700
+
+infiniband-diags (.MLNX20111026.7c49fa2) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo flag ports which were not scanned
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 26 Oct 2011 11:15:03 -0700
+
+infiniband-diags (.MLNX20111012.e2bdd6c) unstable; urgency=low
+
+  * infiniband-diags: saquery: use ib-node-name-map file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 12 Oct 2011 16:55:10 -0700
+
+infiniband-diags (.MLNX20111013.00e4777) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo: fix error message
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 13 Oct 2011 15:28:50 -0700
+
+infiniband-diags (.MLNX20111012.31c06d9) unstable; urgency=low
+
+  * infiniband-diags: fix installation of error_thresholds file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 12 Oct 2011 17:28:57 -0700
+
+infiniband-diags (.MLNX20111013.607467e) unstable; urgency=low
+
+  * Master branch is not moving on to 1.6
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 13 Oct 2011 15:58:33 -0700
+
+infiniband-diags (.MLNX20110929.15ee3ea) unstable; urgency=low
+
+  * support --switches-only and --cas-only options in iblinkinfo
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 29 Sep 2011 11:02:21 -0700
+
+infiniband-diags (.MLNX20110929.1c9866e) unstable; urgency=low
+
+  * Update version in prep for next release
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 29 Sep 2011 11:26:29 -0700
+
+infiniband-diags (.MLNX20110802.64afec3) unstable; urgency=low
+
+  * Support ibccquery, congestion control query tool.
+
+ --  Albert Chu <achu@hyperion1.llnl.gov>  Tue, 2 Aug 2011 11:15:07 -0700
+
+infiniband-diags (.MLNX20110927.cdbc1cd) unstable; urgency=low
+
+  * infiniband-diags/src/ibqueryerrors.c: don't increment bad_ports for port ALL
+
+ --  Marcus R Epperson <marcus.r.epperson@gmail.com>  Tue, 27 Sep 2011 18:15:12 -0700
+
+infiniband-diags (.MLNX20110927.ae19572) unstable; urgency=low
+
+  * infiniband-diags/src/ibqueryerrors.c: fix segv due to CA port 0 reference
+
+ --  Marcus R Epperson <marcus.r.epperson@gmail.com>  Tue, 27 Sep 2011 18:15:11 -0700
+
+infiniband-diags (.MLNX20110911.a3b24e9) unstable; urgency=low
+
+  * infiniband-diags/scripts/ibcheckport.in: ignore lid/sm lid checks on non zero port switches
+
+ --  Alex Netes <alexne@mellanox.com>  Sun, 11 Sep 2011 01:10:32 -0700
+
+infiniband-diags (.MLNX20110919.bb32131) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add query failure count
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 19 Sep 2011 15:32:24 -0700
+
+infiniband-diags (.MLNX20110919.1a72e89) unstable; urgency=low
+
+  * infiniband-diags: ibnetdisc Wrap header for use in C++ code
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 19 Sep 2011 14:05:09 -0700
+
+infiniband-diags (.MLNX20110922.8243db1) unstable; urgency=low
+
+  * RE: [PATCH v2] ib-diags: Add cast to fix build on windows
+
+ --  Hefty, Sean <sean.hefty@intel.com>  Thu, 22 Sep 2011 13:37:23 -0700
+infiniband-diags (1.5.9.MLNX20110922.1ebe44c) unstable; urgency=low
+
+  * tag it
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 22 Sep 2011 14:35:29 -0700
+
+infiniband-diags (1.5.9.MLNX20110802.ea6238d) unstable; urgency=low
+
+  * Support ibccquery, congestion control query tool.
+
+ --  Albert Chu <achu@hyperion1.llnl.gov>  Tue, 2 Aug 2011 11:15:07 -0700
+
+infiniband-diags (1.5.9.MLNX20110919.394be9c) unstable; urgency=low
+
+  * infiniband-diags: ibnetdisc Wrap header for use in C++ code
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 19 Sep 2011 14:05:09 -0700
+
+infiniband-diags (1.5.9.MLNX20110823.d3ff6bc) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (1.5.9.MLNX20110713.094c789) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (1.5.9.MLNX20110427.be824cd) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+
+infiniband-diags (1.5.9.MLNX20110919.f2ee1f2) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add query failure count
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 19 Sep 2011 15:32:24 -0700
+
+infiniband-diags (1.5.9.MLNX20110914.3542f74) unstable; urgency=low
+
+  * The merge failed to remove this file on this branch.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 14 Sep 2011 13:08:27 -0700
+
+infiniband-diags (1.5.9.MLNX20110823.e56e946) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (1.5.9.MLNX20110713.2ce0ad4) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (1.5.9.MLNX20110823.baad926) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (1.5.9.MLNX20110713.ab31d99) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (1.5.9.MLNX20110427.1cd5c16) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+
+infiniband-diags (1.5.9.MLNX20110831.f7d822c) unstable; urgency=low
+
+  * tag 1.5.8-7chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 10:22:43 -0700
+
+infiniband-diags (1.5.9.MLNX20110831.cfae435) unstable; urgency=low
+
+  * Fix messed up merge
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 10:22:19 -0700
+
+infiniband-diags (1.5.9.MLNX20110831.43cd159) unstable; urgency=low
+
+  * tag 1.5.8-6chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 10:14:13 -0700
+
+infiniband-diags (1.5.9.MLNX20110831.1080fd7) unstable; urgency=low
+
+  * add to fabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 09:23:12 -0700
+
+infiniband-diags (1.5.9.MLNX20110831.e05601a) unstable; urgency=low
+
+  * tag 1.5.8-5chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 09:27:14 -0700
+
+infiniband-diags (1.5.9.MLNX20110831.25d3bd0) unstable; urgency=low
+
+  * add to fabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 09:23:12 -0700
+
+infiniband-diags (1.5.9.MLNX20110831.b5111b4) unstable; urgency=low
+
+  * tag 1.5.8-4chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 09:13:25 -0700
+
+infiniband-diags (1.5.9.MLNX20110823.3672e50) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (1.5.9.MLNX20110713.8173029) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (1.5.9.MLNX20110427.ad73af5) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+
+infiniband-diags (1.5.9.MLNX20110830.3e14ea6) unstable; urgency=low
+
+  * add to fabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 30 Aug 2011 22:37:31 -0700
+
+infiniband-diags (1.5.9.MLNX20110823.d414a4a) unstable; urgency=low
+
+  * Messed up the merge; new tag 3chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:42:56 -0700
+
+infiniband-diags (1.5.9.MLNX20110823.5414e2f) unstable; urgency=low
+
+  * tag 1.5.8-2chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:35:31 -0700
+
+infiniband-diags (1.5.9.MLNX20110823.b082606) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (1.5.9.MLNX20110713.4335917) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (1.5.9.MLNX20110427.1093495) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+
+infiniband-diags (1.5.9.MLNX20110713.49d047e) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (1.5.9.MLNX20110225.131752b) unstable; urgency=low
+
+  * Add META for chaos build bot
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 25 Feb 2011 15:13:33 -0800
+infiniband-diags (.MLNX20110816.5ba0caf) unstable; urgency=low
+
+  * Update AUTHORS and make README release notes.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 16 Aug 2011 13:40:32 -0700
+
+infiniband-diags (.MLNX20110901.d7f9ad0) unstable; urgency=low
+
+  * infiniband-diags: Fix cap_mask extended link speed supported endian checks
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 1 Sep 2011 01:47:39 +0000
+
+infiniband-diags (.MLNX20110831.1e62d09) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: Add support for FDR10
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 31 Aug 2011 15:26:42 +0000
+
+infiniband-diags (.MLNX20110831.95a84b7) unstable; urgency=low
+
+  * infiniband-diags/iblinkinfo.c: Add support for FDR10
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 17:08:50 -0700
+
+infiniband-diags (.MLNX20110831.ce6c56f) unstable; urgency=low
+
+  * infiniband-diags: Add support for FDR10 to ibnetdiscover
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 17:07:29 -0700
+
+infiniband-diags (.MLNX20110831.c8542da) unstable; urgency=low
+
+  * infiniband-diags: Add FDR10 support to libibnetdisc
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 17:06:43 -0700
+
+infiniband-diags (.MLNX20110831.1344cb3) unstable; urgency=low
+
+  * infiniband-diags/ibstat.c: Add support for FDR10
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 31 Aug 2011 15:26:53 +0000
+
+infiniband-diags (.MLNX20110829.3133743) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Fix cap_mask endian for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 29 Aug 2011 21:18:31 +0000
+
+infiniband-diags (.MLNX20110831.0020ee4) unstable; urgency=low
+
+  * infiniband-diags/ibportstate: Add support for FDR10
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 31 Aug 2011 15:26:28 +0000
+
+infiniband-diags (.MLNX20110831.2100e88) unstable; urgency=low
+
+  * fix manpage typos
+
+ --  Albert Chu <chu11@llnl.gov>  Wed, 31 Aug 2011 10:38:08 -0700
+
+infiniband-diags (.MLNX20110823.510c0e0) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors Clean up exit codes
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 16:12:39 -0700
+
+infiniband-diags (.MLNX20110706.0c220a7) unstable; urgency=low
+
+  * infiniband-diags: add human readable output for data counters
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 6 Jul 2011 18:50:27 -0700
+
+infiniband-diags (.MLNX20110818.8bc3e39) unstable; urgency=low
+
+  * infiniband-diags: move get_msg to common code
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 18 Aug 2011 14:47:26 -0700
+
+infiniband-diags (.MLNX20110819.6d819a4) unstable; urgency=low
+
+  * infiniband-diags/man/ibportstate.8: Update for fdr
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Fri, 19 Aug 2011 16:53:42 +0000
+
+infiniband-diags (.MLNX20110816.ae7695a) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 13:44:44 +0000
+
+infiniband-diags (.MLNX20110816.2e77e72) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 13:44:37 +0000
+
+infiniband-diags (.MLNX20110816.fa92836) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 11:13:59 +0000
+
+infiniband-diags (.MLNX20110816.d7bb3c1) unstable; urgency=low
+
+  * infiniband-diags/iblinkinfo.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 10:28:39 +0000
+
+infiniband-diags (.MLNX20110816.6aab8ab) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 09:14:39 +0000
+
+infiniband-diags (.MLNX20110816.b550a95) unstable; urgency=low
+
+  * infiniband-diags/perfquery: Add support for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 00:37:15 +0000
+
+infiniband-diags (.MLNX20110816.a76827f) unstable; urgency=low
+
+  * infiniband-diags/saquery: Add extended link speed support for PortInfoRecord queries
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 00:18:51 +0000
+
+infiniband-diags (.MLNX20110815.678ec2f) unstable; urgency=low
+
+  * infiniband-diags/smpquery: Add support for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 15 Aug 2011 23:54:33 +0000
+
+infiniband-diags (.MLNX20110805.a817e38) unstable; urgency=low
+
+  * ibnetdisc: Fix build for windows
+
+ --  shefty <sean.hefty@intel.com>  Fri, 5 Aug 2011 20:44:39 +0000
+
+infiniband-diags (.MLNX20110805.65818ea) unstable; urgency=low
+
+  * infiniband-diags: make library dependancies explicit
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 5 Aug 2011 16:59:08 -0700
+
+infiniband-diags (.MLNX20110803.6f87728) unstable; urgency=low
+
+  * infiniband-diags: update check for latest dump function in libibmad
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 3 Aug 2011 13:09:00 -0700
+
+infiniband-diags (.MLNX20110723.d85a6a8) unstable; urgency=low
+
+  * infiniband-diags/smpquery: Add Mellanox extended portinfo query
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Sat, 23 Jul 2011 11:02:52 +0000
+
+infiniband-diags (.MLNX20110803.c80dc80) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Remove compile warning
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 3 Aug 2011 17:58:04 +0000
+
+infiniband-diags (.MLNX20110714.aa80e79) unstable; urgency=low
+
+  * perfquery: support many optional performance counters, including congestion control counters
+
+ --  Albert L.Chu <chu11@llnl.gov>  Thu, 14 Jul 2011 17:10:52 -0700
+
+infiniband-diags (.MLNX20110726.ae82553) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: PortInfoRecord now has an options field
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 26 Jul 2011 12:18:02 +0000
+
+infiniband-diags (.MLNX20110720.0ee2db5) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors fix null threshold_str
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 20 Jul 2011 10:01:26 -0700
+
+infiniband-diags (.MLNX20110714.1274813) unstable; urgency=low
+
+  * infiniband-diags: convert ib[linkinfo|queryerrors] to use PortGUIDs
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 Jul 2011 14:27:07 -0700
+
+infiniband-diags (.MLNX20110714.ac29123) unstable; urgency=low
+
+  * infiniband-diags: libibnetdisc Allow a DR Path partial fabric query starting at a CA
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 Jul 2011 16:05:30 -0700
+
+infiniband-diags (.MLNX20110714.f3e0901) unstable; urgency=low
+
+  * infiniband-diags: libibnetdisc add port interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 Jul 2011 14:25:41 -0700
+
+infiniband-diags (.MLNX20110609.89b6a7b) unstable; urgency=low
+
+  * infiniband-diags: move core saquery functionality to ibdiag_common
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 9 Jun 2011 22:18:28 -0700
+
+infiniband-diags (.MLNX20110602.8062885) unstable; urgency=low
+
+  * infiniband-diags: saquery; remove "result" global
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 2 Jun 2011 00:13:38 -0700
+
+infiniband-diags (.MLNX20110712.c06655b) unstable; urgency=low
+
+  * infiniband-diags: change perl install to vendorlib
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 12 Jul 2011 11:34:36 -0700
+
+infiniband-diags (.MLNX20110628.dee28c9) unstable; urgency=low
+
+  * infiniband-diags: configure.in; check for more recent function in libibmad
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 28 Jun 2011 17:50:37 -0700
+
+infiniband-diags (.MLNX20110712.1098eac) unstable; urgency=low
+
+  * infiniband-diags: Add sysconfdir to spec for config files
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 12 Jul 2011 11:35:04 -0700
+
+infiniband-diags (.MLNX20110707.c8a3e7b) unstable; urgency=low
+
+  * infiniband-diags: Initial changes for extended speed support in libibmad
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 7 Jul 2011 09:50:12 -0700
+
+infiniband-diags (.MLNX20110706.0138f44) unstable; urgency=low
+
+  * infiniband-diags: Remove reference to OpenSM from COPYING
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 6 Jul 2011 14:32:08 -0700
+
+infiniband-diags (.MLNX20110601.46b1ba4) unstable; urgency=low
+
+  * infiniband-diags: add package requires to spec file.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 1 Jun 2011 21:49:57 -0700
+
+infiniband-diags (.MLNX20110529.291a922) unstable; urgency=low
+
+  * infiniband-diags: test for libosmcomp with a function that is used in the code
+
+ --  Ira Weiny <weiny2@llnl.gov>  Sun, 29 May 2011 18:01:31 -0700
+
+infiniband-diags (.MLNX20110620.e9d099e) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Fix typo in help
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 20 Jun 2011 06:00:56 -0700
+
+infiniband-diags (.MLNX20110616.25fad27) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: Fix typo in help
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 16 Jun 2011 13:52:43 -0700
+
+infiniband-diags (.MLNX20110608.22c5087) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc_cache.c: Fix a couple of memory leaks
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 8 Jun 2011 05:47:34 -0700
+
+infiniband-diags (.MLNX20110608.2a75c3e) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Fix possible overrun of path
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 8 Jun 2011 05:47:15 -0700
+
+infiniband-diags (.MLNX20110608.3364bcd) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Fix sizeof
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 8 Jun 2011 05:57:55 -0700
+
+infiniband-diags (.MLNX20110513.1004b7f) unstable; urgency=low
+
+  * infiniband-diags: perfquery; Support PortCountersExtendedNoIETF
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 13 May 2011 22:28:55 -0700
+
+infiniband-diags (.MLNX20110512.5ef9bfa) unstable; urgency=low
+
+  * infiniband-diags: perfquery; print cap_mask for information
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 12 May 2011 17:31:15 -0700
+
+infiniband-diags (.MLNX20110527.82849a8) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Fix SA_ERR_UNKNOWN define
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Fri, 27 May 2011 10:52:05 -0700
+
+infiniband-diags (.MLNX20110525.ca54411) unstable; urgency=low
+
+  * infiniband-diags/configure.in: Support override for IBPATH
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 25 May 2011 05:30:06 -0700
+
+infiniband-diags (.MLNX20110524.1a2ec7c) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Better error message
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 24 May 2011 11:26:33 -0700
+
+infiniband-diags (.MLNX20110428.87a3070) unstable; urgency=low
+
+  * infiniband-diags/vendstat: Fixed general info query
+
+ --  Eli Dorfman <elido@dev.mellanox.co.il>  Thu, 28 Apr 2011 02:09:36 -0700
+
+infiniband-diags (.MLNX20110427.1e406cb) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors; add --counters option
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 01:07:59 -0700
+
+infiniband-diags (.MLNX20110426.33a7602) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors --data; show/clear PortCountersExtended when supported
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 26 Apr 2011 22:59:15 -0700
+
+infiniband-diags (.MLNX20110426.214bb92) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors; use #defines for CapabilityMask
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 26 Apr 2011 22:18:27 -0700
+
+infiniband-diags (.MLNX20110425.3387935) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors; add ibcheckerrors like summary
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 25 Apr 2011 12:39:12 -0700
+
+infiniband-diags (.MLNX20110427.cbe1040) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors; add error thresholds
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:01 -0700
+
+infiniband-diags (.MLNX20110428.53ac239) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Use ib_types.h defines for CapabilityMask
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 28 Apr 2011 07:47:16 -0700
+
+infiniband-diags (.MLNX20110427.42b5389) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Eliminate blank line when sysimgguid is 0
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 27 Apr 2011 12:48:15 -0700
+
+infiniband-diags (.MLNX20110427.d5d44d1) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Handle calloc failure
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 27 Apr 2011 11:17:46 -0700
+
+infiniband-diags (.MLNX20110427.32c0166) unstable; urgency=low
+
+  * infiniband-diags: fix "dist" target and subsequent rpm building
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:08:03 -0700
+
+infiniband-diags (.MLNX20110425.5f9facd) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover: Make --ports option use remap_node_name()
+
+ --  Marcus Epperson <mrepper@sandia.gov>  Mon, 25 Apr 2011 19:55:22 -0700
+
+infiniband-diags (.MLNX20110421.085432d) unstable; urgency=low
+
+  * infiniband-diags: improve backwards/standalone compatibility
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 21 Apr 2011 14:47:03 -0700
+
+infiniband-diags (.MLNX20110417.a398a09) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo; remove non-supported -c option from man page
+
+ --  Ira Weiny <weiny2@llnl.gov>  Sun, 17 Apr 2011 03:06:21 -0700
+
+infiniband-diags (.MLNX20110329.a8c7126) unstable; urgency=low
+
+  * infiniband-diags: saquery, clean up error code/return types
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 29 Mar 2011 17:48:41 -0700
+
+infiniband-diags (.MLNX20110413.ef2c2d6) unstable; urgency=low
+
+  * infiniband-diags: saquery, properly free mad in get_and_dump_any_records
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Apr 2011 09:10:34 -0700
+
+infiniband-diags (.MLNX20110409.6df1fdd) unstable; urgency=low
+
+  * infiniband-diags: Make sure buffers are set to zero before calling xxx_query_via
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Sat, 9 Apr 2011 15:22:02 +0000
+
+infiniband-diags (.MLNX20110401.a57e627) unstable; urgency=low
+
+  * infiniband-diags.spec.in: Remove duplication of ibdiscover.pl
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Fri, 1 Apr 2011 18:38:50 +0000
+
+infiniband-diags (.MLNX20110317.9f91f2a) unstable; urgency=low
+
+  * infiniband-diags: saquery; clean up name/lid processing
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 17 Mar 2011 17:34:52 -0700
+
+infiniband-diags (.MLNX20100426.1ee5bfa) unstable; urgency=low
+
+  * infiniband-diags/saquery: Add GUIDInfoRecord support
+
+ --  Hal Rosenstock <hal@mellanox.com>  Mon, 26 Apr 2010 14:27:32 -0400
+
+infiniband-diags (.MLNX20110322.7596207) unstable; urgency=low
+
+  * Fix ibdatacounters
+
+ --  Jason Gunthorpe <jgunthorpe@obsidianresearch.com>  Tue, 22 Mar 2011 15:11:45 -0700
+
+infiniband-diags (.MLNX20110322.568a117) unstable; urgency=low
+
+  * Fix missing $IBPATH in ibdatacounts
+
+ --  Jason Gunthorpe <jgunthorpe@obsidianresearch.com>  Tue, 22 Mar 2011 14:25:59 -0700
+
+infiniband-diags (.MLNX20110214.a6abfa0) unstable; urgency=low
+
+  * add support for ibnetdiscover grouping for Mellanox switches
+
+ --  Tamir Ronen <tamirr@voltaire.com>  Mon, 14 Feb 2011 15:17:15 -0800
+infiniband-diags (.MLNX20110225.f400454) unstable; urgency=low
+
+  * Add META for chaos build bot
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 25 Feb 2011 15:13:33 -0800
+infiniband-diags (.MLNX20110831.f7d822c) unstable; urgency=low
+
+  * tag 1.5.8-7chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 10:22:43 -0700
+
+infiniband-diags (.MLNX20110831.cfae435) unstable; urgency=low
+
+  * Fix messed up merge
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 10:22:19 -0700
+infiniband-diags (.MLNX20110831.43cd159) unstable; urgency=low
+
+  * tag 1.5.8-6chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 10:14:13 -0700
+
+infiniband-diags (.MLNX20110831.1080fd7) unstable; urgency=low
+
+  * add to fabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 09:23:12 -0700
+infiniband-diags (.MLNX20110831.e05601a) unstable; urgency=low
+
+  * tag 1.5.8-5chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 09:27:14 -0700
+
+infiniband-diags (.MLNX20110831.25d3bd0) unstable; urgency=low
+
+  * add to fabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 09:23:12 -0700
+
+infiniband-diags (.MLNX20110823.3672e50) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (.MLNX20110713.8173029) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (.MLNX20110427.ad73af5) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+infiniband-diags (.MLNX20110831.b5111b4) unstable; urgency=low
+
+  * tag 1.5.8-4chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 09:13:25 -0700
+
+infiniband-diags (.MLNX20110830.3e14ea6) unstable; urgency=low
+
+  * add to fabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 30 Aug 2011 22:37:31 -0700
+infiniband-diags (.MLNX20110823.d414a4a) unstable; urgency=low
+
+  * Messed up the merge; new tag 3chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:42:56 -0700
+infiniband-diags (1.5.13.MLNX20110823.5414e2f) unstable; urgency=low
+
+  * tag 1.5.8-2chaos
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:35:31 -0700
+
+infiniband-diags (1.5.13.MLNX20110823.b082606) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors add "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 21:27:15 -0700
+
+infiniband-diags (1.5.13.MLNX20110713.4335917) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (1.5.13.MLNX20110427.1093495) unstable; urgency=low
+
+  * infiniband-diags: add libibfabricconf
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:34 -0700
+
+infiniband-diags (1.5.13.MLNX20110713.49d047e) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo "check" capabilities against ibfabricconf file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Jul 2011 17:08:01 -0700
+
+infiniband-diags (1.5.13.MLNX20110225.131752b) unstable; urgency=low
+
+  * Add META for chaos build bot
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 25 Feb 2011 15:13:33 -0800
+infiniband-diags (1.5.12.MLNX20120116.49c2002) unstable; urgency=low
+
+  * bug fix release 1.5.13
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 16 Jan 2012 11:03:45 -0800
+
+infiniband-diags (1.5.12.MLNX20110929.4f31996) unstable; urgency=low
+
+  * support --switches-only and --cas-only options in iblinkinfo
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 29 Sep 2011 11:02:21 -0700
+
+infiniband-diags (1.5.12.MLNX20120111.9544ea6) unstable; urgency=low
+
+  * ibswitches: fix output when switch names have "base" or "enhanced" in them
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 11 Jan 2012 23:39:45 -0800
+
+infiniband-diags (1.5.12.MLNX20120110.783cb78) unstable; urgency=low
+
+  * infiniband-diags/configure.in: Fix typo
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 10 Jan 2012 12:22:58 -0800
+
+infiniband-diags (1.5.12.MLNX20111202.6f7ebf0) unstable; urgency=low
+
+  * infiniband-diags: add config file option for Mellanox ExtPortInfo queries
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 2 Dec 2011 11:52:27 -0800
+
+infiniband-diags (1.5.12.MLNX20111013.18c12c5) unstable; urgency=low
+
+  * infiniband-diags: add a general config file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 13 Oct 2011 15:35:59 -0700
+
+infiniband-diags (1.5.12.MLNX20111202.5d597db) unstable; urgency=low
+
+  * infiniband-diags: move is_mlnx_ext_port_info_supported to common code
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 2 Dec 2011 11:50:31 -0800
+
+infiniband-diags (1.5.12.MLNX20111202.973ac38) unstable; urgency=low
+
+  * infiniband-diags: fix printing of extended speeds when port is down
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 2 Dec 2011 13:38:17 -0800
+
+infiniband-diags (1.5.12.MLNX20111201.10984ee) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Fix reset for PortExtendedSpeedsCounters
+
+ --  Hal Rosenstock <hal@mellanox.com>  Thu, 1 Dec 2011 11:33:09 -0800
+
+infiniband-diags (1.5.12.MLNX20111201.ae736e8) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Fix display of PortExtendedSpeedsCounters
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 1 Dec 2011 08:21:12 -0800
+infiniband-diags (1.5.11.MLNX20111107.dc864ae) unstable; urgency=low
+
+  * big fix release
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 7 Nov 2011 08:57:08 -0800
+
+infiniband-diags (1.5.11.MLNX20111107.1dcda58) unstable; urgency=low
+
+  * infiniband-diags: check_lft_balance.pl add -C/-P options
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 7 Nov 2011 08:47:43 -0800
+
+infiniband-diags (1.5.11.MLNX20111107.8edda35) unstable; urgency=low
+
+  * check_lft_balance.pl: Add extra check when using -e heuristic flag in check_lft_balance.pl
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 7 Nov 2011 07:42:19 -0800
+
+infiniband-diags (1.5.11.MLNX20111012.3abf943) unstable; urgency=low
+
+  * Add -e heuristic flag to check_lft_balance.pl to detect common scenarios where unbalanced routing will occur.
+
+ --  Albert L.Chu <chu11@llnl.gov>  Wed, 12 Oct 2011 17:17:08 -0700
+
+infiniband-diags (1.5.11.MLNX20111012.da2b17c) unstable; urgency=low
+
+  * Update check_lft_balance.pl to work with newer infiniband-diag tools
+
+ --  Albert L.Chu <chu11@llnl.gov>  Wed, 12 Oct 2011 15:43:01 -0700
+
+infiniband-diags (1.5.11.MLNX20111026.f13d08c) unstable; urgency=low
+
+  * infiniband-diags: clean up build
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 26 Oct 2011 14:24:46 -0700
+infiniband-diags (1.5.10.MLNX20111101.309830f) unstable; urgency=low
+
+  * update bug fix version
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 1 Nov 2011 20:43:13 -0700
+
+infiniband-diags (1.5.10.MLNX20111031.42734f2) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors: don't exit on reset error
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 31 Oct 2011 22:48:12 -0700
+
+infiniband-diags (1.5.10.MLNX20111026.555d321) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo flag ports which were not scanned
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 26 Oct 2011 11:15:03 -0700
+
+infiniband-diags (1.5.10.MLNX20111012.c811954) unstable; urgency=low
+
+  * infiniband-diags: saquery: use ib-node-name-map file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 12 Oct 2011 16:55:10 -0700
+infiniband-diags (1.5.8.MLNX20111013.fe2cdbb) unstable; urgency=low
+
+  * bug fix release
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 13 Oct 2011 15:53:13 -0700
+
+infiniband-diags (1.5.8.MLNX20111013.a170683) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo: fix error message
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 13 Oct 2011 15:28:50 -0700
+
+infiniband-diags (1.5.8.MLNX20111012.a3ccb9f) unstable; urgency=low
+
+  * infiniband-diags: fix installation of error_thresholds file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 12 Oct 2011 17:28:57 -0700
+
+infiniband-diags (1.5.8.MLNX20110927.7734196) unstable; urgency=low
+
+  * infiniband-diags/src/ibqueryerrors.c: don't increment bad_ports for port ALL
+
+ --  Marcus R Epperson <marcus.r.epperson@gmail.com>  Tue, 27 Sep 2011 18:15:12 -0700
+
+infiniband-diags (1.5.8.MLNX20110927.c467942) unstable; urgency=low
+
+  * infiniband-diags/src/ibqueryerrors.c: fix segv due to CA port 0 reference
+
+ --  Marcus R Epperson <marcus.r.epperson@gmail.com>  Tue, 27 Sep 2011 18:15:11 -0700
+
+infiniband-diags (1.5.8.MLNX20110911.1222d73) unstable; urgency=low
+
+  * infiniband-diags/scripts/ibcheckport.in: ignore lid/sm lid checks on non zero port switches
+
+ --  Alex Netes <alexne@mellanox.com>  Sun, 11 Sep 2011 01:10:32 -0700
+
+infiniband-diags (1.5.8.MLNX20110922.3d873ba) unstable; urgency=low
+
+  * RE: [PATCH v2] ib-diags: Add cast to fix build on windows
+
+ --  Hefty, Sean <sean.hefty@intel.com>  Thu, 22 Sep 2011 13:37:23 -0700
+
+infiniband-diags (1.5.8.MLNX20110816.5ba0caf) unstable; urgency=low
+
+  * Update AUTHORS and make README release notes.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 16 Aug 2011 13:40:32 -0700
+
+infiniband-diags (1.5.8.MLNX20110901.d7f9ad0) unstable; urgency=low
+
+  * infiniband-diags: Fix cap_mask extended link speed supported endian checks
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 1 Sep 2011 01:47:39 +0000
+
+infiniband-diags (1.5.8.MLNX20110831.1e62d09) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: Add support for FDR10
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 31 Aug 2011 15:26:42 +0000
+
+infiniband-diags (1.5.8.MLNX20110831.95a84b7) unstable; urgency=low
+
+  * infiniband-diags/iblinkinfo.c: Add support for FDR10
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 17:08:50 -0700
+
+infiniband-diags (1.5.8.MLNX20110831.ce6c56f) unstable; urgency=low
+
+  * infiniband-diags: Add support for FDR10 to ibnetdiscover
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 17:07:29 -0700
+
+infiniband-diags (1.5.8.MLNX20110831.c8542da) unstable; urgency=low
+
+  * infiniband-diags: Add FDR10 support to libibnetdisc
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 31 Aug 2011 17:06:43 -0700
+
+infiniband-diags (1.5.8.MLNX20110831.1344cb3) unstable; urgency=low
+
+  * infiniband-diags/ibstat.c: Add support for FDR10
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 31 Aug 2011 15:26:53 +0000
+
+infiniband-diags (1.5.8.MLNX20110829.3133743) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Fix cap_mask endian for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 29 Aug 2011 21:18:31 +0000
+
+infiniband-diags (1.5.8.MLNX20110831.0020ee4) unstable; urgency=low
+
+  * infiniband-diags/ibportstate: Add support for FDR10
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 31 Aug 2011 15:26:28 +0000
+
+infiniband-diags (1.5.8.MLNX20110831.2100e88) unstable; urgency=low
+
+  * fix manpage typos
+
+ --  Albert Chu <chu11@llnl.gov>  Wed, 31 Aug 2011 10:38:08 -0700
+
+infiniband-diags (1.5.8.MLNX20110823.510c0e0) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors Clean up exit codes
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 23 Aug 2011 16:12:39 -0700
+
+infiniband-diags (1.5.8.MLNX20110706.0c220a7) unstable; urgency=low
+
+  * infiniband-diags: add human readable output for data counters
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 6 Jul 2011 18:50:27 -0700
+
+infiniband-diags (1.5.8.MLNX20110818.8bc3e39) unstable; urgency=low
+
+  * infiniband-diags: move get_msg to common code
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 18 Aug 2011 14:47:26 -0700
+
+infiniband-diags (1.5.8.MLNX20110819.6d819a4) unstable; urgency=low
+
+  * infiniband-diags/man/ibportstate.8: Update for fdr
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Fri, 19 Aug 2011 16:53:42 +0000
+
+infiniband-diags (1.5.8.MLNX20110816.ae7695a) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 13:44:44 +0000
+
+infiniband-diags (1.5.8.MLNX20110816.2e77e72) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 13:44:37 +0000
+
+infiniband-diags (1.5.8.MLNX20110816.fa92836) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 11:13:59 +0000
+
+infiniband-diags (1.5.8.MLNX20110816.d7bb3c1) unstable; urgency=low
+
+  * infiniband-diags/iblinkinfo.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 10:28:39 +0000
+
+infiniband-diags (1.5.8.MLNX20110816.6aab8ab) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Changes for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 09:14:39 +0000
+
+infiniband-diags (1.5.8.MLNX20110816.b550a95) unstable; urgency=low
+
+  * infiniband-diags/perfquery: Add support for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 00:37:15 +0000
+
+infiniband-diags (1.5.8.MLNX20110816.a76827f) unstable; urgency=low
+
+  * infiniband-diags/saquery: Add extended link speed support for PortInfoRecord queries
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 16 Aug 2011 00:18:51 +0000
+
+infiniband-diags (1.5.8.MLNX20110815.678ec2f) unstable; urgency=low
+
+  * infiniband-diags/smpquery: Add support for extended link speeds
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 15 Aug 2011 23:54:33 +0000
+
+infiniband-diags (1.5.8.MLNX20110805.a817e38) unstable; urgency=low
+
+  * ibnetdisc: Fix build for windows
+
+ --  shefty <sean.hefty@intel.com>  Fri, 5 Aug 2011 20:44:39 +0000
+
+infiniband-diags (1.5.8.MLNX20110805.65818ea) unstable; urgency=low
+
+  * infiniband-diags: make library dependancies explicit
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 5 Aug 2011 16:59:08 -0700
+
+infiniband-diags (1.5.8.MLNX20110803.6f87728) unstable; urgency=low
+
+  * infiniband-diags: update check for latest dump function in libibmad
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 3 Aug 2011 13:09:00 -0700
+
+infiniband-diags (1.5.8.MLNX20110723.d85a6a8) unstable; urgency=low
+
+  * infiniband-diags/smpquery: Add Mellanox extended portinfo query
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Sat, 23 Jul 2011 11:02:52 +0000
+
+infiniband-diags (1.5.8.MLNX20110803.c80dc80) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Remove compile warning
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 3 Aug 2011 17:58:04 +0000
+
+infiniband-diags (1.5.8.MLNX20110714.aa80e79) unstable; urgency=low
+
+  * perfquery: support many optional performance counters, including congestion control counters
+
+ --  Albert L.Chu <chu11@llnl.gov>  Thu, 14 Jul 2011 17:10:52 -0700
+
+infiniband-diags (1.5.8.MLNX20110726.ae82553) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: PortInfoRecord now has an options field
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 26 Jul 2011 12:18:02 +0000
+
+infiniband-diags (1.5.8.MLNX20110720.0ee2db5) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors fix null threshold_str
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 20 Jul 2011 10:01:26 -0700
+
+infiniband-diags (1.5.8.MLNX20110714.1274813) unstable; urgency=low
+
+  * infiniband-diags: convert ib[linkinfo|queryerrors] to use PortGUIDs
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 Jul 2011 14:27:07 -0700
+
+infiniband-diags (1.5.8.MLNX20110714.ac29123) unstable; urgency=low
+
+  * infiniband-diags: libibnetdisc Allow a DR Path partial fabric query starting at a CA
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 Jul 2011 16:05:30 -0700
+
+infiniband-diags (1.5.8.MLNX20110714.f3e0901) unstable; urgency=low
+
+  * infiniband-diags: libibnetdisc add port interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 Jul 2011 14:25:41 -0700
+
+infiniband-diags (1.5.8.MLNX20110609.89b6a7b) unstable; urgency=low
+
+  * infiniband-diags: move core saquery functionality to ibdiag_common
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 9 Jun 2011 22:18:28 -0700
+
+infiniband-diags (1.5.8.MLNX20110602.8062885) unstable; urgency=low
+
+  * infiniband-diags: saquery; remove "result" global
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 2 Jun 2011 00:13:38 -0700
+
+infiniband-diags (1.5.8.MLNX20110712.c06655b) unstable; urgency=low
+
+  * infiniband-diags: change perl install to vendorlib
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 12 Jul 2011 11:34:36 -0700
+
+infiniband-diags (1.5.8.MLNX20110628.dee28c9) unstable; urgency=low
+
+  * infiniband-diags: configure.in; check for more recent function in libibmad
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 28 Jun 2011 17:50:37 -0700
+
+infiniband-diags (1.5.8.MLNX20110712.1098eac) unstable; urgency=low
+
+  * infiniband-diags: Add sysconfdir to spec for config files
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 12 Jul 2011 11:35:04 -0700
+
+infiniband-diags (1.5.8.MLNX20110707.c8a3e7b) unstable; urgency=low
+
+  * infiniband-diags: Initial changes for extended speed support in libibmad
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 7 Jul 2011 09:50:12 -0700
+
+infiniband-diags (1.5.8.MLNX20110706.0138f44) unstable; urgency=low
+
+  * infiniband-diags: Remove reference to OpenSM from COPYING
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 6 Jul 2011 14:32:08 -0700
+
+infiniband-diags (1.5.8.MLNX20110601.46b1ba4) unstable; urgency=low
+
+  * infiniband-diags: add package requires to spec file.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 1 Jun 2011 21:49:57 -0700
+
+infiniband-diags (1.5.8.MLNX20110529.291a922) unstable; urgency=low
+
+  * infiniband-diags: test for libosmcomp with a function that is used in the code
+
+ --  Ira Weiny <weiny2@llnl.gov>  Sun, 29 May 2011 18:01:31 -0700
+
+infiniband-diags (1.5.8.MLNX20110620.e9d099e) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Fix typo in help
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 20 Jun 2011 06:00:56 -0700
+
+infiniband-diags (1.5.8.MLNX20110616.25fad27) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: Fix typo in help
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 16 Jun 2011 13:52:43 -0700
+
+infiniband-diags (1.5.8.MLNX20110608.22c5087) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc_cache.c: Fix a couple of memory leaks
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 8 Jun 2011 05:47:34 -0700
+
+infiniband-diags (1.5.8.MLNX20110608.2a75c3e) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Fix possible overrun of path
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 8 Jun 2011 05:47:15 -0700
+
+infiniband-diags (1.5.8.MLNX20110608.3364bcd) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Fix sizeof
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 8 Jun 2011 05:57:55 -0700
+
+infiniband-diags (1.5.8.MLNX20110513.1004b7f) unstable; urgency=low
+
+  * infiniband-diags: perfquery; Support PortCountersExtendedNoIETF
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 13 May 2011 22:28:55 -0700
+
+infiniband-diags (1.5.8.MLNX20110512.5ef9bfa) unstable; urgency=low
+
+  * infiniband-diags: perfquery; print cap_mask for information
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 12 May 2011 17:31:15 -0700
+
+infiniband-diags (1.5.8.MLNX20110527.82849a8) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Fix SA_ERR_UNKNOWN define
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Fri, 27 May 2011 10:52:05 -0700
+
+infiniband-diags (1.5.8.MLNX20110525.ca54411) unstable; urgency=low
+
+  * infiniband-diags/configure.in: Support override for IBPATH
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 25 May 2011 05:30:06 -0700
+
+infiniband-diags (1.5.8.MLNX20110524.1a2ec7c) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Better error message
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 24 May 2011 11:26:33 -0700
+
+infiniband-diags (1.5.8.MLNX20110428.87a3070) unstable; urgency=low
+
+  * infiniband-diags/vendstat: Fixed general info query
+
+ --  Eli Dorfman <elido@dev.mellanox.co.il>  Thu, 28 Apr 2011 02:09:36 -0700
+
+infiniband-diags (1.5.8.MLNX20110427.1e406cb) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors; add --counters option
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 01:07:59 -0700
+
+infiniband-diags (1.5.8.MLNX20110426.33a7602) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors --data; show/clear PortCountersExtended when supported
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 26 Apr 2011 22:59:15 -0700
+
+infiniband-diags (1.5.8.MLNX20110426.214bb92) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors; use #defines for CapabilityMask
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 26 Apr 2011 22:18:27 -0700
+
+infiniband-diags (1.5.8.MLNX20110425.3387935) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors; add ibcheckerrors like summary
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 25 Apr 2011 12:39:12 -0700
+
+infiniband-diags (1.5.8.MLNX20110427.cbe1040) unstable; urgency=low
+
+  * infiniband-diags: ibqueryerrors; add error thresholds
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:43:01 -0700
+
+infiniband-diags (1.5.8.MLNX20110428.53ac239) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Use ib_types.h defines for CapabilityMask
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 28 Apr 2011 07:47:16 -0700
+
+infiniband-diags (1.5.8.MLNX20110427.42b5389) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Eliminate blank line when sysimgguid is 0
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 27 Apr 2011 12:48:15 -0700
+
+infiniband-diags (1.5.8.MLNX20110427.d5d44d1) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Handle calloc failure
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 27 Apr 2011 11:17:46 -0700
+
+infiniband-diags (1.5.8.MLNX20110427.32c0166) unstable; urgency=low
+
+  * infiniband-diags: fix "dist" target and subsequent rpm building
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 27 Apr 2011 10:08:03 -0700
+
+infiniband-diags (1.5.8.MLNX20110425.5f9facd) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover: Make --ports option use remap_node_name()
+
+ --  Marcus Epperson <mrepper@sandia.gov>  Mon, 25 Apr 2011 19:55:22 -0700
+
+infiniband-diags (1.5.8.MLNX20110421.085432d) unstable; urgency=low
+
+  * infiniband-diags: improve backwards/standalone compatibility
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 21 Apr 2011 14:47:03 -0700
+
+infiniband-diags (1.5.8.MLNX20110417.a398a09) unstable; urgency=low
+
+  * infiniband-diags: iblinkinfo; remove non-supported -c option from man page
+
+ --  Ira Weiny <weiny2@llnl.gov>  Sun, 17 Apr 2011 03:06:21 -0700
+
+infiniband-diags (1.5.8.MLNX20110329.a8c7126) unstable; urgency=low
+
+  * infiniband-diags: saquery, clean up error code/return types
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 29 Mar 2011 17:48:41 -0700
+
+infiniband-diags (1.5.8.MLNX20110413.ef2c2d6) unstable; urgency=low
+
+  * infiniband-diags: saquery, properly free mad in get_and_dump_any_records
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 Apr 2011 09:10:34 -0700
+
+infiniband-diags (1.5.8.MLNX20110409.6df1fdd) unstable; urgency=low
+
+  * infiniband-diags: Make sure buffers are set to zero before calling xxx_query_via
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Sat, 9 Apr 2011 15:22:02 +0000
+
+infiniband-diags (1.5.8.MLNX20110401.a57e627) unstable; urgency=low
+
+  * infiniband-diags.spec.in: Remove duplication of ibdiscover.pl
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Fri, 1 Apr 2011 18:38:50 +0000
+
+infiniband-diags (1.5.8.MLNX20110317.9f91f2a) unstable; urgency=low
+
+  * infiniband-diags: saquery; clean up name/lid processing
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 17 Mar 2011 17:34:52 -0700
+
+infiniband-diags (1.5.8.MLNX20100426.1ee5bfa) unstable; urgency=low
+
+  * infiniband-diags/saquery: Add GUIDInfoRecord support
+
+ --  Hal Rosenstock <hal@mellanox.com>  Mon, 26 Apr 2010 14:27:32 -0400
+
+infiniband-diags (1.5.8.MLNX20110322.7596207) unstable; urgency=low
+
+  * Fix ibdatacounters
+
+ --  Jason Gunthorpe <jgunthorpe@obsidianresearch.com>  Tue, 22 Mar 2011 15:11:45 -0700
+
+infiniband-diags (1.5.8.MLNX20110322.568a117) unstable; urgency=low
+
+  * Fix missing $IBPATH in ibdatacounts
+
+ --  Jason Gunthorpe <jgunthorpe@obsidianresearch.com>  Tue, 22 Mar 2011 14:25:59 -0700
+
+infiniband-diags (1.5.8.MLNX20110214.a6abfa0) unstable; urgency=low
+
+  * add support for ibnetdiscover grouping for Mellanox switches
+
+ --  Tamir Ronen <tamirr@voltaire.com>  Mon, 14 Feb 2011 15:17:15 -0800
+infiniband-diags (1.5.7.MLNX20100421.450de0f) unstable; urgency=low
+
+  * support --filterdownports in iblinkinfo
+
+ --  Albert Chu <chu11@llnl.gov>  Wed, 21 Apr 2010 17:04:02 -0700
+
+infiniband-diags (1.5.7.MLNX20100420.c9adf42) unstable; urgency=low
+
+  * Add lid and node description diff options for --diffcheck in iblinkinfo
+
+ --  Albert Chu <chu11@llnl.gov>  Tue, 20 Apr 2010 10:13:05 -0700
+
+infiniband-diags (1.5.7.MLNX20100420.20af5c3) unstable; urgency=low
+
+  * support --diffcheck in iblinkinfo
+
+ --  Albert Chu <chu11@llnl.gov>  Tue, 20 Apr 2010 09:53:53 -0700
+
+infiniband-diags (1.5.7.MLNX20100419.1950038) unstable; urgency=low
+
+  * add --diff support to iblinkinfo
+
+ --  Albert Chu <chu11@llnl.gov>  Mon, 19 Apr 2010 10:36:54 -0700
+
+infiniband-diags (1.5.7.MLNX20100730.d58cb63) unstable; urgency=low
+
+  * ibnetdisc.c: Fix partial scan of the fabric.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 30 Jul 2010 14:26:39 -0700
+
+infiniband-diags (1.5.7.MLNX20110214.d60d71e) unstable; urgency=low
+
+  * The shell scripts use bashism, so use bash directly.
+
+ --  Jason Gunthorpe <jgunthorpe@obsidianresearch.com>  Mon, 14 Feb 2011 10:36:13 -0800
+
+infiniband-diags (1.5.7.MLNX20110214.ff57b27) unstable; urgency=low
+
+  * infiniband-diags: package versions update
+
+ --  Alex Netes <alexne@voltaire.com>  Mon, 14 Feb 2011 11:56:21 +0200
+
+infiniband-diags (1.5.7.MLNX20110214.6edf987) unstable; urgency=low
+
+  * infiniband-diags: update shared library versions
+
+ --  Alex Netes <alexne@voltaire.com>  Mon, 14 Feb 2011 11:53:59 +0200
+
+infiniband-diags (1.5.7.MLNX20110203.b1e4531) unstable; urgency=low
+
+  * Makefile: ChangeLog and version generation script path fix
+
+ --  Alex Netes <alexne@voltaire.com>  Thu, 3 Feb 2011 18:25:19 +0200
+
+infiniband-diags (1.5.7.MLNX20101222.b260cb4) unstable; urgency=low
+
+  * Further timeout paramater verification (Was: [PATCH] infiniband-diags: Verify timeout value specified to diagnostics)
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 22 Dec 2010 11:47:07 -0800
+
+infiniband-diags (1.5.7.MLNX20101215.298998c) unstable; urgency=low
+
+  * infiniband-diags: Verify timeout value specified to diagnostics
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 15 Dec 2010 11:47:09 -0800
+
+infiniband-diags (1.5.7.MLNX20100803.8ab2e41) unstable; urgency=low
+
+  * libibmad/fields.c: Change all PortCounter names to match the Specification
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 3 Aug 2010 10:40:56 -0700
+
+infiniband-diags (1.5.7.MLNX20101027.07b4b1a) unstable; urgency=low
+
+  * infiniband-diags/iblinkinfo.c: Limit some queries to switches
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 27 Oct 2010 08:47:07 -0400
+
+infiniband-diags (1.5.7.MLNX20101027.0d7e988) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: In dump_one_mcmember_record, fix flow label endian
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 27 Oct 2010 09:06:36 -0400
+
+infiniband-diags (1.5.7.MLNX20100914.3d00c3e) unstable; urgency=low
+
+  * infiniband-diags/ibtracert: Eliminate direct route (-D) option
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 14 Sep 2010 11:10:16 -0400
+
+infiniband-diags (1.5.7.MLNX20101004.c58dcaa) unstable; urgency=low
+
+  * ibstat.c: fix core dump if wrong port phys state is reported
+
+ --  Yevgeny Kliteynik <kliteyn@mellanox.co.il>  Mon, 4 Oct 2010 12:16:43 +0200
+
+infiniband-diags (1.5.7.MLNX20101007.f517876) unstable; urgency=low
+
+  * Fix autotools to include the necessary M4 files
+
+ --  Jason Gunthorpe <jgunthorpe@obsidianresearch.com>  Thu, 7 Oct 2010 16:33:01 -0600
+
+infiniband-diags (1.5.7.MLNX20100905.782fd92) unstable; urgency=low
+
+  * inifiband-diags: Support Voltaire switch ISR4200
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Sun, 5 Sep 2010 11:30:37 +0300
+
+infiniband-diags (1.5.7.MLNX20100905.5578a9c) unstable; urgency=low
+
+  * infiniband-diags: Do not exit when unexpected node found
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Sun, 5 Sep 2010 11:28:57 +0300
+infiniband-diags (1.5.6.MLNX20100904.843d2bb) unstable; urgency=low
+
+  * management: packages versions update
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 4 Sep 2010 14:15:33 +0300
+
+infiniband-diags (1.5.6.MLNX20100904.3eabf42) unstable; urgency=low
+
+  * management: update shared library versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 4 Sep 2010 14:13:06 +0300
+
+infiniband-diags (1.5.6.MLNX20100825.c02bdb1) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover: Fix handling of CA ports in recv_port_info
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 25 Aug 2010 14:08:02 -0400
+
+infiniband-diags (1.5.6.MLNX20100826.843a007) unstable; urgency=low
+
+  * ibnetdiscover: add '-f' flag to show full information (ports' speed and width).
+
+ --  Doron Shoham <dorons@voltaire.com>  Thu, 26 Aug 2010 16:14:16 +0300
+
+infiniband-diags (1.5.6.MLNX20100801.a387f26) unstable; urgency=low
+
+  * infiniband-diags/ibstat: convert to PRIx64 macros GUID printing
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 1 Aug 2010 20:26:11 +0300
+
+infiniband-diags (1.5.6.MLNX20100726.732bac4) unstable; urgency=low
+
+  * libibnetdisc: fix cast in unmarshall16
+
+ --  Hefty, Sean <sean.hefty@intel.com>  Mon, 26 Jul 2010 11:40:30 -0700
+
+infiniband-diags (1.5.6.MLNX20100616.30309ed) unstable; urgency=low
+
+  * infiniband-diags/perfquery.8: Add some missing counters to description
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 16 Jun 2010 07:05:42 -0400
+
+infiniband-diags (1.5.6.MLNX20100506.074ef7c) unstable; urgency=low
+
+  * ibqueryerrors.c: Optimize by querying AllPortSelect first
+
+ --  Ira Weiny <weiny2@hera2.llnl.gov>  Thu, 6 May 2010 13:49:55 -0700
+
+infiniband-diags (1.5.6.MLNX20100610.35a3ce2) unstable; urgency=low
+
+  * fix MFT record dump
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Thu, 10 Jun 2010 18:03:03 +0300
+
+infiniband-diags (1.5.6.MLNX20100421.9151e22) unstable; urgency=low
+
+  * support diffing lids and nodedesc on remoteports in ibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 21 Apr 2010 11:19:44 -0700
+
+infiniband-diags (1.5.6.MLNX20100420.d84c9d4) unstable; urgency=low
+
+  * support diffing nodedesc on remoteports in ibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 20 Apr 2010 15:30:40 -0700
+
+infiniband-diags (1.5.6.MLNX20100419.5763f49) unstable; urgency=low
+
+  * add ibcacheedit tool
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 19 Apr 2010 11:43:34 -0700
+
+infiniband-diags (1.5.6.MLNX20100419.08512b8) unstable; urgency=low
+
+  * support libibnetdisc caching no-overwrite flag
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 19 Apr 2010 11:43:15 -0700
+
+infiniband-diags (1.5.6.MLNX20100419.38181cf) unstable; urgency=low
+
+  * make libibnetdisc default behavior to overwrite a cache
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 19 Apr 2010 11:43:07 -0700
+
+infiniband-diags (1.5.6.MLNX20100602.e6ae86f) unstable; urgency=low
+
+  * ib/mgmt: fix build under windows stack
+
+ --  Hefty, Sean <sean.hefty@intel.com>  Wed, 2 Jun 2010 13:15:31 -0700
+
+infiniband-diags (1.5.6.MLNX20100602.e8f783c) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Cosmetic changes
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 2 Jun 2010 09:05:19 -0400
+
+infiniband-diags (1.5.6.MLNX20100602.cbcde10) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/chassis.c: In group_nodes, set fabric->chassis
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 2 Jun 2010 09:04:15 -0400
+
+infiniband-diags (1.5.6.MLNX20100602.d6ddf46) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/chassis.c: In group_nodes, pass on all nodes
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 2 Jun 2010 09:02:54 -0400
+
+infiniband-diags (1.5.6.MLNX20100525.c09b93c) unstable; urgency=low
+
+  * libibnetdisc: move ibmad_port out of smp_engine
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 25 May 2010 13:32:18 -0700
+
+infiniband-diags (1.5.6.MLNX20100524.37b6c70) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: Fix compile warns on 32 bit archs
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Mon, 24 May 2010 15:45:08 -0400
+
+infiniband-diags (1.5.6.MLNX20100524.076189d) unstable; urgency=low
+
+  * infiniband-diags/vendstat: allow multiple config space records
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 24 May 2010 21:53:15 +0300
+
+infiniband-diags (1.5.6.MLNX20100524.dc7b66e) unstable; urgency=low
+
+  * infiniband-diags/vendstat: add config space access options
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 24 May 2010 21:53:15 +0300
+
+infiniband-diags (1.5.6.MLNX20100524.1db6d9d) unstable; urgency=low
+
+  * infiniband-diags/vendstat: code simplifications
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 24 May 2010 20:37:29 +0300
+infiniband-diags (1.5.5.MLNX20100522.210775c) unstable; urgency=low
+
+  * management: packages versions update
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 22 May 2010 18:00:16 +0300
+
+infiniband-diags (1.5.5.MLNX20100522.9c01c85) unstable; urgency=low
+
+  * management: update shared library versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 22 May 2010 17:52:50 +0300
+
+infiniband-diags (1.5.5.MLNX20100425.92b4f4b) unstable; urgency=low
+
+  * opensm: Always set enabled speed and width
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Sun, 25 Apr 2010 14:04:07 +0300
+
+infiniband-diags (1.5.5.MLNX20100511.ae0675b) unstable; urgency=low
+
+  * ibnetdisc: Separate calls to umad and mad layer to avoid race condition on response MAD's
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 11 May 2010 15:36:08 -0700
+
+infiniband-diags (1.5.5.MLNX20100427.21ec4a3) unstable; urgency=low
+
+  * libibnetdisc: Add grouping for Voltaire's ISR4700 switch
+
+ --  sebastien dugue <sebastien.dugue@bull.net>  Tue, 27 Apr 2010 14:35:29 +0200
+
+infiniband-diags (1.5.5.MLNX20100506.3eb3622) unstable; urgency=low
+
+  * RE: [PATCH] management: adding mad_dump_fields to libibmad
+
+ --  Mike Heinz <michael.heinz@qlogic.com>  Thu, 6 May 2010 13:34:46 -0500
+
+infiniband-diags (1.5.5.MLNX20100506.0176eec) unstable; urgency=low
+
+  * RE: [PATCH] management: adding mad_dump_fields to libibmad
+
+ --  Mike Heinz <michael.heinz@qlogic.com>  Thu, 6 May 2010 13:30:02 -0500
+
+infiniband-diags (1.5.5.MLNX20100419.1a4b90a) unstable; urgency=low
+
+  * libibnetdisc: fix indentations
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 19 Apr 2010 18:08:19 +0300
+
+infiniband-diags (1.5.5.MLNX20100414.116e64e) unstable; urgency=low
+
+  * check for duplicate port guids in libibnetdisc cache
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 14 Apr 2010 15:48:01 -0700
+
+infiniband-diags (1.5.5.MLNX20100414.a4a7f47) unstable; urgency=low
+
+  * fix libibnetdisc cache error path memleak
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 14 Apr 2010 15:47:49 -0700
+
+infiniband-diags (1.5.5.MLNX20100414.e8cd828) unstable; urgency=low
+
+  * fix libibnetdisc portguid hashing corner case
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 14 Apr 2010 10:48:03 -0700
+
+infiniband-diags (1.5.5.MLNX20100416.97161a8) unstable; urgency=low
+
+  * libibnetdisc: remove not needed num_smps_outstanding counter
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 16 Apr 2010 19:31:43 +0300
+
+infiniband-diags (1.5.5.MLNX20100416.eea29a4) unstable; urgency=low
+
+  * libibnetdisc: remove not needed process_smp_queue() call
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 16 Apr 2010 15:14:00 +0300
+
+infiniband-diags (1.5.5.MLNX20100416.2c89899) unstable; urgency=low
+
+  * libibnetdiscover: more outstanding MADs counting fix
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 16 Apr 2010 19:31:43 +0300
+
+infiniband-diags (1.5.5.MLNX20100416.a9989e0) unstable; urgency=low
+
+  * libibnetdisc: fix memory leak in case of send_smps() failure
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 16 Apr 2010 15:10:30 +0300
+
+infiniband-diags (1.5.5.MLNX20100409.c22a907) unstable; urgency=low
+
+  * libibnetdisc: config struct for ibnd_discover_fabric()
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 9 Apr 2010 04:48:15 +0300
+
+infiniband-diags (1.5.5.MLNX20100413.60514dc) unstable; urgency=low
+
+  * libibnetdisc: don't query CA ports not connected to a fabric
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 13 Apr 2010 20:41:59 +0300
+
+infiniband-diags (1.5.5.MLNX20100413.0914ffd) unstable; urgency=low
+
+  * libibnetdisc: don't try to cross discovery over CA
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 13 Apr 2010 19:54:45 +0300
+
+infiniband-diags (1.5.5.MLNX20100413.001dc72) unstable; urgency=low
+
+  * libibnetdisc: fix outstanding SMPs countung
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 13 Apr 2010 19:30:23 +0300
+
+infiniband-diags (1.5.5.MLNX20100413.7ff1e26) unstable; urgency=low
+
+  * libibnetdisc: add \n at end of error messages
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 13 Apr 2010 17:54:38 +0300
+
+infiniband-diags (1.5.5.MLNX20100413.a17e366) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover: cleanups
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 13 Apr 2010 15:48:30 +0300
+
+infiniband-diags (1.5.5.MLNX20100407.1b60fb0) unstable; urgency=low
+
+  * support lid and nodedesc diffchecks in ibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 7 Apr 2010 10:06:43 -0700
+
+infiniband-diags (1.5.5.MLNX20100407.f6d4848) unstable; urgency=low
+
+  * support --diffcheck in ibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 7 Apr 2010 10:06:32 -0700
+
+infiniband-diags (1.5.5.MLNX20100407.90df93c) unstable; urgency=low
+
+  * support --diff in ibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 7 Apr 2010 10:05:38 -0700
+
+infiniband-diags (1.5.5.MLNX20100409.ee9cd9d) unstable; urgency=low
+
+  * fix libibnetdisc corner case when user tries to re-cache a loaded cache
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 9 Apr 2010 10:24:50 -0700
+
+infiniband-diags (1.5.5.MLNX20100410.937eaac) unstable; urgency=low
+
+  * libibnetdisc: no backward NodeInfo queries
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 10 Apr 2010 02:43:24 +0300
+
+infiniband-diags (1.5.5.MLNX20100410.b5c7dc5) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover: report number of used MADs
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 10 Apr 2010 02:16:40 +0300
+
+infiniband-diags (1.5.5.MLNX20100410.c690e85) unstable; urgency=low
+
+  * libibnetdisc: keep total number of used SMPs
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 10 Apr 2010 02:07:07 +0300
+
+infiniband-diags (1.5.5.MLNX20100410.4f55f7c) unstable; urgency=low
+
+  * libibnetdisc: restore hops limited discovery
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 10 Apr 2010 01:01:44 +0300
+
+infiniband-diags (1.5.5.MLNX20100410.baae94d) unstable; urgency=low
+
+  * libibnetdisc: restore show_progress functionality
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 10 Apr 2010 00:14:27 +0300
+
+infiniband-diags (1.5.5.MLNX20100409.85e417e) unstable; urgency=low
+
+  * libibnetdisc: code cleanups
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 9 Apr 2010 03:35:29 +0300
+
+infiniband-diags (1.5.5.MLNX20100202.f518fb5) unstable; urgency=low
+
+  * libibnetdisc: add ibnd_set_max_smps_on_wire call
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 2 Feb 2010 14:06:03 -0800
+
+infiniband-diags (1.5.5.MLNX20100122.089f028) unstable; urgency=low
+
+  * libibnetdisc: Convert to a multi-smp algorithm
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 22 Jan 2010 17:33:30 -0800
+
+infiniband-diags (1.5.5.MLNX20100309.1226619) unstable; urgency=low
+
+  * infiniband-diags/ibstat.c: print link layer for RoCEE support
+
+ --  Yevgeny Kliteynik <kliteyn@dev.mellanox.co.il>  Tue, 9 Mar 2010 12:41:15 +0200
+
+infiniband-diags (1.5.5.MLNX20100309.a6cc34b) unstable; urgency=low
+
+  * infiniband-diags/ibstatus: add link_layer for RoCEE support
+
+ --  Yevgeny Kliteynik <kliteyn@dev.mellanox.co.il>  Tue, 9 Mar 2010 12:37:38 +0200
+
+infiniband-diags (1.5.5.MLNX20100304.b0caed9) unstable; urgency=low
+
+  * Perfquery can be too noisy.
+
+ --  Mike Heinz <michael.heinz@qlogic.com>  Thu, 4 Mar 2010 15:01:44 -0600
+
+infiniband-diags (1.5.5.MLNX20100318.30b8c90) unstable; urgency=low
+
+  * infiniband-diags: Ignore PortInfo data on down port.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 18 Mar 2010 18:35:34 -0700
+
+infiniband-diags (1.5.5.MLNX20100202.156cd05) unstable; urgency=low
+
+  * libibnetdisc: fix typo in man page for ibnd_show_progress
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 2 Feb 2010 17:43:20 -0800
+
+infiniband-diags (1.5.5.MLNX20100210.74d69f7) unstable; urgency=low
+
+  * infiniband-diags/vendstat: Indicate general info for IS4 as well as IS3
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 10 Feb 2010 09:32:05 -0500
+
+infiniband-diags (1.5.5.MLNX20100125.17adabc) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: Fix typo in counter name
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Mon, 25 Jan 2010 08:32:45 -0500
+
+infiniband-diags (1.5.5.MLNX20100119.ce85937) unstable; urgency=low
+
+  * infiniband-diags/iblinkinfo,ibqueryerrors: code refactoring
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 19 Jan 2010 15:47:12 +0200
+
+infiniband-diags (1.5.5.MLNX20100118.256269d) unstable; urgency=low
+
+  * support --load-cache in iblinkinfo and ibqueryerrors
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 18 Jan 2010 21:35:51 -0800
+
+infiniband-diags (1.5.5.MLNX20100112.6afc4b0) unstable; urgency=low
+
+  * ibqueryerrors.c: more readable details dump function
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 12 Jan 2010 20:56:20 +0200
+
+infiniband-diags (1.5.5.MLNX20091231.f1d70f4) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors: Add support for optional PortRcvErrorDetails counter
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 31 Dec 2009 14:10:54 -0500
+
+infiniband-diags (1.5.5.MLNX20100116.5d4f4bd) unstable; urgency=low
+
+  * infiniband-diags: indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 16 Jan 2010 20:29:29 +0200
+
+infiniband-diags (1.5.5.MLNX20100115.3d5c940) unstable; urgency=low
+
+  * support --cache and --load-cache options in ibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 15 Jan 2010 10:23:16 -0800
+
+infiniband-diags (1.5.5.MLNX20100115.01b8045) unstable; urgency=low
+
+  * add libibnetdisc caching to libibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 15 Jan 2010 10:23:13 -0800
+
+infiniband-diags (1.5.5.MLNX20100114.cd383d5) unstable; urgency=low
+
+  * infiniband-diags/perfquery: Add support for PortSamplesControl counter
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 14 Jan 2010 09:13:24 -0500
+
+infiniband-diags (1.5.5.MLNX20100113.c259589) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.8: Add new supported ops
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 13 Jan 2010 15:23:18 -0500
+
+infiniband-diags (1.5.5.MLNX20091231.eae275c) unstable; urgency=low
+
+  * infiniband-diags/perfquery: Add support for optional PortRcvErrorDetails counter
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 31 Dec 2009 11:58:34 -0500
+
+infiniband-diags (1.5.5.MLNX20091105.b8bbcef) unstable; urgency=low
+
+  * infiniband-diags/ibportstate: allow changes to CA portinfo parameters
+
+ --  Ralph Campbell <ralph.campbell@qlogic.com>  Thu, 5 Nov 2009 11:56:56 -0800
+
+infiniband-diags (1.5.5.MLNX20100112.c7589c6) unstable; urgency=low
+
+  * infiniband-diags: -V, --version: exit with zero status
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 12 Jan 2010 11:14:15 +0200
+
+infiniband-diags (1.5.5.MLNX20091229.a5427f8) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: Fix output format of counters
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 29 Dec 2009 09:30:49 -0500
+infiniband-diags (1.5.4.MLNX20091224.a02a72e) unstable; urgency=low
+
+  * management: packages versions update
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 24 Dec 2009 15:14:41 +0200
+
+infiniband-diags (1.5.4.MLNX20091210.d70ab89) unstable; urgency=low
+
+  * correct manpages for tools that are no longer scripts
+
+ --  Al Chu <chu11@llnl.gov>  Thu, 10 Dec 2009 13:24:01 -0800
+
+infiniband-diags (1.5.4.MLNX20091210.2f0ba97) unstable; urgency=low
+
+  * remove obsoleted option from iblinkinfo manpage
+
+ --  Al Chu <chu11@llnl.gov>  Thu, 10 Dec 2009 11:38:38 -0800
+infiniband-diags (1.5.3.MLNX20091213.8596afb) unstable; urgency=low
+
+  * management: package versions bump
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 13 Dec 2009 19:39:11 +0200
+
+infiniband-diags (1.5.3.MLNX20091213.3ef00cf) unstable; urgency=low
+
+  * management: update library versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 13 Dec 2009 19:36:19 +0200
+
+infiniband-diags (1.5.3.MLNX20091117.a498f70) unstable; urgency=low
+
+  * splice out chassis scan specific from general scan in libibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 17 Nov 2009 10:17:30 -0800
+
+infiniband-diags (1.5.3.MLNX20091117.8b1d334) unstable; urgency=low
+
+  * use nodes/switches lists instead of nodesdist array in libibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 17 Nov 2009 10:17:20 -0800
+
+infiniband-diags (1.5.3.MLNX20091117.d365a61) unstable; urgency=low
+
+  * remove unnecessary casting in libibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 17 Nov 2009 10:16:14 -0800
+
+infiniband-diags (1.5.3.MLNX20091123.97f3fd4) unstable; urgency=low
+
+  * Add different print macros
+
+ --  Doron Shoham <dorons@voltaire.com>  Mon, 23 Nov 2009 12:04:19 +0200
+
+infiniband-diags (1.5.3.MLNX20091113.0d3e5ac) unstable; urgency=low
+
+  * split out scan specific data from ibnd_node_t [attempt #2]
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 13 Nov 2009 09:52:16 -0800
+
+infiniband-diags (1.5.3.MLNX20091103.e51da7b) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors: Properly exit and clean up resources when node info query fails
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 3 Nov 2009 20:17:14 -0800
+
+infiniband-diags (1.5.3.MLNX20091103.8f8736a) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors: Change realloc of suppressed fields to a static array
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 3 Nov 2009 20:22:38 -0800
+
+infiniband-diags (1.5.3.MLNX20091103.587a6f8) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors: Fix remote node name printing
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 3 Nov 2009 19:51:32 -0800
+
+infiniband-diags (1.5.3.MLNX20091106.190451c) unstable; urgency=low
+
+  * fix potential segfault in ibnd_node_t destroy path
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 6 Nov 2009 10:14:24 -0800
+
+infiniband-diags (1.5.3.MLNX20091106.a95d878) unstable; urgency=low
+
+  * consistently type lids and lmcs libibnetdisc
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 6 Nov 2009 10:14:21 -0800
+
+infiniband-diags (1.5.3.MLNX20091110.1086145) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc: Remove nearly duplicate "get_node_info" function
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 10 Nov 2009 13:51:41 -0800
+
+infiniband-diags (1.5.3.MLNX20091110.8ad91fd) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc: clean up PortInfo queries
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 10 Nov 2009 14:01:37 -0800
+
+infiniband-diags (1.5.3.MLNX20091112.ccf687f) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors: minor improvements
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 12 Nov 2009 19:20:39 +0200
+
+infiniband-diags (1.5.3.MLNX20091103.8d673b4) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors: Reformat the output of the xmtdiscard details.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 3 Nov 2009 13:58:03 -0800
+
+infiniband-diags (1.5.3.MLNX20091106.3a3734b) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Change lids and port numbers to decimal
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 6 Nov 2009 15:32:25 -0500
+
+infiniband-diags (1.5.3.MLNX20091106.e11ee0b) unstable; urgency=low
+
+  * infiniband-diags/ibsendtrap.c: Add support for SysImageGuid changed trap (145)
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 6 Nov 2009 10:59:00 -0500
+
+infiniband-diags (1.5.3.MLNX20091106.b363af1) unstable; urgency=low
+
+  * libibnetdisc: remove man page of removed API
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 6 Nov 2009 17:54:48 +0200
+
+infiniband-diags (1.5.3.MLNX20091102.2cc2bf5) unstable; urgency=low
+
+  * remove ibnd_update_node
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 2 Nov 2009 11:33:17 -0800
+
+infiniband-diags (1.5.3.MLNX20091103.3d44880) unstable; urgency=low
+
+  * infiniband-diags/ibnetdisc.h: Clarify "ports" member of ibnd_node_t with more descriptive comment
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 3 Nov 2009 17:03:15 -0800
+
+infiniband-diags (1.5.3.MLNX20091104.b61a291) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors: Add support for PortXmitDiscardDetails
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 4 Nov 2009 09:42:19 -0500
+
+infiniband-diags (1.5.3.MLNX20091103.abc34ab) unstable; urgency=low
+
+  * remove unused headers in libibnetdiscover
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 3 Nov 2009 10:37:29 -0800
+
+infiniband-diags (1.5.3.MLNX20091102.84377df) unstable; urgency=low
+
+  * infiniband-diags/saquery: Report SA MAD Class specific status.
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Mon, 2 Nov 2009 11:40:19 +0200
+infiniband-diags (1.5.2.MLNX20091101.0b1c91a) unstable; urgency=low
+
+  * management: bump package versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 1 Nov 2009 21:55:47 +0200
+
+infiniband-diags (1.5.2.MLNX20091101.8baf219) unstable; urgency=low
+
+  * management: update libraries version information
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 1 Nov 2009 21:42:56 +0200
+
+infiniband-diags (1.5.2.MLNX20091102.edb6c69) unstable; urgency=low
+
+  * management: update/add Voltaire copyright
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 2 Nov 2009 02:09:14 +0200
+
+infiniband-diags (1.5.2.MLNX20091030.929e69b) unstable; urgency=low
+
+  * infiniband-diags/perfquery: merge some code
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 30 Oct 2009 00:49:36 +0200
+
+infiniband-diags (1.5.2.MLNX20090923.3b0b12c) unstable; urgency=low
+
+  * infiniband-diags/perfquery: Add support for optional PortXmitDiscardDetails counter
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 23 Sep 2009 09:29:43 -0400
+
+infiniband-diags (1.5.2.MLNX20091029.d557de9) unstable; urgency=low
+
+  * libibnetdisc: some cleanups
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 29 Oct 2009 23:34:27 +0200
+
+infiniband-diags (1.5.2.MLNX20091029.80c220b) unstable; urgency=low
+
+  * libibnetdisc: rename ibnd_scan variable to scan
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 29 Oct 2009 23:11:29 +0200
+
+infiniband-diags (1.5.2.MLNX20091028.9e92e25) unstable; urgency=low
+
+  * remove 'dist' field from ibnd_node_t, which was virtually not used
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 28 Oct 2009 16:52:11 -0700
+
+infiniband-diags (1.5.2.MLNX20091028.2900314) unstable; urgency=low
+
+  * split out ibnd_fabric_t fields that are only used during a scan
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 28 Oct 2009 16:52:09 -0700
+
+infiniband-diags (1.5.2.MLNX20091027.2d237d0) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors: Use remap'ed node name in clear port error message
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 27 Oct 2009 10:22:36 -0700
+
+infiniband-diags (1.5.2.MLNX20091023.7107a10) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: Cosmetic changes
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 23 Oct 2009 13:57:46 -0400
+
+infiniband-diags (1.5.2.MLNX20091014.609e037) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc: Removed trivial comments
+
+ --  Keshetti Mahesh <keshetti.mahesh@gmail.com>  Wed, 14 Oct 2009 09:44:35 +0530
+
+infiniband-diags (1.5.2.MLNX20091023.fb95033) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: use common node_name
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 23 Oct 2009 18:20:59 +0200
+
+infiniband-diags (1.5.2.MLNX20091023.7a0d07d) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors.c: use common portid in query_cap_mask()
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 23 Oct 2009 17:08:29 +0200
+
+infiniband-diags (1.5.2.MLNX20091023.2aca4b0) unstable; urgency=low
+
+  * infiniband-diags: minor cosmetic fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 23 Oct 2009 17:02:22 +0200
+
+infiniband-diags (1.5.2.MLNX20090925.21b4295) unstable; urgency=low
+
+  * infiniband-diags/src/ibqueryerrors: Add clear errors and counters options
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 25 Sep 2009 09:33:58 -0700
+
+infiniband-diags (1.5.2.MLNX20091007.de9d8f0) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc/ibnetdisc.c: fix bug in single node processing.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 7 Oct 2009 10:35:25 -0700
+
+infiniband-diags (1.5.2.MLNX20091013.65f305c) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Modify dump_path_record
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 13 Oct 2009 09:04:54 -0400
+
+infiniband-diags (1.5.2.MLNX20090929.642160c) unstable; urgency=low
+
+  * infiniband-diags/ibqueryerrors: simplify node_type_to_print setup.
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 29 Sep 2009 14:22:46 +0200
+
+infiniband-diags (1.5.2.MLNX20090923.e426d5b) unstable; urgency=low
+
+  * infiniband-diags/src/ibqueryerrors.c: Remove --all option and replace it with --switch, --ca, --router
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 23 Sep 2009 11:38:11 -0700
+
+infiniband-diags (1.5.2.MLNX20090923.c92b21e) unstable; urgency=low
+
+  * infiniband-diags/src/ibqueryerrors.c: fix bug when attempting a sub-fabric scan
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 23 Sep 2009 14:26:55 -0700
+
+infiniband-diags (1.5.2.MLNX20090922.a74d121) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: Eliminate uninitialized variable compile warning
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 22 Sep 2009 19:59:36 -0400
+
+infiniband-diags (1.5.2.MLNX20090914.f80eefd) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover: Add separator when printing chassis type
+
+ --  sebastien dugue <sebastien.dugue@bull.net>  Mon, 14 Sep 2009 12:59:33 +0200
+
+infiniband-diags (1.5.2.MLNX20090913.59d05a9) unstable; urgency=low
+
+  * ibportstate: fixes for width option
+
+ --  Doron Shoham <dorons@voltaire.com>  Sun, 13 Sep 2009 19:23:13 +0300
+
+infiniband-diags (1.5.2.MLNX20090908.0987cc1) unstable; urgency=low
+
+  * infiniband-diags/ibportstate: Support changing of link width
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 8 Sep 2009 18:11:37 -0400
+
+infiniband-diags (1.5.2.MLNX20090916.3171022) unstable; urgency=low
+
+  * 'ibcheckportwidth' : Exit if LWS is 1X
+
+ --  Keshetti Mahesh <keshetti.mahesh@gmail.com>  Wed, 16 Sep 2009 09:12:14 +0530
+
+infiniband-diags (1.5.2.MLNX20090915.d8b07f4) unstable; urgency=low
+
+  * infiniband-diags/: Cosmetic changes, mostly typos
+
+ --  Keshetti Mahesh <keshetti.mahesh@gmail.com>  Tue, 15 Sep 2009 17:09:29 +0530
+
+infiniband-diags (1.5.2.MLNX20090831.fe9319b) unstable; urgency=low
+
+  * infiniband-diags/ibroute: minor flow optimization
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 31 Aug 2009 19:45:44 +0300
+
+infiniband-diags (1.5.2.MLNX20090830.127ddeb) unstable; urgency=low
+
+  * infiniband-diags/ibroute: Add support for MulticastFDBTop
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Sun, 30 Aug 2009 12:32:07 -0400
+
+infiniband-diags (1.5.2.MLNX20090830.946624a) unstable; urgency=low
+
+  * libibnetdisc: fix compilation warning
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 30 Aug 2009 15:39:33 +0300
+
+infiniband-diags (1.5.2.MLNX20090826.c0d2f74) unstable; urgency=low
+
+  * libibnetdisc: add retract_dpath function
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 26 Aug 2009 09:25:00 -0700
+
+infiniband-diags (1.5.2.MLNX20090821.b50abf9) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc: add missing '\n' to error message
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 21 Aug 2009 15:01:00 -0700
+
+infiniband-diags (1.5.2.MLNX20090830.4e7655c) unstable; urgency=low
+
+  * infiniband-diags/perfquery: indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 30 Aug 2009 15:29:24 +0300
+
+infiniband-diags (1.5.2.MLNX20090826.7400343) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Indicate whether PortXmitWait counter is supported
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 26 Aug 2009 12:12:23 -0400
+
+infiniband-diags (1.5.2.MLNX20090826.1ddb09c) unstable; urgency=low
+
+  * Fix IB network discovery from switch node.
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Wed, 26 Aug 2009 17:37:30 +0300
+
+infiniband-diags (1.5.2.MLNX20090817.2180add) unstable; urgency=low
+
+  * libibnetdisc: make all fields of ibnd_fabric_t public
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 17 Aug 2009 14:03:38 -0700
+
+infiniband-diags (1.5.2.MLNX20090816.4bf4217) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Allow pkey and qkey to be hidden
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Sun, 16 Aug 2009 07:02:24 -0400
+
+infiniband-diags (1.5.2.MLNX20090815.12504d1) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Fix CHECK_AND_SET_VAL macro
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Sat, 15 Aug 2009 09:46:24 -0400
+
+infiniband-diags (1.5.2.MLNX20090813.efbce75) unstable; urgency=low
+
+  * libibnetdisc: make all fields of ibnd_port_t public
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 13 Aug 2009 19:54:00 -0700
+
+infiniband-diags (1.5.2.MLNX20090816.fb94a68) unstable; urgency=low
+
+  * libibnetdisc: fix again typo in dump_node()
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 16 Aug 2009 13:22:09 +0300
+
+infiniband-diags (1.5.2.MLNX20090811.d6f2d1f) unstable; urgency=low
+
+  * libibnetdisc: make all fields of ibnd_node_t public
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 11 Aug 2009 15:15:21 -0700
+
+infiniband-diags (1.5.2.MLNX20090814.32c65e1) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Fix typo in option name
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 14 Aug 2009 10:52:49 -0400
+
+infiniband-diags (1.5.2.MLNX20090814.832b916) unstable; urgency=low
+
+  * infiniabnd-diags: indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 14 Aug 2009 13:15:03 +0300
+
+infiniband-diags (1.5.2.MLNX20090814.898ffb9) unstable; urgency=low
+
+  * infiniband-diags/ibportstat.c: simplify conditions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 14 Aug 2009 04:40:54 +0300
+
+infiniband-diags (1.5.2.MLNX20090814.ea58a37) unstable; urgency=low
+
+  * infiniband-diags/ibportstate.c: consolidate flows
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 14 Aug 2009 04:36:24 +0300
+
+infiniband-diags (1.5.2.MLNX20090813.4e0fb74) unstable; urgency=low
+
+  * libibnetdisc: indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 13 Aug 2009 15:37:50 +0300
+
+infiniband-diags (1.5.2.MLNX20090813.0c033c2) unstable; urgency=low
+
+  * libibnetdisc/ibnetdisc.c: typo fix
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 13 Aug 2009 15:25:50 +0300
+
+infiniband-diags (1.5.2.MLNX20090812.676bd9f) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc: remove all IBPANIC's and clean up error handling
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 12 Aug 2009 16:53:20 -0700
+
+infiniband-diags (1.5.2.MLNX20090807.db808b6) unstable; urgency=low
+
+  * libibnetdisc: fix potential memory leak of port object
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 7 Aug 2009 09:05:44 -0700
+
+infiniband-diags (1.5.2.MLNX20090805.cf5922b) unstable; urgency=low
+
+  * infiniband-diags/ibsendtrap.c: code consolidation
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 5 Aug 2009 10:29:31 +0300
+
+infiniband-diags (1.5.2.MLNX20090805.7c5b332) unstable; urgency=low
+
+  * infiniband-diags/ibsendtrap.c: fix array size
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 5 Aug 2009 10:24:32 +0300
+
+infiniband-diags (1.5.2.MLNX20090804.4b78754) unstable; urgency=low
+
+  * infiniband-diags/ibsendtrap.c: Add support for link_speed_enabled_change trap
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 4 Aug 2009 08:50:09 -0400
+
+infiniband-diags (1.5.2.MLNX20090803.395d4d0) unstable; urgency=low
+
+  * infiniband-diags/ibsendtrap.c: Fill in capability mask on trap 144
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Mon, 3 Aug 2009 16:39:57 -0400
+
+infiniband-diags (1.5.2.MLNX20090803.9d60102) unstable; urgency=low
+
+  * infiniband-diags/man: break long lines
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 3 Aug 2009 15:22:56 +0300
+
+infiniband-diags (1.5.2.MLNX20090802.17b317a) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.8: Add max hops option
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Sun, 2 Aug 2009 20:15:32 -0400
+
+infiniband-diags (1.5.2.MLNX20090802.fbc7286) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover: remove not used var
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 2 Aug 2009 10:55:37 +0300
+
+infiniband-diags (1.5.2.MLNX20090727.dfbb960) unstable; urgency=low
+
+  * fix libibnetdisc API consistency and bugs
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 27 Jul 2009 10:13:01 -0700
+
+infiniband-diags (1.5.2.MLNX20090727.3eb0af5) unstable; urgency=low
+
+  * fix libibnetdisc API consistency and bugs
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 27 Jul 2009 10:12:59 -0700
+
+infiniband-diags (1.5.2.MLNX20090801.5d06b65) unstable; urgency=low
+
+  * bibnetdisc/ibnetdisc.c: fix parameter incompatibility warning
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 1 Aug 2009 02:59:50 +0300
+
+infiniband-diags (1.5.2.MLNX20090727.8092614) unstable; urgency=low
+
+  * fix libibnetdisc API consistency and bugs
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 27 Jul 2009 10:12:51 -0700
+
+infiniband-diags (1.5.2.MLNX20090727.3fa0a9d) unstable; urgency=low
+
+  * fix libibnetdisc API consistency and bugs
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 27 Jul 2009 10:12:41 -0700
+
+infiniband-diags (1.5.2.MLNX20090727.47323f3) unstable; urgency=low
+
+  * fix libibnetdisc API consistency and bugs
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 27 Jul 2009 10:12:36 -0700
+
+infiniband-diags (1.5.2.MLNX20090727.a150500) unstable; urgency=low
+
+  * fix libibnetdisc API consistency and bugs
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 27 Jul 2009 10:12:32 -0700
+
+infiniband-diags (1.5.2.MLNX20090730.ab70ff9) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc: fix DBGFLAGS variable
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 30 Jul 2009 18:40:12 -0700
+
+infiniband-diags (1.5.2.MLNX20090720.a6fbe5f) unstable; urgency=low
+
+  * infiniband-diags/ibtracert.c: Fix linearcap test in switch_lookup
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Mon, 20 Jul 2009 08:58:47 -0400
+
+infiniband-diags (1.5.2.MLNX20090707.b0e2e5c) unstable; urgency=low
+
+  * libibnetdisc cleanup patches
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 7 Jul 2009 15:24:26 -0700
+
+infiniband-diags (1.5.2.MLNX20090716.5dd30ca) unstable; urgency=low
+
+  * infiniband-diags/ibroute.c: Fix typo in IBWARN message
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 16 Jul 2009 09:32:38 -0400
+
+infiniband-diags (1.5.2.MLNX20090716.b262007) unstable; urgency=low
+
+  * infiniband-diags/ibtracert.c: Fix comparison to SwitchInfo.MulticastFDBCap in switch_mclookup
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 16 Jul 2009 09:31:58 -0400
+
+infiniband-diags (1.5.2.MLNX20090714.7937993) unstable; urgency=low
+
+  * infiniband-diags/README: Update saquery dependencies
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 14 Jul 2009 13:28:52 -0400
+
+infiniband-diags (1.5.2.MLNX20090714.c91986c) unstable; urgency=low
+
+  * infiniband-diags/libibnetdisc: add man pages to EXTRA_DIST
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 14 Jul 2009 04:26:20 +0300
+
+infiniband-diags (1.5.2.MLNX20090709.ba92f99) unstable; urgency=low
+
+  * infiniband-diags/ibroute.c: Fix format and typo in printf
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 9 Jul 2009 15:39:15 -0400
+
+infiniband-diags (1.5.2.MLNX20090707.579be1d) unstable; urgency=low
+
+  * libibnetdisc/Makefile.am: add internal.h to SOURCES list
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 7 Jul 2009 06:43:57 +0300
+
+infiniband-diags (1.5.2.MLNX20090624.3123b27) unstable; urgency=low
+
+  * iblinkinfo, ibqueryerrors: clean up ibdiag_process_opts call
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 24 Jun 2009 18:22:14 -0700
+
+infiniband-diags (1.5.2.MLNX20090623.c2a119d) unstable; urgency=low
+
+  * ibprintca.pl: fix corner case: print switch information for CA's found at the end of the cache file.
+
+ --  Ira Weiny <weiny2@hyperion1.llnl.gov>  Tue, 23 Jun 2009 13:29:19 -0700
+
+infiniband-diags (1.5.2.MLNX20090624.314008b) unstable; urgency=low
+
+  * ibqueryerrors: optomize -D operation
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 24 Jun 2009 17:52:37 -0700
+
+infiniband-diags (1.5.2.MLNX20090618.2df69c8) unstable; urgency=low
+
+  * iblinkinfo: optomize -D operation
+
+ --  Ira Weiny <weiny2@hyperion1.llnl.gov>  Thu, 18 Jun 2009 14:07:13 -0700
+
+infiniband-diags (1.5.2.MLNX20090514.9da2a09) unstable; urgency=low
+
+  * ibqueryerrors: fix custom opts string
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 May 2009 17:24:29 -0700
+
+infiniband-diags (1.5.2.MLNX20090514.ab82af3) unstable; urgency=low
+
+  * iblinkinfo: convert to ibdiag_process_opts
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 May 2009 17:23:22 -0700
+
+infiniband-diags (1.5.2.MLNX20090514.1b6b85a) unstable; urgency=low
+
+  * iblinkinfo: remove unused file pointer.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 May 2009 16:39:52 -0700
+
+infiniband-diags (1.5.2.MLNX20090514.5d6a05b) unstable; urgency=low
+
+  * iblinkinfo, ibqueryerrors: prevent core when switch is not found
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 14 May 2009 15:52:42 -0700
+
+infiniband-diags (1.5.2.MLNX20090513.8022ccc) unstable; urgency=low
+
+  * ibnetdiscover: only report max hops discovered when requested
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 13 May 2009 09:30:20 -0700
+
+infiniband-diags (1.5.2.MLNX20090604.443ef9a) unstable; urgency=low
+
+  * Move _with_node_name_map rpm spec option from infiniband-diags to opensm.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 4 Jun 2009 11:08:27 -0700
+
+infiniband-diags (1.5.2.MLNX20090608.76f74f7) unstable; urgency=low
+
+  * infiniband_diags/ibportstate.c perform reset in a single mad
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Mon, 8 Jun 2009 13:03:01 +0300
+
+infiniband-diags (1.5.2.MLNX20090603.9d832c6) unstable; urgency=low
+
+  * infiniband-diags: Do not change port state on SubnSet
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Wed, 3 Jun 2009 17:12:56 +0300
+
+infiniband-diags (1.5.2.MLNX20090529.dbb68b4) unstable; urgency=low
+
+  * infiniband-diags/ibdiag_common.c: Eliminate compile warning on x86_64 archs
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 29 May 2009 15:31:12 -0400
+
+infiniband-diags (1.5.2.MLNX20090527.4348825) unstable; urgency=low
+
+  * ib-mgmt/libibnetdisc: fix typecast warning
+
+ --  Sean Hefty <sean.hefty@intel.com>  Wed, 27 May 2009 11:08:10 -0700
+
+infiniband-diags (1.5.2.MLNX20090510.71a382e) unstable; urgency=low
+
+  * saquery: fix -c arguement
+
+ --  Doron Shoham <dorons@voltaire.com>  Sun, 10 May 2009 14:30:13 +0300
+
+infiniband-diags (1.5.2.MLNX20090506.3917867) unstable; urgency=low
+
+  * Clean up printing of switch heading when printing "down links" only.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 6 May 2009 09:53:03 -0700
+
+infiniband-diags (1.5.2.MLNX20090506.ce9635b) unstable; urgency=low
+
+  * Fix 2 formatting diff's from old ibqueryerrors.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 6 May 2009 09:51:14 -0700
+
+infiniband-diags (1.5.2.MLNX20090428.e5c1b96) unstable; urgency=low
+
+  * Modify '-S' option of iblinkinfo and ibqueryerrors to do a limited scan of the
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 28 Apr 2009 16:38:38 -0700
+
+infiniband-diags (1.5.2.MLNX20090506.c6f03b7) unstable; urgency=low
+
+  * Add combined routing support to libibnetdisc
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 6 May 2009 09:33:47 -0700
+
+infiniband-diags (1.5.2.MLNX20090504.750c7d1) unstable; urgency=low
+
+  * ib-mgmt: fixup ibsendtrap for windows
+
+ --  Sean Hefty <sean.hefty@intel.com>  Mon, 4 May 2009 15:49:49 -0700
+
+infiniband-diags (1.5.2.MLNX20090501.4f784b3) unstable; urgency=low
+
+  * ibstat.c: use htohl() for 32-bit capmask conversion
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 1 May 2009 22:47:51 +0300
+
+infiniband-diags (1.5.2.MLNX20090504.03b311f) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover.c: Cosmetic formatting changes
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Mon, 4 May 2009 15:17:32 -0400
+
+infiniband-diags (1.5.2.MLNX20090504.984b983) unstable; urgency=low
+
+  * infiniband-diags: Added libibnetdiscover to .spec file
+
+ --  Nicolas Morey-Chaisemartin <nicolas.morey-chaisemartin@ext.bull.net>  Mon, 4 May 2009 12:58:09 +0200
+
+infiniband-diags (1.5.2.MLNX20090427.0b33c91) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Display attribute ID in hex rather than decimal
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Mon, 27 Apr 2009 14:17:53 -0400
+
+infiniband-diags (1.5.2.MLNX20090427.bfc1992) unstable; urgency=low
+
+  * management: Fixed custom_release in SPEC files
+
+ --  Nicolas Morey-Chaisemartin <nicolas.morey-chaisemartin@ext.bull.net>  Mon, 27 Apr 2009 12:59:05 +0200
+
+infiniband-diags (1.5.2.MLNX20090427.24741af) unstable; urgency=low
+
+  * ibqueryerrors: switch_guid_str is required for the string resolve function.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 27 Apr 2009 14:50:26 -0700
+
+infiniband-diags (1.5.2.MLNX20090425.76e4fb8) unstable; urgency=low
+
+  * ibdiag_common: remove duplicated ibdebug variable
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 25 Apr 2009 20:10:59 +0300
+
+infiniband-diags (1.5.2.MLNX20090425.466fbe3) unstable; urgency=low
+
+  * infiniband-diags: remove not used ibnetdiscover.h
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 25 Apr 2009 19:51:06 +0300
+
+infiniband-diags (1.5.2.MLNX20090425.0d0c890) unstable; urgency=low
+
+  * infiniband-diags: cosmetic fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 25 Apr 2009 14:36:43 +0300
+
+infiniband-diags (1.5.2.MLNX20090423.bff90d5) unstable; urgency=low
+
+  * Convert ibqueryerrors.pl to C and use new ibnetdisc library.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 23 Apr 2009 10:57:10 -0700
+
+infiniband-diags (1.5.2.MLNX20090422.5d5734e) unstable; urgency=low
+
+  * libibnetdisc: change ibnd_discover_fabric to receive ibmad_port
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 22 Apr 2009 18:54:46 -0700
+
+infiniband-diags (1.5.2.MLNX20090425.0d1e27e) unstable; urgency=low
+
+  * ibnetdiscover: fix types to avoid portability castings
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 25 Apr 2009 15:00:13 +0300
+
+infiniband-diags (1.5.2.MLNX20090421.b0b97a6) unstable; urgency=low
+
+  * ib-mgmt/ibn3 branch: libibnetdisc add windows support
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 21 Apr 2009 12:06:42 -0700
+
+infiniband-diags (1.5.2.MLNX20090421.3ef7d3d) unstable; urgency=low
+
+  * ib-mgmt/ibn3 branch: diags updated for continued windows support
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 21 Apr 2009 12:02:18 -0700
+
+infiniband-diags (1.5.2.MLNX20090423.51401a3) unstable; urgency=low
+
+  * Convert ibnetdiscover to use new ibnetdisc library
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 23 Apr 2009 10:57:10 -0700
+
+infiniband-diags (1.5.2.MLNX20090423.339cf92) unstable; urgency=low
+
+  * clean up iblinkinfo conversion
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 23 Apr 2009 10:57:10 -0700
+
+infiniband-diags (1.5.2.MLNX20090403.392a032) unstable; urgency=low
+
+  * Convert iblinkinfo.pl to C and use new ibnetdisc library.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 3 Apr 2009 15:42:54 -0700
+
+infiniband-diags (1.5.2.MLNX20090403.a626de1) unstable; urgency=low
+
+  * Create a new library libibnetdisc
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 3 Apr 2009 15:42:51 -0700
+infiniband-diags (1.5.1.MLNX20090426.186fa39) unstable; urgency=low
+
+  * management: bump package versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 26 Apr 2009 17:05:13 +0300
+
+infiniband-diags (1.5.1.MLNX20090425.bbee669) unstable; urgency=low
+
+  * ibdiag_common: remove duplicated ibdebug variable
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 25 Apr 2009 20:10:59 +0300
+
+infiniband-diags (1.5.1.MLNX20090419.a9acc85) unstable; urgency=low
+
+  * infiniband-diags/man/vendstat.8: Indicate IS4 config group config not persistent across IS4 reboot
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Sun, 19 Apr 2009 06:32:41 -0400
+
+infiniband-diags (1.5.1.MLNX20090418.34fe5e8) unstable; urgency=low
+
+  * infiniband-diags/ibsendtrap.c: Set producer type according to node type
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Sat, 18 Apr 2009 09:11:36 -0400
+
+infiniband-diags (1.5.1.MLNX20090416.668fb55) unstable; urgency=low
+
+  * infiniband-diags/man/vendstat.8: Fix PortXmit/RcvDataSL examples
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 16 Apr 2009 09:01:45 -0400
+
+infiniband-diags (1.5.1.MLNX20090415.8b8a9f0) unstable; urgency=low
+
+  * infiniband-diags/perltidy.sh: option to format a single file
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 15 Apr 2009 19:38:30 +0300
+
+infiniband-diags (1.5.1.MLNX20090403.e34a45c) unstable; urgency=low
+
+  * Fix ibidsverify.pl to use the correct cache file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 3 Apr 2009 16:02:49 -0700
+
+infiniband-diags (1.5.1.MLNX20090415.02e6915) unstable; urgency=low
+
+  * infiniband-diags/ibsendtrap.c: Local link integrity is an "urgent" trap
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 15 Apr 2009 09:05:18 -0400
+
+infiniband-diags (1.5.1.MLNX20090414.347e4ff) unstable; urgency=low
+
+  * infiniband-diags/ibsendtrap: code consolidation
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 14 Apr 2009 15:11:18 +0300
+
+infiniband-diags (1.5.1.MLNX20090316.441ece3) unstable; urgency=low
+
+  * Added send trap for trap 129 (local link integrity)
+
+ --  Julia Volynsky <juliav@voltaire.com>  Mon, 16 Mar 2009 11:20:38 +0200
+
+infiniband-diags (1.5.1.MLNX20090408.6c2a373) unstable; urgency=low
+
+  * infiniband-diags/vendstat: Update man page and examples for PortXmit/RcvDataSL counter support
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 8 Apr 2009 11:04:45 -0400
+
+infiniband-diags (1.5.1.MLNX20090324.c73f168) unstable; urgency=low
+
+  * infiniband-diags/vendstat.c: code moving
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 24 Mar 2009 03:09:15 +0200
+
+infiniband-diags (1.5.1.MLNX20090319.c10e955) unstable; urgency=low
+
+  * ib-diag/vendstat: counter-group-info & config-counter-group vendor mads
+
+ --  Or Gerlitz <ogerlitz@voltaire.com>  Thu, 19 Mar 2009 14:27:25 +0200
+
+infiniband-diags (1.5.1.MLNX20090320.fc3d02c) unstable; urgency=low
+
+  * infiniband-diags/perfquery.8: Fix typo in short option for PortXmitDataSL counters
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 20 Mar 2009 18:12:22 -0500
+
+infiniband-diags (1.5.1.MLNX20090313.71113b0) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Label PortXmit/RcvDataSL counters in headings
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 13 Mar 2009 15:37:18 -0500
+
+infiniband-diags (1.5.1.MLNX20090312.9e2416c) unstable; urgency=low
+
+  * infiniband-diags/perfquery.8: Extended counters are now -x rather than -e
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 12 Mar 2009 11:38:56 -0500
+
+infiniband-diags (1.5.1.MLNX20090311.90ef4ff) unstable; urgency=low
+
+  * infiniband-diags/vendstat.c: Add missing mad_rpc_close_port call
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 11 Mar 2009 08:29:19 -0500
+
+infiniband-diags (1.5.1.MLNX20090310.21478a7) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: Fix some memory leaks on exit
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 10 Mar 2009 17:50:01 -0500
+
+infiniband-diags (1.5.1.MLNX20090310.680bafc) unstable; urgency=low
+
+  * infiniband-diags/perfquery.8: Update man page for PortXmit/RcvDataSL
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 10 Mar 2009 15:50:23 -0500
+
+infiniband-diags (1.5.1.MLNX20090311.52c956f) unstable; urgency=low
+
+  * libibmad: add mad_rpc_class_agent() call
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 11 Mar 2009 12:43:47 +0200
+
+infiniband-diags (1.5.1.MLNX20090309.05d7a87) unstable; urgency=low
+
+  * infiniband-diags/ibnetdiscover: Apply --node-name-map remapping to names printed by --ports option
+
+ --  David A. McMillen <davem@systemfabricworks.com>  Mon, 9 Mar 2009 13:53:21 -0700
+
+infiniband-diags (1.5.1.MLNX20090309.c236d1f) unstable; urgency=low
+
+  * infiniband-diags/perfquery: add srcport param
+
+ --  Or Gerlitz <ogerlitz@voltaire.com>  Mon, 9 Mar 2009 18:01:02 +0200
+
+infiniband-diags (1.5.1.MLNX20090220.9ef2ac0) unstable; urgency=low
+
+  * infiniband-diags: convert ibnetdiscover to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 20 Feb 2009 14:45:29 -0800
+
+infiniband-diags (1.5.1.MLNX20090219.37a39ee) unstable; urgency=low
+
+  * infiniband-diags: Convert perfquery, saquery, sminfo, smpquery, and vendstat to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 19 Feb 2009 18:53:10 -0800
+
+infiniband-diags (1.5.1.MLNX20090219.a76c09b) unstable; urgency=low
+
+  * infiniband-diags: Convert mcm_rereg_test to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 19 Feb 2009 18:24:56 -0800
+
+infiniband-diags (1.5.1.MLNX20090219.b34db7f) unstable; urgency=low
+
+  * infiniband-diags: Convert ibsysstat to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 19 Feb 2009 18:14:49 -0800
+
+infiniband-diags (1.5.1.MLNX20090219.20a6a5b) unstable; urgency=low
+
+  * infiniband-diags: Convert ibtracert to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 19 Feb 2009 17:58:36 -0800
+
+infiniband-diags (1.5.1.MLNX20090219.be317ec) unstable; urgency=low
+
+  * infiniband-diags: Convert ibsendtrap to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 19 Feb 2009 17:53:30 -0800
+
+infiniband-diags (1.5.1.MLNX20090219.63205b2) unstable; urgency=low
+
+  * infiniband-diags: Convert ibroute to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 19 Feb 2009 17:30:14 -0800
+
+infiniband-diags (1.5.1.MLNX20090219.37808bc) unstable; urgency=low
+
+  * infiniband-diags: Convert ibportstate to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 19 Feb 2009 17:27:21 -0800
+
+infiniband-diags (1.5.1.MLNX20090306.481279f) unstable; urgency=low
+
+  * infiniband-diags: Convert ibaddr to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 6 Mar 2009 10:48:08 -0800
+
+infiniband-diags (1.5.1.MLNX20090227.45131fc) unstable; urgency=low
+
+  * opensm/infiniband-diags: Changes for C rather than C++ style comments
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 27 Feb 2009 13:46:53 -0500
+
+infiniband-diags (1.5.1.MLNX20090302.aa877e7) unstable; urgency=low
+
+  * infiniband-diags: update configure.in check for libibmad API
+
+ --  Or Gerlitz <ogerlitz@voltaire.com>  Mon, 2 Mar 2009 11:35:54 +0200
+
+infiniband-diags (1.5.1.MLNX20090301.08775ed) unstable; urgency=low
+
+  * perfquery PortXmtDataSL/PortRcvDataSL support
+
+ --  Or Gerlitz <ogerlitz@voltaire.com>  Sun, 1 Mar 2009 14:41:51 +0200
+
+infiniband-diags (1.5.1.MLNX20090301.3116fb5) unstable; urgency=low
+
+  * generic libibmad perf query/reset api
+
+ --  Or Gerlitz <ogerlitz@voltaire.com>  Sun, 1 Mar 2009 14:39:48 +0200
+infiniband-diags (1.5.0.MLNX20090228.d5f23ac) unstable; urgency=low
+
+  * management: bump all package versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 28 Feb 2009 18:50:54 +0200
+
+infiniband-diags (1.5.0.MLNX20090227.1cb94c3) unstable; urgency=low
+
+  * infiniband-diags/ibroute: fix warning
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 27 Feb 2009 10:34:19 +0200
+
+infiniband-diags (1.5.0.MLNX20090226.bf861ff) unstable; urgency=low
+
+  * [ib-diag] saquery: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Thu, 26 Feb 2009 13:08:23 -0800
+
+infiniband-diags (1.5.0.MLNX20090226.9cb8cf8) unstable; urgency=low
+
+  * [ib-diags] saquery: set correct pkey table field
+
+ --  Sean Hefty <sean.hefty@intel.com>  Thu, 26 Feb 2009 12:33:49 -0800
+
+infiniband-diags (1.5.0.MLNX20090226.d8b1999) unstable; urgency=low
+
+  * [ib-diag] ibsysstat: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Thu, 26 Feb 2009 12:22:04 -0800
+
+infiniband-diags (1.5.0.MLNX20090226.aaf1334) unstable; urgency=low
+
+  * [ib-diag] mcm_rereg_test: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Thu, 26 Feb 2009 10:12:23 -0800
+
+infiniband-diags (1.5.0.MLNX20090226.3bc107e) unstable; urgency=low
+
+  * [ib-diag] ibsendtrap: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Thu, 26 Feb 2009 10:12:19 -0800
+
+infiniband-diags (1.5.0.MLNX20090226.02b7f2e) unstable; urgency=low
+
+  * [ib-diag] ibtracert: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Thu, 26 Feb 2009 10:11:58 -0800
+
+infiniband-diags (1.5.0.MLNX20090226.9b59ad6) unstable; urgency=low
+
+  * [ib-diag] ibroute: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Thu, 26 Feb 2009 10:10:58 -0800
+
+infiniband-diags (1.5.0.MLNX20090226.f3cf470) unstable; urgency=low
+
+  * [ib-diag] ibnetdiscover: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Thu, 26 Feb 2009 09:48:58 -0800
+
+infiniband-diags (1.5.0.MLNX20090220.8f52685) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Convert more LID prints to unsigned decimal
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 20 Feb 2009 16:59:38 -0500
+
+infiniband-diags (1.5.0.MLNX20090218.1f6243a) unstable; urgency=low
+
+  * infiniband-diags/smpdump.c: Release umad resources on exit
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 18 Feb 2009 12:19:32 -0500
+
+infiniband-diags (1.5.0.MLNX20090218.cf6e7dc) unstable; urgency=low
+
+  * infiniband-diags/smpdump.c: Fix usage examples
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 18 Feb 2009 10:55:37 -0500
+
+infiniband-diags (1.5.0.MLNX20090222.b75064b) unstable; urgency=low
+
+  * infiniband-diags/src/ibnetdiscover.c missing LID information on --ports
+
+ --  David McMillen <davem@systemfabricworks.com>  Sun, 22 Feb 2009 06:19:44 -0600
+
+infiniband-diags (1.5.0.MLNX20090218.99225e6) unstable; urgency=low
+
+  * smpquery: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Wed, 18 Feb 2009 10:00:21 -0800
+
+infiniband-diags (1.5.0.MLNX20090217.d82c0b8) unstable; urgency=low
+
+  * ibping: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 17 Feb 2009 16:05:45 -0800
+
+infiniband-diags (1.5.0.MLNX20090217.7dbf78d) unstable; urgency=low
+
+  * smpdump: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 17 Feb 2009 14:36:20 -0800
+
+infiniband-diags (1.5.0.MLNX20090217.799a708) unstable; urgency=low
+
+  * ibstat: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 17 Feb 2009 14:35:40 -0800
+
+infiniband-diags (1.5.0.MLNX20090217.61fb971) unstable; urgency=low
+
+  * ibportstate: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 17 Feb 2009 14:33:09 -0800
+
+infiniband-diags (1.5.0.MLNX20090217.518d545) unstable; urgency=low
+
+  * perfquery: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 17 Feb 2009 14:32:38 -0800
+
+infiniband-diags (1.5.0.MLNX20090217.43524e0) unstable; urgency=low
+
+  * ibaddr: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 17 Feb 2009 14:32:05 -0800
+
+infiniband-diags (1.5.0.MLNX20090217.0524c25) unstable; urgency=low
+
+  * vendstat: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 17 Feb 2009 14:31:31 -0800
+
+infiniband-diags (1.5.0.MLNX20090217.43e6dfa) unstable; urgency=low
+
+  * sminfo: add support for WinOF
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 17 Feb 2009 14:30:54 -0800
+
+infiniband-diags (1.5.0.MLNX20090214.8219070) unstable; urgency=low
+
+  * infiniabnd-diags/common: wrap debug macros with do {} while (0)
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 14 Feb 2009 17:19:02 +0200
+
+infiniband-diags (1.5.0.MLNX20090211.68daa74) unstable; urgency=low
+
+  * infiniband-diags: some code consolidation
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 11 Feb 2009 18:37:24 +0200
+
+infiniband-diags (1.5.0.MLNX20090211.f2920cc) unstable; urgency=low
+
+  * infiniband-diags/saquery: fix types and some cleanup
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 11 Feb 2009 04:53:46 +0200
+
+infiniband-diags (1.5.0.MLNX20090211.ce8e82d) unstable; urgency=low
+
+  * infiniband-diags/saquery: remove osm vendor layer
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 11 Feb 2009 02:11:30 +0200
+
+infiniband-diags (1.5.0.MLNX20090205.f13f0a2) unstable; urgency=low
+
+  * infiniband-diags/perfquery: Change option name for extended counters
+
+ --  Hal Rosenstock <halr@obsidianresearch.com>  Thu, 5 Feb 2009 17:00:02 -0700
+
+infiniband-diags (1.5.0.MLNX20090205.6079cc2) unstable; urgency=low
+
+  * infiniband-diags/common: use enum MAD_DEST as ibd_dest_type type
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 5 Feb 2009 20:18:10 +0200
+
+infiniband-diags (1.5.0.MLNX20090130.5b6ba15) unstable; urgency=low
+
+  * infiniband-diags/saquery: merge PathRecord query functions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 30 Jan 2009 15:51:05 +0200
+
+infiniband-diags (1.5.0.MLNX20090128.2305370) unstable; urgency=low
+
+  * infiniband-diags/saquery: more params for Path and MCMember Records
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 28 Jan 2009 20:23:02 +0200
+
+infiniband-diags (1.5.0.MLNX20090128.db4dd2c) unstable; urgency=low
+
+  * infiniband-diags/saquery: adding query params
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 28 Jan 2009 20:23:02 +0200
+
+infiniband-diags (1.5.0.MLNX20090129.d85205d) unstable; urgency=low
+
+  * infiniband-diags/saquery: CHECK_AND_SET_VAL() macro
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 29 Jan 2009 14:34:45 +0200
+
+infiniband-diags (1.5.0.MLNX20090129.21de45d) unstable; urgency=low
+
+  * infiniband-diags/saquery: cosmetic
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 29 Jan 2009 13:24:59 +0200
+
+infiniband-diags (1.5.0.MLNX20090129.6d2909c) unstable; urgency=low
+
+  * infiniband-diags/saquery: fix encoding of SA queries
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 29 Jan 2009 14:42:55 +0200
+
+infiniband-diags (1.5.0.MLNX20090128.b219187) unstable; urgency=low
+
+  * infiniband-diags/smpdump: fix SL value encoding
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 28 Jan 2009 20:10:06 +0200
+
+infiniband-diags (1.5.0.MLNX20090128.2e11ae5) unstable; urgency=low
+
+  * infiniband-diags/saquery: fix backward compatibility bug
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 28 Jan 2009 15:14:07 +0200
+
+infiniband-diags (1.5.0.MLNX20090127.e478ef0) unstable; urgency=low
+
+  * infiniband-diags/ibsysstat: backward compatibility fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 27 Jan 2009 14:36:02 +0200
+
+infiniband-diags (1.5.0.MLNX20090126.7d1b0a3) unstable; urgency=low
+
+  * infiniband-diags/ibsysstat: use RMPP for client/server communication
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 26 Jan 2009 23:03:29 +0200
+
+infiniband-diags (1.5.0.MLNX20090126.a58765c) unstable; urgency=low
+
+  * infiniband-diags/saquery: add lid parameter to NodeRecord query
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 26 Jan 2009 16:35:51 +0200
+
+infiniband-diags (1.5.0.MLNX20090126.c5f90dd) unstable; urgency=low
+
+  * infiniband-diags/smpquery: usage improvement
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 26 Jan 2009 10:49:43 +0200
+
+infiniband-diags (1.5.0.MLNX20090124.f1db964) unstable; urgency=low
+
+  * infiniband-diags: remove unneeded includes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 24 Jan 2009 11:19:30 +0200
+
+infiniband-diags (1.5.0.MLNX20090124.cff14be) unstable; urgency=low
+
+  * infiniband-diags: make get_build_version() static
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 24 Jan 2009 10:50:50 +0200
+
+infiniband-diags (1.5.0.MLNX20090124.0628026) unstable; urgency=low
+
+  * infiniband-diags: remove argv0 global variable
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 24 Jan 2009 10:11:08 +0200
+
+infiniband-diags (1.5.0.MLNX20090124.3ccf4d5) unstable; urgency=low
+
+  * infiniband-diags: using common command line option processing
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 24 Jan 2009 00:31:01 +0200
+
+infiniband-diags (1.5.0.MLNX20090124.cd5a137) unstable; urgency=low
+
+  * infiniband-diags: command line option processing framework
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 24 Jan 2009 00:31:01 +0200
+
+infiniband-diags (1.5.0.MLNX20090125.591081b) unstable; urgency=low
+
+  * infiniband-diags/dump_mfts.sh: fix -D format parsing
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 25 Jan 2009 11:45:03 +0200
+
+infiniband-diags (1.5.0.MLNX20090125.2668073) unstable; urgency=low
+
+  * infiniband-diags/dump_lfts.sh: fix -D format parsing
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 25 Jan 2009 11:45:03 +0200
+
+infiniband-diags (1.5.0.MLNX20090124.1fa3b32) unstable; urgency=low
+
+  * infiniband-diags/ibdiag_common: cleanup argv0 prototype
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 24 Jan 2009 00:12:28 +0200
+
+infiniband-diags (1.5.0.MLNX20090124.7ea0dba) unstable; urgency=low
+
+  * infiniband-diags/smpdump.c: use common ib definitions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 24 Jan 2009 00:06:11 +0200
+
+infiniband-diags (1.5.0.MLNX20090122.bc4d171) unstable; urgency=low
+
+  * infiniband-diags: remove duplicated ibdebug prototype
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 Jan 2009 22:32:34 +0200
+
+infiniband-diags (1.5.0.MLNX20090122.40061e8) unstable; urgency=low
+
+  * infiniband-diags/ibdiag_common: move get_build_version()
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 Jan 2009 15:00:58 +0200
+
+infiniband-diags (1.5.0.MLNX20090122.383afee) unstable; urgency=low
+
+  * infiniband-diags/ibdiag_common: cosmetic
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 Jan 2009 14:57:11 +0200
+
+infiniband-diags (1.5.0.MLNX20090122.20bf9d3) unstable; urgency=low
+
+  * infiniband-diags/Makefile.am: use common library
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 Jan 2009 14:46:25 +0200
+
+infiniband-diags (1.5.0.MLNX20090122.e1ea13a) unstable; urgency=low
+
+  * infiniband-diags/Makefile.am: merge CFLAGS
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 Jan 2009 14:37:11 +0200
+
+infiniband-diags (1.5.0.MLNX20090122.4318758) unstable; urgency=low
+
+  * infiniband-diags/Makefile.am: kill -rpath
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 Jan 2009 14:32:35 +0200
+
+infiniband-diags (1.5.0.MLNX20090120.c002711) unstable; urgency=low
+
+  * infiniband-diags/perfquery.c: fix typo
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 20 Jan 2009 13:29:25 +0200
+
+infiniband-diags (1.5.0.MLNX20090113.7dd16a4) unstable; urgency=low
+
+  * infiniband-diags support PortXmitWait get and set
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Tue, 13 Jan 2009 16:56:57 +0200
+
+infiniband-diags (1.5.0.MLNX20090105.69743b5) unstable; urgency=low
+
+  * infiniband-diags/perfquery: indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 5 Jan 2009 14:31:07 +0200
+
+infiniband-diags (1.5.0.MLNX20081222.7e2d9e4) unstable; urgency=low
+
+  * management: remove libibcommon dependencies
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 22 Dec 2008 02:26:31 +0200
+
+infiniband-diags (1.5.0.MLNX20081222.c01c740) unstable; urgency=low
+
+  * management: move sysfs()_* function to libibumad
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 22 Dec 2008 00:24:30 +0200
+
+infiniband-diags (1.5.0.MLNX20081221.916e757) unstable; urgency=low
+
+  * infiniband-diags/ibstat,smpdump: kill unused includes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 21 Dec 2008 17:28:25 +0200
+
+infiniband-diags (1.5.0.MLNX20081218.0a7b21b) unstable; urgency=low
+
+  * infiniband-diags/saquery: minor indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 18 Dec 2008 23:45:42 +0200
+
+infiniband-diags (1.5.0.MLNX20081213.656614a) unstable; urgency=low
+
+  * infinabd-diags: convert type uint -> unsigned int
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 13 Dec 2008 22:46:56 +0200
+
+infiniband-diags (1.5.0.MLNX20081212.7599040) unstable; urgency=low
+
+  * infiniband-diags/saquery: PortInfoRecord query
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 12 Dec 2008 17:30:25 +0200
+
+infiniband-diags (1.5.0.MLNX20081212.07d7028) unstable; urgency=low
+
+  * infiniband-diags/saquery: separate queries and commands
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 12 Dec 2008 16:11:52 +0200
+
+infiniband-diags (1.5.0.MLNX20081210.4e858dc) unstable; urgency=low
+
+  * infiniband-diabs/saquery: unify SA queries processors
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 10 Dec 2008 19:50:35 +0200
+
+infiniband-diags (1.5.0.MLNX20081210.7fd2c79) unstable; urgency=low
+
+  * infiniband-diags/saquery: indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 10 Dec 2008 16:12:44 +0200
+infiniband-diags (1.4.4.MLNX20081213.f0ce6ce) unstable; urgency=low
+
+  * management: bump all package versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 13 Dec 2008 19:46:15 +0200
+infiniband-diags (1.4.3.MLNX20081207.bbf5ee9) unstable; urgency=low
+
+  * management: update package versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 7 Dec 2008 00:16:36 +0200
+
+infiniband-diags (1.4.3.MLNX20081126.ed48f26) unstable; urgency=low
+
+  * infiniband-diags/grouping: add 10G IP router devid
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 26 Nov 2008 12:51:30 +0200
+infiniband-diags (1.4.2.MLNX20081118.cbd7759) unstable; urgency=low
+
+  * management: update versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 18 Nov 2008 06:20:46 +0200
+
+infiniband-diags (1.4.2.MLNX20081116.abeb73d) unstable; urgency=low
+
+  * infiniband-diags/ibstat.c: Use UMAD_MAX_DEVICES define
+
+ --  Hal Rosenstock <halr@obsidianresearch.com>  Sun, 16 Nov 2008 11:37:31 -0700
+
+infiniband-diags (1.4.2.MLNX20081116.4949d1f) unstable; urgency=low
+
+  * infiniband-diags/ibstat.c: remove casting
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 16 Nov 2008 14:23:10 +0200
+
+infiniband-diags (1.4.2.MLNX20081114.485d945) unstable; urgency=low
+
+  * Fix max parameter passed to umad_get_cas_names
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 14 Nov 2008 14:54:06 -0800
+infiniband-diags (1.4.1.MLNX20081019.46f65ae) unstable; urgency=low
+
+  * management/*/configure.in: bump all versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 19 Oct 2008 20:53:23 +0200
+
+infiniband-diags (1.4.1.MLNX20081008.bfe012a) unstable; urgency=low
+
+  * management: update Voltaire copyright
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 8 Oct 2008 12:28:44 +0200
+
+infiniband-diags (1.4.1.MLNX20081019.8daa6f9) unstable; urgency=low
+
+  * infiniband-diags/saquery.8: Update saquery man page
+
+ --  Hal Rosenstock <halr@obsidianresearch.com>  Sun, 19 Oct 2008 08:54:32 -0600
+
+infiniband-diags (1.4.1.MLNX20081019.9def498) unstable; urgency=low
+
+  * infiniband-diags/saquery: Support MFTRecord
+
+ --  Hal Rosenstock <halr@obsidianresearch.com>  Sun, 19 Oct 2008 08:54:30 -0600
+
+infiniband-diags (1.4.1.MLNX20081019.32fa8fc) unstable; urgency=low
+
+  * infiniband-diags/saquery: add LFT Record handling
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 19 Oct 2008 01:13:15 +0200
+
+infiniband-diags (1.4.1.MLNX20081017.2d556cd) unstable; urgency=low
+
+  * Trivial: update usage info for ibaddr.c in infiniband-diags-1.4.1
+
+ --  Doug Ledford <dledford@redhat.com>  Fri, 17 Oct 2008 13:04:39 -0400
+
+infiniband-diags (1.4.1.MLNX20081008.1b6e86e) unstable; urgency=low
+
+  * management: add Voltaire copyright
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 8 Oct 2008 12:28:44 +0200
+
+infiniband-diags (1.4.1.MLNX20081011.80b3f33) unstable; urgency=low
+
+  * infiniband-diags/perfquery: fix constant size warning
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 11 Oct 2008 22:02:38 +0200
+
+infiniband-diags (1.4.1.MLNX20081010.54f611b) unstable; urgency=low
+
+  * infiniband-diags/perfquery: if -a is specified loop through ports if required and aggregate output
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 10 Oct 2008 16:03:05 -0700
+
+infiniband-diags (1.4.1.MLNX20081010.12b8d91) unstable; urgency=low
+
+  * perfquery code cleanup
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 10 Oct 2008 15:58:20 -0700
+
+infiniband-diags (1.4.1.MLNX20081010.01f93e4) unstable; urgency=low
+
+  * infiniband-diags/perfquery: if --loop_ports is specified always loop through all ports if desired
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 10 Oct 2008 16:35:43 -0700
+
+infiniband-diags (1.4.1.MLNX20081010.e7b0a62) unstable; urgency=low
+
+  * infinibanf-diags/perfquery: remove single port CA AllPortSelect workaround
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 10 Oct 2008 15:57:45 -0700
+
+infiniband-diags (1.4.1.MLNX20081010.c77bfec) unstable; urgency=low
+
+  * infiniband-diags/perfquery: error out if AllPortSelect is not supported
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 10 Oct 2008 15:57:02 -0700
+
+infiniband-diags (1.4.1.MLNX20081010.3e83004) unstable; urgency=low
+
+  * tweak notes about port 255 in perfquery manpage
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 10 Oct 2008 15:56:54 -0700
+
+infiniband-diags (1.4.1.MLNX20081010.d7730ef) unstable; urgency=low
+
+  * infiniband-diags/ibclearerrors: specify -a in call to perfquery
+
+ --  Al Chu <chu11@llnl.gov>  Fri, 10 Oct 2008 15:56:46 -0700
+
+infiniband-diags (1.4.1.MLNX20081008.88fe58c) unstable; urgency=low
+
+  * infiniband-diags/perfquery: fix comments
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 8 Oct 2008 17:40:52 -0700
+
+infiniband-diags (1.4.1.MLNX20081008.0ee221d) unstable; urgency=low
+
+  * infiniband-diags/perfquery: support ehanced port 0 with --loop-ports
+
+ --  Al Chu <chu11@llnl.gov>  Wed, 8 Oct 2008 17:40:51 -0700
+
+infiniband-diags (1.4.1.MLNX20080929.7193fae) unstable; urgency=low
+
+  * infiniband-diags/ibsysstat.c: Fix a couple of latent bugs
+
+ --  Hal Rosenstock <halr@obsidianresearch.com>  Mon, 29 Sep 2008 14:25:01 -0600
+
+infiniband-diags (1.4.1.MLNX20081007.c567103) unstable; urgency=low
+
+  * add --loop_ports option to perfquery
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 7 Oct 2008 15:54:05 -0700
+
+infiniband-diags (1.4.1.MLNX20081007.b6d240c) unstable; urgency=low
+
+  * add more detail to error message on perfquery workaround
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 7 Oct 2008 15:38:51 -0700
+
+infiniband-diags (1.4.1.MLNX20081007.d2409b5) unstable; urgency=low
+
+  * use 0xff vs. 255 consistently in perfquery
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 7 Oct 2008 15:38:27 -0700
+
+infiniband-diags (1.4.1.MLNX20081007.adbbf1e) unstable; urgency=low
+
+  * add clarification in perfquery manpage
+
+ --  Al Chu <chu11@llnl.gov>  Tue, 7 Oct 2008 15:38:17 -0700
+
+infiniband-diags (1.4.1.MLNX20080924.8e6f693) unstable; urgency=low
+
+  * infiniband-diags: eliminate compiler warnings
+
+ --  Jack Morgenstein <jackm@dev.mellanox.co.il>  Wed, 24 Sep 2008 16:59:23 +0300
+
+infiniband-diags (1.4.1.MLNX20080913.372998d) unstable; urgency=low
+
+  * infiniband-diags/ibtracert: fix port by direct path resolving
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 13 Sep 2008 04:07:54 +0300
+
+infiniband-diags (1.4.1.MLNX20080912.f959ff0) unstable; urgency=low
+
+  * man/ibtracert: remove non-existing -e option
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 12 Sep 2008 22:07:56 +0300
+
+infiniband-diags (1.4.1.MLNX20080912.251ddae) unstable; urgency=low
+
+  * infiniband-diags/ibclearcounters: remove unrelated -N option
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 12 Sep 2008 22:03:42 +0300
+
+infiniband-diags (1.4.1.MLNX20080912.ad37a02) unstable; urgency=low
+
+  * man/ibnetdiscover: cleanup non-existing options
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 12 Sep 2008 21:49:19 +0300
+
+infiniband-diags (1.4.1.MLNX20080905.8a09e0b) unstable; urgency=low
+
+  * ibnetdiscover.c: continue processing other ports even if smpquery fails on one port
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 5 Sep 2008 15:47:16 -0700
+
+infiniband-diags (1.4.1.MLNX20080818.cf7517a) unstable; urgency=low
+
+  * Fix some missing node name map substitutions
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 18 Aug 2008 15:46:51 -0700
+
+infiniband-diags (1.4.1.MLNX20080724.be288b2) unstable; urgency=low
+
+  * infiniband-diags/src/ibaddr.c: remove unused variables
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 24 Jul 2008 07:05:05 +0300
+
+infiniband-diags (1.4.1.MLNX20080710.10f82e3) unstable; urgency=low
+
+  * infiniband-diags/src/ibaddr.c: convert GID prints to use inet_ntop
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 10 Jul 2008 17:44:08 -0700
+
+infiniband-diags (1.4.1.MLNX20080724.779d2b8) unstable; urgency=low
+
+  * infiniband-diags/saquery: remove unused variable
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 24 Jul 2008 07:00:51 +0300
+
+infiniband-diags (1.4.1.MLNX20080710.2fd9b7f) unstable; urgency=low
+
+  * infiniband-diags/src/saquery.c: convert GID prints to use inet_ntop
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 10 Jul 2008 17:44:07 -0700
+infiniband-diags (1.4.0.MLNX20080708.e43349f) unstable; urgency=low
+
+  * management: bump management versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 8 Jul 2008 07:22:02 +0300
+
+infiniband-diags (1.4.0.MLNX20080707.ab61af4) unstable; urgency=low
+
+  * infiniband-diags/mcm_rereg_test.c: Cosmetic formatting change
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Mon, 7 Jul 2008 14:12:58 -0700
+
+infiniband-diags (1.4.0.MLNX20080706.91671f9) unstable; urgency=low
+
+  * management: revert configure.in update configure.in on 'make dist'
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 6 Jul 2008 23:07:38 +0300
+
+infiniband-diags (1.4.0.MLNX20080630.6686273) unstable; urgency=low
+
+  * Fix regenerate cache corner case.
+
+ --  Al Chu <chu11@llnl.gov>  Mon, 30 Jun 2008 15:11:29 -0700
+
+infiniband-diags (1.4.0.MLNX20080629.b1178b0) unstable; urgency=low
+
+  * infiniband-diags: fix snprintf() usage
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 29 Jun 2008 17:20:23 +0300
+
+infiniband-diags (1.4.0.MLNX20080612.60e7e24) unstable; urgency=low
+
+  * infiniband-diags/saquery: split print_multicast_group_records() function
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 12 Jun 2008 22:38:02 +0300
+
+infiniband-diags (1.4.0.MLNX20080610.8e33e60) unstable; urgency=low
+
+  * infiniband-diags/src/saquery.c: fix potential core dump
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 10 Jun 2008 13:18:03 -0700
+
+infiniband-diags (1.4.0.MLNX20080610.bbeed16) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: In print_multicast_group_records, only query NodeRecords when needed
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Tue, 10 Jun 2008 11:12:31 -0700
+
+infiniband-diags (1.4.0.MLNX20080608.2e5e1e6) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: In dump_results, use query_result rather than query_svc_rec
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Sun, 8 Jun 2008 13:17:50 -0700
+
+infiniband-diags (1.4.0.MLNX20080605.7ab6e63) unstable; urgency=low
+
+  * infiniband-diags/src/ibnetdiscover.c: Fix the PortInfo data on the port we discover a switch on.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 5 Jun 2008 19:12:51 -0700
+
+infiniband-diags (1.4.0.MLNX20080608.98dcc64) unstable; urgency=low
+
+  * infiniband-diags/man/saquery: add --smkey option to the man page
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 8 Jun 2008 07:14:42 +0300
+
+infiniband-diags (1.4.0.MLNX20080522.ac99fcb) unstable; urgency=low
+
+  * saquery: --smkey command line option
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 May 2008 16:50:39 +0300
+
+infiniband-diags (1.4.0.MLNX20080605.9ea58ce) unstable; urgency=low
+
+  * infiniband-diags/ibsendtrap.c: Support CA and port num
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Thu, 5 Jun 2008 12:51:53 -0700
+
+infiniband-diags (1.4.0.MLNX20080605.3a0ccf2) unstable; urgency=low
+
+  * infiniband-diags/mcm_rereg_test.c: Handle error when guid file not found
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Thu, 5 Jun 2008 12:51:49 -0700
+
+infiniband-diags (1.4.0.MLNX20080603.1562103) unstable; urgency=low
+
+  * infiniband-diags/saquery.c: Update for change to osm_mad_pool_init API
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Tue, 3 Jun 2008 06:01:28 -0700
+
+infiniband-diags (1.4.0.MLNX20080529.7b08c94) unstable; urgency=low
+
+  * management: Support separate SA and SM keys as clarified in IBA 1.2.1
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Thu, 29 May 2008 06:22:52 -0700
+
+infiniband-diags (1.4.0.MLNX20080601.327fb32) unstable; urgency=low
+
+  * infiniband-diags/scripts/*.pl: prevent some zero exists on errors
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 1 Jun 2008 19:48:17 +0300
+
+infiniband-diags (1.4.0.MLNX20080601.89544a6) unstable; urgency=low
+
+  * infiniband-diags/scripts/*.pl: exit 2 on usage errors
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 1 Jun 2008 19:47:22 +0300
+
+infiniband-diags (1.4.0.MLNX20080521.95a60ca) unstable; urgency=low
+
+  * saquery: port selection problem
+
+ --  Matthias Blankenhaus <matthias@sgi.com>  Wed, 21 May 2008 16:48:28 -0700
+
+infiniband-diags (1.4.0.MLNX20080528.90df7e6) unstable; urgency=low
+
+  * infiniband-diags/scripts/ibprint[ca|switch|rt].pl: allow printing of multiple matches but print warning to user that multiple matches were found
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 28 May 2008 17:59:41 -0700
+
+infiniband-diags (1.4.0.MLNX20080528.a061013) unstable; urgency=low
+
+  * infiniband-diags/scripts/ibprint[ca|switch|rt].pl: fix printing by name
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 28 May 2008 17:57:19 -0700
+
+infiniband-diags (1.4.0.MLNX20080501.4ec2588) unstable; urgency=low
+
+  * infiniband-diags/scripts/iblinkinfo.pl: fix printing of switch name when port 1 is down.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 1 May 2008 15:50:45 -0700
+
+infiniband-diags (1.4.0.MLNX20080511.34f90df) unstable; urgency=low
+
+  * infiniband-diags/Makefile.am: fix location of ibdiag_version.h
+
+ --  Yevgeny Kliteynik <kliteyn@dev.mellanox.co.il>  Sun, 11 May 2008 15:37:11 +0300

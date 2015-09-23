@@ -1,0 +1,311 @@
+SYSTEM LEAF,LEAF:4x,LEAF:4X
+
+NODE SW 36 MT48436 U1
+1  -10G-> P1
+2  -10G-> P2
+3  -10G-> P3
+4  -10G-> P4
+5  -10G-> P5
+6  -10G-> P6
+7  -10G-> P7
+8  -10G-> P8
+9  -10G-> P9
+10 -10G-> P10
+11 -10G-> P11
+12 -10G-> P12
+13 -10G-> P13
+14 -10G-> P14
+15 -10G-> P15
+16 -10G-> P16
+17 -10G-> P17
+18 -10G-> P18
+19 -10G-> P19
+20 -10G-> P20
+21 -10G-> P21
+22 -10G-> P22
+23 -10G-> P23
+24 -10G-> P24
+25 -10G-> P25
+26 -10G-> P26
+27 -10G-> P27
+28 -10G-> P28
+29 -10G-> P29
+30 -10G-> P30
+31 -10G-> P31
+32 -10G-> P32
+33 -10G-> P33
+34 -10G-> P34
+35 -10G-> P35
+36 -10G-> P36
+
+SYSTEM SPINE,SPINE:4x,SPINE:4X
+
+NODE SW 36 MT48436 U1
+1  -10G-> P1
+2  -10G-> P2
+3  -10G-> P3
+4  -10G-> P4
+5  -10G-> P5
+6  -10G-> P6
+7  -10G-> P7
+8  -10G-> P8
+9  -10G-> P9
+10 -10G-> P10
+11 -10G-> P11
+12 -10G-> P12
+13 -10G-> P13
+14 -10G-> P14
+15 -10G-> P15
+16 -10G-> P16
+17 -10G-> P17
+18 -10G-> P18
+19 -10G-> P19
+20 -10G-> P20
+21 -10G-> P21
+22 -10G-> P22
+23 -10G-> P23
+24 -10G-> P24
+25 -10G-> P25
+26 -10G-> P26
+27 -10G-> P27
+28 -10G-> P28
+29 -10G-> P29
+30 -10G-> P30
+31 -10G-> P31
+32 -10G-> P32
+33 -10G-> P33
+34 -10G-> P34
+35 -10G-> P35
+36 -10G-> P36
+
+TOPSYSTEM SUNDCS72QDR,NM2-72P
+
+SUBSYSTEM SPINE SW-F
+   P1 -10G-> SW-C P9
+   P2 -10G-> SW-A P8
+   P4 -10G-> SW-C P6
+   P3 -10G-> SW-A P7
+   P5 -10G-> SW-A P5
+   P6 -10G-> SW-C P4
+   P7 -10G-> SW-A P3
+   P8 -10G-> SW-A P2
+   P9 -10G-> SW-C P1
+   P10 -10G-> SW-B P13
+   P11 -10G-> SW-D P14
+   P12 -10G-> SW-D P15
+   P13 -10G-> SW-B P10
+   P14 -10G-> SW-D P11
+   P15 -10G-> SW-D P12
+   P16 -10G-> SW-B P18
+   P17 -10G-> SW-D P17
+   P18 -10G-> SW-B P16
+   P19 -10G-> SW-A P10
+   P20 -10G-> SW-C P11
+   P21 -10G-> SW-C P12
+   P22 -10G-> SW-A P18
+   P23 -10G-> SW-C P17
+   P24 -10G-> SW-A P16
+   P25 -10G-> SW-C P15
+   P26 -10G-> SW-C P14
+   P27 -10G-> SW-A P13
+   P28 -10G-> SW-D P1
+   P29 -10G-> SW-B P2
+   P30 -10G-> SW-B P3
+   P31 -10G-> SW-D P9
+   P32 -10G-> SW-B P8
+   P33 -10G-> SW-B P7
+   P34 -10G-> SW-D P6
+   P35 -10G-> SW-B P5
+   P36 -10G-> SW-D P4
+
+
+SUBSYSTEM SPINE SW-E
+   P1 -10G-> SW-A P9
+   P2 -10G-> SW-C P8
+   P3 -10G-> SW-C P7
+   P4 -10G-> SW-A P6
+   P5 -10G-> SW-C P5
+   P6 -10G-> SW-A P4
+   P7 -10G-> SW-C P3
+   P8 -10G-> SW-C P2
+   P9 -10G-> SW-A P1
+   P10 -10G-> SW-D P13
+   P11 -10G-> SW-B P14
+   P12 -10G-> SW-B P15
+   P13 -10G-> SW-D P10
+   P14 -10G-> SW-B P11
+   P15 -10G-> SW-B P12
+   P16 -10G-> SW-D P18
+   P17 -10G-> SW-B P17
+   P18 -10G-> SW-D P16
+   P19 -10G-> SW-C P10
+   P20 -10G-> SW-A P11
+   P21 -10G-> SW-A P12
+   P22 -10G-> SW-C P18
+   P23 -10G-> SW-A P17
+   P24 -10G-> SW-C P16
+   P25 -10G-> SW-A P15
+   P26 -10G-> SW-A P14
+   P27 -10G-> SW-C P13
+   P28 -10G-> SW-B P1
+   P29 -10G-> SW-D P2
+   P30 -10G-> SW-D P3
+   P31 -10G-> SW-B P9
+   P32 -10G-> SW-D P8
+   P33 -10G-> SW-D P7
+   P34 -10G-> SW-B P6
+   P35 -10G-> SW-D P5
+   P36 -10G-> SW-B P4
+
+SUBSYSTEM LEAF SW-D
+   P1 -10G-> SW-F P28
+   P2 -10G-> SW-E P29
+   P3 -10G-> SW-E P30
+   P4 -10G-> SW-F P36
+   P5 -10G-> SW-E P35
+   P6 -10G-> SW-F P34
+   P7 -10G-> SW-E P33
+   P8 -10G-> SW-E P32
+   P9 -10G-> SW-F P31
+   P10 -10G-> SW-E P13
+   P11 -10G-> SW-F P14
+   P12 -10G-> SW-F P15
+   P13 -10G-> SW-E P10
+   P14 -10G-> SW-F P11
+   P15 -10G-> SW-F P12
+   P16 -10G-> SW-E P18
+   P17 -10G-> SW-F P17
+   P18 -10G-> SW-E P16
+   P19 -10G-> C-9B/P3
+   P20 -10G-> C-9A/P3
+   P21 -10G-> C-9A/P2
+   P22 -10G-> C-9A/P1
+   P23 -10G-> C-9B/P2
+   P24 -10G-> C-9B/P1
+   P25 -10G-> C-10B/P3
+   P26 -10G-> C-10A/P3
+   P27 -10G-> C-10A/P2
+   P28 -10G-> C-10A/P1
+   P29 -10G-> C-10B/P2
+   P30 -10G-> C-10B/P1
+   P31 -10G-> C-11B/P1
+   P32 -10G-> C-11B/P2
+   P33 -10G-> C-11A/P1
+   P34 -10G-> C-11A/P2
+   P35 -10G-> C-11A/P3
+   P36 -10G-> C-11B/P3
+
+SUBSYSTEM LEAF SW-C
+   P1 -10G-> SW-F P9
+   P2 -10G-> SW-E P8
+   P3 -10G-> SW-E P7
+   P4 -10G-> SW-F P6
+   P5 -10G-> SW-E P5
+   P6 -10G-> SW-F P4
+   P7 -10G-> SW-E P3
+   P8 -10G-> SW-E P2
+   P9 -10G-> SW-F P1
+   P10 -10G-> SW-E P19
+   P11 -10G-> SW-F P20
+   P12 -10G-> SW-F P21
+   P13 -10G-> SW-E P27
+   P14 -10G-> SW-F P26
+   P15 -10G-> SW-F P25
+   P16 -10G-> SW-E P24
+   P17 -10G-> SW-F P23
+   P18 -10G-> SW-E P22
+   P19 -10G-> C-6B/P3
+   P20 -10G-> C-6A/P3
+   P21 -10G-> C-6A/P2
+   P22 -10G-> C-6A/P1
+   P23 -10G-> C-6B/P2
+   P24 -10G-> C-6B/P1
+   P25 -10G-> C-7B/P3
+   P26 -10G-> C-7A/P3
+   P27 -10G-> C-7A/P2
+   P28 -10G-> C-7A/P1
+   P29 -10G-> C-7B/P2
+   P30 -10G-> C-7B/P1
+   P31 -10G-> C-8B/P1
+   P32 -10G-> C-8B/P2
+   P33 -10G-> C-8A/P1
+   P34 -10G-> C-8A/P2
+   P35 -10G-> C-8A/P3
+   P36 -10G-> C-8B/P3
+
+SUBSYSTEM LEAF SW-B
+   P1 -10G-> SW-E P28
+   P2 -10G-> SW-F P29
+   P3 -10G-> SW-F P30
+   P4 -10G-> SW-E P36
+   P5 -10G-> SW-F P35
+   P6 -10G-> SW-E P34
+   P7 -10G-> SW-F P33
+   P8 -10G-> SW-F P32
+   P9 -10G-> SW-E P31
+   P10 -10G-> SW-F P13
+   P11 -10G-> SW-E P14
+   P12 -10G-> SW-E P15
+   P13 -10G-> SW-F P10
+   P14 -10G-> SW-E P11
+   P15 -10G-> SW-E P12
+   P16 -10G-> SW-F P18
+   P17 -10G-> SW-E P17
+   P18 -10G-> SW-F P16
+   P19 -10G-> C-3B/P3
+   P20 -10G-> C-3A/P3
+   P21 -10G-> C-3A/P2
+   P22 -10G-> C-3A/P1
+   P23 -10G-> C-3B/P2
+   P24 -10G-> C-3B/P1
+   P25 -10G-> C-4B/P3
+   P26 -10G-> C-4A/P3
+   P27 -10G-> C-4A/P2
+   P28 -10G-> C-4A/P1
+   P29 -10G-> C-4B/P2
+   P30 -10G-> C-4B/P1
+   P31 -10G-> C-5B/P1
+   P32 -10G-> C-5B/P2
+   P33 -10G-> C-5A/P1
+   P34 -10G-> C-5A/P2
+   P35 -10G-> C-5A/P3
+   P36 -10G-> C-5B/P3
+
+SUBSYSTEM LEAF SW-A
+   P1 -10G-> SW-E P9
+   P2 -10G-> SW-F P8
+   P3 -10G-> SW-F P7
+   P4 -10G-> SW-E P6
+   P5 -10G-> SW-F P5
+   P6 -10G-> SW-E P4
+   P7 -10G-> SW-F P3
+   P8 -10G-> SW-F P2
+   P9 -10G-> SW-E P1
+   P10 -10G-> SW-F P19
+   P11 -10G-> SW-E P20
+   P12 -10G-> SW-E P21
+   P13 -10G-> SW-F P27
+   P14 -10G-> SW-E P26
+   P15 -10G-> SW-E P25
+   P16 -10G-> SW-F P24
+   P17 -10G-> SW-E P23
+   P18 -10G-> SW-F P22
+   P19 -10G-> C-0B/P3
+   P20 -10G-> C-0A/P3
+   P21 -10G-> C-0A/P2
+   P22 -10G-> C-0A/P1
+   P23 -10G-> C-0B/P2
+   P24 -10G-> C-0B/P1
+   P25 -10G-> C-1B/P3
+   P26 -10G-> C-1A/P3
+   P27 -10G-> C-1A/P2
+   P28 -10G-> C-1A/P1
+   P29 -10G-> C-1B/P2
+   P30 -10G-> C-1B/P1
+   P31 -10G-> C-2B/P1
+   P32 -10G-> C-2B/P2
+   P33 -10G-> C-2A/P1
+   P34 -10G-> C-2A/P2
+   P35 -10G-> C-2A/P3
+   P36 -10G-> C-2B/P3
+

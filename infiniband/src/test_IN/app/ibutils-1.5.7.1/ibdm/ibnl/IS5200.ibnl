@@ -1,0 +1,766 @@
+SYSTEM LEAF,LEAF:4x,LEAF:4X
+
+ NODE SW 36 MT48436 U1
+  1  -10G-> P1
+  2  -10G-> P2
+  3  -10G-> P3
+  4  -10G-> P4
+  5  -10G-> P5
+  6  -10G-> P6
+  7  -10G-> P7
+  8  -10G-> P8
+  9  -10G-> P9
+  10 -10G-> P10
+  11 -10G-> P11
+  12 -10G-> P12
+  13 -10G-> P13
+  14 -10G-> P14
+  15 -10G-> P15
+  16 -10G-> P16
+  17 -10G-> P17
+  18 -10G-> P18
+  19 -10G-> P19
+  20 -10G-> P20
+  21 -10G-> P21
+  22 -10G-> P22
+  23 -10G-> P23
+  24 -10G-> P24
+  25 -10G-> P25
+  26 -10G-> P26
+  27 -10G-> P27
+  28 -10G-> P28
+  29 -10G-> P29
+  30 -10G-> P30
+  31 -10G-> P31
+  32 -10G-> P32
+  33 -10G-> P33
+  34 -10G-> P34
+  35 -10G-> P35
+  36 -10G-> P36
+
+SYSTEM SPINE,SPINE:4x,SPINE:4X
+
+ NODE SW 36 MT48436 U1
+  1  -10G-> P1
+  2  -10G-> P2
+  3  -10G-> P3
+  4  -10G-> P4
+  5  -10G-> P5
+  6  -10G-> P6
+  7  -10G-> P7
+  8  -10G-> P8
+  9  -10G-> P9
+  10 -10G-> P10
+  11 -10G-> P11
+  12 -10G-> P12
+  13 -10G-> P13
+  14 -10G-> P14
+  15 -10G-> P15
+  16 -10G-> P16
+  17 -10G-> P17
+  18 -10G-> P18
+  19 -10G-> P19
+  20 -10G-> P20
+  21 -10G-> P21
+  22 -10G-> P22
+  23 -10G-> P23
+  24 -10G-> P24
+  25 -10G-> P25
+  26 -10G-> P26
+  27 -10G-> P27
+  28 -10G-> P28
+  29 -10G-> P29
+  30 -10G-> P30
+  31 -10G-> P31
+  32 -10G-> P32
+  33 -10G-> P33
+  34 -10G-> P34
+  35 -10G-> P35
+  36 -10G-> P36
+
+TOPSYSTEM IS5200,MIS5200,Orca216
+
+ 
+SUBSYSTEM LEAF leaf1
+  P1  -10G-> L1/P1
+  P2  -10G-> L1/P2
+  P3  -10G-> L1/P3
+  P4  -10G-> L1/P4
+  P5  -10G-> L1/P5
+  P6  -10G-> L1/P6
+  P7  -10G-> L1/P7
+  P8  -10G-> L1/P8
+  P9  -10G-> L1/P9
+  P10 -10G-> L1/P10
+  P11 -10G-> L1/P11
+  P12 -10G-> L1/P12
+  P13 -10G-> L1/P13
+  P14 -10G-> L1/P14
+  P15 -10G-> L1/P15
+  P16 -10G-> L1/P16
+  P17 -10G-> L1/P17
+  P18 -10G-> L1/P18
+  P19 -10G-> spine1 P1
+  P20 -10G-> spine1 P2
+  P21 -10G-> spine1 P3
+  P22 -10G-> spine2 P1
+  P23 -10G-> spine2 P2
+  P24 -10G-> spine2 P3
+  P25 -10G-> spine3 P1
+  P26 -10G-> spine3 P2
+  P27 -10G-> spine3 P3
+  P28 -10G-> spine4 P1
+  P29 -10G-> spine4 P2
+  P30 -10G-> spine4 P3
+  P31 -10G-> spine5 P1
+  P32 -10G-> spine5 P2
+  P33 -10G-> spine5 P3
+  P34 -10G-> spine6 P1
+  P35 -10G-> spine6 P2
+  P36 -10G-> spine6 P3
+ 
+SUBSYSTEM LEAF leaf2
+  P1  -10G-> L2/P1
+  P2  -10G-> L2/P2
+  P3  -10G-> L2/P3
+  P4  -10G-> L2/P4
+  P5  -10G-> L2/P5
+  P6  -10G-> L2/P6
+  P7  -10G-> L2/P7
+  P8  -10G-> L2/P8
+  P9  -10G-> L2/P9
+  P10 -10G-> L2/P10
+  P11 -10G-> L2/P11
+  P12 -10G-> L2/P12
+  P13 -10G-> L2/P13
+  P14 -10G-> L2/P14
+  P15 -10G-> L2/P15
+  P16 -10G-> L2/P16
+  P17 -10G-> L2/P17
+  P18 -10G-> L2/P18
+  P19 -10G-> spine1 P4
+  P20 -10G-> spine1 P5
+  P21 -10G-> spine1 P6
+  P22 -10G-> spine2 P4
+  P23 -10G-> spine2 P5
+  P24 -10G-> spine2 P6
+  P25 -10G-> spine3 P4
+  P26 -10G-> spine3 P5
+  P27 -10G-> spine3 P6
+  P28 -10G-> spine4 P4
+  P29 -10G-> spine4 P5
+  P30 -10G-> spine4 P6
+  P31 -10G-> spine5 P4
+  P32 -10G-> spine5 P5
+  P33 -10G-> spine5 P6
+  P34 -10G-> spine6 P4
+  P35 -10G-> spine6 P5
+  P36 -10G-> spine6 P6
+ 
+SUBSYSTEM LEAF leaf3
+  P1  -10G-> L3/P1
+  P2  -10G-> L3/P2
+  P3  -10G-> L3/P3
+  P4  -10G-> L3/P4
+  P5  -10G-> L3/P5
+  P6  -10G-> L3/P6
+  P7  -10G-> L3/P7
+  P8  -10G-> L3/P8
+  P9  -10G-> L3/P9
+  P10 -10G-> L3/P10
+  P11 -10G-> L3/P11
+  P12 -10G-> L3/P12
+  P13 -10G-> L3/P13
+  P14 -10G-> L3/P14
+  P15 -10G-> L3/P15
+  P16 -10G-> L3/P16
+  P17 -10G-> L3/P17
+  P18 -10G-> L3/P18
+  P19 -10G-> spine1 P7
+  P20 -10G-> spine1 P8
+  P21 -10G-> spine1 P9
+  P22 -10G-> spine2 P7
+  P23 -10G-> spine2 P8
+  P24 -10G-> spine2 P9
+  P25 -10G-> spine3 P7
+  P26 -10G-> spine3 P8
+  P27 -10G-> spine3 P9
+  P28 -10G-> spine4 P7
+  P29 -10G-> spine4 P8
+  P30 -10G-> spine4 P9
+  P31 -10G-> spine5 P7
+  P32 -10G-> spine5 P8
+  P33 -10G-> spine5 P9
+  P34 -10G-> spine6 P7
+  P35 -10G-> spine6 P8
+  P36 -10G-> spine6 P9
+ 
+SUBSYSTEM LEAF leaf4
+  P1  -10G-> L4/P1
+  P2  -10G-> L4/P2
+  P3  -10G-> L4/P3
+  P4  -10G-> L4/P4
+  P5  -10G-> L4/P5
+  P6  -10G-> L4/P6
+  P7  -10G-> L4/P7
+  P8  -10G-> L4/P8
+  P9  -10G-> L4/P9
+  P10 -10G-> L4/P10
+  P11 -10G-> L4/P11
+  P12 -10G-> L4/P12
+  P13 -10G-> L4/P13
+  P14 -10G-> L4/P14
+  P15 -10G-> L4/P15
+  P16 -10G-> L4/P16
+  P17 -10G-> L4/P17
+  P18 -10G-> L4/P18
+  P19 -10G-> spine1 P10
+  P20 -10G-> spine1 P11
+  P21 -10G-> spine1 P12
+  P22 -10G-> spine2 P10
+  P23 -10G-> spine2 P11
+  P24 -10G-> spine2 P12
+  P25 -10G-> spine3 P10
+  P26 -10G-> spine3 P11
+  P27 -10G-> spine3 P12
+  P28 -10G-> spine4 P10
+  P29 -10G-> spine4 P11
+  P30 -10G-> spine4 P12
+  P31 -10G-> spine5 P10
+  P32 -10G-> spine5 P11
+  P33 -10G-> spine5 P12
+  P34 -10G-> spine6 P10
+  P35 -10G-> spine6 P11
+  P36 -10G-> spine6 P12
+ 
+SUBSYSTEM LEAF leaf5
+  P1  -10G-> L5/P1
+  P2  -10G-> L5/P2
+  P3  -10G-> L5/P3
+  P4  -10G-> L5/P4
+  P5  -10G-> L5/P5
+  P6  -10G-> L5/P6
+  P7  -10G-> L5/P7
+  P8  -10G-> L5/P8
+  P9  -10G-> L5/P9
+  P10 -10G-> L5/P10
+  P11 -10G-> L5/P11
+  P12 -10G-> L5/P12
+  P13 -10G-> L5/P13
+  P14 -10G-> L5/P14
+  P15 -10G-> L5/P15
+  P16 -10G-> L5/P16
+  P17 -10G-> L5/P17
+  P18 -10G-> L5/P18
+  P19 -10G-> spine1 P13
+  P20 -10G-> spine1 P14
+  P21 -10G-> spine1 P15
+  P22 -10G-> spine2 P13
+  P23 -10G-> spine2 P14
+  P24 -10G-> spine2 P15
+  P25 -10G-> spine3 P13
+  P26 -10G-> spine3 P14
+  P27 -10G-> spine3 P15
+  P28 -10G-> spine4 P13
+  P29 -10G-> spine4 P14
+  P30 -10G-> spine4 P15
+  P31 -10G-> spine5 P13
+  P32 -10G-> spine5 P14
+  P33 -10G-> spine5 P15
+  P34 -10G-> spine6 P13
+  P35 -10G-> spine6 P14
+  P36 -10G-> spine6 P15
+ 
+SUBSYSTEM LEAF leaf6
+  P1  -10G-> L6/P1
+  P2  -10G-> L6/P2
+  P3  -10G-> L6/P3
+  P4  -10G-> L6/P4
+  P5  -10G-> L6/P5
+  P6  -10G-> L6/P6
+  P7  -10G-> L6/P7
+  P8  -10G-> L6/P8
+  P9  -10G-> L6/P9
+  P10 -10G-> L6/P10
+  P11 -10G-> L6/P11
+  P12 -10G-> L6/P12
+  P13 -10G-> L6/P13
+  P14 -10G-> L6/P14
+  P15 -10G-> L6/P15
+  P16 -10G-> L6/P16
+  P17 -10G-> L6/P17
+  P18 -10G-> L6/P18
+  P19 -10G-> spine1 P16
+  P20 -10G-> spine1 P17
+  P21 -10G-> spine1 P18
+  P22 -10G-> spine2 P16
+  P23 -10G-> spine2 P17
+  P24 -10G-> spine2 P18
+  P25 -10G-> spine3 P16
+  P26 -10G-> spine3 P17
+  P27 -10G-> spine3 P18
+  P28 -10G-> spine4 P16
+  P29 -10G-> spine4 P17
+  P30 -10G-> spine4 P18
+  P31 -10G-> spine5 P16
+  P32 -10G-> spine5 P17
+  P33 -10G-> spine5 P18
+  P34 -10G-> spine6 P16
+  P35 -10G-> spine6 P17
+  P36 -10G-> spine6 P18
+ 
+SUBSYSTEM LEAF leaf7
+  P1  -10G-> L7/P1
+  P2  -10G-> L7/P2
+  P3  -10G-> L7/P3
+  P4  -10G-> L7/P4
+  P5  -10G-> L7/P5
+  P6  -10G-> L7/P6
+  P7  -10G-> L7/P7
+  P8  -10G-> L7/P8
+  P9  -10G-> L7/P9
+  P10 -10G-> L7/P10
+  P11 -10G-> L7/P11
+  P12 -10G-> L7/P12
+  P13 -10G-> L7/P13
+  P14 -10G-> L7/P14
+  P15 -10G-> L7/P15
+  P16 -10G-> L7/P16
+  P17 -10G-> L7/P17
+  P18 -10G-> L7/P18
+  P19 -10G-> spine1 P19
+  P20 -10G-> spine1 P20
+  P21 -10G-> spine1 P21
+  P22 -10G-> spine2 P19
+  P23 -10G-> spine2 P20
+  P24 -10G-> spine2 P21
+  P25 -10G-> spine3 P19
+  P26 -10G-> spine3 P20
+  P27 -10G-> spine3 P21
+  P28 -10G-> spine4 P19
+  P29 -10G-> spine4 P20
+  P30 -10G-> spine4 P21
+  P31 -10G-> spine5 P19
+  P32 -10G-> spine5 P20
+  P33 -10G-> spine5 P21
+  P34 -10G-> spine6 P19
+  P35 -10G-> spine6 P20
+  P36 -10G-> spine6 P21
+ 
+SUBSYSTEM LEAF leaf8
+  P1  -10G-> L8/P1
+  P2  -10G-> L8/P2
+  P3  -10G-> L8/P3
+  P4  -10G-> L8/P4
+  P5  -10G-> L8/P5
+  P6  -10G-> L8/P6
+  P7  -10G-> L8/P7
+  P8  -10G-> L8/P8
+  P9  -10G-> L8/P9
+  P10 -10G-> L8/P10
+  P11 -10G-> L8/P11
+  P12 -10G-> L8/P12
+  P13 -10G-> L8/P13
+  P14 -10G-> L8/P14
+  P15 -10G-> L8/P15
+  P16 -10G-> L8/P16
+  P17 -10G-> L8/P17
+  P18 -10G-> L8/P18
+  P19 -10G-> spine1 P22
+  P20 -10G-> spine1 P23
+  P21 -10G-> spine1 P24
+  P22 -10G-> spine2 P22
+  P23 -10G-> spine2 P23
+  P24 -10G-> spine2 P24
+  P25 -10G-> spine3 P22
+  P26 -10G-> spine3 P23
+  P27 -10G-> spine3 P24
+  P28 -10G-> spine4 P22
+  P29 -10G-> spine4 P23
+  P30 -10G-> spine4 P24
+  P31 -10G-> spine5 P22
+  P32 -10G-> spine5 P23
+  P33 -10G-> spine5 P24
+  P34 -10G-> spine6 P22
+  P35 -10G-> spine6 P23
+  P36 -10G-> spine6 P24
+ 
+SUBSYSTEM LEAF leaf9
+  P1  -10G-> L9/P1
+  P2  -10G-> L9/P2
+  P3  -10G-> L9/P3
+  P4  -10G-> L9/P4
+  P5  -10G-> L9/P5
+  P6  -10G-> L9/P6
+  P7  -10G-> L9/P7
+  P8  -10G-> L9/P8
+  P9  -10G-> L9/P9
+  P10 -10G-> L9/P10
+  P11 -10G-> L9/P11
+  P12 -10G-> L9/P12
+  P13 -10G-> L9/P13
+  P14 -10G-> L9/P14
+  P15 -10G-> L9/P15
+  P16 -10G-> L9/P16
+  P17 -10G-> L9/P17
+  P18 -10G-> L9/P18
+  P19 -10G-> spine1 P25
+  P20 -10G-> spine1 P26
+  P21 -10G-> spine1 P27
+  P22 -10G-> spine2 P25
+  P23 -10G-> spine2 P26
+  P24 -10G-> spine2 P27
+  P25 -10G-> spine3 P25
+  P26 -10G-> spine3 P26
+  P27 -10G-> spine3 P27
+  P28 -10G-> spine4 P25
+  P29 -10G-> spine4 P26
+  P30 -10G-> spine4 P27
+  P31 -10G-> spine5 P25
+  P32 -10G-> spine5 P26
+  P33 -10G-> spine5 P27
+  P34 -10G-> spine6 P25
+  P35 -10G-> spine6 P26
+  P36 -10G-> spine6 P27
+ 
+SUBSYSTEM LEAF leaf10
+  P1  -10G-> L10/P1
+  P2  -10G-> L10/P2
+  P3  -10G-> L10/P3
+  P4  -10G-> L10/P4
+  P5  -10G-> L10/P5
+  P6  -10G-> L10/P6
+  P7  -10G-> L10/P7
+  P8  -10G-> L10/P8
+  P9  -10G-> L10/P9
+  P10 -10G-> L10/P10
+  P11 -10G-> L10/P11
+  P12 -10G-> L10/P12
+  P13 -10G-> L10/P13
+  P14 -10G-> L10/P14
+  P15 -10G-> L10/P15
+  P16 -10G-> L10/P16
+  P17 -10G-> L10/P17
+  P18 -10G-> L10/P18
+  P19 -10G-> spine1 P28
+  P20 -10G-> spine1 P29
+  P21 -10G-> spine1 P30
+  P22 -10G-> spine2 P28
+  P23 -10G-> spine2 P29
+  P24 -10G-> spine2 P30
+  P25 -10G-> spine3 P28
+  P26 -10G-> spine3 P29
+  P27 -10G-> spine3 P30
+  P28 -10G-> spine4 P28
+  P29 -10G-> spine4 P29
+  P30 -10G-> spine4 P30
+  P31 -10G-> spine5 P28
+  P32 -10G-> spine5 P29
+  P33 -10G-> spine5 P30
+  P34 -10G-> spine6 P28
+  P35 -10G-> spine6 P29
+  P36 -10G-> spine6 P30
+ 
+SUBSYSTEM LEAF leaf11
+  P1  -10G-> L11/P1
+  P2  -10G-> L11/P2
+  P3  -10G-> L11/P3
+  P4  -10G-> L11/P4
+  P5  -10G-> L11/P5
+  P6  -10G-> L11/P6
+  P7  -10G-> L11/P7
+  P8  -10G-> L11/P8
+  P9  -10G-> L11/P9
+  P10 -10G-> L11/P10
+  P11 -10G-> L11/P11
+  P12 -10G-> L11/P12
+  P13 -10G-> L11/P13
+  P14 -10G-> L11/P14
+  P15 -10G-> L11/P15
+  P16 -10G-> L11/P16
+  P17 -10G-> L11/P17
+  P18 -10G-> L11/P18
+  P19 -10G-> spine1 P31
+  P20 -10G-> spine1 P32
+  P21 -10G-> spine1 P33
+  P22 -10G-> spine2 P31
+  P23 -10G-> spine2 P32
+  P24 -10G-> spine2 P33
+  P25 -10G-> spine3 P31
+  P26 -10G-> spine3 P32
+  P27 -10G-> spine3 P33
+  P28 -10G-> spine4 P31
+  P29 -10G-> spine4 P32
+  P30 -10G-> spine4 P33
+  P31 -10G-> spine5 P31
+  P32 -10G-> spine5 P32
+  P33 -10G-> spine5 P33
+  P34 -10G-> spine6 P31
+  P35 -10G-> spine6 P32
+  P36 -10G-> spine6 P33
+ 
+SUBSYSTEM LEAF leaf12
+  P1  -10G-> L12/P1
+  P2  -10G-> L12/P2
+  P3  -10G-> L12/P3
+  P4  -10G-> L12/P4
+  P5  -10G-> L12/P5
+  P6  -10G-> L12/P6
+  P7  -10G-> L12/P7
+  P8  -10G-> L12/P8
+  P9  -10G-> L12/P9
+  P10 -10G-> L12/P10
+  P11 -10G-> L12/P11
+  P12 -10G-> L12/P12
+  P13 -10G-> L12/P13
+  P14 -10G-> L12/P14
+  P15 -10G-> L12/P15
+  P16 -10G-> L12/P16
+  P17 -10G-> L12/P17
+  P18 -10G-> L12/P18
+  P19 -10G-> spine1 P34
+  P20 -10G-> spine1 P35
+  P21 -10G-> spine1 P36
+  P22 -10G-> spine2 P34
+  P23 -10G-> spine2 P35
+  P24 -10G-> spine2 P36
+  P25 -10G-> spine3 P34
+  P26 -10G-> spine3 P35
+  P27 -10G-> spine3 P36
+  P28 -10G-> spine4 P34
+  P29 -10G-> spine4 P35
+  P30 -10G-> spine4 P36
+  P31 -10G-> spine5 P34
+  P32 -10G-> spine5 P35
+  P33 -10G-> spine5 P36
+  P34 -10G-> spine6 P34
+  P35 -10G-> spine6 P35
+  P36 -10G-> spine6 P36
+
+SUBSYSTEM SPINE spine1
+  P1 -10G-> leaf1 P19
+  P2 -10G-> leaf1 P20
+  P3 -10G-> leaf1 P21
+  P4 -10G-> leaf2 P19
+  P5 -10G-> leaf2 P20
+  P6 -10G-> leaf2 P21
+  P7 -10G-> leaf3 P19
+  P8 -10G-> leaf3 P20
+  P9 -10G-> leaf3 P21
+  P10 -10G-> leaf4 P19
+  P11 -10G-> leaf4 P20
+  P12 -10G-> leaf4 P21
+  P13 -10G-> leaf5 P19
+  P14 -10G-> leaf5 P20
+  P15 -10G-> leaf5 P21
+  P16 -10G-> leaf6 P19
+  P17 -10G-> leaf6 P20
+  P18 -10G-> leaf6 P21
+  P19 -10G-> leaf7 P19
+  P20 -10G-> leaf7 P20
+  P21 -10G-> leaf7 P21
+  P22 -10G-> leaf8 P19
+  P23 -10G-> leaf8 P20
+  P24 -10G-> leaf8 P21
+  P25 -10G-> leaf9 P19
+  P26 -10G-> leaf9 P20
+  P27 -10G-> leaf9 P21
+  P28 -10G-> leaf10 P19
+  P29 -10G-> leaf10 P20
+  P30 -10G-> leaf10 P21
+  P31 -10G-> leaf11 P19
+  P32 -10G-> leaf11 P20
+  P33 -10G-> leaf11 P21
+  P34 -10G-> leaf12 P19
+  P35 -10G-> leaf12 P20
+  P36 -10G-> leaf12 P21
+
+SUBSYSTEM SPINE spine2
+  P1 -10G-> leaf1 P22
+  P2 -10G-> leaf1 P23
+  P3 -10G-> leaf1 P24
+  P4 -10G-> leaf2 P22
+  P5 -10G-> leaf2 P23
+  P6 -10G-> leaf2 P24
+  P7 -10G-> leaf3 P22
+  P8 -10G-> leaf3 P23
+  P9 -10G-> leaf3 P24
+  P10 -10G-> leaf4 P22
+  P11 -10G-> leaf4 P23
+  P12 -10G-> leaf4 P24
+  P13 -10G-> leaf5 P22
+  P14 -10G-> leaf5 P23
+  P15 -10G-> leaf5 P24
+  P16 -10G-> leaf6 P22
+  P17 -10G-> leaf6 P23
+  P18 -10G-> leaf6 P24
+  P19 -10G-> leaf7 P22
+  P20 -10G-> leaf7 P23
+  P21 -10G-> leaf7 P24
+  P22 -10G-> leaf8 P22
+  P23 -10G-> leaf8 P23
+  P24 -10G-> leaf8 P24
+  P25 -10G-> leaf9 P22
+  P26 -10G-> leaf9 P23
+  P27 -10G-> leaf9 P24
+  P28 -10G-> leaf10 P22
+  P29 -10G-> leaf10 P23
+  P30 -10G-> leaf10 P24
+  P31 -10G-> leaf11 P22
+  P32 -10G-> leaf11 P23
+  P33 -10G-> leaf11 P24
+  P34 -10G-> leaf12 P22
+  P35 -10G-> leaf12 P23
+  P36 -10G-> leaf12 P24
+
+SUBSYSTEM SPINE spine3
+  P1 -10G-> leaf1 P25
+  P2 -10G-> leaf1 P26
+  P3 -10G-> leaf1 P27
+  P4 -10G-> leaf2 P25
+  P5 -10G-> leaf2 P26
+  P6 -10G-> leaf2 P27
+  P7 -10G-> leaf3 P25
+  P8 -10G-> leaf3 P26
+  P9 -10G-> leaf3 P27
+  P10 -10G-> leaf4 P25
+  P11 -10G-> leaf4 P26
+  P12 -10G-> leaf4 P27
+  P13 -10G-> leaf5 P25
+  P14 -10G-> leaf5 P26
+  P15 -10G-> leaf5 P27
+  P16 -10G-> leaf6 P25
+  P17 -10G-> leaf6 P26
+  P18 -10G-> leaf6 P27
+  P19 -10G-> leaf7 P25
+  P20 -10G-> leaf7 P26
+  P21 -10G-> leaf7 P27
+  P22 -10G-> leaf8 P25
+  P23 -10G-> leaf8 P26
+  P24 -10G-> leaf8 P27
+  P25 -10G-> leaf9 P25
+  P26 -10G-> leaf9 P26
+  P27 -10G-> leaf9 P27
+  P28 -10G-> leaf10 P25
+  P29 -10G-> leaf10 P26
+  P30 -10G-> leaf10 P27
+  P31 -10G-> leaf11 P25
+  P32 -10G-> leaf11 P26
+  P33 -10G-> leaf11 P27
+  P34 -10G-> leaf12 P25
+  P35 -10G-> leaf12 P26
+  P36 -10G-> leaf12 P27
+
+SUBSYSTEM SPINE spine4
+  P1 -10G-> leaf1 P28
+  P2 -10G-> leaf1 P29
+  P3 -10G-> leaf1 P30
+  P4 -10G-> leaf2 P28
+  P5 -10G-> leaf2 P29
+  P6 -10G-> leaf2 P30
+  P7 -10G-> leaf3 P28
+  P8 -10G-> leaf3 P29
+  P9 -10G-> leaf3 P30
+  P10 -10G-> leaf4 P28
+  P11 -10G-> leaf4 P29
+  P12 -10G-> leaf4 P30
+  P13 -10G-> leaf5 P28
+  P14 -10G-> leaf5 P29
+  P15 -10G-> leaf5 P30
+  P16 -10G-> leaf6 P28
+  P17 -10G-> leaf6 P29
+  P18 -10G-> leaf6 P30
+  P19 -10G-> leaf7 P28
+  P20 -10G-> leaf7 P29
+  P21 -10G-> leaf7 P30
+  P22 -10G-> leaf8 P28
+  P23 -10G-> leaf8 P29
+  P24 -10G-> leaf8 P30
+  P25 -10G-> leaf9 P28
+  P26 -10G-> leaf9 P29
+  P27 -10G-> leaf9 P30
+  P28 -10G-> leaf10 P28
+  P29 -10G-> leaf10 P29
+  P30 -10G-> leaf10 P30
+  P31 -10G-> leaf11 P28
+  P32 -10G-> leaf11 P29
+  P33 -10G-> leaf11 P30
+  P34 -10G-> leaf12 P28
+  P35 -10G-> leaf12 P29
+  P36 -10G-> leaf12 P30
+
+SUBSYSTEM SPINE spine5
+  P1 -10G-> leaf1 P31
+  P2 -10G-> leaf1 P32
+  P3 -10G-> leaf1 P33
+  P4 -10G-> leaf2 P31
+  P5 -10G-> leaf2 P32
+  P6 -10G-> leaf2 P33
+  P7 -10G-> leaf3 P31
+  P8 -10G-> leaf3 P32
+  P9 -10G-> leaf3 P33
+  P10 -10G-> leaf4 P31
+  P11 -10G-> leaf4 P32
+  P12 -10G-> leaf4 P33
+  P13 -10G-> leaf5 P31
+  P14 -10G-> leaf5 P32
+  P15 -10G-> leaf5 P33
+  P16 -10G-> leaf6 P31
+  P17 -10G-> leaf6 P32
+  P18 -10G-> leaf6 P33
+  P19 -10G-> leaf7 P31
+  P20 -10G-> leaf7 P32
+  P21 -10G-> leaf7 P33
+  P22 -10G-> leaf8 P31
+  P23 -10G-> leaf8 P32
+  P24 -10G-> leaf8 P33
+  P25 -10G-> leaf9 P31
+  P26 -10G-> leaf9 P32
+  P27 -10G-> leaf9 P33
+  P28 -10G-> leaf10 P31
+  P29 -10G-> leaf10 P32
+  P30 -10G-> leaf10 P33
+  P31 -10G-> leaf11 P31
+  P32 -10G-> leaf11 P32
+  P33 -10G-> leaf11 P33
+  P34 -10G-> leaf12 P31
+  P35 -10G-> leaf12 P32
+  P36 -10G-> leaf12 P33
+
+SUBSYSTEM SPINE spine6
+  P1 -10G-> leaf1 P34
+  P2 -10G-> leaf1 P35
+  P3 -10G-> leaf1 P36
+  P4 -10G-> leaf2 P34
+  P5 -10G-> leaf2 P35
+  P6 -10G-> leaf2 P36
+  P7 -10G-> leaf3 P34
+  P8 -10G-> leaf3 P35
+  P9 -10G-> leaf3 P36
+  P10 -10G-> leaf4 P34
+  P11 -10G-> leaf4 P35
+  P12 -10G-> leaf4 P36
+  P13 -10G-> leaf5 P34
+  P14 -10G-> leaf5 P35
+  P15 -10G-> leaf5 P36
+  P16 -10G-> leaf6 P34
+  P17 -10G-> leaf6 P35
+  P18 -10G-> leaf6 P36
+  P19 -10G-> leaf7 P34
+  P20 -10G-> leaf7 P35
+  P21 -10G-> leaf7 P36
+  P22 -10G-> leaf8 P34
+  P23 -10G-> leaf8 P35
+  P24 -10G-> leaf8 P36
+  P25 -10G-> leaf9 P34
+  P26 -10G-> leaf9 P35
+  P27 -10G-> leaf9 P36
+  P28 -10G-> leaf10 P34
+  P29 -10G-> leaf10 P35
+  P30 -10G-> leaf10 P36
+  P31 -10G-> leaf11 P34
+  P32 -10G-> leaf11 P35
+  P33 -10G-> leaf11 P36
+  P34 -10G-> leaf12 P34
+  P35 -10G-> leaf12 P35
+  P36 -10G-> leaf12 P36

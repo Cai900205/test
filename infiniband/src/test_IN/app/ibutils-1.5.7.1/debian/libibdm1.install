@@ -1,0 +1,8 @@
+opt/lib/lib*.so.*
+opt/lib/lib*.a
+opt/lib/ibis1.5.7.1
+opt/lib/ibdiagnet1.5.7.1
+opt/lib/ibdiagpath1.5.7.1
+opt/lib/ibdm1.5.7.1
+opt/lib/ibdiagui1.5.7.1
+opt/include/ibdm

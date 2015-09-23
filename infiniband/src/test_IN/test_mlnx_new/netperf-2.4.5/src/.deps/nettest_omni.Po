@@ -1,0 +1,3 @@
+nettest_omni.o: nettest_omni.c ../config.h
+
+../config.h:

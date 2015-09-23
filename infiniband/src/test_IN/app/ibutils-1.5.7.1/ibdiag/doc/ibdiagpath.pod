@@ -1,0 +1,239 @@
+=head1 NAME
+
+B<ibdiagpath - IB diagnostic path>
+
+=head1 SYNOPSYS
+
+ibdiagpath
+     {-n <[src-name,]dst-name>|-l <[src-lid,]dst-lid>|-d <p1,p2,p3,...>}
+     [-c <count>] [-v] [-t <topo-file>] [-s <sys-name>] [-i <dev-index>]
+     [-p <port-num>] [-o <out-dir>] [-lw <1x|4x|12x>] [-ls <2.5|5|10>] [-pm]
+     [-pc] [-P <<PM counter>=<Trash Limit>>]
+
+=head1 DESCRIPTION
+
+ibdiagpath traces a path between two end-points and provides information
+regarding the nodes and ports traversed along the path. It utilizes device
+specific health queries for the different devices along the traversed path.
+The way ibdiagpath operates depends on the addressing mode used on the command
+line. If directed route adressing is used, the local node is the source node
+and the route to the destination port is known apriori.
+On the other hand, if LID route (or by-name) addressing is imployed,
+then the source and destination ports of a route are specified by their LIDs
+(or by the names defined in the topology file). In this case, the actual path
+from the local port to the source port, and from the source port to the
+destination port, is defined by means of Subnet Management Linear Forwarding
+Table queries of the switch nodes along those paths. Therefore, the path
+cannot be predicted as it may change.
+The tool allows omitting the source node, in which case the local port on the
+machine running the tool is assumed to be the source.
+Note: When ibdiagpath queries for the performance counters along the path between
+the source and destination ports, it always traverses the LID route, even if a
+directed route is specified. If along the LID route one or more links are not
+in the ACTIVE state, ibdiagpath reports an error.
+Checks for path validity from partitions, IPoIB and QoS perspectives are also provided.
+
+=over
+
+=item F<ibdiagpath.log> -
+
+A dump of all the application reports generate according to the provided flags
+
+=item F<ibdiagnet.pm> -
+
+A dump of the pm Counters values, of the fabric links
+
+=back
+
+=head1 OPTIONS
+
+=over
+
+=item B<-n <[src-name,]dst-name>> :
+
+=over
+
+=item
+Names of the source and destination ports (as defined in the topology file; source may be omitted -> local port is assumed to be the source)
+
+=back
+
+=item B<-l <[src-lid,]dst-lid>> :
+
+=over
+
+=item
+Source and destination LIDs (source may be omitted -> local port is assumed to be the source)
+
+=back
+
+=item B<-d <p1,p2,p3,...>> :
+
+=over
+
+=item
+directed route from the local node (which is the source) and the destination node
+
+=back
+
+=item B<-c <count>> :
+
+=over
+
+=item
+The minimal number of packets to be sent across each link (default = 100)
+
+=back
+
+=item B<-v> :
+
+=over
+
+=item
+Enable verbose mode
+
+=back
+
+=item B<-t <topo-file>> :
+
+=over
+
+=item
+Specifies the topology file name
+
+=back
+
+=item B<-s <sys-name>> :
+
+=over
+
+=item
+Specifies the local system name. Meaningful only if a topology file is specified
+
+=back
+
+=item B<-i <dev-index>> :
+
+=over
+
+=item
+Specifies the index of the device of the port used to connect to the IB fabric (in case of multiple devices on the local system)
+
+=back
+
+=item B<-p <port-num>> :
+
+=over
+
+=item
+Specifies the local device's port number used to connect to the IB fabric
+
+=back
+
+=item B<-o <out-dir>> :
+
+=over
+
+=item
+Specifies the directory where the output files will be placed (default = /tmp)
+
+=back
+
+=item B<-lw <1x|4x|12x>> :
+
+=over
+
+=item
+Specifies the expected link width
+
+=back
+
+=item B<-ls <2.5|5|10>>  :
+
+=over
+
+=item
+Specifies the expected link speed
+
+=back
+
+=item B<-pm>             :
+
+=over
+
+=item
+Dump all the fabric links, pm Counters into ibdiagnet.pm
+
+=back
+
+=item B<-pc>             :
+
+=over
+
+=item
+Reset all the fabric links pmCounters
+
+=back
+
+=item B<-P> <PM=<Trash>> :
+
+=over
+
+=item
+If any of the provided pm is greater then its provided value, print it to screen
+
+=back
+
+=item B<-h|--help>       :
+
+=over
+
+=item
+Prints the help page information
+
+=back
+
+=item B<-V|--version> :
+
+=over
+
+=item
+Prints the version of the tool
+
+=back
+
+=item B<--vars> :
+
+=over
+
+=item
+Prints the tool's environment variables and their values
+
+=back
+
+=back
+
+=head1 ERROR CODES
+
+=over
+
+=item 1 -
+The path traced is un-healthy
+
+=item 2 -
+Failed to parse command line options
+
+=item 3 -
+More then 64 hops are required for traversing the local port to the "Source" port and then to the C<Destination> port.
+
+=item 4 -
+Unable to traverse the LFT data from source to destination
+
+=item 5 -
+Failed to use Topology File
+
+=item 6 -
+Failed to load required Package
+
+=back
+

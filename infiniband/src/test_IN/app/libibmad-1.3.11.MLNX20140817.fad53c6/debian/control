@@ -1,0 +1,30 @@
+Source: libibmad
+Priority: extra
+Maintainer: Ira Weiny <weiny2@llnl.gov>
+Section: libs
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libibumad-devel
+Standards-Version: 1.3.11
+Homepage: http://www.openfabrics.org/downloads/management/libibmad-1.3.11.tar.gz
+
+Package: libibmad-devel
+Section: libdevel
+Architecture: any
+Depends: libibmad (= ${binary:Version})
+Description: Development files for the libibmad library
+ Development files for the libibmad library
+
+Package: libibmad-static
+Section: libdevel
+Architecture: any
+Depends: libibmad (= ${binary:Version})
+Description: Static version of the libibmad library
+ Static version of the libibmad library
+
+Package: libibmad
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: OpenFabrics Alliance InfiniBand MAD library
+ libibmad provides low layer IB functions for use by the IB diagnostic
+ and management programs. These include MAD, SA, SMP, and other basic
+ IB functions.

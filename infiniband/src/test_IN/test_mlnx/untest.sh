@@ -1,0 +1,22 @@
+#!/bin/sh
+rmmod ib_srp
+rmmod scsi_transport_srp
+rmmod rds_tcp
+rmmod rds_rdma
+rmmod rds
+rmmod mlx4_ib
+rmmod mlx4_en
+rmmod mlx4_core
+rmmod ib_ipoib
+rmmod rdma_ucm
+rmmod rdma_cm
+rmmod ib_ucm
+rmmod ib_cm
+rmmod iw_cm
+rmmod ib_uverbs
+rmmod ib_umad
+rmmod ib_sa
+rmmod ib_mad
+rmmod ib_core
+rmmod ib_addr
+rmmod compat

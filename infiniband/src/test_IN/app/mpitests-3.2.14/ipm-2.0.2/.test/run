@@ -1,0 +1,7 @@
+#!/bin/sh -x
+mpicc -g -O2  ./simplec_MPI_STATUS_COUNT.c -o ./simplec_MPI_STATUS_COUNT
+if test -x ./simplec_MPI_STATUS_COUNT ; then
+ exit 0
+else
+ exit 1
+fi

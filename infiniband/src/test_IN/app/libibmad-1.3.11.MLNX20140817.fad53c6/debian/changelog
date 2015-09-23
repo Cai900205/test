@@ -1,0 +1,2213 @@
+libibmad (1.3.11.MLNX20140817.fad53c6) unstable; urgency=low
+
+  * debian: Update version number to 1.3.11
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Sun, 17 Aug 2014 13:22:43 +0300
+
+libibmad (1.3.11.MLNX20140415.bc41338) unstable; urgency=low
+
+  * dump.c: In mad_dump_linkwidth, output undefined widths
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 15 Apr 2014 13:35:29 -0400
+
+libibmad (1.3.11.MLNX20140124.eb7c560) unstable; urgency=low
+
+  * update README and version 1.3.11
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 24 Jan 2014 19:16:46 -0800
+
+libibmad (1.3.11.MLNX20130818.5c2a8d4) unstable; urgency=low
+
+  * mad_rpc(): Fail with EINVAL if max_retries <= 0
+
+ --  Bart Van Assche <bvanassche@acm.org>  Sun, 18 Aug 2013 10:37:11 +0200
+
+libibmad (1.3.11.MLNX20130817.f7da5d0) unstable; urgency=low
+
+  * Update README and version to 1.3.10 release
+
+ --  Ira Weiny <ira.weiny@intel.com>  Sat, 17 Aug 2013 22:53:27 -0700
+
+libibmad (1.3.11.MLNX20130312.4ced9d1) unstable; urgency=low
+
+  * libibmad: Add setting of errno on function failure
+
+ --  Brendan Doyle <brendan.doyle@oracle.com>  Tue, 12 Mar 2013 19:38:52 +0000
+
+libibmad (1.3.11.MLNX20130312.d3a4ea4) unstable; urgency=low
+
+  * libibmad: mask off the kernel transaction id bits
+
+ --  Brendan Doyle <brendan.doyle@oracle.com>  Tue, 12 Mar 2013 19:38:52 +0000
+
+libibmad (1.3.11.MLNX20130312.f0f203f) unstable; urgency=low
+
+  * libibmad: To handle null dev_name in madrpc_init
+
+ --  Brendan Doyle <brendan.doyle@oracle.com>  Tue, 12 Mar 2013 19:38:52 +0000
+
+libibmad (1.3.11.MLNX20130312.66d7262) unstable; urgency=low
+
+  * libibmad: Conversion specifier; %m is not supported on Solaris
+
+ --  Brendan Doyle <brendan.doyle@oracle.com>  Tue, 12 Mar 2013 19:38:11 +0000
+
+libibmad (1.3.11.MLNX20130312.f64e99a) unstable; urgency=low
+
+  * libibmad: To fix compilation warning: need typecasts
+
+ --  Brendan Doyle <brendan.doyle@oracle.com>  Tue, 12 Mar 2013 19:39:42 +0000
+
+libibmad (1.3.11.MLNX20130308.02e31eb) unstable; urgency=low
+
+  * libibmad: update emails
+
+ --  Ira Weiny <ira.weiny@intel.com>  Fri, 8 Mar 2013 17:59:51 -0800
+
+libibmad (1.3.11.MLNX20130214.3b8a0f3) unstable; urgency=low
+
+  * libibmad: Add NodeRecord query API
+
+ --  Hal Rosenstock <hal@mellanox.com>  Thu, 14 Feb 2013 21:42:31 -0500
+
+libibmad (1.3.11.MLNX20130612.276246d) unstable; urgency=low
+
+  * MOFED: fix duplicate exports in mad.h
+
+ --  Alex Netes <alexne@mellanox.com>  Wed, 12 Jun 2013 16:43:42 +0300
+
+libibmad (1.3.11.MLNX20130226.1e79ec6) unstable; urgency=low
+
+  * MOFED: adding support for Debian packaging.
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Tue, 26 Feb 2013 17:47:59 +0200
+
+libibmad (1.3.11.MLNX20130121.619aeaa) unstable; urgency=low
+
+  * libibmad: Add PortSamplesResult support
+
+ --  Ilya Nelkenbaum <ilyan@mellanox.com>  Mon, 21 Jan 2013 15:04:23 +0200
+
+libibmad (1.3.11.MLNX20110120.d877412) unstable; urgency=low
+
+  * libibmad/dump.c: In mad_dump_mtu, don't set buf[0] to 0
+
+ --  Hal Rosenstock <hal@mellanox.com>  Thu, 20 Jan 2011 11:36:06 +0200
+
+libibmad (1.3.11.MLNX20100725.4ca2e28) unstable; urgency=low
+
+  * libibmad: Add IB mirror mad definitions
+
+ --  Eli Dorfman <elid@voltaire.com>  Sun, 25 Jul 2010 17:24:32 +0300
+
+libibmad (1.3.11.MLNX20120713.d5e9ff0) unstable; urgency=low
+
+  * libibmad: Add comment notes for various PortSelect and CounterSelect fields.
+
+ --  Huang, Perry <huang32@llnl.gov>  Fri, 13 Jul 2012 11:07:34 -0700
+
+libibmad (1.3.11.MLNX20120531.0736b28) unstable; urgency=low
+
+  * Update README for 1.3.9 release
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 31 May 2012 16:14:32 -0700
+
+libibmad (1.3.11.MLNX20120525.27925f1) unstable; urgency=low
+
+  * libibmad/dump.c: clean up boundary conditions in dump routines
+
+ --  Jim Foraker <foraker1@llnl.gov>  Fri, 25 May 2012 15:33:01 -0700
+
+libibmad (1.3.11.MLNX20120430.0b0ab0e) unstable; urgency=low
+
+  * libibmad/fields.c: Update counter offsets for PortExtendedSpeedsCounters
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 30 Apr 2012 13:26:12 -0400
+
+libibmad (1.3.11.MLNX20120425.95d4955) unstable; urgency=low
+
+  * libibmad: fix misspelling
+
+ --  Albert Chu <chu11@llnl.gov>  Wed, 25 Apr 2012 14:06:25 -0700
+
+libibmad (1.3.11.MLNX20120306.1506d7a) unstable; urgency=low
+
+  * libibmad: Add MKey support to SMP requests via smp_mkey_get/set()
+
+ --  Jim Foraker <foraker1@llnl.gov>  Tue, 6 Mar 2012 14:12:29 -0800
+
+libibmad (1.3.11.MLNX20111208.115679c) unstable; urgency=low
+
+  * libibmad: Add support for congestion control config mads.
+
+ --  Albert Chu <chu11@llnl.gov>  Thu, 8 Dec 2011 14:09:34 -0800
+
+libibmad (1.3.11.MLNX20111128.0331433) unstable; urgency=low
+
+  * libibmad: Add support for SA NodeRecord
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 28 Nov 2011 06:01:28 -0800
+
+libibmad (1.3.11.MLNX20111110.9fcdf15) unstable; urgency=low
+
+  * libibmad/rpc.c: On receive, add debug info for dumping incoming MAD address
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 10 Nov 2011 05:48:46 -0800
+
+libibmad (1.3.11.MLNX20110929.ec98cd1) unstable; urgency=low
+
+  * Update version for next release
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 29 Sep 2011 11:26:48 -0700
+
+libibmad (1.3.11.MLNX20110907.9fd2087) unstable; urgency=low
+
+  * Support classportinfo dump function
+
+ --  Albert Chu <chu11@llnl.gov>  Wed, 7 Sep 2011 11:02:52 -0700
+
+libibmad (1.3.11.MLNX20110802.ce716fc) unstable; urgency=low
+
+  * Add support for congestion control mads
+
+ --  Albert Chu <achu@hyperion1.llnl.gov>  Tue, 2 Aug 2011 11:16:54 -0700
+
+libibmad (1.3.11.MLNX20110815.fa8f601) unstable; urgency=low
+
+  * Update AUTHORS and add README with release notes
+
+ --  Ira Weiny <weiny2@llnl.gov>  Mon, 15 Aug 2011 10:32:40 -0700
+
+libibmad (1.3.11.MLNX20110818.43eed2d) unstable; urgency=low
+
+  * libibmad: Fix build on win8
+
+ --  shefty <sean.hefty@intel.com>  Thu, 18 Aug 2011 16:46:49 +0000
+
+libibmad (1.3.11.MLNX20110815.38e9ac4) unstable; urgency=low
+
+  * libibmad: Add support for PortInfo CapabilityMask2
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 15 Aug 2011 20:39:14 +0000
+
+libibmad (1.3.11.MLNX20110815.a872bcd) unstable; urgency=low
+
+  * libibmad/dump.c: Allow 0 (extended speed active) in mad_dump_linkspeed
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 15 Aug 2011 20:49:07 +0000
+
+libibmad (1.3.11.MLNX20110815.37b344e) unstable; urgency=low
+
+  * libibmad/dump.c: Add IsOptionalIPDSupported into mad_dump_portcapmask
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 15 Aug 2011 20:23:12 +0000
+
+libibmad (1.3.11.MLNX20110803.818fcb2) unstable; urgency=low
+
+  * libibmad: Make new feild names consistent
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 3 Aug 2011 11:16:37 -0700
+
+libibmad (1.3.11.MLNX20110722.627185f) unstable; urgency=low
+
+  * libibmad: Support for Mellanox vendor specific ExtendedPortInfo SM class MAD
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Fri, 22 Jul 2011 11:22:03 +0000
+
+libibmad (1.3.11.MLNX20110714.e4713b2) unstable; urgency=low
+
+  * Support optional performance counters, including congestion control performance counters.
+
+ --  Albert L. Chu <chu11@llnl.gov>  Thu, 14 Jul 2011 15:03:38 -0700
+
+libibmad (1.3.11.MLNX20110720.4805e14) unstable; urgency=low
+
+  * Fix offset in various < 32 bit field entries
+
+ --  Albert L.Chu <chu11@llnl.gov>  Wed, 20 Jul 2011 11:52:47 -0700
+
+libibmad (1.3.11.MLNX20110707.db5e552) unstable; urgency=low
+
+  * libibmad: make IB_GUID_GUID0_F consistent with new GUIDInfo fields
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 7 Jul 2011 17:40:18 -0700
+
+libibmad (1.3.11.MLNX20110711.4d1d186) unstable; urgency=low
+
+  * libibmad: Add PortExtendedSpeedsCounters support
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Mon, 11 Jul 2011 12:08:23 +0000
+
+libibmad (1.3.11.MLNX20110707.0f25a22) unstable; urgency=low
+
+  * libibmad: Add initial extended speed support
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Thu, 7 Jul 2011 09:50:03 -0700
+
+libibmad (1.3.11.MLNX20110706.92d5ee1) unstable; urgency=low
+
+  * libibmad: Remove reference to OpenSM in COPYING file
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 6 Jul 2011 14:30:27 -0700
+
+libibmad (1.3.11.MLNX20110705.e6fb284) unstable; urgency=low
+
+  * libibmad: Fix backward compatibility
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 5 Jul 2011 06:09:10 -0700
+
+libibmad (1.3.11.MLNX20110601.e48518d) unstable; urgency=low
+
+  * libibmad/[register rpc].c: Fix some bounds checks
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 1 Jun 2011 06:45:57 -0700
+
+libibmad (1.3.11.MLNX20110427.68b1e78) unstable; urgency=low
+
+  * libibmad/vendor.c: In ib_vendor_call_via, set errno
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 27 Apr 2011 11:14:41 +0000
+
+libibmad (1.3.11.MLNX20110427.32a4414) unstable; urgency=low
+
+  * libibmad/gs.c: In pma_query_via/performance_reset_via, set errno
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 27 Apr 2011 11:14:36 +0000
+
+libibmad (1.3.11.MLNX20110427.e1fdb50) unstable; urgency=low
+
+  * libibmad: Distinguish timed out from other errors
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Wed, 27 Apr 2011 11:14:29 +0000
+
+libibmad (1.3.11.MLNX20110421.c6e974a) unstable; urgency=low
+
+  * libibmad: Remove libibnetdisc specific define
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 21 Apr 2011 14:24:27 -0700
+
+libibmad (1.3.11.MLNX20110405.243868f) unstable; urgency=low
+
+  * libibmad: Added smp_query/set _status_via functions
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 5 Apr 2011 19:23:44 +0000
+
+libibmad (1.3.11.MLNX20110405.ceda34a) unstable; urgency=low
+
+  * libibmad/smp.c: Fix to smp_query_via for attribute data
+
+ --  Hal Rosenstock <hal@dev.mellanox.co.il>  Tue, 5 Apr 2011 19:23:28 +0000
+
+libibmad (1.3.11.MLNX20100427.d271059) unstable; urgency=low
+
+  * libibmad: Add support for SA GUIDInfoRecord fields
+
+ --  Hal Rosenstock <hal@mellanox.com>  Tue, 27 Apr 2010 11:15:11 -0400
+
+libibmad (1.3.11.MLNX20100426.bbe8d06) unstable; urgency=low
+
+  * libibmad: Add remaining SM GUIDInfo attribute fields
+
+ --  Hal Rosenstock <hal@mellanox.com>  Mon, 26 Apr 2010 14:24:40 -0400
+
+libibmad (1.3.11.MLNX20110214.e857ca1) unstable; urgency=low
+
+  * libibmad: package versions update
+
+ --  Alex Netes <alexne@voltaire.com>  Mon, 14 Feb 2011 12:28:24 +0200
+
+libibmad (1.3.11.MLNX20110214.2065091) unstable; urgency=low
+
+  * libibmad: update shared library versions
+
+ --  Alex Netes <alexne@voltaire.com>  Mon, 14 Feb 2011 12:24:37 +0200
+
+libibmad (1.3.11.MLNX20110203.ffc95cc) unstable; urgency=low
+
+  * Makefile: ChangeLog generation script path fix
+
+ --  Alex Netes <alexne@voltaire.com>  Thu, 3 Feb 2011 17:26:15 +0200
+
+libibmad (1.3.11.MLNX20100803.823411b) unstable; urgency=low
+
+  * libibmad/fields.c: Change all PortCounter names to match the Specification
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 3 Aug 2010 10:40:56 -0700
+
+libibmad (1.3.11.MLNX20101007.c51a9ca) unstable; urgency=low
+
+  * Fix autotools to include the necessary M4 files
+
+ --  Jason Gunthorpe <jgunthorpe@obsidianresearch.com>  Thu, 7 Oct 2010 16:33:01 -0600
+
+libibmad (1.3.11.MLNX20100904.bac90fd) unstable; urgency=low
+
+  * management: packages versions update
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 4 Sep 2010 14:15:33 +0300
+
+libibmad (1.3.11.MLNX20100904.c4471de) unstable; urgency=low
+
+  * management: update shared library versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 4 Sep 2010 14:13:06 +0300
+
+libibmad (1.3.11.MLNX20100602.85c88d4) unstable; urgency=low
+
+  * ib/mgmt: fix build under windows stack
+
+ --  Hefty, Sean <sean.hefty@intel.com>  Wed, 2 Jun 2010 13:15:31 -0700
+
+libibmad (1.3.11.MLNX20100522.fe17890) unstable; urgency=low
+
+  * management: packages versions update
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 22 May 2010 18:00:16 +0300
+
+libibmad (1.3.11.MLNX20100522.da1c98b) unstable; urgency=low
+
+  * management: update shared library versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 22 May 2010 17:52:50 +0300
+
+libibmad (1.3.11.MLNX20100507.ef5a9f7) unstable; urgency=low
+
+  * libibmad/src/dump.c: fix compile warning
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 7 May 2010 01:23:01 +0300
+
+libibmad (1.3.11.MLNX20100506.b83ee17) unstable; urgency=low
+
+  * management: adding mad_dump_fields to libibmad
+
+ --  Mike Heinz <michael.heinz@qlogic.com>  Thu, 6 May 2010 13:27:13 -0500
+
+libibmad (1.3.11.MLNX20100410.cd0d3a7) unstable; urgency=low
+
+  * libibmad: add explicit extern for ibdebug prototype
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 10 Apr 2010 16:12:20 +0300
+
+libibmad (1.3.11.MLNX20100114.1a02316) unstable; urgency=low
+
+  * libibmad: Add support for PortSamplesControl counter
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 14 Jan 2010 09:11:56 -0500
+
+libibmad (1.3.11.MLNX20091231.46135fc) unstable; urgency=low
+
+  * libibmad: Add support for optional PortRcvErrorDetails counter
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 31 Dec 2009 11:57:34 -0500
+
+libibmad (1.3.11.MLNX20091213.4c31ef7) unstable; urgency=low
+
+  * management: package versions bump
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 13 Dec 2009 19:39:11 +0200
+
+libibmad (1.3.11.MLNX20091213.4c93305) unstable; urgency=low
+
+  * management: update library versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 13 Dec 2009 19:36:19 +0200
+
+libibmad (1.3.11.MLNX20091126.2b4d2f8) unstable; urgency=low
+
+  * libibmad: remove repeated comment
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 26 Nov 2009 18:00:28 +0200
+
+libibmad (1.3.11.MLNX20091123.563be0f) unstable; urgency=low
+
+  * Add different print macros
+
+ --  Doron Shoham <dorons@voltaire.com>  Mon, 23 Nov 2009 12:04:19 +0200
+
+libibmad (1.3.11.MLNX20091117.f295575) unstable; urgency=low
+
+  * libibmad: libibumad: Print warnings and errors to stderr not stdout
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 17 Nov 2009 14:39:37 -0800
+
+libibmad (1.3.11.MLNX20091106.16803d7) unstable; urgency=low
+
+  * libibmad: Add support for new PortInfo:McastPkeyTrapSuppressionEnabled field
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 6 Nov 2009 15:35:19 -0500
+
+libibmad (1.3.11.MLNX20091101.1692f6c) unstable; urgency=low
+
+  * management: bump package versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 1 Nov 2009 21:55:47 +0200
+
+libibmad (1.3.11.MLNX20091101.238f55c) unstable; urgency=low
+
+  * management: update libraries version information
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 1 Nov 2009 21:42:56 +0200
+
+libibmad (1.3.11.MLNX20091102.c626c73) unstable; urgency=low
+
+  * management: update/add Voltaire copyright
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 2 Nov 2009 02:09:14 +0200
+
+libibmad (1.3.11.MLNX20090923.73c18b7) unstable; urgency=low
+
+  * libibmad: Add support for PortXmitDiscardDetails
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 23 Sep 2009 08:57:41 -0400
+
+libibmad (1.3.11.MLNX20091024.b123c8d) unstable; urgency=low
+
+  * libibmad: fix strinct-aliasing breakage warnings
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 24 Oct 2009 01:41:16 +0200
+
+libibmad (1.3.11.MLNX20090930.150372b) unstable; urgency=low
+
+  * libibmad/resolve: add include to pick up inet_pton
+
+ --  Sean Hefty <sean.hefty@intel.com>  Wed, 30 Sep 2009 16:22:26 -0700
+
+libibmad (1.3.11.MLNX20090930.c05c039) unstable; urgency=low
+
+  * libibmad/rpc: fix build warning casting from uint32 to uint8
+
+ --  Sean Hefty <sean.hefty@intel.com>  Wed, 30 Sep 2009 16:21:38 -0700
+
+libibmad (1.3.11.MLNX20090922.b14cb28) unstable; urgency=low
+
+  * libibmad/dump.c: Fix typo
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 22 Sep 2009 09:46:11 -0400
+
+libibmad (1.3.11.MLNX20090902.732fe50) unstable; urgency=low
+
+  * libibmad/mad.h: Add a couple of SM class attribute IDs
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 2 Sep 2009 10:42:50 -0400
+
+libibmad (1.3.11.MLNX20090902.9b6fda7) unstable; urgency=low
+
+  * libibmad/dump.c: In mad_dump_portcapmask, decode new capabilities
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 2 Sep 2009 10:36:27 -0400
+
+libibmad (1.3.11.MLNX20090826.94c9dc1) unstable; urgency=low
+
+  * libibmad: Add support for MulticastFDBTop
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 26 Aug 2009 10:02:02 -0400
+
+libibmad (1.3.11.MLNX20090816.a434442) unstable; urgency=low
+
+  * libibmad: indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 16 Aug 2009 11:37:08 +0300
+
+libibmad (1.3.11.MLNX20090816.53be4d0) unstable; urgency=low
+
+  * libibmad: fix warnings
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 16 Aug 2009 11:24:55 +0300
+
+libibmad (1.3.11.MLNX20090806.46b027b) unstable; urgency=low
+
+  * libibmad: make accessors function for retry values used in libibmad
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 6 Aug 2009 15:27:30 -0700
+
+libibmad (1.3.11.MLNX20090806.f33bf86) unstable; urgency=low
+
+  * libibmad: make accessors function for timeout values used in libibmad
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 6 Aug 2009 16:01:06 -0700
+
+libibmad (1.3.11.MLNX20090811.c288247) unstable; urgency=low
+
+  * libibmad: clear packet buffer correctly before formating and sending
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 11 Aug 2009 10:04:28 -0700
+
+libibmad (1.3.11.MLNX20090712.9c93b2d) unstable; urgency=low
+
+  * libibmad: use NULL as null pointer
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 12 Jul 2009 18:23:26 +0300
+
+libibmad (1.3.11.MLNX20090731.c770599) unstable; urgency=low
+
+  * libibmad/mad.c: Validate DR hop count for SMPs and handle errors
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 31 Jul 2009 10:57:29 -0400
+
+libibmad (1.3.11.MLNX20090721.5ea092e) unstable; urgency=low
+
+  * libibmad: Ensure the proper length is passed into umad_recv on each call
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 21 Jul 2009 15:50:00 -0700
+
+libibmad (1.3.11.MLNX20090422.dd4e0d8) unstable; urgency=low
+
+  * Add ib_resolve_gid_via and make portid an out only parameter of ib_resolve_portid_str_via
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 22 Apr 2009 17:12:58 -0700
+
+libibmad (1.3.11.MLNX20090707.9f58e2f) unstable; urgency=low
+
+  * libibmad: Handle MAD redirection
+
+ --  Joachim Fenkes <fenkes@de.ibm.com>  Tue, 7 Jul 2009 16:20:19 +0200
+
+libibmad (1.3.11.MLNX20090708.9f2b76a) unstable; urgency=low
+
+  * Fix error return code from mad_send_via
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 8 Jul 2009 16:52:09 -0700
+
+libibmad (1.3.11.MLNX20090617.06613dc) unstable; urgency=low
+
+  * libibmad/resolve.c: Remove compile warning on x86_64 arch
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 17 Jun 2009 16:08:11 -0400
+
+libibmad (1.3.11.MLNX20090529.74a7ad5) unstable; urgency=low
+
+  * libibmad/resolve.c: Determine SL properly
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 29 May 2009 11:35:15 -0400
+
+libibmad (1.3.11.MLNX20090504.fbf4d3e) unstable; urgency=low
+
+  * ib-mgmt/libibmad: export ibdebug
+
+ --  Sean Hefty <sean.hefty@intel.com>  Mon, 4 May 2009 15:50:53 -0700
+
+libibmad (1.3.11.MLNX20090430.ac76acf) unstable; urgency=low
+
+  * Fix reversal of DRSLID and DRDLID in MAD_FIELDS enum.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 30 Apr 2009 11:19:26 -0700
+
+libibmad (1.3.11.MLNX20090501.a97ef03) unstable; urgency=low
+
+  * libibmad: Add support for SA PathRecord SL field
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 1 May 2009 17:33:12 -0400
+
+libibmad (1.3.11.MLNX20090427.5b763bb) unstable; urgency=low
+
+  * management: Fixed custom_release in SPEC files
+
+ --  Nicolas Morey-Chaisemartin <nicolas.morey-chaisemartin@ext.bull.net>  Mon, 27 Apr 2009 12:59:05 +0200
+
+libibmad (1.3.11.MLNX20090426.33e14dc) unstable; urgency=low
+
+  * management: bump package versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 26 Apr 2009 17:05:13 +0300
+
+libibmad (1.3.11.MLNX20090311.8f2425a) unstable; urgency=low
+
+  * libibmad: bump library interface version
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 11 Mar 2009 10:44:28 -0700
+
+libibmad (1.3.11.MLNX20090414.2feac14) unstable; urgency=low
+
+  * libibmad: Add decode support for SwitchInfo OptimizedSLtoVLMappingProgramming
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 14 Apr 2009 09:54:19 -0400
+
+libibmad (1.3.11.MLNX20090425.578bb5e) unstable; urgency=low
+
+  * libibmad: indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 25 Apr 2009 21:53:10 +0300
+
+libibmad (1.3.11.MLNX20090425.ea989f1) unstable; urgency=low
+
+  * infiniabnd-diags/bm.c: check mad_rpc() status
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 25 Apr 2009 21:48:13 +0300
+
+libibmad (1.3.11.MLNX20090319.eb47aaa) unstable; urgency=low
+
+  * libibmad: added support for handling of BM (Baseboard management) MADs - FIXED without rmpp
+
+ --  Itai Baz <itaib@mellanox.com>  Thu, 19 Mar 2009 16:25:24 +0200
+
+libibmad (1.3.11.MLNX20090423.5086d98) unstable; urgency=low
+
+  * Add mad_field_name function
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 23 Apr 2009 10:57:10 -0700
+
+libibmad (1.3.11.MLNX20090421.553d852) unstable; urgency=low
+
+  * ib-mgmt/ibn3 branch: libibmad: remove ib_resolve_guid function prototype
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 21 Apr 2009 12:05:21 -0700
+
+libibmad (1.3.11.MLNX20090421.16e357a) unstable; urgency=low
+
+  * ib-mgmt/ibn3 branch: libibmad update for windows support
+
+ --  Sean Hefty <sean.hefty@intel.com>  Tue, 21 Apr 2009 12:04:08 -0700
+
+libibmad (1.3.11.MLNX20090416.6f00c74) unstable; urgency=low
+
+  * change missed LID conversion functions from hex to uint
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 16 Apr 2009 09:23:29 -0700
+
+libibmad (1.3.11.MLNX20090311.b5d9521) unstable; urgency=low
+
+  * libibmad/rpc.c: wrap ERRS macro.
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Wed, 11 Mar 2009 06:30:59 -0500
+
+libibmad (1.3.11.MLNX20090326.3bfaddb) unstable; urgency=low
+
+  * libibmad/fields.c: Display CounterSelect2 in hex rather than decimal
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 26 Mar 2009 11:39:08 -0500
+
+libibmad (1.3.11.MLNX20090324.4b0ef65) unstable; urgency=low
+
+  * libibmad/dump.c: Cosmetic formatting changes
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 24 Mar 2009 07:16:42 -0500
+
+libibmad (1.3.11.MLNX20090320.06a9fc1) unstable; urgency=low
+
+  * libibmad: Add PortSelect and CounterSelect fields for PortXmit/RcvDataSL
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 20 Mar 2009 18:11:01 -0500
+
+libibmad (1.3.11.MLNX20090321.399d02b) unstable; urgency=low
+
+  * libibmad/sa.c: Cosmetic formatting changes
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Sat, 21 Mar 2009 07:08:40 -0500
+
+libibmad (1.3.11.MLNX20090320.ef1c650) unstable; urgency=low
+
+  * libibmad/sa.c: No need to specify NumbPath field in Get request of SA PathRecord
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 20 Mar 2009 08:37:21 -0500
+
+libibmad (1.3.11.MLNX20090317.0e74ba5) unstable; urgency=low
+
+  * libibmad/serv.c: Fixed respond function to return proper result code
+
+ --  Itai Baz <itaib@mellanox.com>  Tue, 17 Mar 2009 16:17:56 +0200
+
+libibmad (1.3.11.MLNX20090316.6264cea) unstable; urgency=low
+
+  * libibmad/libibmad.map: Eliminate perf_classportinfo_query_via
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Mon, 16 Mar 2009 11:52:25 -0500
+
+libibmad (1.3.11.MLNX20090310.fc1f965) unstable; urgency=low
+
+  * libibmad/mad.h: Cosmetic formatting changes
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Tue, 10 Mar 2009 17:51:14 -0500
+
+libibmad (1.3.11.MLNX20090312.54ec44f) unstable; urgency=low
+
+  * libibmad/register.c: Cosmetic formatting change
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Thu, 12 Mar 2009 09:57:32 -0500
+
+libibmad (1.3.11.MLNX20090312.8fc227d) unstable; urgency=low
+
+  * libibmad/rpc: fix _do_madrpc() parameter value
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 12 Mar 2009 15:24:47 +0200
+
+libibmad (1.3.11.MLNX20090311.d40c0b5) unstable; urgency=low
+
+  * libibmad: deprecate old API calls
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 11 Mar 2009 12:28:03 +0200
+
+libibmad (1.3.11.MLNX20090311.667ecaf) unstable; urgency=low
+
+  * libibmad: add mad_rpc_class_agent() call
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 11 Mar 2009 12:43:47 +0200
+
+libibmad (1.3.11.MLNX20090311.8274786) unstable; urgency=low
+
+  * libibmad: per port timeout and retires setup
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 11 Mar 2009 12:15:54 +0200
+
+libibmad (1.3.11.MLNX20090312.ba5dde8) unstable; urgency=low
+
+  * libibmad/rpc: fix class registration bug
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 12 Mar 2009 13:55:44 +0200
+
+libibmad (1.3.11.MLNX20090307.aaea56d) unstable; urgency=low
+
+  * libibmad: cleanup deprecated function use
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 7 Mar 2009 23:27:34 +0200
+
+libibmad (1.3.11.MLNX20090219.45bb82c) unstable; urgency=low
+
+  * infiniband-diags: Convert ibsendtrap to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 19 Feb 2009 17:53:30 -0800
+
+libibmad (1.3.11.MLNX20090306.0aae092) unstable; urgency=low
+
+  * infiniband-diags: Convert ibaddr to "new" ibmad interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Fri, 6 Mar 2009 10:48:08 -0800
+
+libibmad (1.3.11.MLNX20090305.ddab050) unstable; urgency=low
+
+  * fix offset used for parsing of XmtDataSL & RcvDataSL
+
+ --  Or Gerlitz <ogerlitz@voltaire.com>  Thu, 5 Mar 2009 16:45:04 +0200
+
+libibmad (1.3.11.MLNX20090218.dc628e5) unstable; urgency=low
+
+  * libibmad: Clean up "new" interface
+
+ --  Ira Weiny <weiny2@llnl.gov>  Wed, 18 Feb 2009 16:37:36 -0800
+
+libibmad (1.3.11.MLNX20090301.b4852b3) unstable; urgency=low
+
+  * libimad implementation of PortXmtDataSL and PortRcvDataSL
+
+ --  Or Gerlitz <ogerlitz@voltaire.com>  Sun, 1 Mar 2009 14:40:32 +0200
+
+libibmad (1.3.11.MLNX20090301.53f614c) unstable; urgency=low
+
+  * generic libibmad perf query/reset api
+
+ --  Or Gerlitz <ogerlitz@voltaire.com>  Sun, 1 Mar 2009 14:39:48 +0200
+
+libibmad (1.3.11.MLNX20090228.bb7ee5d) unstable; urgency=low
+
+  * management: bump all package versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 28 Feb 2009 18:50:54 +0200
+
+libibmad (1.3.11.MLNX20090220.3db40d2) unstable; urgency=low
+
+  * libibmad/fields.c: Dump LIDs as unsigned decimal
+
+ --  Hal Rosenstock <hnrose@comcast.net>  Fri, 20 Feb 2009 16:58:45 -0500
+
+libibmad (1.3.11.MLNX20090212.e09be69) unstable; urgency=low
+
+  * libibmad: add MAD_EXPORT to exported calls
+
+ --  Stan Smith <stan.smith@intel.com>  Thu, 12 Feb 2009 23:31:31 -0800
+
+libibmad (1.3.11.MLNX20090211.c52d26b) unstable; urgency=low
+
+  * libibmad/fields.c: define SA SM_Key field details
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 11 Feb 2009 04:50:37 +0200
+
+libibmad (1.3.11.MLNX20090211.0be7ccf) unstable; urgency=low
+
+  * libibmad/mad.h: define more SA attributed
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 11 Feb 2009 04:49:58 +0200
+
+libibmad (1.3.11.MLNX20090205.bd572aa) unstable; urgency=low
+
+  * libibmad: lid print format changed to unsigned
+
+ --  Hal Rosenstock <halr@obsidianresearch.com>  Thu, 5 Feb 2009 16:42:59 -0700
+
+libibmad (1.3.11.MLNX20090205.9c563cf) unstable; urgency=low
+
+  * libibmad: Use enum types for function parameters
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 5 Feb 2009 10:03:31 -0800
+
+libibmad (1.3.11.MLNX20090204.c3e1c8b) unstable; urgency=low
+
+  * libibmad/src/dump.c fix dump functions for big endian machines
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Wed, 4 Feb 2009 10:00:05 +0200
+
+libibmad (1.3.11.MLNX20090202.c5affc5) unstable; urgency=low
+
+  * libibmad/(mad.h fields.c): Add support for PerfMgt ClassPortInfo
+
+ --  Hal Rosenstock <halr@obsidianresearch.com>  Mon, 2 Feb 2009 11:58:35 -0700
+
+libibmad (1.3.11.MLNX20090122.a9a4867) unstable; urgency=low
+
+  * libibmad: use mad_set_field64() for mkey encoding
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 Jan 2009 03:07:47 +0200
+
+libibmad (1.3.11.MLNX20090122.50b9b19) unstable; urgency=low
+
+  * libibmad/fields.c: fix MAD MKey offset
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 Jan 2009 11:11:13 +0200
+
+libibmad (1.3.11.MLNX20090122.a76413f) unstable; urgency=low
+
+  * libibmad: indentation fixes
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 22 Jan 2009 03:04:00 +0200
+
+libibmad (1.3.11.MLNX20090117.2ed7236) unstable; urgency=low
+
+  * libibmad: minor changes to source to allow portability to WinOF.
+
+ --  Arlin Davis <arlin.r.davis@intel.com>  Sat, 17 Jan 2009 08:34:34 -0800
+
+libibmad (1.3.11.MLNX20090117.569498b) unstable; urgency=low
+
+  * libibmad: remove c99 definitions within the ib_mad_f structure
+
+ --  Arlin Davis <arlin.r.davis@intel.com>  Sat, 17 Jan 2009 08:32:41 -0800
+
+libibmad (1.3.11.MLNX20090116.454f901) unstable; urgency=low
+
+  * libibmad: add os dependent definitions.
+
+ --  Arlin Davis <arlin.r.davis@intel.com>  Fri, 16 Jan 2009 09:15:04 -0800
+
+libibmad (1.3.11.MLNX20090120.53f18b2) unstable; urgency=low
+
+  * libibmad: cleanup mad.h include path
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 20 Jan 2009 20:24:49 +0200
+
+libibmad (1.3.11.MLNX20090113.4038364) unstable; urgency=low
+
+  * infiniband-diags support PortXmitWait get and set
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Tue, 13 Jan 2009 16:56:57 +0200
+
+libibmad (1.3.11.MLNX20090113.7963548) unstable; urgency=low
+
+  * libibmad add PortXmitWait and CounterSelect2 to fields.
+
+ --  Eli Dorfman (Voltaire) <dorfman.eli@gmail.com>  Tue, 13 Jan 2009 16:31:42 +0200
+
+libibmad (1.3.11.MLNX20081226.f371708) unstable; urgency=low
+
+  * libibmad: remove functions which use pthread
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 26 Dec 2008 16:47:06 +0200
+
+libibmad (1.3.11.MLNX20081225.4db29c3) unstable; urgency=low
+
+  * libibmad: remove not needed header files inclusion
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 25 Dec 2008 21:43:17 +0200
+
+libibmad (1.3.11.MLNX20081222.5efd5d7) unstable; urgency=low
+
+  * management: remove libibcommon dependencies
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 22 Dec 2008 02:26:31 +0200
+
+libibmad (1.3.11.MLNX20081222.9c5dacf) unstable; urgency=low
+
+  * management: move sysfs()_* function to libibumad
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 22 Dec 2008 00:24:30 +0200
+
+libibmad (1.3.11.MLNX20081221.1c043f9) unstable; urgency=low
+
+  * libibmad: remove hidden _set/_get_field*() API
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 21 Dec 2008 23:48:00 +0200
+
+libibmad (1.3.11.MLNX20081213.45f383d) unstable; urgency=low
+
+  * management: bump all package versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 13 Dec 2008 19:46:15 +0200
+
+libibmad (1.3.11.MLNX20081118.ba36740) unstable; urgency=low
+
+  * management: update versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 18 Nov 2008 06:20:46 +0200
+
+libibmad (1.3.11.MLNX20081024.c0d1f90) unstable; urgency=low
+
+  * libibmad/dump: print more PortInfo:CapabilityMask bits
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 24 Oct 2008 22:12:58 +0200
+
+libibmad (1.3.11.MLNX20081024.08fa37b) unstable; urgency=low
+
+  * libibmad/src/mad.c: indentation fix
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 24 Oct 2008 21:14:15 +0200
+
+libibmad (1.3.11.MLNX20081019.3a199de) unstable; urgency=low
+
+  * management/*/configure.in: bump all versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 19 Oct 2008 20:53:23 +0200
+
+libibmad (1.3.11.MLNX20081008.5cca380) unstable; urgency=low
+
+  * management: update Voltaire copyright
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 8 Oct 2008 12:28:44 +0200
+
+libibmad (1.3.11.MLNX20081008.f5999be) unstable; urgency=low
+
+  * management/*/COPYING: update Voltaire copyright years
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 8 Oct 2008 12:27:12 +0200
+
+libibmad (1.3.11.MLNX20080924.9a789c2) unstable; urgency=low
+
+  * libibmad: eliminate compiler warnings on x86_64
+
+ --  Jack Morgenstein <jackm@dev.mellanox.co.il>  Wed, 24 Sep 2008 16:59:19 +0300
+
+libibmad (1.3.11.MLNX20080725.96d5c2f) unstable; urgency=low
+
+  * libibmad/ChangeLog: Fix typo
+
+ --  Hal Rosenstock <hal.rosenstock@gmail.com>  Fri, 25 Jul 2008 09:27:47 -0400
+
+libibmad (1.3.11.MLNX20080708.6b531e1) unstable; urgency=low
+
+  * libibmad: Bump a library version
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 8 Jul 2008 22:09:55 +0300
+
+libibmad (1.3.11.MLNX20080708.b6398b8) unstable; urgency=low
+
+  * management: bump management versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 8 Jul 2008 07:22:02 +0300
+
+libibmad (1.3.11.MLNX20080707.7d7ee95) unstable; urgency=low
+
+  * libibmad: Initial changes for congestion management class
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Mon, 7 Jul 2008 14:10:25 -0700
+
+libibmad (1.3.11.MLNX20080707.188d513) unstable; urgency=low
+
+  * libibmad/src/rpc.c: Eliminate compiler warning
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Mon, 7 Jul 2008 14:07:31 -0700
+
+libibmad (1.3.11.MLNX20080706.fc9d407) unstable; urgency=low
+
+  * management: revert configure.in update configure.in on 'make dist'
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 6 Jul 2008 23:07:38 +0300
+
+libibmad (1.3.11.MLNX20080629.a93c8cb) unstable; urgency=low
+
+  * libibmad: fix snprintf() usage
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 29 Jun 2008 19:05:01 +0300
+
+libibmad (1.3.11.MLNX20080627.4cc8383) unstable; urgency=low
+
+  * libibmad: remove intermediate buffer in portid2str()
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 27 Jun 2008 18:08:26 +0300
+
+libibmad (1.3.11.MLNX20080625.c50b2e2) unstable; urgency=low
+
+  * libibmad: update portid2str to use inet_ntop and drpath2str functions for gid
+
+ --  Ira K. Weiny <weiny2@llnl.gov>  Wed, 25 Jun 2008 15:08:13 -0700
+
+libibmad (1.3.11.MLNX20080624.816da76) unstable; urgency=low
+
+  * libibmad: print warning containing destination port when _do_madrpc fails
+
+ --  Ira K. Weiny <weiny2@llnl.gov>  Tue, 24 Jun 2008 14:43:24 -0700
+
+libibmad (1.3.11.MLNX20080624.aa6fd76) unstable; urgency=low
+
+  * libibmad: add a drpath2str function for easier printing of DR Paths.
+
+ --  Ira Weiny <weiny2@llnl.gov>  Tue, 24 Jun 2008 16:45:57 -0700
+
+libibmad (1.3.11.MLNX20080624.7d4cc4e) unstable; urgency=low
+
+  * libibmad: allow explicit HCA selection by functions from libibmad
+
+ --  Max Matveev <makc@sgi.com>  Tue, 24 Jun 2008 22:16:08 +1000
+
+libibmad (1.3.11.MLNX20080619.08d9109) unstable; urgency=low
+
+  * libibmad/rpc.c: Better error message in madrpc_init
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Thu, 19 Jun 2008 11:04:29 -0700
+
+libibmad (1.3.11.MLNX20080605.b1e6dd7) unstable; urgency=low
+
+  * libibmad/fields.c: _set_field64 sets field in network rather than host order
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Thu, 5 Jun 2008 11:14:38 -0700
+
+libibmad (1.3.11.MLNX20080601.1107325) unstable; urgency=low
+
+  * libibmad: fix for umad unaligned access of ia64.
+
+ --  Ron Livne <ronli@voltaire.com>  Sun, 1 Jun 2008 18:54:35 +0000
+
+libibmad (1.3.11.MLNX20080403.560f664) unstable; urgency=low
+
+  * management: bump all versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 3 Apr 2008 20:07:55 +0300
+
+libibmad (1.3.11.MLNX20080329.c8cfec9) unstable; urgency=low
+
+  * libibmad/dump: support VLArb table size, fix printing
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 29 Mar 2008 14:47:27 +0300
+
+libibmad (1.3.11.MLNX20080325.261d7c0) unstable; urgency=low
+
+  * management: Remove extraneous semicolon from several files
+
+ --  Dotan Barak <dotanb@dev.mellanox.co.il>  Tue, 25 Mar 2008 13:54:48 +0200
+
+libibmad (1.3.11.MLNX20080306.af12b52) unstable; urgency=low
+
+  * Rename ib_gid_t in mad.h to mad_gid_t to prevent name collision with ib_types.h
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 6 Mar 2008 18:30:37 -0800
+
+libibmad (1.3.11.MLNX20080211.1395b23) unstable; urgency=low
+
+  * management: bump versions in master branch
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 11 Feb 2008 20:17:54 +0200
+
+libibmad (1.3.11.MLNX20080127.f26d73b) unstable; urgency=low
+
+  * management: Update License: field in management spec files
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Sun, 27 Jan 2008 08:01:40 -0800
+
+libibmad (1.3.11.MLNX20080126.e493ddb) unstable; urgency=low
+
+  * management/libib*: remove trailing whitespaces
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sat, 26 Jan 2008 22:37:43 +0200
+
+libibmad (1.3.11.MLNX20080107.6d9fa5f) unstable; urgency=low
+
+  * management/*/Makefile.am: update configure.in version on 'make dist'
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 7 Jan 2008 01:40:19 +0200
+
+libibmad (1.3.11.MLNX20080106.973471b) unstable; urgency=low
+
+  * management/*/Makefile.am: fix ChangeLog generation rule
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Sun, 6 Jan 2008 21:33:44 +0200
+
+libibmad (1.3.11.MLNX20080103.b99a74f) unstable; urgency=low
+
+  * management: bump versions
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 3 Jan 2008 09:44:46 +0200
+
+libibmad (1.3.11.MLNX20071221.b062a92) unstable; urgency=low
+
+  * manangement: kill __WORDSIZE macro checks
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 21 Dec 2007 18:32:28 +0200
+
+libibmad (1.3.11.MLNX20071221.739b68a) unstable; urgency=low
+
+  * libibmad: initialize sm portid in ib_resolve_smlid()
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 21 Dec 2007 18:59:44 +0200
+
+libibmad (1.3.11.MLNX20071202.2eb8faa) unstable; urgency=low
+
+  * libibmad/dump.c: Use bit mask approach to decoding LinkWidth/Speed Enabled/Supported
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Sun, 2 Dec 2007 04:48:41 -0800
+
+libibmad (1.3.11.MLNX20071120.75c8f24) unstable; urgency=low
+
+  * libbmad: version 1.1.4
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 20 Nov 2007 00:02:05 +0200
+
+libibmad (1.3.11.MLNX20071113.6aaf025) unstable; urgency=low
+
+  * libibmad/dump.c: Support link speed and width vendor extensions
+
+ --  Hal Rosenstock <hrosenstock@xsigo.com>  Tue, 13 Nov 2007 07:38:43 -0800
+
+libibmad (1.3.11.MLNX20071106.873f426) unstable; urgency=low
+
+  * libibmad: version 1.1.3
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 6 Nov 2007 19:07:58 +0200
+
+libibmad (1.3.11.MLNX20071015.d560a26) unstable; urgency=low
+
+  * management: changed method_mask type in user_mad interface
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 15 Oct 2007 20:41:33 +0200
+
+libibmad (1.3.11.MLNX20071001.e0760c6) unstable; urgency=low
+
+  * management/Makefile: remove obsolete .orig Makefile stuff
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 1 Oct 2007 22:01:37 +0200
+
+libibmad (1.3.11.MLNX20070920.afd2c26) unstable; urgency=low
+
+  * libibmad: update vesrion to 1.1.2
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 20 Sep 2007 19:39:21 +0200
+
+libibmad (1.3.11.MLNX20070920.3dd9ea4) unstable; urgency=low
+
+  * management/*/*.spec.in: change Source field to OFA paths
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 20 Sep 2007 18:04:12 +0200
+
+libibmad (1.3.11.MLNX20070920.4b8a154) unstable; urgency=low
+
+  * libibmad: add support for IB_DEVICE_MGMT_CLASS
+
+ --  Jeff Becker <jeff.c.becker@gmail.com>  Thu, 20 Sep 2007 17:48:55 +0200
+
+libibmad (1.3.11.MLNX20070919.0ba8b1e) unstable; urgency=low
+
+  * management/*/configure: RELEASE and TARBALL for spec files
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 19 Sep 2007 03:37:03 +0200
+
+libibmad (1.3.11.MLNX20070919.772f460) unstable; urgency=low
+
+  * management/*/Makefile.am: generate ChangeLog files when distributed
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 19 Sep 2007 03:42:52 +0200
+
+libibmad (1.3.11.MLNX20070919.fa14a7e) unstable; urgency=low
+
+  * management/*/Makefile.am: clean dist-hook target
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 19 Sep 2007 03:28:43 +0200
+
+libibmad (1.3.11.MLNX20070919.71772e4) unstable; urgency=low
+
+  * management/*/*.spec.in: don't run autogen.sh
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 19 Sep 2007 02:00:08 +0200
+
+libibmad (1.3.11.MLNX20070919.d6f1042) unstable; urgency=low
+
+  * management/*/Makefile.am: fix include paths
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 19 Sep 2007 12:39:44 +0200
+
+libibmad (1.3.11.MLNX20070919.f5dfb18) unstable; urgency=low
+
+  * libibmad,infiniband-diags: fix include paths
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 19 Sep 2007 06:36:00 +0200
+
+libibmad (1.3.11.MLNX20070919.2933ce5) unstable; urgency=low
+
+  * management/*/Makefile.am: add autogen.sh script to 'make dist'
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 19 Sep 2007 02:05:57 +0200
+
+libibmad (1.3.11.MLNX20070917.deec857) unstable; urgency=low
+
+  * opensm and all: fix Source field in spec.in files.
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 17 Sep 2007 20:53:30 +0200
+
+libibmad (1.3.11.MLNX20070802.b7bb989) unstable; urgency=low
+
+  * osm: cosmetics - removing trailing blanks
+
+ --  Yevgeny Kliteynik <kliteyn@dev.mellanox.co.il>  Thu, 2 Aug 2007 16:10:19 +0300
+
+libibmad (1.3.11.MLNX20070724.2f4fc4f) unstable; urgency=low
+
+  * libibmad: Fixed a name of a field in SwitchInfo to the right name
+
+ --  Dotan Barak <dotanb@dev.mellanox.co.il>  Tue, 24 Jul 2007 14:32:14 +0300
+
+libibmad (1.3.11.MLNX20070710.6e557e6) unstable; urgency=low
+
+  * libibmad: Updated to version 1.1.1
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 10 Jul 2007 17:10:37 -0400
+
+libibmad (1.3.11.MLNX20070626.0b08da3) unstable; urgency=low
+
+  * libibmad/src/rpc.c: Change uint to unsigned for strict ANSI
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 26 Jun 2007 17:35:35 -0400
+
+libibmad (1.3.11.MLNX20070626.c7dc9de) unstable; urgency=low
+
+  * libibmad/src: Change uint to unsigned for strict ANSI
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 26 Jun 2007 16:58:08 -0400
+
+libibmad (1.3.11.MLNX20070626.cc8c6ef) unstable; urgency=low
+
+  * management libraries/ChangeLog: Add log entry for MST change for replacing uint with unsigned for strict ANSI
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 26 Jun 2007 16:12:13 -0400
+
+libibmad (1.3.11.MLNX20070626.41a47cb) unstable; urgency=low
+
+  * management libs: uint -> unsigned replacement
+
+ --  Michael S. Tsirkin <mst@dev.mellanox.co.il>  Tue, 26 Jun 2007 16:06:46 -0400
+
+libibmad (1.3.11.MLNX20070618.2be7e1a) unstable; urgency=low
+
+  * libibmad: Change IB_PORT_MTRU_CAP_F to IB_PORT_MTU_CAP_F
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 18 Jun 2007 10:02:09 -0400
+
+libibmad (1.3.11.MLNX20070605.f5fd0bb) unstable; urgency=low
+
+  * libibmad/ChangeLog: Add log entries for Sasha's change to add some Notice DataDetails fields for DataDetails and trap 144 LID and CapabilityMask
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 5 Jun 2007 20:24:42 -0400
+
+libibmad (1.3.11.MLNX20070605.f807e25) unstable; urgency=low
+
+  * libibmad: Add some Notice DataDetails fields
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Tue, 5 Jun 2007 20:21:47 -0400
+
+libibmad (1.3.11.MLNX20070604.cfcb9bc) unstable; urgency=low
+
+  * libibmad/src: Cosmetic formatting changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 4 Jun 2007 08:08:03 -0400
+
+libibmad (1.3.11.MLNX20070531.6bb7d4e) unstable; urgency=low
+
+  * management/*.spec: Remove *.spec files from management git repo as committed files. They are generated files.
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 31 May 2007 12:33:39 -0400
+
+libibmad (1.3.11.MLNX20070531.6ee962b) unstable; urgency=low
+
+  * management/*.spec: Latest daily versions of .spec files (prior to removing these due to build changes)
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 31 May 2007 11:41:16 -0400
+
+libibmad (1.3.11.MLNX20070530.9e253a8) unstable; urgency=low
+
+  * libibmad/include/infiniband/mad.h: Comment change
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 30 May 2007 08:29:58 -0400
+
+libibmad (1.3.11.MLNX20070521.b56800c) unstable; urgency=low
+
+  * libibmad/src/fields.c: Changed PortMulticastPkts to PortMulticastRcvPkts
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 21 May 2007 19:28:25 -0400
+
+libibmad (1.3.11.MLNX20070514.b124f8d) unstable; urgency=low
+
+  * spec summary changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 14 May 2007 13:31:05 -0400
+
+libibmad (1.3.11.MLNX20070511.58beded) unstable; urgency=low
+
+  * configure.in: Update to correct list email address
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 11 May 2007 17:54:13 -0400
+
+libibmad (1.3.11.MLNX20070412.ec53c8e) unstable; urgency=low
+
+  * Diags: Renamed openib-diags to infiniband-diags Also, some other changes based on this (openib-diags.spec.in moved to infiniband-diags.spec.in, openib-diags.spec moved to infiniband-diags.spec, and Makefile.am changed for this)
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 12 Apr 2007 16:52:49 -0400
+
+libibmad (1.3.11.MLNX20070403.79f02d0) unstable; urgency=low
+
+  * Version change in spec files
+
+ --  Doug Ledford <dledford@redhat.com>  Tue, 3 Apr 2007 16:47:44 -0400
+
+libibmad (1.3.11.MLNX20070403.7b12cc3) unstable; urgency=low
+
+  * More mailing list updates
+
+ --  Doug Ledford <dledford@redhat.com>  Tue, 3 Apr 2007 15:12:07 -0400
+
+libibmad (1.3.11.MLNX20070403.523a5cc) unstable; urgency=low
+
+  * Automatic check-in of target spec files after version processing
+
+ --  Doug Ledford <dledford@redhat.com>  Tue, 3 Apr 2007 13:47:15 -0400
+
+libibmad (1.3.11.MLNX20070402.d55669c) unstable; urgency=low
+
+  * Update all the various spec files Make spec files work with new make.dist script Add make dist script to ease the process of releasing tarballs
+
+ --  Doug Ledford <dledford@redhat.com>  Mon, 2 Apr 2007 18:43:08 -0400
+
+libibmad (1.3.11.MLNX20070329.ebf032c) unstable; urgency=low
+
+  * libibmad/ChangeLog: Cosmetic change
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 29 Mar 2007 12:41:02 -0500
+
+libibmad (1.3.11.MLNX20070329.db5d418) unstable; urgency=low
+
+  * libibmad/fields.c: Changed Xmt/RcvBytes to Xmt/RcvData
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 29 Mar 2007 12:31:09 -0500
+
+libibmad (1.3.11.MLNX20070329.bf5c10c) unstable; urgency=low
+
+  * libibmad: Updated to version 1.1.0
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 29 Mar 2007 09:32:43 -0500
+
+libibmad (1.3.11.MLNX20070323.f83b40c) unstable; urgency=low
+
+  * libibmad/mad.c: Implement GRH support in mad_build_pkt
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 23 Mar 2007 09:14:36 -0500
+
+libibmad (1.3.11.MLNX20070323.a6ef735) unstable; urgency=low
+
+  * libibmad: In ib_portid_t, change grh to grh_present
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 23 Mar 2007 07:29:09 -0500
+
+libibmad (1.3.11.MLNX20070323.3527515) unstable; urgency=low
+
+  * libibmad/include/infiniband/mad.h: In ib_portid_set, ensure grh is 0
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 23 Mar 2007 07:01:52 -0500
+
+libibmad (1.3.11.MLNX20070323.b78ddb2) unstable; urgency=low
+
+  * libibmad: portid.c: In portid2str, fix endian of dispay of GID
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 23 Mar 2007 06:59:34 -0500
+
+libibmad (1.3.11.MLNX20070323.25e325f) unstable; urgency=low
+
+  * libibmad/fields.c: Cosmetic changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 23 Mar 2007 06:55:21 -0500
+
+libibmad (1.3.11.MLNX20070314.6c57f90) unstable; urgency=low
+
+  * libibmad: Add encode/decode support for GUID0 in SM GUIDInfo attribute
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 14 Mar 2007 14:10:51 -0500
+
+libibmad (1.3.11.MLNX20070314.288370d) unstable; urgency=low
+
+  * libibmad/ChangeLog: Add log entry for adding GUIDInfo as SM attribute ID
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 14 Mar 2007 09:14:18 -0500
+
+libibmad (1.3.11.MLNX20070314.6fc8bcb) unstable; urgency=low
+
+  * libibmad/include/infiniband/mad.h: Add GUIDInfo attribute ID to SM attributes
+
+ --  Dotan Barak <dotanb@mellanox.co.il>  Wed, 14 Mar 2007 09:12:56 -0500
+
+libibmad (1.3.11.MLNX20070208.f05dfdd) unstable; urgency=low
+
+  * libibmad/ChangeLog: Updated for previous portid.c change for DR path output
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 8 Feb 2007 07:12:02 -0500
+
+libibmad (1.3.11.MLNX20070208.bcfc810) unstable; urgency=low
+
+  * libibmad/src/portid.c: Change DR path output to be comma separated decimal values
+
+ --  Ira Weiny <weiny2@llnl.gov>  Thu, 8 Feb 2007 07:08:41 -0500
+
+libibmad (1.3.11.MLNX20070129.ea24ae8) unstable; urgency=low
+
+  * management/libibmad: Release 1.0.2
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 29 Jan 2007 10:06:23 -0500
+
+libibmad (1.3.11.MLNX20070124.5a8540a) unstable; urgency=low
+
+  * libibmad/libibmad.spec.in: Add doc files
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 24 Jan 2007 09:36:37 -0500
+
+libibmad (1.3.11.MLNX20070124.899a8b8) unstable; urgency=low
+
+  * Management libraries: Added AUTHORS and COPYING to libibcommon, libibumad, and libibmad
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 24 Jan 2007 09:19:30 -0500
+
+libibmad (1.3.11.MLNX20061215.c5a3797) unstable; urgency=low
+
+  * libibmad/mad.h: Commentary change for consistency
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 15 Dec 2006 16:36:22 -0500
+
+libibmad (1.3.11.MLNX20061212.91f7347) unstable; urgency=low
+
+  * Diags/libibmad: Change some debug/warning messages to use hex rather than decimal
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 12 Dec 2006 09:07:04 -0500
+
+libibmad (1.3.11.MLNX20061204.ccb9166) unstable; urgency=low
+
+  * Remove unneeded $Id$ from the rest of management
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 4 Dec 2006 11:55:20 -0500
+
+libibmad (1.3.11.MLNX20061120.c9534ef) unstable; urgency=low
+
+  * r10124: libibumad/libibmad/diags: fix printf style uses
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 20 Nov 2006 12:07:25 +0000
+
+libibmad (1.3.11.MLNX20061102.bf9688d) unstable; urgency=low
+
+  * r10050: management/libib*: Strip trailing whitespace
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Thu, 2 Nov 2006 22:26:03 +0000
+
+libibmad (1.3.11.MLNX20061023.7c43fd3) unstable; urgency=low
+
+  * r9943: Diags/libibmad: Support optional PortExtendedCounters
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 23 Oct 2006 09:35:50 +0000
+
+libibmad (1.3.11.MLNX20061020.aa48c44) unstable; urgency=low
+
+  * r9933: libibmad/ChangeLog: Cosmetic change
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 20 Oct 2006 12:46:02 +0000
+
+libibmad (1.3.11.MLNX20061020.d636d05) unstable; urgency=low
+
+  * r9925: libibmad/ChangeLog: Add another change which was previously omitted
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 20 Oct 2006 11:16:37 +0000
+
+libibmad (1.3.11.MLNX20061020.b8a85f3) unstable; urgency=low
+
+  * r9921: libibmad: Add support for DrSLID
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 20 Oct 2006 10:49:18 +0000
+
+libibmad (1.3.11.MLNX20061016.362b1fd) unstable; urgency=low
+
+  * r9827: management libraries: Added library versioning support (similar to OpenSM and it's libraries)
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 16 Oct 2006 13:49:19 +0000
+
+libibmad (1.3.11.MLNX20061009.e7a198c) unstable; urgency=low
+
+  * r9741: libibmad/src/resolve.c: In ib_resolve_portid_str, use strtoull rather than strtoll for IB_DEST_GUID
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 9 Oct 2006 09:50:43 +0000
+
+libibmad (1.3.11.MLNX20061003.7ced5a0) unstable; urgency=low
+
+  * r9689: libibmad/include/infiniband/mad.h: Commentary change
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 3 Oct 2006 16:40:28 +0000
+
+libibmad (1.3.11.MLNX20060913.43ecf17) unstable; urgency=low
+
+  * r9448: libibmad: Add sa_rpc_call API
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 13 Sep 2006 11:55:13 +0000
+
+libibmad (1.3.11.MLNX20060901.f318a45) unstable; urgency=low
+
+  * r9214: libibmad/portid.c: Change display of Lid from hex to decimal for consistency with other OpenIB diags
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 1 Sep 2006 14:28:30 +0000
+
+libibmad (1.3.11.MLNX20060830.3ba9702) unstable; urgency=low
+
+  * r9196: libibmad/src/rpc.c: Validate num_classes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 30 Aug 2006 23:26:56 +0000
+
+libibmad (1.3.11.MLNX20060830.d985b3e) unstable; urgency=low
+
+  * r9192: libibmad: rpc API which supports more than one port
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Wed, 30 Aug 2006 16:20:41 +0000
+
+libibmad (1.3.11.MLNX20060814.7c4f60f) unstable; urgency=low
+
+  * r8935: libibmad/mad.h: Cosmetic change
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 14 Aug 2006 19:45:14 +0000
+
+libibmad (1.3.11.MLNX20060810.daec554) unstable; urgency=low
+
+  * r8868: libibmad/rpc.c: Cosmetic change
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 10 Aug 2006 15:52:37 +0000
+
+libibmad (1.3.11.MLNX20060722.92144a8) unstable; urgency=low
+
+  * r8630: libibmad: Remove recently added TRAP_NUM_ID enum
+
+ --  Hal Rosenstock <halr@voltaire.com>  Sat, 22 Jul 2006 10:41:25 +0000
+
+libibmad (1.3.11.MLNX20060711.d7da1a3) unstable; urgency=low
+
+  * r8488: Cosmetic change to libibmad/include/infiniband/mad.h
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 11 Jul 2006 10:17:32 +0000
+
+libibmad (1.3.11.MLNX20060710.600623c) unstable; urgency=low
+
+  * r8484: libibmad: Cosmetic changes to src/(fields dump).c
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 10 Jul 2006 23:13:53 +0000
+
+libibmad (1.3.11.MLNX20060710.c83fff2) unstable; urgency=low
+
+  * r8482: libibmad: Support MFT and Notice/Trap fields
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 10 Jul 2006 21:40:07 +0000
+
+libibmad (1.3.11.MLNX20060705.3c5c5da) unstable; urgency=low
+
+  * r8361: diags/libibmad: Decode support for PortInfo:OperVLs
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 5 Jul 2006 10:14:28 +0000
+
+libibmad (1.3.11.MLNX20060626.01443c5) unstable; urgency=low
+
+  * r8208: libibmad/rpc.c: Match MAD TransactionID
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 26 Jun 2006 18:03:01 +0000
+
+libibmad (1.3.11.MLNX20060619.b1627ae) unstable; urgency=low
+
+  * r8114: libibmad/rpc.c: In _do_madrpc, fix umad retry counter display
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 19 Jun 2006 20:25:27 +0000
+
+libibmad (1.3.11.MLNX20060519.c864f5d) unstable; urgency=low
+
+  * r7350: Change to libibmad and diags/ibstat.c to support iWARP RNIC node type
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 19 May 2006 12:40:35 +0000
+
+libibmad (1.3.11.MLNX20060503.13b8451) unstable; urgency=low
+
+  * r6894: libibmad/src/rpc.c: Fix madrpc_init() to use correct rmpp version
+
+ --  Ralph Campbell <ralph.campbell@qlogic.com>  Wed, 3 May 2006 21:39:46 +0000
+
+libibmad (1.3.11.MLNX20060503.3556216) unstable; urgency=low
+
+  * r6893: bibmad/src/rpc.c: Fix madrpc_init() to use correct rmpp version
+
+ --  Ralph Campbell <ralph.campbell@qlogic.com>  Wed, 3 May 2006 21:38:17 +0000
+
+libibmad (1.3.11.MLNX20060426.d484bd3) unstable; urgency=low
+
+  * r6645: libibmad/fields.c: Fix bit field access of RMPP header
+
+ --  Jan Daley  <jdaley@systemfabricworks.com>  Wed, 26 Apr 2006 10:55:26 +0000
+
+libibmad (1.3.11.MLNX20060426.884de27) unstable; urgency=low
+
+  * r6644: libibmad/fields.c: Fix bit field access of RMPP header
+
+ --  Jan Daley  <jdaley@systemfabricworks.com>  Wed, 26 Apr 2006 10:53:04 +0000
+
+libibmad (1.3.11.MLNX20060320.9fec403) unstable; urgency=low
+
+  * r5905: libibmad/fields.c: Cosmetic change to VLCap display
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 20 Mar 2006 16:22:36 +0000
+
+libibmad (1.3.11.MLNX20060320.7089646) unstable; urgency=low
+
+  * r5904: libibmad/fields.c: Cosmetic change to VLCap display
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 20 Mar 2006 16:21:20 +0000
+
+libibmad (1.3.11.MLNX20060320.e536851) unstable; urgency=low
+
+  * r5900: libibmad: mad_dump_sltovl() output simplification
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 20 Mar 2006 16:12:03 +0000
+
+libibmad (1.3.11.MLNX20060320.7ee5f0e) unstable; urgency=low
+
+  * r5899: libibmad: mad_dump_sltovl() output simplification
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Mon, 20 Mar 2006 16:06:03 +0000
+
+libibmad (1.3.11.MLNX20060308.b224925) unstable; urgency=low
+
+  * r5683: Merge management packaging changes from 1.0 back to trunk
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 8 Mar 2006 14:10:56 +0000
+
+libibmad (1.3.11.MLNX20060307.009da38) unstable; urgency=low
+
+  * r5663: first cut at packaging fun for 1.0-rc1.
+
+ --  Bryan O'Sullivan <bos@pathscale.com>  Tue, 7 Mar 2006 22:26:55 +0000
+
+libibmad (1.3.11.MLNX20060227.0ce3a1d) unstable; urgency=low
+
+  * r5508: Updated version identifiers for release candidate
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 27 Feb 2006 13:31:21 +0000
+
+libibmad (1.3.11.MLNX20060210.b04dbfb) unstable; urgency=low
+
+  * r5358: management/*/autogen.sh: config dir test and creation
+
+ --  Sasha Khapyorsky <sashak@voltaire.com>  Fri, 10 Feb 2006 15:58:06 +0000
+
+libibmad (1.3.11.MLNX20060210.43e90a0) unstable; urgency=low
+
+  * r5357: In libibmad, in rpc.c, cosmetic change to format of a couple of error messages
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 10 Feb 2006 14:15:56 +0000
+
+libibmad (1.3.11.MLNX20060130.4df2bfb) unstable; urgency=low
+
+  * r5208: Cosmetic change to libibmad and diags to change HCA to CA
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 30 Jan 2006 14:56:23 +0000
+
+libibmad (1.3.11.MLNX20060126.7dcc317) unstable; urgency=low
+
+  * r5188: In diags, use enum for node types rather than hard coded constants
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 26 Jan 2006 14:35:47 +0000
+
+libibmad (1.3.11.MLNX20060120.813b5fc) unstable; urgency=low
+
+  * r5114: Added perf_classportinfo_query and port_samples_result_query routines to libibmad
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 20 Jan 2006 19:34:36 +0000
+
+libibmad (1.3.11.MLNX20060109.ce19975) unstable; urgency=low
+
+  * r4863: Fix some typos in mad.h and fields.c in libibmad
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 9 Jan 2006 22:40:05 +0000
+
+libibmad (1.3.11.MLNX20051221.2e48b86) unstable; urgency=low
+
+  * r4577: Created common pma_query routine
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 21 Dec 2005 15:55:57 +0000
+
+libibmad (1.3.11.MLNX20051221.3f27a61) unstable; urgency=low
+
+  * r4576: Start adding support for PortSamplesControl and PortSamplesResults PMA attributes. Add port_samples_control_query API.
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 21 Dec 2005 15:43:00 +0000
+
+libibmad (1.3.11.MLNX20051216.50e8bc3) unstable; urgency=low
+
+  * r4507: In libibmad and libibumad, eliminate compile warnings with gcc version4.0.0 20050519 (Red Hat 4.0.0-8)
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 16 Dec 2005 18:31:58 +0000
+
+libibmad (1.3.11.MLNX20051212.85c3194) unstable; urgency=low
+
+  * r4412: In libibmad (fields.c), change Type to NodeType when displaying
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 12 Dec 2005 20:58:18 +0000
+
+libibmad (1.3.11.MLNX20051212.16a3b6b) unstable; urgency=low
+
+  * r4406: Add mad_dump_portstates (for PortState and PortPhysicalState)
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 12 Dec 2005 19:58:28 +0000
+
+libibmad (1.3.11.MLNX20051209.9e4b9ef) unstable; urgency=low
+
+  * r4361: In libibmad (fields.c), change Vl to VL
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 9 Dec 2005 18:30:41 +0000
+
+libibmad (1.3.11.MLNX20051206.3262ba9) unstable; urgency=low
+
+  * r4334: Move struct ib_user_mad into umad.h (from umad.c)i (libibumad) Save and restore ib_user_mad header in rpc.c::_do_madrpc (libibmad) so retries sent to proper DLID and DQPN
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 6 Dec 2005 21:03:52 +0000
+
+libibmad (1.3.11.MLNX20051206.3715ca1) unstable; urgency=low
+
+  * r4333: Cosmetic changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 6 Dec 2005 20:59:09 +0000
+
+libibmad (1.3.11.MLNX20051206.07f289c) unstable; urgency=low
+
+  * r4331: Cosmetic change to a couple of error messages
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 6 Dec 2005 16:18:38 +0000
+
+libibmad (1.3.11.MLNX20051204.131a15e) unstable; urgency=low
+
+  * r4292: Fix previous checkin for make dist change for libibmad & libibumad
+
+ --  Hal Rosenstock <halr@voltaire.com>  Sun, 4 Dec 2005 23:10:08 +0000
+
+libibmad (1.3.11.MLNX20051204.7a456c0) unstable; urgency=low
+
+  * r4291: fixed make dist for libibmad & libibumad
+
+ --  Hal Rosenstock <halr@voltaire.com>  Sun, 4 Dec 2005 23:04:47 +0000
+
+libibmad (1.3.11.MLNX20051128.1326780) unstable; urgency=low
+
+  * r4179: Cosmetic changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 28 Nov 2005 19:08:07 +0000
+
+libibmad (1.3.11.MLNX20051128.907df93) unstable; urgency=low
+
+  * r4178: Add define for IB_GSI_PORT_COUNTERS_EXT
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 28 Nov 2005 17:46:41 +0000
+
+libibmad (1.3.11.MLNX20051102.201074d) unstable; urgency=low
+
+  * r3950: In rpc.c::_do_madrpc, also use timeout on umad_recv just in case packet sent is lost somewhere
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 2 Nov 2005 19:53:09 +0000
+
+libibmad (1.3.11.MLNX20051022.63b76d8) unstable; urgency=low
+
+  * r3834: Fix PortInfo CapabilityMask dumping (used by smpquery)
+
+ --  Hal Rosenstock <halr@voltaire.com>  Sat, 22 Oct 2005 11:52:26 +0000
+
+libibmad (1.3.11.MLNX20051010.1cf2a25) unstable; urgency=low
+
+  * r3705: Change NodeInfo component name display from PortsNum to NumPorts
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 10 Oct 2005 13:13:03 +0000
+
+libibmad (1.3.11.MLNX20050926.62e99fc) unstable; urgency=low
+
+  * r3540: Minor changes to diags and management libraries to eliminate possible naming conflicts warn becomes ibwarn, panic becomes ibpanic (also associated macros changed)
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 26 Sep 2005 13:03:50 +0000
+
+libibmad (1.3.11.MLNX20050914.dbd24f5) unstable; urgency=low
+
+  * r3426: mad.h pulls in common.h which it does not actually depend on. The user should include it if he wants to. This approach reduces global namespace pollution.
+
+ --  Michael S. Tsirkin <mst@mellanox.co.il>  Wed, 14 Sep 2005 14:21:10 +0000
+
+libibmad (1.3.11.MLNX20050815.7586c03) unstable; urgency=low
+
+  * r3097: Remove a couple more instances of /usr/local/ib
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 15 Aug 2005 18:27:40 +0000
+
+libibmad (1.3.11.MLNX20050815.e205db5) unstable; urgency=low
+
+  * r3091: Remove special libdir to be in sync with OpenSM build change
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 15 Aug 2005 17:16:13 +0000
+
+libibmad (1.3.11.MLNX20050808.ee0e481) unstable; urgency=low
+
+  * r3020: Fix typo pointed out by Bernhard Fischer <rep.nop@aon.at>
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 8 Aug 2005 18:03:31 +0000
+
+libibmad (1.3.11.MLNX20050808.bcc1059) unstable; urgency=low
+
+  * r3017: Add option to skip library test
+
+ --  Michael S. Tsirkin <mst@mellanox.co.il>  Mon, 8 Aug 2005 15:44:05 +0000
+
+libibmad (1.3.11.MLNX20050808.5ca57f3) unstable; urgency=low
+
+  * r3014: libibmad: dont assume that all headers are in the same directory.
+
+ --  Michael S. Tsirkin <mst@mellanox.co.il>  Mon, 8 Aug 2005 13:46:42 +0000
+
+libibmad (1.3.11.MLNX20050706.a0ad9e2) unstable; urgency=low
+
+  * r2815: Initial changes for receive side RMPP Also, some minor bug fixes and changed a couple of messages
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 6 Jul 2005 19:15:24 +0000
+
+libibmad (1.3.11.MLNX20050706.0f43c44) unstable; urgency=low
+
+  * r2813: Add in a few more SA attributes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 6 Jul 2005 19:05:13 +0000
+
+libibmad (1.3.11.MLNX20050705.9a261a5) unstable; urgency=low
+
+  * r2792: Commentary typos
+
+ --  Bernhard Fischer <rep.nop@aon.at>  Tue, 5 Jul 2005 12:45:47 +0000
+
+libibmad (1.3.11.MLNX20050629.a1f08e5) unstable; urgency=low
+
+  * r2748: Make length output as well as input parameter to umad_recv in order to get ready for receive side RMPP
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 29 Jun 2005 13:41:16 +0000
+
+libibmad (1.3.11.MLNX20050628.f1b147e) unstable; urgency=low
+
+  * r2727: Add length parameter to umad_recv in preparation for receive side RMPP support
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 28 Jun 2005 15:28:47 +0000
+
+libibmad (1.3.11.MLNX20050609.d604aaa) unstable; urgency=low
+
+  * r2579: Cosmetic changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 9 Jun 2005 20:45:32 +0000
+
+libibmad (1.3.11.MLNX20050607.1875e70) unstable; urgency=low
+
+  * r2566: Add retries to umad_send ABI_VERSION is now 4
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 7 Jun 2005 11:21:44 +0000
+
+libibmad (1.3.11.MLNX20050603.57f5563) unstable; urgency=low
+
+  * r2542: Changed RcvBytes to RcvPkts for PortCounters component which was mislabeled. Pointed out by Troy Benjegerdes <hozer@hozed.org>
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 3 Jun 2005 20:25:17 +0000
+
+libibmad (1.3.11.MLNX20050602.4ecdb65) unstable; urgency=low
+
+  * r2528: Add umad_get_fd routine to libibumad
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 2 Jun 2005 18:49:59 +0000
+
+libibmad (1.3.11.MLNX20050526.db1b630) unstable; urgency=low
+
+  * r2494: Change another C++ style comment to C style
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 26 May 2005 15:31:22 +0000
+
+libibmad (1.3.11.MLNX20050526.aa696d7) unstable; urgency=low
+
+  * r2492: Minor formatting changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 26 May 2005 14:17:31 +0000
+
+libibmad (1.3.11.MLNX20050525.2b8cdf2) unstable; urgency=low
+
+  * r2478: Added preference component mask bit for path record
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 25 May 2005 12:41:39 +0000
+
+libibmad (1.3.11.MLNX20050524.244c37f) unstable; urgency=low
+
+  * r2466: Remove config.h.in files which should be generated but not part of tree
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 24 May 2005 12:59:47 +0000
+
+libibmad (1.3.11.MLNX20050523.6d6096f) unstable; urgency=low
+
+  * r2456: Changes to support send side RMPP (needs change to linux-kernel/infiniband/core/user_mad.c) ABI_VERSION is now 3 RMPP is enabled in build SA GetTable is now supported properly (within current RMPP limitations)
+
+ --  Hal Rosenstock <halr@voltaire.com>  Mon, 23 May 2005 16:33:46 +0000
+
+libibmad (1.3.11.MLNX20050522.b1a5ab6) unstable; urgency=low
+
+  * r2440: Another conversion to use standard type Also, minor formatting changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Sun, 22 May 2005 15:41:36 +0000
+
+libibmad (1.3.11.MLNX20050520.4a0e494) unstable; urgency=low
+
+  * r2424: Completing conversion to standard types
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 20 May 2005 16:22:19 +0000
+
+libibmad (1.3.11.MLNX20050519.d4e2e89) unstable; urgency=low
+
+  * r2418: Modified VL15Dropped counter name
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 19 May 2005 20:32:07 +0000
+
+libibmad (1.3.11.MLNX20050518.f3883c8) unstable; urgency=low
+
+  * r2396: Start converting to standard types
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 18 May 2005 21:09:26 +0000
+
+libibmad (1.3.11.MLNX20050518.76dc537) unstable; urgency=low
+
+  * r2395: Eliminate already included include file
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 18 May 2005 20:13:37 +0000
+
+libibmad (1.3.11.MLNX20050518.80c58c9) unstable; urgency=low
+
+  * r2388: Add some SA methods and attributes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 18 May 2005 19:26:47 +0000
+
+libibmad (1.3.11.MLNX20050518.27bd8aa) unstable; urgency=low
+
+  * r2386: Minor formatting change
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 18 May 2005 18:30:20 +0000
+
+libibmad (1.3.11.MLNX20050518.36261f4) unstable; urgency=low
+
+  * r2385: Cosmetic changes to some field names
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 18 May 2005 18:26:48 +0000
+
+libibmad (1.3.11.MLNX20050518.cdb3b5e) unstable; urgency=low
+
+  * r2384: Fix typo in #define
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 18 May 2005 18:14:44 +0000
+
+libibmad (1.3.11.MLNX20050513.dcd570b) unstable; urgency=low
+
+  * r2334: Change C++ to C style comment
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 13 May 2005 15:19:15 +0000
+
+libibmad (1.3.11.MLNX20050428.1ebee6e) unstable; urgency=low
+
+  * r2225: Cosmetic changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 28 Apr 2005 17:07:47 +0000
+
+libibmad (1.3.11.MLNX20050328.303edbb) unstable; urgency=low
+
+  * r2051: cleanup
+
+ --  Shahar Frank <shaharf@voltaire.com>  Mon, 28 Mar 2005 08:57:49 +0000
+
+libibmad (1.3.11.MLNX20050322.04364aa) unstable; urgency=low
+
+  * r2034: change umad_recv and mad_receive semantics - timeout 0 mean do not block
+
+ --  Shahar Frank <shaharf@voltaire.com>  Tue, 22 Mar 2005 17:12:42 +0000
+
+libibmad (1.3.11.MLNX20050317.0eab1a1) unstable; urgency=low
+
+  * r2015: Change IB_OPENIB_OUI to official IEEE assignment
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 17 Mar 2005 14:03:15 +0000
+
+libibmad (1.3.11.MLNX20050303.4cde26c) unstable; urgency=low
+
+  * r1950: add vendor classes
+
+ --  Shahar Frank <shaharf@voltaire.com>  Thu, 3 Mar 2005 16:00:58 +0000
+
+libibmad (1.3.11.MLNX20050303.640726d) unstable; urgency=low
+
+  * r1948: update
+
+ --  Shahar Frank <shaharf@voltaire.com>  Thu, 3 Mar 2005 15:42:23 +0000
+
+libibmad (1.3.11.MLNX20050303.697f188) unstable; urgency=low
+
+  * r1945: Add include to eliminate some implicit function declaration compile warnings
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 3 Mar 2005 11:27:26 +0000
+
+libibmad (1.3.11.MLNX20050303.6ac9adf) unstable; urgency=low
+
+  * r1944: add vendor and server side support
+
+ --  Shahar Frank <shaharf@voltaire.com>  Thu, 3 Mar 2005 10:07:32 +0000
+
+libibmad (1.3.11.MLNX20050220.802b065) unstable; urgency=low
+
+  * r1843: Cosmetic changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Sun, 20 Feb 2005 15:55:52 +0000
+
+libibmad (1.3.11.MLNX20050220.7d36502) unstable; urgency=low
+
+  * r1840: use _get|set_array in mad_set|get_array
+
+ --  Shahar Frank <shaharf@voltaire.com>  Sun, 20 Feb 2005 12:52:04 +0000
+
+libibmad (1.3.11.MLNX20050220.09a7fab) unstable; urgency=low
+
+  * r1839: minor cleanup
+
+ --  Shahar Frank <shaharf@voltaire.com>  Sun, 20 Feb 2005 12:50:55 +0000
+
+libibmad (1.3.11.MLNX20050220.6060c9b) unstable; urgency=low
+
+  * r1838: buf fixes and temporary debug instrumentations
+
+ --  Shahar Frank <shaharf@voltaire.com>  Sun, 20 Feb 2005 12:49:45 +0000
+
+libibmad (1.3.11.MLNX20050220.773e5a8) unstable; urgency=low
+
+  * r1837: fix set|get array bug handling non word aligned sizes/off
+
+ --  Shahar Frank <shaharf@voltaire.com>  Sun, 20 Feb 2005 12:48:10 +0000
+
+libibmad (1.3.11.MLNX20050214.a17e6ec) unstable; urgency=low
+
+  * r1786: add vendor mads support
+
+ --  Shahar Frank <shaharf@voltaire.com>  Mon, 14 Feb 2005 17:46:01 +0000
+
+libibmad (1.3.11.MLNX20050210.8fe1304) unstable; urgency=low
+
+  * r1764: rename encode_MAD to mad_encode, oui
+
+ --  Shahar Frank <shaharf@voltaire.com>  Thu, 10 Feb 2005 14:12:25 +0000
+
+libibmad (1.3.11.MLNX20050210.b228075) unstable; urgency=low
+
+  * r1760: bug fixes: tr order, buffer memset
+
+ --  Shahar Frank <shaharf@voltaire.com>  Thu, 10 Feb 2005 11:41:23 +0000
+
+libibmad (1.3.11.MLNX20050207.5cd996e) unstable; urgency=low
+
+  * r1756: add mad_dump_rhex - no 0x prefix
+
+ --  Shahar Frank <shaharf@voltaire.com>  Mon, 7 Feb 2005 17:17:56 +0000
+
+libibmad (1.3.11.MLNX20050207.658006f) unstable; urgency=low
+
+  * r1752: add gs.c symbols
+
+ --  Shahar Frank <shaharf@voltaire.com>  Mon, 7 Feb 2005 15:17:16 +0000
+
+libibmad (1.3.11.MLNX20050207.afb3930) unstable; urgency=low
+
+  * r1749: add gs.c: port counters support
+
+ --  Shahar Frank <shaharf@voltaire.com>  Mon, 7 Feb 2005 14:15:49 +0000
+
+libibmad (1.3.11.MLNX20050203.682f4ab) unstable; urgency=low
+
+  * r1727: fix bug in ib_resolve_self
+
+ --  Shahar Frank <shaharf@voltaire.com>  Thu, 3 Feb 2005 17:17:17 +0000
+
+libibmad (1.3.11.MLNX20050202.a08488a) unstable; urgency=low
+
+  * r1719: Changes so ibroute will build when libraries are using autotools
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 2 Feb 2005 18:19:39 +0000
+
+libibmad (1.3.11.MLNX20050202.d3741f9) unstable; urgency=low
+
+  * r1718: resolve changes
+
+ --  Shahar Frank <shaharf@voltaire.com>  Wed, 2 Feb 2005 17:41:28 +0000
+
+libibmad (1.3.11.MLNX20050129.05a1856) unstable; urgency=low
+
+  * r1699: Initial cutover to autotools for diags including update of README directions
+
+ --  Hal Rosenstock <halr@voltaire.com>  Sat, 29 Jan 2005 18:36:29 +0000
+
+libibmad (1.3.11.MLNX20050129.6cf0e37) unstable; urgency=low
+
+  * r1698: Add IB header and library dependencies in for autotools
+
+ --  Hal Rosenstock <halr@voltaire.com>  Sat, 29 Jan 2005 18:01:07 +0000
+
+libibmad (1.3.11.MLNX20050128.3fdce1c) unstable; urgency=low
+
+  * r1693: Final preparations for autotools switchover for management libraries and diagnostics (but not OpenSM and its libraries as yet)
+
+ --  Hal Rosenstock <halr@voltaire.com>  Fri, 28 Jan 2005 20:49:06 +0000
+
+libibmad (1.3.11.MLNX20050127.53c3a19) unstable; urgency=low
+
+  * r1681: Fix typos in names of new linkspeed routines
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 27 Jan 2005 19:16:47 +0000
+
+libibmad (1.3.11.MLNX20050127.aa64ced) unstable; urgency=low
+
+  * r1677: More IBA 1.2 changes for smpquery
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 27 Jan 2005 16:31:46 +0000
+
+libibmad (1.3.11.MLNX20050127.5d6b6d5) unstable; urgency=low
+
+  * r1675: Added support for new IBA 1.2 link widths
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 27 Jan 2005 14:02:42 +0000
+
+libibmad (1.3.11.MLNX20050127.9c34445) unstable; urgency=low
+
+  * r1674: Decode PortInfo:LinkDownDefaultState and add PhyTest to decoded values of PortInfo:PortPhysicalState
+
+ --  Hal Rosenstock <halr@voltaire.com>  Thu, 27 Jan 2005 13:52:02 +0000
+
+libibmad (1.3.11.MLNX20050126.845888a) unstable; urgency=low
+
+  * r1655: Cosmetic changes to catch up with latest changes
+
+ --  Hal Rosenstock <halr@voltaire.com>  Wed, 26 Jan 2005 15:41:41 +0000
+
+libibmad (1.3.11.MLNX20050125.c5e20fe) unstable; urgency=low
+
+  * r1652: Cleanup undeleted files which were previously moved to src subdirectories
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 25 Jan 2005 23:31:32 +0000
+
+libibmad (1.3.11.MLNX20050125.4a40021) unstable; urgency=low
+
+  * r1651: Install public headers in /usr/local/include/infiniband
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 25 Jan 2005 23:17:25 +0000
+
+libibmad (1.3.11.MLNX20050125.7053433) unstable; urgency=low
+
+  * r1649: More changes to ready management directory for autotools switchover
+
+ --  Hal Rosenstock <halr@voltaire.com>  Tue, 25 Jan 2005 22:19:06 +0000

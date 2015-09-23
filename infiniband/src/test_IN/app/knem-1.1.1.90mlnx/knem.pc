@@ -1,0 +1,9 @@
+prefix = /opt/knem
+exec_prefix = ${prefix}
+libdir = ${exec_prefix}/lib
+includedir = ${prefix}/include
+
+Name: knem
+Description:  High-Performance Intra-Node MPI Communication
+Version: 1.1.1.90mlnx
+Cflags: -I${includedir} 

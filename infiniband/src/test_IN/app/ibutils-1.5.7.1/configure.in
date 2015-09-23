@@ -1,0 +1,98 @@
+#--
+# Copyright (c) 2004-2010 Mellanox Technologies LTD. All rights reserved.
+#
+# This software is available to you under a choice of one of two
+# licenses.  You may choose to be licensed under the terms of the GNU
+# General Public License (GPL) Version 2, available from the file
+# COPYING in the main directory of this source tree, or the
+# OpenIB.org BSD license below:
+#
+#     Redistribution and use in source and binary forms, with or
+#     without modification, are permitted provided that the following
+#     conditions are met:
+#
+#      - Redistributions of source code must retain the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer.
+#
+#      - Redistributions in binary form must reproduce the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer in the documentation and/or other materials
+#        provided with the distribution.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+# BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+# ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#--
+
+dnl Process this file with autoconf to produce a configure script.
+
+AC_INIT([ibutils], [1.5.7.1], [linux-rdma@vger.kernel.org])
+dnl use local config dir for extras
+AC_CONFIG_AUX_DIR(config)
+
+dnl Auto make
+AM_INIT_AUTOMAKE( [foreign ] )
+
+dnl Defines the Language
+AC_LANG_C
+
+dnl Provides control over re-making of all auto files
+dnl We also use it to define swig dependencies so end
+dnl users do not see them.
+AM_MAINTAINER_MODE
+
+dnl Required for cases make defines a MAKE=make ??? Why
+AC_PROG_MAKE_SET
+
+dnl Define an input config option to control debug compile
+AC_ARG_ENABLE(debug,
+[  --enable-debug    Turn on debugging],
+[case "${enableval}" in
+  yes) debug=true ;;
+  no)  debug=false ;;
+  *) AC_MSG_ERROR(bad value ${enableval} for --enable-debug) ;;
+esac],[debug=false])
+
+dnl For making dist we need not check any lib dependency
+AC_ARG_ENABLE(libcheck,
+[  --enable-libcheck    Enable Dependency Checking],
+[case "${enableval}" in
+  yes) libcheck=true ;;
+  no)  libcheck=false ;;
+  *) AC_MSG_ERROR(bad value ${enableval} for --enable-libcheck) ;;
+esac],[libcheck=true])
+
+dnl find OpenSM and umad
+OPENIB_APP_OSM
+
+dnl Configure the following subdirs
+AC_CONFIG_SUBDIRS(ibis ibdm ibdiag)
+
+AC_ARG_ENABLE(ibmgtsim,
+[  --enable-ibmgtsim    Build ibmgtsim],
+[case "${enableval}" in
+  yes) ibmgtsim=true ;;
+  no)  ibmgtsim=false ;;
+  *) AC_MSG_ERROR(bad value ${enableval} for --enable-ibmgtsim) ;;
+esac],[ibmgtsim=false])
+AM_CONDITIONAL([BUILD_IBMGTSIM], [test "x$ibmgtsim" != xfalse])
+
+dnl we need a non relative srcdir:
+abs_srcdir=`cd ${0%*/*};pwd`
+
+if test $ibmgtsim = true; then
+dnl we need to pass down the local dir as the directory to take ibdm from
+ac_configure_args=["$ac_configure_args --with-ibdm=$abs_srcdir/ibdm"]
+AC_CONFIG_SUBDIRS(ibmgtsim)
+fi
+
+AC_CONFIG_FILES([ibutils.spec])
+dnl Create the following Makefiles
+AC_OUTPUT(Makefile)
+

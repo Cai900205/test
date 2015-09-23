@@ -1,0 +1,69 @@
+                     Open Fabrics InfiniBand Diagnostic Utilities
+                     --------------------------------------------
+
+*******************************************************************************
+RELEASE: ibutils 1.5.7
+DATE:    Mar 2011
+
+===============================================================================
+Table of Contents
+===============================================================================
+1.  Overview
+2.  New features
+3.  Major Bugs Fixed
+4.  Known Issues
+
+===============================================================================
+1. Overview
+===============================================================================
+
+The ibutils package provides a set of diagnostic tools that check the health
+of an InfiniBand fabric.
+
+Package components:
+ibis:     IB interface - A TCL shell that provides interface for sending various
+          MADs on the IB fabric. This is the component that actually accesses
+          the IB Hardware.
+
+ibdm:     IB Data Model - A library that provides IB fabric analysis.
+
+ibmgtsim: An IB fabric simulator. Useful for developing IB tools.
+
+ibdiag:   This package provides 3 tools which provide the user interface
+          to activate the above functionality:
+            - ibdiagnet:  Performs various quality and health checks on the IB
+                          fabric.
+            - ibdiagpath: Performs various fabric quality and health checks on
+                          the given links and nodes in a specific path.
+            - ibdiagui:   A GUI wrapper for the above tools.
+
+===============================================================================
+2. New Features
+===============================================================================
+
+* Added scripts that convert OSM dump files for ibdmchk
+
+* ibutils: added support for GUIDInfo MAD in ibis and simulator
+
+===============================================================================
+3. Major Bugs Fixed
+===============================================================================
+
+* ibmgtsim: fixed various bugs with running simulations
+
+* ibutils: fixed rpmbuild with and w/o ibmgtsim
+
+===============================================================================
+4. Known Issues
+===============================================================================
+
+- Ibdiagnet "-wt" option may generate a bad topology file when running on a
+  cluster that contains complex switch systems.
+
+- ibutils works only partially on RHEL6 and any other distro with TCL 8.5.
+  ibdiagnet/ibdiagpath/ibis don't work with TCL 8.5 due to a change in
+  TCL behavior: the built-in TCL function "dump" on TCL 8.5 always includes
+  field names.
+  Until the fix, any user script that uses ibis needs to be fixed in order
+  to function correctly on TCL 8.5
+  

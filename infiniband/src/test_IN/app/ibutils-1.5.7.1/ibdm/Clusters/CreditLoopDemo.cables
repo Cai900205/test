@@ -1,0 +1,9 @@
+
+Cougar	OSM	P1	Reindeer	RD1	P1
+Cougar	H2	   P1	Reindeer	RD2	P1
+Cougar	H3	   P1	Reindeer	RD3	P1
+Cougar	H4	   P1	Reindeer	RD4	P1
+Reindeer	RD1	P2 Reindeer	RD4	P3
+Reindeer	RD2	P2 Reindeer	RD1	P3
+Reindeer	RD3	P2	Reindeer	RD2	P3
+Reindeer	RD4	P2	Reindeer	RD3	P3

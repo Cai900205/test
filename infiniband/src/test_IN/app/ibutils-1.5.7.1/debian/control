@@ -1,0 +1,20 @@
+Source: ibutils
+Section: net
+Priority: extra
+Maintainer: Yevgeny Kliteynik <kliteyn@dev.mellanox.co.il>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, dpatch, chrpath, swig, graphviz, libibumad-devel, tcl8.4-dev, tk8.4-dev
+Standards-Version: 1.5.7.1
+
+Package: ibutils
+Architecture: i386 ia64 amd64 powerpc ppc64 ppc64el arm64
+Depends: ${shlibs:Depends}, ${misc:Depends}, libibdm1
+Description: InfiniBand network utilities
+ This package contains a set of utilities useful for
+ diagnosing and testing InfiniBand based networks.
+
+Package: libibdm1
+Architecture: i386 ia64 amd64 powerpc ppc64 ppc64el arm64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: InfiniBand network diagnostic library
+ This package contains a library for building tools useful
+ for diagnosing and testing InfiniBand based networks.

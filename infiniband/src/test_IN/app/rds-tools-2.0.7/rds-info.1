@@ -1,0 +1,162 @@
+.Dd October 30, 2006
+.Dt RDS-INFO 1
+.Os
+.Sh NAME
+.Nm rds-info
+.Nd display information from the RDS kernel module
+.Pp
+.Sh SYNOPSIS
+.Nm rds-info
+.Op Fl v
+.Bk -words
+.Op Fl cknrstIT
+
+.Sh DESCRIPTION
+The
+.Nm
+utility presents various sources of information that
+the RDS kernel module maintains.  When run without any optional arguments
+.Nm
+will output all the information it knows of.  When options are specified then
+only the information associated with those options is displayed.
+
+The options are as follows:
+.Bl -tag -width Ds
+.It Fl v
+Requests verbose output. When this option is given, some classes of information
+will display additional data.
+
+.It Fl c
+Display global counters.  Each counter increments as its event
+occurs.  The counters may not be reset.  The set of supported counters
+may change over time.
+
+.Bl -tag -width 4
+.It CounterName
+The name of the counter.  These names come from the kernel and can change
+depending on the capability of the kernel module.
+.It Value
+The number of times that the counter has been incremented since the kernel
+module was loaded.
+.El
+
+.It Fl k
+Display all the RDS sockets in the system.  There will always be one socket
+listed that is neither bound to nor connected to any addresses because
+.Nm
+itself uses an unbound socket to collect information.
+
+.Bl -tag -width 4
+.It BoundAddr, BPort
+The IP address and port that the socket is bound to.  0.0.0.0 0 indicates that
+the socket has not been bound.
+.It ConnAddr, CPort
+The IP address and port that the socket is connected to.  0.0.0.0 0 indicates
+that the socket has not been connected.
+.It SndBuf, RcvBuf
+The number of bytes of message payload which can be queued for sending or
+receiving on the socket, respectively.
+.It Inode
+The number of the inode object associated with the socket. Can be used to
+locate the process owning a given socket by searching /proc/*/fd for
+open files referencing a socket with this inode number.
+.El
+
+.It Fl n
+Display all RDS connections.  RDS connections are maintained between
+nodes by transports.  
+
+.Bl -tag -width 4
+.It LocalAddr
+The IP address of this node.  For connections that originate and terminate on
+the same node the local address indicates which address initiated the
+connection establishment.
+.It RemoteAddr
+The IP address of the remote end of the connection.  
+.It NextTX
+The sequence number that will be given to the next message that is sent
+over the connection.
+.It NextRX
+The sequence number that is expected from the next message to arrive over
+the connection.  Any incoming messages with sequence numbers less than this
+will be dropped.
+.It Flg
+Flags which indicate the state of the connection. 
+.Bl -tag -width 4
+.It s
+A process is currently sending a message down the connection.
+.It c
+The transport is attempting to connect to the remote address.
+.It C
+The connection to the remote host is connected and active.
+.El
+.El
+
+.It Fl r, Fl s, Fl t
+Display the messages in the receive, send, or retransmit queues respectively.
+.Bl -tag -width 4
+.It LocalAddr, LPort
+The local IP address and port on this node associated with the message. For
+sent messages this is the source address, for receive messages it is the
+destination address.
+.It RemoteAddr, RPort
+The remote IP address and port associated with the message. For sent messages
+this is the destination address, for receive messages it is the source address.
+.It Seq
+The sequence number of the message.
+.It Bytes
+The number of bytes in the message payload.
+.El
+
+The following information sources are dependent on specific transports which
+may not always be available. 
+
+.It Fl I
+Display the IB connections which the IB transport is using to provide
+RDS connections.
+
+.Bl -tag -width 4
+.It LocalAddr
+The local IP address of this connection.
+.It RemoteAddr
+The remote IP address of this connection.
+.It LocalDev
+The local IB Global Identifier, printed in IPv6 address syntax.
+.It RemoteDev
+The remote IB Global Identifier, printed in IPv6 address syntax.
+.El
+
+If verbose output is requested, per-connection settings such as the
+maximum number of send and receive work requests will be displayed
+in addition.
+
+.It Fl T
+Display the TCP sockets which the TCP transport is using to provide
+RDS connections.
+
+.Bl -tag -width 4
+.It LocalAddr, LPort
+The local IP address and port of this socket.
+.It RemoteAddr, RPort
+The remote IP address and port that this socket is connected to.
+.It HdrRemain
+The number of bytes that must be read off the socket to complete the next
+full RDS header.
+.It DataRemain
+The number of bytes that must be read off the socket to complete the data
+payload of the message which is being received.
+.It SentNxt
+The TCP sequence number of the first byte of the last message that we sent
+down the connection.
+.It ExpectedUna
+The TCP sequence number of the byte past the last byte of the last message
+that we sent down the connection.  When we see that the remote side has
+acked up to this byte then we know that the remote side has received all
+our RDS messages.
+.It SeenUna
+The TCP sequence number of the byte past the last byte which has been
+acked by the remote host.
+.El
+
+.El
+.Pp

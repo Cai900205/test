@@ -1,0 +1,214 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+  exec tclsh "$0" "$@"
+#--
+# Copyright (c) 2004-2010 Mellanox Technologies LTD. All rights reserved.
+#
+# This software is available to you under a choice of one of two
+# licenses.  You may choose to be licensed under the terms of the GNU
+# General Public License (GPL) Version 2, available from the file
+# COPYING in the main directory of this source tree, or the
+# OpenIB.org BSD license below:
+#
+#     Redistribution and use in source and binary forms, with or
+#     without modification, are permitted provided that the following
+#     conditions are met:
+#
+#      - Redistributions of source code must retain the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer.
+#
+#      - Redistributions in binary form must reproduce the above
+#        copyright notice, this list of conditions and the following
+#        disclaimer in the documentation and/or other materials
+#        provided with the distribution.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+# BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+# ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#--
+
+proc Usage {} {
+	global argv0
+	puts "Usage: $argv0 \[-r <prompt>\] \[-g\] \[-s\] \[-p\] -o <out-file>"
+}
+
+proc Help {} {
+	puts "\nfixSwigWrapper : Applies extended behaviour to a swig_wrap.c\n"
+	Usage
+	puts "\nArguments:"
+	puts "-o out-file : The name of the out file\n"
+	puts "\nOptions:"
+	puts "-r prompt : add readline support using the given prompt"
+	puts "-g : Cleanup SWIG_GetPointerObj"
+	puts "-s : Cleanup SWIG_SetPointerObj"
+	puts "-p : Cleanup SWIG_MakePtr\n\n"
+	exit 1
+}
+
+# basically this code filters out the two swig functions:
+# SWIG_GetPointerObj
+# SWIG_SetPointerObj
+# from the given file and also adds one line just before the last
+# return statement
+
+proc LoadFile {fn} {
+	# open the file
+	if {[catch {set f [open $fn "r"]} e]} {
+		error "-E- LoadFile: $e"
+	}
+
+	while {[gets $f sLine] >= 0} {
+	        lappend linesList "$sLine"
+	}
+	close $f
+	set res "[join $linesList \n]"
+	puts stderr "-I- Loaded file: $fn with:[string length $res] chars"
+
+	return $res
+}
+
+proc remTrailingBlanks {code} {
+	regsub -line -all {[ 	]+$} $code {} code
+	return $code
+}
+
+
+# remove the given proc from the file
+proc remProc {code procName procRetType} {
+
+	# find the idx of the start of the procedure
+	if {! [regexp -indices -line "SWIGSTATIC\[\\s\n\]*$procRetType\[\\s\n\]*$procName" \
+				 $code sidx]} {
+		error "-E- Fail to find proc:$procName"
+	}
+
+	# assume the end of the procedure has a nice indented \}
+	if {! [regexp -start [lindex $sidx 0] -indices "\n\}" $code eidx]} {
+		error "-E- Fail to find proc:$procName end"
+	}
+
+	return [string replace $code [lindex $sidx 0] [lindex $eidx 1]]
+}
+
+proc addAtLastReturn {code text} {
+	# find the last "return TCL_OK"
+	set idx [string last {return TCL_OK} $code]
+	if {$idx <= 0} {
+		error "-E- Fail to find last return"
+	}
+
+	return [string replace $code $idx $idx $text]
+}
+
+
+# MAIN
+
+set removeGetObj 0
+set removeSetObj 0
+set removeMakePtr 0
+set userPrompt 0
+set removeTrailingBlanks 1
+set outFileName ""
+
+# parse command line args
+while {[llength $argv]} {
+	set sw [lindex $argv 0]
+	set argv [lrange $argv 1 end]
+
+	switch -- $sw {
+		-r {
+			if {![llength $argv]} {
+				puts "-E- Expected prompt value after -r"
+				Usage
+				exit 1
+			}
+			set userPrompt [lindex $argv 0]
+			set argv [lrange $argv 1 end]
+		}
+		-o {
+			if {![llength $argv]} {
+				puts "-E- Expected file name value after -o"
+				Usage
+				exit 1
+			}
+			set outFileName [lindex $argv 0]
+			set argv [lrange $argv 1 end]
+		}
+		-g { set removeGetObj 1}
+		-s { set removeSetObj 1}
+		-p { set removeMakePtr 1}
+		-h {
+			Help
+		}
+		default {
+			puts "-E- Unexpected argument: $sw"
+			Usage
+			exit 1
+		}
+	}
+}
+
+set readlineCode "
+   if (Tcl_PkgRequire(interp,\"tclreadline\",0,0) != NULL) \{
+     Tcl_Eval(interp,
+				  \"if \{\$tcl_interactive\} \{namespace eval tclreadline \{proc prompt1 \{\} \{return \\\"$userPrompt >\\\"\} \}; ::tclreadline::Loop $userPrompt.log \}\"
+     );
+   \}
+"
+
+if {[catch {set swigCode [LoadFile swig_wrap.c]} e]} {
+	puts "$e"
+	exit 3
+}
+
+if {$removeGetObj} {
+	if {[catch {set swigCode [remProc $swigCode SWIG_GetPointerObj "char \\*"]} e]} {
+		puts "-E- $e"
+		exit 1
+	}
+}
+
+if {$removeTrailingBlanks} {
+	if {[catch {set swigCode [remTrailingBlanks $swigCode]} e]} {
+		puts "-E- $e"
+		exit 1
+	}
+}
+
+if {$removeSetObj} {
+	if {[catch {set swigCode [remProc $swigCode SWIG_SetPointerObj "void"]} e]} {
+		puts "-E- $e"
+		exit 1
+	}
+}
+
+if {$removeMakePtr} {
+	if {[catch {set swigCode [remProc $swigCode SWIG_MakePtr "int"]} e]} {
+		puts "-E- $e"
+		exit 1
+	}
+}
+
+if {$userPrompt != 0} {
+	if {[catch {set swigCode [addAtLastReturn $swigCode "${readlineCode}r"]} e]} {
+		puts "-E- $e"
+		exit 1
+	}
+}
+
+if {$outFileName != 0} {
+	if {[catch {set f [open $outFileName w]} e]} {
+		puts "-E- $e"
+		exit 1
+	}
+	puts $f $swigCode
+	close $f
+} else {
+	puts $swigCode
+}

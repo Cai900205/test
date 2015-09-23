@@ -1,0 +1,90 @@
+=head1 NAME
+
+B<IBDM Topology File>
+
+The topology file describes the IB connectivity and systems included in the network.
+It serves two purposes:
+
+=over 4
+
+=item 1. Support for arbitrary system names to be later used in every report that IBDM generates.
+
+=item 2. Connectivity verification: The specified network topology is verified against the discovered one. Mismatch errors resulting from missing cables and/or wrong connections are reported by IBADM.
+
+=back 4
+
+The topology file is composed "system" sections. Each such section describes the connectivity of one system to other systems in the network. The first line of each section is a declaration of the system composed of a system-type, its system-name section, and optional configuration details. The lines to follow until the next empty line describe the connections between this system ports to the other systems. The following is a formal definition of a system section syntax.
+
+An example is listed afterwards.
+
+SYSTEM-TYPE SYSTEM-NAME [CFG: <b1>=<modifier>, [<b2>=<modifier>]...]
+
+	LOCAL-PORT-PANEL-NAME -> REM-SYS-TYPE REM-SYS-NAME REM-PORT-PANEL-NAME
+
+	LOCAL-PORT-PANEL-NAME -> REM-SYS-TYPE REM-SYS-NAME REM-PORT-PANEL-NAME
+
+	LOCAL-PORT-PANEL-NAME -> REM-SYS-TYPE REM-SYS-NAME REM-PORT-PANEL-NAME
+
+	. . .
+
+SYSTEM-TYPE SYSTEM-NAME [CFG: <b1>=<modifier>, [<b2>=<modifier>]...]
+
+	LOCAL-PORT-PANEL-NAME -> REM-SYS-TYPE REM-SYS-NAME REM-PORT-PANEL-NAME
+
+	LOCAL-PORT-PANEL-NAME -> REM-SYS-TYPE REM-SYS-NAME REM-PORT-PANEL-NAME
+
+	. . .
+
+. . .
+
+
+Where:
+
+=over 4
+
+=item B<SYSTEM-TYPE> and B<REM-SYS-TYPE>
+
+Any system that has a corresponding IBNL definition. See man B<ibdm-ibnl-file>
+
+=item B<SYSTEM-NAME>
+
+The name of the system described in this topology file section.
+
+=item B<LOCAL-PORT-PANEL-NAME>
+
+The name of the local system port. The numbers printed on the front panel are used together with Ln for Leaf no. N or Sn for Spine no. N.
+
+=item B<REM-SYS-NAME>
+
+The name of the system connected to the local port.
+
+=item B<REM-PORT-PANEL-NAME>
+
+A name of the remote system port. We use the numbers as printed on the front panel and Ln for Leaf number N or Sn for Spine number N.
+
+=back 4
+
+=head1 EXAMPLE
+
+The following is a topology file for a simple cluster with one 24 port switch and two HCAs. The firts HCA named H-1 and connect to the fabric with its two ports. The second HCA named H-2. The switch is of type MTS2400 and is named S-1
+
+MTS2400 S-1
+   P1 -> MT23108 H-1 P1
+   P2 -> MT23108 H-1 P2
+   P24 -> MT23108 H-2 P1
+
+=head1 OPTIONAL CFG SECTION
+
+This section in the system declaration line describes the special customization of each board of the system.
+
+That is the CFG string is a set of comma-separated sub-fields. Each sub-field describes some special configuration of a corresponding system board. The actual semantics of the specific board modifiers is defined by the IBNL of the specific system.
+
+=head1 EXAMPLE
+
+The following is an example of a definition-line in a topology file of the MTS9600 switch system. This switch system can have up to eight leafs and four spines. This example of the MTS9600 lacks (R) leafs no.6,7 and 8, and lacks spines no. 3 and 4.
+
+MTS9600 PartialGz1 CFG: leaf3=R,leaf5=R,leaf7=R,spine1=R
+
+=head1 AUTHOR
+
+Eitan Zahavi, Mellanox Technologies LTD, eitan@mellanox.co.il

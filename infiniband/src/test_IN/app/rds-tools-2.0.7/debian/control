@@ -1,0 +1,22 @@
+Source: rds-tools
+Section: net
+Priority: extra
+Maintainer: OFED and Debian Developement and Discussion <pkg-ofed-devel@lists.alioth.debian.org>
+Uploaders: Benoit Mortier <benoit.mortier@opensides.be>, Guy Coates <gmpc@sanger.ac.uk>, Mario Lang <mlang@debian.org>
+Build-Depends: debhelper (>= 7), automake
+Standards-Version: 3.8.4
+Homepage: http://www.openfabrics.org
+DM-Upload-Allowed: yes
+
+Package: rds-tools
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Tools for the Infiniband RDS protocol
+ rds-tools is a collection of support tools for the 
+ Reliable Datagram Socket (RDS) protocol. 
+ .
+ RDS provides reliable, ordered datagram delivery by using a single
+ reliable connection between any two nodes in the cluster. This allows
+ applications to use a single socket to talk to any other process in the
+ cluster - so in a cluster with N processes you need N sockets, in contrast
+ to N*N if you use a connection-oriented socket transport like TCP.

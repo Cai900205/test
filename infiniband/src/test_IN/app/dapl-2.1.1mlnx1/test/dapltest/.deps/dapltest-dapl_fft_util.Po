@@ -1,0 +1,249 @@
+dapltest-dapl_fft_util.o: test/dapl_fft_util.c include/dapl_proto.h \
+ ../../dat/include/dat2/udat.h ../../dat/include/dat2/udat_config.h \
+ ../../dat/include/dat2/dat_platform_specific.h /usr/include/sys/types.h \
+ /usr/include/features.h /usr/include/bits/predefs.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/time.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/stdio.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/sys/socket.h \
+ /usr/include/sys/uio.h /usr/include/bits/uio.h \
+ /usr/include/bits/socket.h /usr/include/bits/sockaddr.h \
+ /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+ ../../dat/include/dat2/dat.h ../../dat/include/dat2/dat_error.h \
+ ../../dat/include/dat2/udat_vendor_specific.h \
+ ../../dat/include/dat2/dat_vendor_specific.h /usr/include/ctype.h \
+ /usr/include/xlocale.h /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/alloca.h /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h include/dapl_mdep.h \
+ mdep/linux/dapl_mdep_user.h /usr/include/inttypes.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h /usr/include/netdb.h \
+ /usr/include/netinet/in.h /usr/include/bits/in.h \
+ /usr/include/rpc/netdb.h /usr/include/bits/netdb.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/getopt.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
+ /usr/include/bits/setjmp.h /usr/include/sys/times.h \
+ /usr/include/sys/time.h /usr/include/arpa/inet.h \
+ include/dapl_tdep_print.h include/dapl_bpool.h include/dapl_proto.h \
+ include/dapl_client_info.h include/dapl_common.h include/dapl_execute.h \
+ include/dapl_params.h include/dapl_server_cmd.h \
+ include/dapl_transaction_cmd.h include/dapl_performance_cmd.h \
+ include/dapl_limit_cmd.h include/dapl_quit_cmd.h include/dapl_fft_cmd.h \
+ include/dapl_getopt.h include/dapl_global.h include/dapl_fft_util.h \
+ include/dapl_test_data.h include/dapl_transaction_stats.h \
+ include/dapl_memlist.h include/dapl_server_info.h \
+ include/dapl_performance_stats.h include/dapl_performance_test.h \
+ include/dapl_tdep.h include/dapl_transaction_test.h \
+ include/dapl_version.h
+
+include/dapl_proto.h:
+
+../../dat/include/dat2/udat.h:
+
+../../dat/include/dat2/udat_config.h:
+
+../../dat/include/dat2/dat_platform_specific.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/time.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/sys/socket.h:
+
+/usr/include/sys/uio.h:
+
+/usr/include/bits/uio.h:
+
+/usr/include/bits/socket.h:
+
+/usr/include/bits/sockaddr.h:
+
+/usr/include/asm/socket.h:
+
+/usr/include/asm/sockios.h:
+
+../../dat/include/dat2/dat.h:
+
+../../dat/include/dat2/dat_error.h:
+
+../../dat/include/dat2/udat_vendor_specific.h:
+
+../../dat/include/dat2/dat_vendor_specific.h:
+
+/usr/include/ctype.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/alloca.h:
+
+/usr/include/string.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+include/dapl_mdep.h:
+
+mdep/linux/dapl_mdep_user.h:
+
+/usr/include/inttypes.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/netdb.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/bits/in.h:
+
+/usr/include/rpc/netdb.h:
+
+/usr/include/bits/netdb.h:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/sys/times.h:
+
+/usr/include/sys/time.h:
+
+/usr/include/arpa/inet.h:
+
+include/dapl_tdep_print.h:
+
+include/dapl_bpool.h:
+
+include/dapl_proto.h:
+
+include/dapl_client_info.h:
+
+include/dapl_common.h:
+
+include/dapl_execute.h:
+
+include/dapl_params.h:
+
+include/dapl_server_cmd.h:
+
+include/dapl_transaction_cmd.h:
+
+include/dapl_performance_cmd.h:
+
+include/dapl_limit_cmd.h:
+
+include/dapl_quit_cmd.h:
+
+include/dapl_fft_cmd.h:
+
+include/dapl_getopt.h:
+
+include/dapl_global.h:
+
+include/dapl_fft_util.h:
+
+include/dapl_test_data.h:
+
+include/dapl_transaction_stats.h:
+
+include/dapl_memlist.h:
+
+include/dapl_server_info.h:
+
+include/dapl_performance_stats.h:
+
+include/dapl_performance_test.h:
+
+include/dapl_tdep.h:
+
+include/dapl_transaction_test.h:
+
+include/dapl_version.h:

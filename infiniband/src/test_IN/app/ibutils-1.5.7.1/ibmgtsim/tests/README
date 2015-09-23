@@ -1,0 +1,40 @@
+This directory holds some tcl code of simulator tests, and
+example topology files.
+
+RunSimTest TESTS:
+------------------
+RunSimTest requires two files:
+* a "simulator flow": *.sim.tcl file that is run in the simulator
+* a "checker": *.check.tcl file that extends the RunSimTest with
+  a particular flow of execution and checkers for pass/fail
+
+osmLidAssignment - comprehensive test of lid assignment algorithm
+osmMulticastRoutingTest - performs Multicast Join in random order
+osmStability - check if we can get Subnet Up under many bad links
+OsmTest - simply run osmtest after subnet is up
+
+The following are ibdiagnet tests (all of them currently do not have an internal PASS/FAIL)
+ibdiagnet.check.tcl - is a common checker flow that starts the SM and calls post SM
+   errors injection and then ibdiagnet
+ibdiag-drops.sim.tcl - set some bad links
+ibdiag-dup-node-guid.sim.tcl - duplicate node guid
+ibdiag-dup-port-guid.sim.tcl - duplicate port guid
+ibdiag-lid.sim.tcl - post the SM run duplicate or zero some lids
+ibdiag-mcast.sim.tcl - post SM create 3 MGRPs join some ports, then disconenct some MFT routing
+ibdiag-ucast.sim.tcl - post SM delete some LFT entries
+
+
+OTHERS:
+_______
+init.test.tcl - is a very simple code that only initialize
+  the simulator and serve as example for the TCL API.
+
+TOPOLOGY FILES:
+---------------
+Gnu16NodeOsmTest.topo - a 6 x 8p switch, two level tree with 16 nodes
+ReindeerBased128Nodes.topo - 128 nodes on 2 level tree made out of 24p switches
+RhinoBased10K.topo - a 10,000 nodes tree made of 24p (first) and 144p (second)
+RhinoBased512Nodes.topo - 512 ndoes tree using 144p switches (have credit loops)
+RhinoBasedCreditLoop.topo - 3 24p switch and 1 144p switch for credit loop demo
+RhinoReindeer1100.topo - a 10K nodes cluster made of 24p and 144p switches
+

@@ -1,0 +1,593 @@
+vlogger_timer_handler.lo: event/vlogger_timer_handler.cpp \
+ ../../src/vlogger/vlogger.h /usr/include/c++/iostream \
+ /usr/include/c++/powerpc64-fsl-linux/bits/c++config.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/bits/predefs.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/cpu_defines.h \
+ /usr/include/c++/ostream /usr/include/c++/ios /usr/include/c++/iosfwd \
+ /usr/include/c++/bits/stringfwd.h /usr/include/c++/bits/memoryfwd.h \
+ /usr/include/c++/bits/postypes.h /usr/include/c++/cwchar \
+ /usr/include/wchar.h /usr/include/stdio.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h \
+ /usr/include/bits/wchar.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/c++/exception \
+ /usr/include/c++/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/bits/char_traits.h /usr/include/c++/bits/stl_algobase.h \
+ /usr/include/c++/bits/functexcept.h \
+ /usr/include/c++/bits/exception_defines.h \
+ /usr/include/c++/bits/cpp_type_traits.h \
+ /usr/include/c++/ext/type_traits.h /usr/include/c++/ext/numeric_traits.h \
+ /usr/include/c++/bits/stl_pair.h /usr/include/c++/bits/move.h \
+ /usr/include/c++/bits/concept_check.h \
+ /usr/include/c++/bits/stl_iterator_base_types.h \
+ /usr/include/c++/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/debug/debug.h /usr/include/c++/bits/stl_iterator.h \
+ /usr/include/c++/bits/localefwd.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/c++locale.h \
+ /usr/include/c++/clocale /usr/include/locale.h \
+ /usr/include/bits/locale.h /usr/include/c++/cctype /usr/include/ctype.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/c++/bits/ios_base.h \
+ /usr/include/c++/ext/atomicity.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/gthr.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
+ /usr/include/bits/sched.h /usr/include/bits/time.h \
+ /usr/include/bits/timex.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/setjmp.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/atomic_word.h \
+ /usr/include/c++/bits/locale_classes.h /usr/include/c++/string \
+ /usr/include/c++/bits/allocator.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/c++allocator.h \
+ /usr/include/c++/ext/new_allocator.h /usr/include/c++/new \
+ /usr/include/c++/bits/ostream_insert.h \
+ /usr/include/c++/bits/cxxabi_forced.h \
+ /usr/include/c++/bits/stl_function.h /usr/include/c++/backward/binders.h \
+ /usr/include/c++/bits/range_access.h \
+ /usr/include/c++/bits/basic_string.h \
+ /usr/include/c++/bits/basic_string.tcc \
+ /usr/include/c++/bits/locale_classes.tcc /usr/include/c++/streambuf \
+ /usr/include/c++/bits/streambuf.tcc /usr/include/c++/bits/basic_ios.h \
+ /usr/include/c++/bits/locale_facets.h /usr/include/c++/cwctype \
+ /usr/include/wctype.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/ctype_base.h \
+ /usr/include/c++/bits/streambuf_iterator.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/ctype_inline.h \
+ /usr/include/c++/bits/locale_facets.tcc \
+ /usr/include/c++/bits/basic_ios.tcc /usr/include/c++/bits/ostream.tcc \
+ /usr/include/c++/istream /usr/include/c++/bits/istream.tcc \
+ /usr/include/c++/fstream /usr/include/c++/bits/codecvt.h \
+ /usr/include/c++/cstdio /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/basic_file.h \
+ /usr/include/c++/powerpc64-fsl-linux/bits/c++io.h \
+ /usr/include/c++/bits/fstream.tcc /usr/include/errno.h \
+ /usr/include/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/asm/errno.h /usr/include/asm-generic/errno.h \
+ /usr/include/asm-generic/errno-base.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdint.h \
+ /usr/include/stdint.h ../../src/vma/util/rdtsc.h \
+ ../../src/vma/util/clock.h /usr/include/sys/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h ../../src/vma/util/asm.h \
+ ../../src/vma/util/asm-ppc64.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/getopt.h \
+ ../../src/vma/util/bullseye.h ../../src/vma/util/vtypes.h \
+ /usr/include/sys/types.h /usr/include/sys/sysmacros.h \
+ /usr/include/netinet/in.h /usr/include/sys/socket.h \
+ /usr/include/sys/uio.h /usr/include/bits/uio.h \
+ /usr/include/bits/socket.h /usr/include/bits/sockaddr.h \
+ /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+ /usr/include/bits/in.h /usr/include/linux/kernel.h \
+ /usr/include/linux/sysinfo.h /usr/include/linux/types.h \
+ /usr/include/asm/types.h /usr/include/asm-generic/int-l64.h \
+ /usr/include/asm/bitsperlong.h /usr/include/asm-generic/bitsperlong.h \
+ /usr/include/linux/posix_types.h /usr/include/linux/stddef.h \
+ /usr/include/asm/posix_types.h /usr/include/asm-generic/posix_types.h \
+ /usr/include/sys/epoll.h event/vlogger_timer_handler.h \
+ event/timer_handler.h event/event_handler_manager.h /usr/include/c++/map \
+ /usr/include/c++/bits/stl_tree.h /usr/include/c++/bits/stl_map.h \
+ /usr/include/c++/bits/stl_multimap.h /usr/include/c++/list \
+ /usr/include/c++/bits/stl_list.h /usr/include/c++/bits/list.tcc \
+ /usr/include/c++/deque /usr/include/c++/bits/stl_construct.h \
+ /usr/include/c++/ext/alloc_traits.h \
+ /usr/include/c++/bits/stl_uninitialized.h \
+ /usr/include/c++/bits/stl_deque.h /usr/include/c++/bits/deque.tcc \
+ ../../src/vma/util/lock_wrapper.h /usr/include/execinfo.h \
+ /usr/include/string.h ../../src/vma/util/rdtsc.h \
+ ../../src/vma/util/wakeup.h ../../src/vma/netlink/netlink_wrapper.h \
+ ../../src/netlink/netlink.h /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/alloca.h /usr/include/sys/poll.h /usr/include/bits/poll.h \
+ ../../src/netlink/netlink-compat.h /usr/include/linux/netlink.h \
+ /usr/include/linux/socket.h /usr/include/linux/rtnetlink.h \
+ /usr/include/linux/if_link.h /usr/include/linux/if_addr.h \
+ /usr/include/linux/neighbour.h /usr/include/linux/genetlink.h \
+ /usr/include/linux/netfilter/nfnetlink.h \
+ /usr/include/linux/netfilter/nfnetlink_compat.h \
+ ../../src/netlink/types.h ../../src/netlink/handlers.h \
+ ../../src/netlink/netlink-kernel.h ../../src/netlink/socket.h \
+ ../../src/netlink/cache.h ../../src/netlink/msg.h \
+ ../../src/netlink/object.h ../../src/netlink/utils.h \
+ ../../src/netlink/list.h ../../src/netlink/attr.h \
+ ../../src/netlink/addr.h ../../src/netlink/data.h \
+ ../../src/netlink/cache-api.h ../../src/netlink/route/neighbour.h \
+ ../../src/vma/netlink/neigh_info.h \
+ ../../src/vma/infra/subject_observer.h \
+ /usr/include/c++/tr1/unordered_set /usr/include/c++/utility \
+ /usr/include/c++/bits/stl_relops.h /usr/include/c++/tr1/type_traits \
+ /usr/include/c++/tr1/functional_hash.h /usr/include/c++/tr1/hashtable.h \
+ /usr/include/c++/tr1/hashtable_policy.h \
+ /usr/include/c++/tr1/unordered_set.h ../../src/vma/util/to_str.h \
+ ../../src/vma/event/event.h /usr/include/c++/typeinfo \
+ ../../src/vma/event/netlink_event.h ../../src/vma/netlink/neigh_info.h \
+ ../../src/vma/netlink/route_info.h ../../src/netlink/route/rtnl.h \
+ ../../src/netlink/route/route.h ../../src/netlink/route/nexthop.h \
+ ../../src/vma/netlink/link_info.h ../../src/netlink/route/link.h \
+ ../../src/netlink/object-api.h ../../src/vma/event/command.h \
+ ../../src/vma/event/timer_handler.h ../../src/vma/event/delta_timer.h \
+ ../../src/vma/event/timers_group.h
+
+../../src/vlogger/vlogger.h:
+
+/usr/include/c++/iostream:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/c++config.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/os_defines.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/cpu_defines.h:
+
+/usr/include/c++/ostream:
+
+/usr/include/c++/ios:
+
+/usr/include/c++/iosfwd:
+
+/usr/include/c++/bits/stringfwd.h:
+
+/usr/include/c++/bits/memoryfwd.h:
+
+/usr/include/c++/bits/postypes.h:
+
+/usr/include/c++/cwchar:
+
+/usr/include/wchar.h:
+
+/usr/include/stdio.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/c++/exception:
+
+/usr/include/c++/bits/atomic_lockfree_defines.h:
+
+/usr/include/c++/bits/char_traits.h:
+
+/usr/include/c++/bits/stl_algobase.h:
+
+/usr/include/c++/bits/functexcept.h:
+
+/usr/include/c++/bits/exception_defines.h:
+
+/usr/include/c++/bits/cpp_type_traits.h:
+
+/usr/include/c++/ext/type_traits.h:
+
+/usr/include/c++/ext/numeric_traits.h:
+
+/usr/include/c++/bits/stl_pair.h:
+
+/usr/include/c++/bits/move.h:
+
+/usr/include/c++/bits/concept_check.h:
+
+/usr/include/c++/bits/stl_iterator_base_types.h:
+
+/usr/include/c++/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/debug/debug.h:
+
+/usr/include/c++/bits/stl_iterator.h:
+
+/usr/include/c++/bits/localefwd.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/c++locale.h:
+
+/usr/include/c++/clocale:
+
+/usr/include/locale.h:
+
+/usr/include/bits/locale.h:
+
+/usr/include/c++/cctype:
+
+/usr/include/ctype.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/c++/bits/ios_base.h:
+
+/usr/include/c++/ext/atomicity.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/gthr.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/gthr-default.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/time.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/bits/timex.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/atomic_word.h:
+
+/usr/include/c++/bits/locale_classes.h:
+
+/usr/include/c++/string:
+
+/usr/include/c++/bits/allocator.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/c++allocator.h:
+
+/usr/include/c++/ext/new_allocator.h:
+
+/usr/include/c++/new:
+
+/usr/include/c++/bits/ostream_insert.h:
+
+/usr/include/c++/bits/cxxabi_forced.h:
+
+/usr/include/c++/bits/stl_function.h:
+
+/usr/include/c++/backward/binders.h:
+
+/usr/include/c++/bits/range_access.h:
+
+/usr/include/c++/bits/basic_string.h:
+
+/usr/include/c++/bits/basic_string.tcc:
+
+/usr/include/c++/bits/locale_classes.tcc:
+
+/usr/include/c++/streambuf:
+
+/usr/include/c++/bits/streambuf.tcc:
+
+/usr/include/c++/bits/basic_ios.h:
+
+/usr/include/c++/bits/locale_facets.h:
+
+/usr/include/c++/cwctype:
+
+/usr/include/wctype.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/ctype_base.h:
+
+/usr/include/c++/bits/streambuf_iterator.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/ctype_inline.h:
+
+/usr/include/c++/bits/locale_facets.tcc:
+
+/usr/include/c++/bits/basic_ios.tcc:
+
+/usr/include/c++/bits/ostream.tcc:
+
+/usr/include/c++/istream:
+
+/usr/include/c++/bits/istream.tcc:
+
+/usr/include/c++/fstream:
+
+/usr/include/c++/bits/codecvt.h:
+
+/usr/include/c++/cstdio:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/basic_file.h:
+
+/usr/include/c++/powerpc64-fsl-linux/bits/c++io.h:
+
+/usr/include/c++/bits/fstream.tcc:
+
+/usr/include/errno.h:
+
+/usr/include/bits/errno.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/asm/errno.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdint.h:
+
+/usr/include/stdint.h:
+
+../../src/vma/util/rdtsc.h:
+
+../../src/vma/util/clock.h:
+
+/usr/include/sys/time.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+../../src/vma/util/asm.h:
+
+../../src/vma/util/asm-ppc64.h:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
+
+../../src/vma/util/bullseye.h:
+
+../../src/vma/util/vtypes.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/sys/socket.h:
+
+/usr/include/sys/uio.h:
+
+/usr/include/bits/uio.h:
+
+/usr/include/bits/socket.h:
+
+/usr/include/bits/sockaddr.h:
+
+/usr/include/asm/socket.h:
+
+/usr/include/asm/sockios.h:
+
+/usr/include/bits/in.h:
+
+/usr/include/linux/kernel.h:
+
+/usr/include/linux/sysinfo.h:
+
+/usr/include/linux/types.h:
+
+/usr/include/asm/types.h:
+
+/usr/include/asm-generic/int-l64.h:
+
+/usr/include/asm/bitsperlong.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/asm/posix_types.h:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/sys/epoll.h:
+
+event/vlogger_timer_handler.h:
+
+event/timer_handler.h:
+
+event/event_handler_manager.h:
+
+/usr/include/c++/map:
+
+/usr/include/c++/bits/stl_tree.h:
+
+/usr/include/c++/bits/stl_map.h:
+
+/usr/include/c++/bits/stl_multimap.h:
+
+/usr/include/c++/list:
+
+/usr/include/c++/bits/stl_list.h:
+
+/usr/include/c++/bits/list.tcc:
+
+/usr/include/c++/deque:
+
+/usr/include/c++/bits/stl_construct.h:
+
+/usr/include/c++/ext/alloc_traits.h:
+
+/usr/include/c++/bits/stl_uninitialized.h:
+
+/usr/include/c++/bits/stl_deque.h:
+
+/usr/include/c++/bits/deque.tcc:
+
+../../src/vma/util/lock_wrapper.h:
+
+/usr/include/execinfo.h:
+
+/usr/include/string.h:
+
+../../src/vma/util/rdtsc.h:
+
+../../src/vma/util/wakeup.h:
+
+../../src/vma/netlink/netlink_wrapper.h:
+
+../../src/netlink/netlink.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/alloca.h:
+
+/usr/include/sys/poll.h:
+
+/usr/include/bits/poll.h:
+
+../../src/netlink/netlink-compat.h:
+
+/usr/include/linux/netlink.h:
+
+/usr/include/linux/socket.h:
+
+/usr/include/linux/rtnetlink.h:
+
+/usr/include/linux/if_link.h:
+
+/usr/include/linux/if_addr.h:
+
+/usr/include/linux/neighbour.h:
+
+/usr/include/linux/genetlink.h:
+
+/usr/include/linux/netfilter/nfnetlink.h:
+
+/usr/include/linux/netfilter/nfnetlink_compat.h:
+
+../../src/netlink/types.h:
+
+../../src/netlink/handlers.h:
+
+../../src/netlink/netlink-kernel.h:
+
+../../src/netlink/socket.h:
+
+../../src/netlink/cache.h:
+
+../../src/netlink/msg.h:
+
+../../src/netlink/object.h:
+
+../../src/netlink/utils.h:
+
+../../src/netlink/list.h:
+
+../../src/netlink/attr.h:
+
+../../src/netlink/addr.h:
+
+../../src/netlink/data.h:
+
+../../src/netlink/cache-api.h:
+
+../../src/netlink/route/neighbour.h:
+
+../../src/vma/netlink/neigh_info.h:
+
+../../src/vma/infra/subject_observer.h:
+
+/usr/include/c++/tr1/unordered_set:
+
+/usr/include/c++/utility:
+
+/usr/include/c++/bits/stl_relops.h:
+
+/usr/include/c++/tr1/type_traits:
+
+/usr/include/c++/tr1/functional_hash.h:
+
+/usr/include/c++/tr1/hashtable.h:
+
+/usr/include/c++/tr1/hashtable_policy.h:
+
+/usr/include/c++/tr1/unordered_set.h:
+
+../../src/vma/util/to_str.h:
+
+../../src/vma/event/event.h:
+
+/usr/include/c++/typeinfo:
+
+../../src/vma/event/netlink_event.h:
+
+../../src/vma/netlink/neigh_info.h:
+
+../../src/vma/netlink/route_info.h:
+
+../../src/netlink/route/rtnl.h:
+
+../../src/netlink/route/route.h:
+
+../../src/netlink/route/nexthop.h:
+
+../../src/vma/netlink/link_info.h:
+
+../../src/netlink/route/link.h:
+
+../../src/netlink/object-api.h:
+
+../../src/vma/event/command.h:
+
+../../src/vma/event/timer_handler.h:
+
+../../src/vma/event/delta_timer.h:
+
+../../src/vma/event/timers_group.h:

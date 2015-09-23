@@ -1,0 +1,82 @@
+=head1 NAME
+
+B<ibdmtr> -  Fabric Trace Route
+
+=head1 SYNOPSYS
+
+ibdmtr [-v][-h] {-c <cbaling file>|-t <topo file>} -s <sm node name>
+  -p <sm port num> -d <comma-sep-dr-path>
+
+=head1 DESCRIPTION
+
+This utility parses a cabling list or topology file describing the systems connections that make a fabric.  Then it start following the direct route provided and print out the systems and nodes on the route.
+
+=head1 ARGUMENTS
+Required arguments description.
+
+=over
+
+=item -t|--topology <file>
+
+=over
+
+=item Topology file describing the network. See man ibdm-topology-file.
+
+=back
+
+=item -c|--cables <file>
+
+=over
+
+=item Cabling list file. Following the line format:
+
+=back
+
+<Sys1Type> <Sys1Name> <Port1Name> <Sys2Type> <Sys2Name> <Port2Name>
+
+=item -s|--sm-node <name>
+
+=over
+
+=item The name of the SM node (not system). E.g. OSM/U1.
+
+=back
+
+=item -p|--port-num <num>
+
+=over
+
+=item The number of the SM node port the SM is attached to
+
+=back
+
+=item -d|--dr-path <comm-sep-dr-path>
+
+=over
+
+=item A list of ports to go out through
+
+=back
+
+=head1 OPTIONS
+
+=item -v|--verbose
+
+=over
+
+=item verbsoe mode
+
+=back
+
+=item -h|--help
+
+=over
+
+=item provide this help message
+
+=back
+
+=head1 AUTHOR
+
+Eitan Zahavi, Mellanox Technologies LTD, eitan@mellanox.co.il
+

@@ -1,0 +1,454 @@
+allocator_basic.lo: allocator_basic.c \
+ ../../../../ompi/include/ompi_config.h \
+ ../../../../opal/include/opal_config.h \
+ ../../../../opal/include/opal_config_top.h \
+ ../../../../opal/include/opal_config_bottom.h \
+ ../../../../opal/include/opal_config.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h \
+ /usr/include/bits/predefs.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdbool.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include-fixed/limits.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include-fixed/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+ /usr/include/bits/stdio_lim.h /usr/include/sys/param.h \
+ /usr/include/linux/param.h /usr/include/asm/param.h \
+ /usr/include/asm-generic/param.h /usr/include/sys/types.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/time.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h allocator_basic.h /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/xlocale.h /usr/include/alloca.h /usr/include/string.h \
+ /usr/include/bits/string.h /usr/include/bits/string2.h \
+ ../../../../opal/threads/mutex.h ../../../../opal/threads/mutex_unix.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
+ /usr/include/bits/timex.h /usr/include/bits/setjmp.h \
+ /usr/include/errno.h /usr/include/bits/errno.h \
+ /usr/include/linux/errno.h /usr/include/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ ../../../../opal/class/opal_object.h /usr/include/assert.h \
+ ../../../../opal/include/opal/sys/atomic.h \
+ ../../../../opal/include/opal/sys/architecture.h \
+ ../../../../opal/include/opal/sys/powerpc/atomic.h \
+ ../../../../opal/include/opal/sys/atomic_impl.h \
+ ../../../../ompi/class/ompi_free_list.h \
+ ../../../../opal/class/opal_atomic_lifo.h \
+ ../../../../opal/class/opal_list.h \
+ ../../../../opal/include/opal/prefetch.h \
+ ../../../../opal/threads/condition.h /usr/include/sys/time.h \
+ ../../../../opal/runtime/opal_progress.h \
+ ../../../../opal/runtime/opal_cr.h ../../../../opal/mca/crs/crs.h \
+ ../../../../opal/mca/mca.h ../../../../opal/mca/base/base.h \
+ ../../../../opal/mca/base/mca_base_param.h \
+ ../../../../opal/mca/base/mca_base_var.h \
+ ../../../../opal/class/opal_value_array.h /usr/include/strings.h \
+ ../../../../opal/include/opal/constants.h \
+ ../../../../opal/mca/base/mca_base_var_enum.h \
+ ../../../../opal/mca/base/mca_base_var_group.h \
+ ../../../../opal/mca/base/mca_base_framework.h \
+ ../../../../opal/util/cmd_line.h ../../../../opal/mca/event/event.h \
+ ../../../../opal/class/opal_pointer_array.h \
+ ../../../../opal/mca/event/libevent2021/libevent2021.h \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/confname.h \
+ /usr/include/getopt.h /usr/include/signal.h /usr/include/bits/signum.h \
+ /usr/include/bits/siginfo.h /usr/include/bits/sigaction.h \
+ /usr/include/bits/sigcontext.h /usr/include/asm/sigcontext.h \
+ /usr/include/asm/ptrace.h /usr/include/linux/types.h \
+ /usr/include/asm/types.h /usr/include/asm-generic/int-l64.h \
+ /usr/include/asm/bitsperlong.h /usr/include/asm-generic/bitsperlong.h \
+ /usr/include/linux/posix_types.h /usr/include/linux/stddef.h \
+ /usr/include/asm/posix_types.h /usr/include/asm-generic/posix_types.h \
+ /usr/include/asm/elf.h /usr/include/asm/cputable.h \
+ /usr/include/asm/auxvec.h /usr/include/bits/sigstack.h \
+ /usr/include/sys/ucontext.h /usr/include/bits/sigthread.h \
+ ../../../../opal/threads/threads.h ../../../../opal/threads/mutex.h \
+ ../../../../opal/threads/condition.h ../../../../opal/util/output.h \
+ ../../../../opal/util/argv.h ../../../../opal/mca/event/base/base.h \
+ ../../../../opal/mca/event/libevent2021/libevent/event.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/event-config.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/evutil.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/util.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/opal_rename.h \
+ /usr/include/netdb.h /usr/include/netinet/in.h /usr/include/sys/socket.h \
+ /usr/include/sys/uio.h /usr/include/bits/uio.h \
+ /usr/include/bits/socket.h /usr/include/bits/sockaddr.h \
+ /usr/include/asm/socket.h /usr/include/asm/sockios.h \
+ /usr/include/bits/in.h /usr/include/rpc/netdb.h \
+ /usr/include/bits/netdb.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/event_struct.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/keyvalq_struct.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/event.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/event_compat.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/buffer.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/buffer_compat.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/bufferevent.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/bufferevent_struct.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/bufferevent_compat.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/tag.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/tag_compat.h \
+ ../../../../opal/mca/event/libevent2021/libevent/include/event2/thread.h \
+ ../../../../ompi/include/ompi/constants.h \
+ ../../../../orte/include/orte/constants.h \
+ ../../../../orte/include/orte_config.h ../../../../opal/runtime/opal.h \
+ ../../../../ompi/mca/allocator/allocator.h \
+ ../../../../ompi/mca/mpool/mpool.h ../../../../ompi/info/info.h \
+ ../../../../ompi/include/mpi.h ../../../../opal/mca/crs/base/base.h \
+ ../../../../opal/util/opal_environ.h
+
+../../../../ompi/include/ompi_config.h:
+
+../../../../opal/include/opal_config.h:
+
+../../../../opal/include/opal_config_top.h:
+
+../../../../opal/include/opal_config_bottom.h:
+
+../../../../opal/include/opal_config.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdbool.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include-fixed/limits.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include-fixed/syslimits.h:
+
+/usr/include/limits.h:
+
+/usr/include/bits/posix1_lim.h:
+
+/usr/include/bits/local_lim.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/bits/posix2_lim.h:
+
+/usr/include/bits/xopen_lim.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/sys/param.h:
+
+/usr/include/linux/param.h:
+
+/usr/include/asm/param.h:
+
+/usr/include/asm-generic/param.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/time.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+allocator_basic.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/alloca.h:
+
+/usr/include/string.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+../../../../opal/threads/mutex.h:
+
+../../../../opal/threads/mutex_unix.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/timex.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/errno.h:
+
+/usr/include/bits/errno.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/asm/errno.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+../../../../opal/class/opal_object.h:
+
+/usr/include/assert.h:
+
+../../../../opal/include/opal/sys/atomic.h:
+
+../../../../opal/include/opal/sys/architecture.h:
+
+../../../../opal/include/opal/sys/powerpc/atomic.h:
+
+../../../../opal/include/opal/sys/atomic_impl.h:
+
+../../../../ompi/class/ompi_free_list.h:
+
+../../../../opal/class/opal_atomic_lifo.h:
+
+../../../../opal/class/opal_list.h:
+
+../../../../opal/include/opal/prefetch.h:
+
+../../../../opal/threads/condition.h:
+
+/usr/include/sys/time.h:
+
+../../../../opal/runtime/opal_progress.h:
+
+../../../../opal/runtime/opal_cr.h:
+
+../../../../opal/mca/crs/crs.h:
+
+../../../../opal/mca/mca.h:
+
+../../../../opal/mca/base/base.h:
+
+../../../../opal/mca/base/mca_base_param.h:
+
+../../../../opal/mca/base/mca_base_var.h:
+
+../../../../opal/class/opal_value_array.h:
+
+/usr/include/strings.h:
+
+../../../../opal/include/opal/constants.h:
+
+../../../../opal/mca/base/mca_base_var_enum.h:
+
+../../../../opal/mca/base/mca_base_var_group.h:
+
+../../../../opal/mca/base/mca_base_framework.h:
+
+../../../../opal/util/cmd_line.h:
+
+../../../../opal/mca/event/event.h:
+
+../../../../opal/class/opal_pointer_array.h:
+
+../../../../opal/mca/event/libevent2021/libevent2021.h:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
+
+/usr/include/signal.h:
+
+/usr/include/bits/signum.h:
+
+/usr/include/bits/siginfo.h:
+
+/usr/include/bits/sigaction.h:
+
+/usr/include/bits/sigcontext.h:
+
+/usr/include/asm/sigcontext.h:
+
+/usr/include/asm/ptrace.h:
+
+/usr/include/linux/types.h:
+
+/usr/include/asm/types.h:
+
+/usr/include/asm-generic/int-l64.h:
+
+/usr/include/asm/bitsperlong.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/asm/posix_types.h:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/asm/elf.h:
+
+/usr/include/asm/cputable.h:
+
+/usr/include/asm/auxvec.h:
+
+/usr/include/bits/sigstack.h:
+
+/usr/include/sys/ucontext.h:
+
+/usr/include/bits/sigthread.h:
+
+../../../../opal/threads/threads.h:
+
+../../../../opal/threads/mutex.h:
+
+../../../../opal/threads/condition.h:
+
+../../../../opal/util/output.h:
+
+../../../../opal/util/argv.h:
+
+../../../../opal/mca/event/base/base.h:
+
+../../../../opal/mca/event/libevent2021/libevent/event.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/event-config.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/evutil.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/util.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/opal_rename.h:
+
+/usr/include/netdb.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/sys/socket.h:
+
+/usr/include/sys/uio.h:
+
+/usr/include/bits/uio.h:
+
+/usr/include/bits/socket.h:
+
+/usr/include/bits/sockaddr.h:
+
+/usr/include/asm/socket.h:
+
+/usr/include/asm/sockios.h:
+
+/usr/include/bits/in.h:
+
+/usr/include/rpc/netdb.h:
+
+/usr/include/bits/netdb.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/event_struct.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/keyvalq_struct.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/event.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/event_compat.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/buffer.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/buffer_compat.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/bufferevent.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/bufferevent_struct.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/bufferevent_compat.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/tag.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/opal/mca/event/libevent2021/libevent/include/event2/tag_compat.h:
+
+../../../../opal/mca/event/libevent2021/libevent/include/event2/thread.h:
+
+../../../../ompi/include/ompi/constants.h:
+
+../../../../orte/include/orte/constants.h:
+
+../../../../orte/include/orte_config.h:
+
+../../../../opal/runtime/opal.h:
+
+../../../../ompi/mca/allocator/allocator.h:
+
+../../../../ompi/mca/mpool/mpool.h:
+
+../../../../ompi/info/info.h:
+
+../../../../ompi/include/mpi.h:
+
+../../../../opal/mca/crs/base/base.h:
+
+../../../../opal/util/opal_environ.h:

@@ -1,0 +1,14 @@
+2005-02-23  Eitan Zahavi  <eitan@mellanox.co.il>
+
+	* Added OpenIB license headers. Basically this is the first
+	publically released code.
+
+2005-07-10 Eitan Zahavi  <eitan@mellanox.co.il>
+	* Major update:
+	- Introduce RunSimTest and tests directory with a set of example tests
+	  and a simple way to run them
+	- MCMemberRecord mads can be injected from the simulator.
+	- PMA integrated into the simulator
+	- VSA integrated into the simulator
+	- All randomization in test flows should be done through a thread safe
+	  randomization angine

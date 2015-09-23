@@ -1,0 +1,155 @@
+mpi-io/rd_atallb.lo: mpi-io/rd_atallb.c mpi-io/mpioimpl.h \
+ adio/include/adio.h adio/include/romioconf.h \
+ adio/include/romioconf-undefs.h adio/include/nopackage.h \
+ ../../../../../ompi/include/mpi.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/ompi/mca/io/romio/romio/include/mpio.h \
+ /home/root/Infiniband/test/app/openmpi-1.8.4rc1/ompi/mca/io/romio/romio/include/io_romio_conv.h \
+ /usr/include/fcntl.h /usr/include/features.h /usr/include/bits/predefs.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/include/bits/fcntl.h /usr/include/sys/types.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/stat.h \
+ /usr/include/sys/stat.h /usr/include/string.h /usr/include/xlocale.h \
+ /usr/include/bits/string.h /usr/include/bits/string2.h \
+ /usr/include/stdlib.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/alloca.h \
+ /usr/include/errno.h /usr/include/bits/errno.h \
+ /usr/include/linux/errno.h /usr/include/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ adio/include/adioi.h adio/include/adioi_error.h /usr/include/assert.h \
+ adio/include/adioi_fs_proto.h adio/include/mpio_error.h \
+ adio/include/mpipr.h adio/include/mpiu_external32.h mpi-io/mpioprof.h
+
+mpi-io/mpioimpl.h:
+
+adio/include/adio.h:
+
+adio/include/romioconf.h:
+
+adio/include/romioconf-undefs.h:
+
+adio/include/nopackage.h:
+
+../../../../../ompi/include/mpi.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stddef.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/ompi/mca/io/romio/romio/include/mpio.h:
+
+/home/root/Infiniband/test/app/openmpi-1.8.4rc1/ompi/mca/io/romio/romio/include/io_romio_conv.h:
+
+/usr/include/fcntl.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/bits/fcntl.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/time.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/bits/stat.h:
+
+/usr/include/sys/stat.h:
+
+/usr/include/string.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib64/gcc/powerpc64-fsl-linux/4.8.1/include/stdarg.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/alloca.h:
+
+/usr/include/errno.h:
+
+/usr/include/bits/errno.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/asm/errno.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+adio/include/adioi.h:
+
+adio/include/adioi_error.h:
+
+/usr/include/assert.h:
+
+adio/include/adioi_fs_proto.h:
+
+adio/include/mpio_error.h:
+
+adio/include/mpipr.h:
+
+adio/include/mpiu_external32.h:
+
+mpi-io/mpioprof.h:

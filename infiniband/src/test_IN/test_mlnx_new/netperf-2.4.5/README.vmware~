@@ -1,0 +1,9 @@
+Compiling for VMware is somewhat like compiling for Windows - there is
+a separate, standalone makefile one uses.  In this case, it is
+src/Makefile.uw.
+
+Also, seems the way things are "run" under VMware is enough different
+that the scripts, should you chose to use them, will need to be
+modified.  The initial set of patches make some arbitrary changes that
+need to be re-worked with some "To run this under VMware uncomment
+this line" or somesuch.

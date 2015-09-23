@@ -1,0 +1,61 @@
+NAME
+  ibdiagnet
+
+SYNOPSYS
+  ibdiagnet [-c <count>] [-v] [-r] [-t <topo-file>] [-s <sys-name>]
+     [-i <dev-index>] [-p <port-num>] [-o <out-dir>]
+
+DESCRIPTION
+  ibdiagnet scans the fabric using directed route packets and extracts all the
+  available information regarding its connectivity and devices.
+  It then produces the following files in the output directory defined by the
+  -o option (see below):
+    ibdiagnet.lst    - List of all the nodes, ports and links in the fabric
+    ibdiagnet.fdbs   - A dump of the unicast forwarding tables of the fabric
+                        switches
+    ibdiagnet.mcfdbs - A dump of the multicast forwarding tables of the fabric
+                        switches
+  In addition to generating the files above, the discovery phase also checks for
+  duplicate node GUIDs in the IB fabric. If such an error is detected, it is
+  displayed on the standard output.
+  After the discovery phase is completed, directed route packets are sent
+  multiple times (according to the -c option) to detect possible problematic
+  paths on which packets may be lost. Such paths are explored, and a report of
+  the suspected bad links is displayed on the standard output.
+  After scanning the fabric, if the -r option is provided, a full report of the
+  fabric qualities is displayed.
+  This report includes:
+    Number of nodes and systems
+    Hop-count information:
+         maximal hop-count, an example path, and a hop-count histogram
+    All CA-to-CA paths traced
+  Note: In case the IB fabric includes only one CA, then CA-to-CA paths are not
+  reported.
+  Furthermore, if a topology file is provided, ibdiagnet uses the names defined
+  in it for the output reports.
+
+OPTIONS
+  -c <count>    : The minimal number of packets to be sent across each link
+                  (default = 10)
+  -v            : Instructs the tool to run in verbose mode
+  -r            : Provides a report of the fabric qualities
+  -t <topo-file>: Specifies the topology file name
+  -s <sys-name> : Specifies the local system name. Meaningful only if a topology
+                  file is specified
+  -i <dev-index>: Specifies the index of the device of the port used to connect
+                  to the IB fabric (in case of multiple devices on the local
+                  system)
+  -p <port-num> : Specifies the local device's port number used to connect to
+                  the IB fabric
+  -o <out-dir>  : Specifies the directory where the output files will be placed
+                  (default = /tmp/ez)
+
+  -h|--help     : Prints this help information
+  -V|--version  : Prints the version of the tool
+     --vars     : Prints the tool's environment variables and their values
+
+ERROR CODES
+  1 - Failed to fully discover the fabric
+  2 - Failed to parse command line options
+  3 - Some packet drop observed
+  4 - Mismatch with provided topology

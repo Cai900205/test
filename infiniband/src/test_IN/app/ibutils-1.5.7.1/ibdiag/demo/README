@@ -1,0 +1,27 @@
+IBIADG TOOLS DEMO:
+==================
+
+The set of files provided in this directory can be used to demo the
+ibdiags capabilities to report various error conditions on the IB fabric.
+The files should be used by the ibmgtsim to simulate the error and
+then interactively invoke ibdiagnet/ibdiagpath to see the report.
+
+Files in this directory:
+------------------------
+network.topo - the full topology used for this demo
+credit-loops.topo - OpenSM default router cause credit loops on this fabric
+
+partition.*.tcl       - set 3 partitions and remove some sw pkeys to fail
+		     	enforcement
+ipoib.*.tcl 	      -	set three subnets, show OK and two warnings regarding
+                     	IPoIB join
+faulty-links.*.tcl    - set some packet drops on the fabric
+ipoib.*.tcl 	      - make some nodes fail to join IPoIB or make MCG
+			slower then needed
+no-faults.*.tcl       - the good case flow
+qos.*.tcl 	      - show some errors caused by faulty QoS setup
+sm-credits.*.tcl      - show credit loop report if run with credit-loops.topo
+sm-lids.*.tcl         - show bad LID assignment errors
+sm-link-setup.*.tcl   - show bad LINK parameter assignments
+sm-routing.*.tcl      - demo routing faults by the SM
+sm-single-master.tcl  - show bad SM handover sequence report

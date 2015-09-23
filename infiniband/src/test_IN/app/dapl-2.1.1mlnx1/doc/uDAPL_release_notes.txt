@@ -1,0 +1,926 @@
+
+		   Release Notes for 
+	Gamma 3.3 and OFED 1.2 DAPL Release
+		    June 2007
+
+
+        DAPL GAMMA 3.3/OFED 1.2 RELEASE NOTES
+
+	This release of the DAPL reference implementation 
+        is timed to coincide with OFED release 1.2 of the 
+        Open Fabrics (www.openfabrics.org) software stack.
+
+        NEW SINCE Gamma 3.2 and OFED 1.1
+
+        * New Features
+
+          1. Added dtest and dapltest to the openfabrics build and utils rpm. 
+             Includes manpages.
+          2. Added following enviroment variables to configure connection management
+             timers (default settings) for larger clusters:
+
+             DAPL_CM_ARP_TIMEOUT_MS      4000
+             DAPL_CM_ARP_RETRY_COUNT       15
+             DAPL_CM_ROUTE_TIMEOUT_MS    4000
+             DAPL_CM_ROUTE_RETRY_COUNT     15
+            
+        * Bug Fixes
+
+          + Added support for new ib verbs client register event. No extra 
+            processing required at the uDAPL level.
+          + Fix some issues supporting create qp without recv cq handle or 
+            recv qp resources. IB verbs assume a recv_cq handle and uDAPL 
+            dapl_ep_create assumes there is always recv_sge resources specified.
+          + Fix some timeout and long disconnect delay issues discovered during 
+            scale-out testing. Added support to retry rdma_cm address and route 
+            resolution with configuration options. Provide a disconnect call
+            when receiving the disconnect request to guarantee a disconnect reply 
+            and event on the remote side. The rdma_disconnect was not being called 
+            from dat_ep_disconnect() as a result of the state changing
+            to DISCONNECTED in the event callback.
+          + Changes to support exchanging and validation of the device 
+            responder_resources and the initiator_depth during conn establishment
+          + Fix some build issues with dapltest on 32 bit arch, and on ia64 SUSE arch
+          + Add support for multiple IB devices to dat.conf to support IPoIB HA failover
+          + Fix atomic operation build problem with ia64 and RHEL5.
+          + Add support to return local and remote port information with dat_ep_query
+          + Cleanup RPM specfile for the dapl package, move to 1.2-1 release.
+
+        NEW SINCE Gamma 3.1 and OFED 1.0
+ 
+        * BUG FIXES
+
+	  + Update obsolete CLK_TCK to CLOCKS_PER_SEC
+ 	  + Fill out some unitialized fields in the ia_attr structure returned by
+	  dat_ia_query().
+        + Update dtest to support multiple segments on rdma write and change
+	  makefile to use OpenIB-cma by default.
+        + Add support for dat_evd_set_unwaitable on a DTO evd in openib_cma
+	  provider
+        + Added errno reporting (message and return codes) during open to help
+	  diagnose create thread issues.
+        + Fix some suspicious inline assembly  EIEIO_ON_SMP and ISYNC_ON_SMP 
+        + Fix IA64 build problems 
+        + Lower the reject debug message level so we don't see warnings when
+	  consumers reject.
+        + Added support for active side TIMED_OUT event from a provider.
+        + Fix bug in dapls_ib_get_dat_event() call after adding new unreachable
+	  event.
+        + Update for new rdma_create_id() function signature.
+        + Set max rdma read per EP attributes
+        + Report the proper error and timeout events.
+        + Socket CM fix to guard against using a loopback address as the local
+	  device address.
+        + Use the uCM set_option feature to adjust connect request timeout
+	  retry values. 
+        + Fix to disallow any event after a disconnect event.
+
+	* OFED 1.1 uDAPL source build instructions:
+
+	cd /usr/local/ofed/src/openib-1.1/src/userspace/dapl
+
+	# NON_DEBUG build configuration
+
+	./configure --disable-libcheck --prefix /usr/local/ofed 
+	--libdir /usr/local/ofed/lib64 LDFLAGS=-L/usr/local/ofed/lib64	
+	CPPFLAGS="-I../libibverbs/include -I../librdmacm/include"
+
+	# build and install 
+
+	make
+	make install
+
+	# DEBUG build configuration
+
+	./configure --disable-libcheck --enable-debug --prefix /usr/local/ofed 	
+	--libdir /usr/local/ofed/lib64 LDFLAGS=-L/usr/local/ofed/lib64
+	CPPFLAGS="-I../libibverbs/include -I../librdmacm/include"
+
+	# build and install 
+
+	make
+	make install
+
+	# DEBUG messages: set environment variable DAPL_DBG_TYPE, default
+	  mapping is 0x0003
+
+	DAPL_DBG_TYPE_ERR       = 0x0001,
+	DAPL_DBG_TYPE_WARN      = 0x0002,
+	DAPL_DBG_TYPE_EVD       = 0x0004,
+	DAPL_DBG_TYPE_CM        = 0x0008,
+	DAPL_DBG_TYPE_EP        = 0x0010,
+	DAPL_DBG_TYPE_UTIL      = 0x0020,
+	DAPL_DBG_TYPE_CALLBACK  = 0x0040,
+	DAPL_DBG_TYPE_DTO_COMP_ERR= 0x0080,
+	DAPL_DBG_TYPE_API       = 0x0100,
+	DAPL_DBG_TYPE_RTN       = 0x0200,
+	DAPL_DBG_TYPE_EXCEPTION = 0x0400,
+	DAPL_DBG_TYPE_SRQ       = 0x0800,
+	DAPL_DBG_TYPE_CNTR      = 0x1000
+
+
+	Note: The udapl provider library libdaplscm.so is untested and 
+	unsupported, thus customers should not use it.
+	It will be removed in the next OFED release. 
+	
+        DAPL GAMMA 3.1 RELEASE NOTES
+
+        This release of the DAPL reference implementation 
+        is timed to coincide with the first release of the 
+        Open Fabrics (www.openfabrics.org) software stack.
+        This release adds support for this new stack, which 
+        is now the native Linux RDMA stack.
+        
+        This release also adds a new licensing option. In 
+        addition to the Common Public License and BSD License,
+	  the code can now be licensed under the terms of the GNU 
+        General Public License (GPL) version 2.
+
+        NEW SINCE Gamma 3.0
+
+        - GPL v2 added as a licensing option
+        - OpenFabrics (aka OpenIB) gen2 verbs support
+        - dapltest support for Solaris 10
+
+        * BUG FIXES
+
+        + Fixed a disconnect event processing race
+        + Fix to destroy all QPs on IA close
+        + Removed compiler warnings
+        + Removed unused variables
+        + And many more...
+
+        DAPL GAMMA 3.0 RELEASE NOTES
+
+        This is the first release based on version 1.2 of the spec. There 
+        are some components, such a shared receive queues (SRQs), which 
+        are not implemented yet. 
+
+        Once again there were numerous bug fixes submitted by the 
+        DAPL community.
+
+        NEW SINCE Beta 2.06
+
+        - DAT 1.2 headers
+        - DAT_IA_HANDLEs implemented as small integers
+	- Changed default device name to be "ia0a"
+        - Initial support for Linux 2.6.X kernels
+        - Updates to the OpenIB gen 1 provider 
+
+        * BUG FIXES
+
+        + Updated Makefile for differentiation between OS releases. 
+        + Updated atomic routines to use appropriate API
+        + Removed unnecessary assert from atomic_dec. 
+        + Fixed bugs when freeing a PSP.
+        + Fixed error codes returned by the DAT static registry.
+        + Kernel updates for dat_strerror.
+        + Cleaned up the transport layer/adapter interface to use DAPL 
+          types rather than transport types.
+        + Fixed ring buffer reallocation.
+        + Removed old test/udapl/dapltest directory.
+        + Fixed DAT_IA_HANDLE translation (from pointer to int and 
+          vice versa) on 64-bit platforms.
+
+	DAP BETA 2.06 RELEASE NOTES
+
+	We are not planning any further releases of the Beta series,
+	which are based  on the 1.1 version of the spec. There may be
+	further releases for bug fixes, but we anticipate the DAPL
+	community to move to the new 1.2 version of the spec and the
+	changes mandated in the reference implementation.
+
+	The biggest item in this release is the first inclusion of the
+	OpenIB Gen 1 provider, an item generating a lot of interest in
+	the IB community. This implementation has graciously been
+	provided by the Mellanox team. The kdapl implementation is in
+	progress, and we imagine work will soon begin on Gen 2.
+
+	There are also a handful of bug fixes available, as well as a long
+	awaited update to the endpoint design document.
+
+	NEW SINCE Beta 2.05
+
+	- OpenIB gen 1 provider support has been added
+	- Added dapls_evd_post_generic_event(), routine to post generic 
+	  event types as requested by some providers. Also cleaned up 
+	  error reporting.
+	- Updated the endpoint design document in the doc/ directory.
+
+	* BUG FIXES
+
+	+ Cleaned up memory leak on close by freeing the HCA structure;
+	+ Removed bogus #defs for rdtsc calls on IA64.
+	+ Changed daptest thread types to use internal types for 
+	  portability & correctness
+	+ Various 64 bit enhancements & updates
+	+ Fixes to conformance test that were defining CONN_QUAL twice
+	  and using it in different ways
+	+ Cleaned up private data handling in ep_connect & provider 
+	  support: we now avoid extra copy in connect code; reduced
+	  stack requirements by using private_data structure in the EP;
+	  removed provider variable.
+	+ Fixed problem in the dat conformance test where cno_wait would
+	  attempt to dereference a timer value and SEGV.
+	+ Removed old vestiges of depricated POLLING_COMPLETIONS 
+	  conditionals.
+
+	DAPL BETA 2.05 RELEASE NOTES
+
+	This was to be a very minor release, the primary change was
+	going to be the new wording of the DAT license as contained in
+	the header for all source files. But the interest and
+	development occurring in DAPL provided some extra bug fixes, and
+	some new functionality that has been requested for a while.
+
+	First, you may notice that every single source file was
+	changed. If you read the release notes from DAPL BETA 2.04, you
+	were warned this would happen. There was a legal issue with the
+	wording in the header, the end result was that every source file
+	was required to change the word 'either of' to 'both'. We've
+	been putting this change off as long as possible, but we wanted
+	to do it in a clean drop before we start working on DAT 1.2
+	changes in the reference implementation, just to keep things
+	reasonably sane.
+
+	kdapltest has enabled three of the subtests supported by
+	dapltest. The Performance test in particular has been very
+	useful to dapltest in getting minima and maxima. The Limit test
+	pushes the limits by allocating the maximum number of specific
+	resources. And the FFT tests are also available.
+
+	Most vendors have supported shared memory regions for a while,
+	several of which have asked the reference implementation team to
+	provide a common implementation. Shared memory registration has
+	been tested on ibapi, and compiled into vapi. Both InfiniBand
+	providers have the restriction that a memory region must be
+	created before it can be shared; not all RDMA APIs are this way,
+	several allow you to declare a memory region shared when it is
+	registered. Hence, details of the implementation are hidden in
+	the provider layer, rather than forcing other APIs to do
+	something strange.
+
+	This release also contains some changes that will allow dapl to
+	work on Opteron processors, as well as some preliminary support
+	for Power PC architecture. These features are not well tested
+	and may be incomplete at this time.
+
+	Finally, we have been asked several times over the course of the
+	project for a canonical interface between the common and
+	provider layers. This release includes a dummy provider to meet
+	that need. Anyone should be able to download the release and do
+	a:
+	   make VERBS=DUMMY
+
+	And have a cleanly compiled dapl library. This will be useful
+	both to those porting new transport providers, as well as those
+	going to new machines.
+
+	The DUMMY provider has been compiled on both Linux and Windows
+	machines.
+
+
+	NEW SINCE Beta 2.4
+	- kdapltest enhancements:
+	  * Limit subtests now work
+	  * Performance subtests now work.
+	  * FFT tests now work.
+
+	- The VAPI headers have been refreshed by Mellanox
+
+	- Initial Opteron and PPC support.
+
+	- Atomic data types now have consistent treatment, allowing us to
+	  use native data types other than integers. The Linux kdapl
+	  uses atomic_t, allowing dapl to use the kernel macros and
+	  eliminate the assembly code in dapl_osd.h
+
+	- The license language was updated per the direction of the
+	  DAT Collaborative. This two word change affected the header
+	  of every file in the tree.
+
+	- SHARED memory regions are now supported.
+
+	- Initial support for the TOPSPIN provider.
+
+	- Added a dummy provider, essentially the NULL provider. It's
+	  purpose is to aid in porting and to clarify exactly what is
+	  expected in a provider implementation.
+
+	- Removed memory allocation from the DTO path for VAPI
+
+	- cq_resize will now allow the CQ to be resized smaller. Not all
+	  providers support this, but it's a provider problem, not a
+	  limitation of the common code.
+
+	* BUG FIXES
+
+	+ Removed spurious lock in dapl_evd_connection_callb.c that
+	  would have caused a deadlock.
+	+ The Async EVD was getting torn down too early, potentially
+	  causing lost errors. Has been moved later in the teardown
+	  process.
+	+ kDAPL replaced mem_map_reserve() with newer SetPageReserved()
+	  for better Linux integration.
+	+ kdapltest no longer allocate large print buffers on the stack,
+	  is more careful to ensure buffers don't overflow.
+	+ Put dapl_os_dbg_print() under DAPL_DBG conditional, it is
+	  supposed to go away in a production build. 
+	+ dapltest protocol version has been bumped to reflect the
+	  change in the Service ID.
+	+ Corrected several instances of routines that did not adhere
+	  to the DAT 1.1 error code scheme.
+	+ Cleaned up vapi ib_reject_connection to pass DAT types rather
+	  than provider specific types. Also cleaned up naming interface
+	  declarations and their use in vapi_cm.c; fixed incorrect
+	  #ifdef for naming.  
+	+ Initialize missing uDAPL provider attr, pz_support.
+	+ Changes for better layering: first, moved
+	  dapl_lmr_convert_privileges to the provider layer as memory
+	  permissions are clearly transport specific and are not always
+	  defined in an integer bitfield; removed common routines for
+	  lmr and rmr. Second, move init and release setup/teardown
+	  routines into adapter_util.h, which defined the provider
+	  interface.
+	+ Cleaned up the HCA name cruft that allowed different types
+	  of names such as strings or ints to be dealt with in common
+	  code; but all names are presented by the dat_registry as
+	  strings, so pushed conversions down to the provider
+	  level. Greatly simplifies names.
+	+ Changed deprecated true/false to DAT_TRUE/DAT_FALSE.
+	+ Removed old IB_HCA_NAME type in favor of char *.
+	+ Fixed race condition in kdapltest's use of dat_evd_dequeue. 
+	+ Changed cast for SERVER_PORT_NUMBER to DAT_CONN_QUAL as it
+	  should be. 
+	+ Small code reorg to put the CNO into the EVD when it is
+	  allocated, which simplifies things. 
+	+ Removed gratuitous ib_hca_port_t and ib_send_op_type_t types,
+	  replaced with standard int.
+	+ Pass a pointer to cqe debug routine, not a structure. Some
+	  clean up of data types.
+	+ kdapl threads now invoke reparent_to_init() on exit to allow
+	  threads to get cleaned up.
+
+
+
+	DAPL BETA 2.04 RELEASE NOTES
+
+	The big changes for this release involve a more strict adherence
+	to the original dapl architecture. Originally, only InfiniBand
+	providers were available, so allowing various data types and
+	event codes to show through into common code wasn't a big deal.
+
+	But today, there are an increasing number of providers available
+	on a number of transports. Requiring an IP iWarp provider to
+	match up to InfiniBand events is silly, for example.
+
+	Restructuring the code allows more flexibility in providing an
+	implementation.
+
+	There are also a large number of bug fixes available in this
+	release, particularly in kdapl related code.
+
+	Be warned that the next release will change every file in the
+	tree as we move to the newly approved DAT license. This is a
+	small change, but all files are affected.
+
+	Future releases will also support to the soon to be ratified DAT
+	1.2 specification.
+
+	This release has benefited from many bug reports and fixes from
+	a number of individuals and companies. On behalf of the DAPL
+	community, thank you!
+
+
+	NEW SINCE Beta 2.3
+
+	- Made several changes to be more rigorous on the layering
+	  design of dapl. The intent is to make it easier for non
+	  InfiniBand transports to use dapl. These changes include:
+	  
+	  * Revamped the ib_hca_open/close code to use an hca_ptr
+	    rather than an ib_handle, giving the transport layer more
+	    flexibility in assigning transport handles and resources.
+
+	  * Removed the CQD calls, they are specific to the IBM API;
+	    folded this functionality into the provider open/close calls.
+
+	  * Moved VAPI, IBAPI transport specific items into a transport
+	    structure placed inside of the HCA structure. Also updated
+	    routines using these fields to use the new location. Cleaned
+	    up provider knobs that have been exposed for too long.
+
+	  * Changed a number of provider routines to use DAPL structure
+	    pointers rather than exposing provider handles & values. Moved
+	    provider specific items out of common code, including provider
+	    data types (e.g. ib_uint32_t).
+
+	  * Pushed provider completion codes and type back into the
+            provider layer. We no longer use EVD or CM completion types at
+            the common layer, instead we obtain the appropriate DAT type
+            from the provider and process only DAT types.
+
+	  * Change private_data handling such that we can now accommodate
+            variable length private data.
+
+	- Remove DAT 1.0 cruft from the DAT header files.
+
+	- Better spec compliance in headers and various routines.
+
+	- Major updates to the VAPI implementation from
+          Mellanox. Includes initial kdapl implementation
+
+	- Move kdapl platform specific support for hash routines into
+          OSD file.
+
+	- Cleanups to make the code more readable, including comments
+          and certain variable and structure names.
+
+	- Fixed CM_BUSTED code so that it works again: very useful for
+          new dapl ports where infrastructure is lacking. Also made
+	  some fixes for IBHOSTS_NAMING conditional code.
+
+	- Added DAPL_MERGE_CM_DTO as a compile time switch to support
+	  EVD stream merging of CM and DTO events. Default is off.
+
+	- 'Quit' test ported to kdapltest
+
+	- uDAPL now builds on Linux 2.6 platform (SuSE 9.1).
+
+	- kDAPL now builds for a larger range of Linux kernels, but
+          still lacks 2.6 support.
+
+	- Added shared memory ID to LMR structure. Shared memory is
+          still not fully supported in the reference implementation, but
+          the common code will appear soon.
+
+	* Bug fixes
+	  - Various Makefiles fixed to use the correct dat registry
+	    library in its new location (as of Beta 2.03)
+	  - Simple reorg of dat headers files to be consistent with
+	    the spec.
+	  - fixed bug in vapi_dto.h recv macro where we could have an
+	    uninitialized pointer.
+	  - Simple fix in dat_dr.c to initialize a variable early in the
+	    routine before errors occur.
+	  - Removed private data pointers from a CONNECTED event, as
+	    there should be no private data here.
+	  - dat_strerror no longer returns an uninitialized pointer if
+	    the error code is not recognized.
+	  - dat_dup_connect() will reject 0 timeout values, per the
+	    spec.
+	  - Removed unused internal_hca_names parameter from
+	    ib_enum_hcas() interface. 
+	  - Use a temporary DAT_EVENT for kdapl up-calls rather than
+	    making assumptions about the current event queue.
+	  - Relocated some platform dependent code to an OSD file.
+	  - Eliminated several #ifdefs in .c files.
+	  - Inserted a missing unlock() on an error path.
+	  - Added bounds checking on size of private data to make sure
+	    we don't overrun the buffer
+	  - Fixed a kdapltest problem that caused a machine to panic if
+	    the user hit ^C
+	  - kdapltest now uses spin locks more appropriate for their
+	    context, e.g. spin_lock_bh or spin_lock_irq. Under a
+	    conditional. 
+	  - Fixed kdapltest loops that drain EVDs so they don't go into
+	    endless loops.
+	  - Fixed bug in dapl_llist_add_entry link list code.
+	  - Better error reporting from provider code.
+	  - Handle case of user trying to reap DTO completions on an
+	    EP that has been freed.
+	  - No longer hold lock when ep_free() calls into provider layer
+	  - Fixed cr_accept() to not have an extra copy of
+	    private_data. 
+	  - Verify private_data pointers before using them, avoid
+	    panic. 
+	  - Fixed memory leak in kdapltest where print buffers were not
+	    getting reclaimed.
+
+
+
+	DAPL BETA 2.03 RELEASE NOTES
+
+	There are some  prominent features in this release:
+	1) dapltest/kdapltest. The dapltest test program has been
+	   rearchitected such that a kernel version is now available
+	   to test with kdapl. The most obvious change is a new
+	   directory structure that more closely matches other core
+	   dapl software. But there are a large number of changes
+	   throughout the source files to accommodate both the
+	   differences in udapl/kdapl interfaces, but also more mundane
+	   things such as printing.
+
+	   The new dapltest is in the tree at ./test/dapltest, while the
+	   old remains at ./test/udapl/dapltest. For this release, we
+	   have maintained both versions. In a future release, perhaps
+	   the next release, the old dapltest directory will be
+	   removed. Ongoing development will only occur in the new tree.
+
+	2) DAT 1.1 compliance. The DAT Collaborative has been busy
+	   finalizing the 1.1 revision of the spec. The header files
+	   have been reviewed and posted on the DAT Collaborative web
+	   site, they are now in full compliance.
+
+	   The reference implementation has been at a 1.1 level for a
+	   while. The current implementation has some features that will
+	   be part of the 1.2 DAT specification, but only in places
+	   where full compatibility can be maintained.
+
+	3) The DAT Registry has undergone some positive changes for
+           robustness and support of more platforms. It now has the
+           ability to support several identical provider names
+           simultaneously, which enables the same dat.conf file to
+           support multiple platforms. The registry will open each
+           library and return when successful. For example, a dat.conf
+           file may contain multiple provider names for ex0a, each
+           pointing to a different library that may represent different
+           platforms or vendors. This simplifies distribution into
+           different environments by enabling the use of common
+           dat.conf files.
+
+	In addition, there are a large number of bug fixes throughout
+	the code. Bug reports and fixes have come from a number of
+	companies.
+
+	Also note that the Release notes are cleaned up, no longer
+	containing the complete text of previous releases.
+
+	* EVDs no longer support DTO and CONNECTION event types on the
+          same EVD. NOTE: The problem is maintaining the event ordering
+          between two channels such that no DTO completes before a
+          connection is received; and no DTO completes after a
+          disconnect is received. For 90% of the cases this can be made
+          to work, but the remaining 10% will cause serious performance
+          degradation to get right.
+
+	NEW SINCE Beta 2.2
+
+	* DAT 1.1 spec compliance. This includes some new types, error
+          codes, and moving structures around in the header files,
+          among other things. Note the Class bits of dat_error.h have
+	  returned to a #define (from an enum) to cover the broadest
+	  range of platforms.
+
+	* Several additions for robustness, including handle and
+          pointer checking, better argument checking, state
+          verification, etc. Better recovery from error conditions,
+	  and some assert()s have been replaced with 'if' statements to
+          handle the error.
+
+	* EVDs now maintain the actual queue length, rather than the
+	  requested amount. Both the DAT spec and IB (and other
+	  transports) allow the underlying implementation to provide
+	  more CQ entries than requested.
+
+	  Requests for the same number of entries contained by an EVD
+	  return immediate success.
+
+	* kDAPL enhancements:
+	  - module parameters & OS support calls updated to work with
+            more recent Linux kernels.
+	  - kDAPL build options changes to match the Linux kernel, vastly
+	    reducing the size and making it more robust.
+	  - kDAPL unload now works properly
+	  - kDAPL takes a reference on the provider driver when it
+	    obtains a verbs vector, to prevent an accidental unload
+	  - Cleaned out all of the uDAPL cruft from the linux/osd files.
+
+	* New dapltest (see above).
+
+	* Added a new I/O trace facility, enabling a developer to debug
+          all I/O that are in progress or recently completed. Default
+          is OFF in the build.
+
+	* 0 timeout connections now refused, per the spec.
+
+	* Moved the remaining uDAPL specific files from the common/
+          directory to udapl/. Also removed udapl files from the kdapl
+	  build.
+
+	* Bug fixes
+	  - Better error reporting from provider layer  
+	  - Fixed race condition on reference counts for posting DTO
+	    ops.
+	  - Use DAT_COMPLETION_SUPPRESS_FLAG to suppress successful
+	    completion of dapl_rmr_bind  (instead of
+	    DAT_COMPLEITON_UNSIGNALLED, which is for non-notification
+	    completion). 
+	  - Verify psp_flags value per the spec
+	  - Bug in psp_create_any() checking psp_flags fixed
+	  - Fixed type of flags in ib_disconnect from
+	    DAT_COMPLETION_FLAGS to DAT_CLOSE_FLAGS
+	  - Removed hard coded check for ASYNC_EVD. Placed all EVD
+	    prevention in evd_stream_merging_supported array, and
+	    prevent ASYNC_EVD from being created by an app.
+	  - ep_free() fixed to comply with the spec
+	  - Replaced various printfs with dbg_log statements
+	  - Fixed kDAPL interaction with the Linux kernel
+	  - Corrected phy_register protottype
+	  - Corrected kDAPL wait/wakeup synchronization
+	  - Fixed kDAPL evd_kcreate() such that it no longer depends
+	    on uDAPL only code.
+	  - dapl_provider.h had wrong guard #def: changed DAT_PROVIDER_H
+	    to DAPL_PROVIDER_H
+	  - removed extra (and bogus) call to dapls_ib_completion_notify()
+	    in evd_kcreate.c
+	  - Inserted missing error code assignment in
+	    dapls_rbuf_realloc() 
+	  - When a CONNECTED event arrives, make sure we are ready for
+	    it, else something bad may have happened to the EP and we
+	    just return; this replaces an explicit check for a single
+	    error condition, replacing it with the general check for the
+	    state capable of dealing with the request.
+	  - Better context pointer verification. Removed locks around
+	    call to ib_disconnect on an error path, which would result
+	    in a deadlock. Added code for BROKEN events.
+	  - Brought the vapi code more up to date: added conditional
+	    compile switches, removed obsolete __ActivePort, deal
+	    with 0 length DTO
+	  - Several dapltest fixes to bring the code up to the 1.1
+	    specification.
+	  - Fixed mismatched dalp_os_dbg_print() #else dapl_Dbg_Print();
+	    the latter was replaced with the former.
+	  - ep_state_subtype() now includes UNCONNECTED.
+	  - Added some missing ibapi error codes.
+ 
+
+
+	NEW SINCE Beta 2.1
+
+	* Changes for Erratta and 1.1 Spec
+	  - Removed DAT_NAME_NOT_FOUND, per DAT erratta
+	  - EVD's with DTO and CONNECTION flags set no longer valid.
+	  - Removed DAT_IS_SUCCESS macro
+	  - Moved provider attribute structures from vendor files to udat.h
+	    and kdat.h
+	  - kdapl UPCALL_OBJECT now passed by reference
+
+	* Completed dat_strerr return strings
+
+	* Now support interrupted system calls
+
+	* dapltest now used dat_strerror for error reporting.
+
+	* Large number of files were formatted to meet project standard,
+	  very cosmetic changes but improves readability and
+	  maintainability.  Also cleaned up a number of comments during
+	  this effort.
+
+	* dat_registry and RPM file changes (contributed by Steffen Persvold):
+	  - Renamed the RPM name of the registry to be dat-registry 
+	    (renamed the .spec file too, some cvs add/remove needed)
+	  - Added the ability to create RPMs as normal user (using 
+	    temporal paths), works on SuSE, Fedora, and RedHat.
+	  - 'make rpm' now works even if you didn't build first.
+	  - Changed to using the GNU __attribute__((constructor)) and
+	    __attribute__((destructor)) on the dat_init functions, dat_init
+	    and dat_fini. The old -init and -fini options to LD makes 
+	    applications crash on some platforms (Fedora for example).
+	  - Added support for 64 bit platforms.
+	  - Added code to allow multiple provider names in the registry,
+	    primarily to support ia32 and ia64 libraries simultaneously. 
+	    Provider names are now kept in a list, the first successful
+	    library open will be the provider.
+
+	* Added initial infrastructure for DAPL_DCNTR, a feature that
+	  will aid in debug and tuning of a dapl implementation. Partial
+	  implementation only at this point.
+
+	* Bug fixes
+	- Prevent debug messages from crashing dapl in EVD completions by
+	  verifying the error code to ensure data is valid.
+	- Verify CNO before using it to clean up in evd_free()
+	- CNO timeouts now return correct error codes, per the spec.
+	- cr_accept now complies with the spec concerning connection 
+	  requests that go away before the accept is invoked.
+	- Verify valid EVD before posting connection evens on active side
+	  of a connection. EP locking also corrected.
+	- Clean up of dapltest Makefile, no longer need to declare
+	  DAT_THREADSAFE
+	- Fixed check of EP states to see if we need to disconnect an
+	  IA is closed.
+	- ep_free() code reworked such that we can properly close a 
+	  connection pending EP.
+	- Changed disconnect processing to comply with the spec: user will
+	   see a BROKEN event, not DISCONNECTED.
+	- If we get a DTO error, issue a disconnect to let the CM and
+	  the user know the EP state changed to disconnect; checked IBA
+	  spec to make sure we disconnect on correct error codes.
+	- ep_disconnect now properly deals with abrupt disconnects on the
+	  active side of a connection.
+	- PSP now created in the correct state for psp_create_any(), making
+	  it usable.
+	- dapl_evd_resize() now returns correct status, instead of always
+	  DAT_NOT_IMPLEMENTED.
+	- dapl_evd_modify_cno() does better error checking before invoking
+	  the provider layer, avoiding bugs.
+	- Simple change to allow dapl_evd_modify_cno() to set the CNO to 
+	  NULL, per the spec.
+	- Added required locking around call to dapl_sp_remove_cr.
+
+	- Fixed problems related to dapl_ep_free: the new
+	  disconnect(abrupt) allows us to do a more immediate teardown of
+	  connections, removing the need for the MAGIC_EP_EXIT magic
+	  number/state, which has been removed. Mmuch cleanup of paths,
+	  and made more robust.
+	- Made changes to meet the spec, uDAPL 1.1 6.3.2.3: CNO is
+	  triggered if there are waiters when the last EVD is removed
+	  or when the IA is freed.
+	- Added code to deal with the provider synchronously telling us
+	   a connection is unreachable, and generate the appropriate
+	   event.
+	- Changed timer routine type from unsigned long to uintptr_t
+	  to better fit with machine architectures.
+	- ep.param data now initialized in ep_create, not ep_alloc.
+	- Or Gerlitz provided updates to Mellanox files for evd_resize,
+	  fw attributes, many others. Also implemented changes for correct
+	  sizes on REP side of a connection request.
+
+
+
+	NEW SINCE Beta 2.0
+
+	* dat_echo now DAT 1.1 compliant. Various small enhancements.
+
+	* Revamped atomic_inc/dec to be void, the return value was never
+	  used. This allows kdapl to use Linux kernel equivalents, and
+	  is a small performance advantage.
+
+	* kDAPL: dapl_evd_modify_upcall implemented and tested.
+
+	* kDAPL: physical memory registration implemented and tested.
+
+	* uDAPL now builds cleanly for non-debug versions.
+
+	* Default RDMA credits increased to 8.
+
+	* Default ACK_TIMEOUT now a reasonable value (2 sec vs old 2
+	  months).
+
+	* Cleaned up dat_error.h, now 1.1 compliant in comments.
+
+	* evd_resize initial implementation. Untested.
+
+	* Bug fixes
+	  - __KDAPL__ is defined in kdat_config.h, so apps don't need
+	    to define it.
+	  - Changed include file ordering in kdat.h to put kdat_config.h
+	    first.
+	  - resolved connection/tear-down race on the client side.
+	  - kDAPL timeouts now scaled properly; fixed 3 orders of
+	    magnitude difference.
+	  - kDAPL EVD callbacks now get invoked for all completions; old
+	    code would drop them in heavy utilization.
+	  - Fixed error path in kDAPL evd creation, so we no longer
+	    leak CNOs.
+	  - create_psp_any returns correct error code if it can't create
+	    a connection qualifier.
+	  - lock fix in ibapi disconnect code.
+	  - kDAPL INFINITE waits now work properly (non connection
+	    waits) 
+	  - kDAPL driver unload now works properly
+	  - dapl_lmr_[k]create now returns 1.1 error codes
+	  - ibapi routines now return DAT 1.1 error codes
+	  
+
+
+	NEW SINCE Beta 1.10
+
+	* kDAPL is now part of the DAPL distribution. See the release
+	  notes above.
+
+	  The kDAPL 1.1 spec is now contained in the doc/ subdirectory.
+
+	* Several files have been moved around as part of the kDAPL
+	  checkin. Some files that were previously in udapl/ are now
+	  in common/, some in common are now in udapl/. The goal was
+	  to make sure files are properly located and make sense for
+	  the build.
+
+	* Source code formatting changes for consistency.
+
+	* Bug fixes
+	  - dapl_evd_create() was comparing the wrong bit combinations,
+	    allowing bogus EVDs to be created.
+	  - Removed code that swallowed zero length I/O requests, which
+	    are allowed by the spec and are useful to applications.
+	  - Locking in dapli_get_sp_ep was asymmetric; fixed it so the
+	    routine will take and release the lock. Cosmetic change.
+	  - dapl_get_consuemr_context() will now verify the pointer
+	    argument 'context' is not NULL.
+
+
+	OBTAIN THE CODE
+
+	To obtain the tree for your local machine you can check it
+	out of the source repository using CVS tools. CVS is common
+	on Unix systems and available as freeware on Windows machines.
+	The command to anonymously obtain the source code from 
+	Source Forge (with no password) is:
+	
+	cvs -d:pserver:anonymous@cvs.dapl.sourceforge.net:/cvsroot/dapl login
+	cvs -z3 -d:pserver:anonymous@cvs.dapl.sourceforge.net:/cvsroot/dapl co .
+
+	When prompted for a password, simply  press the Enter key.
+
+	Source Forge also contains explicit directions on how to become
+	a developer, as well as how to use different CVS commands. You may
+	also browse the source code using the URL:
+
+        http://svn.sourceforge.net/viewvc/dapl/trunk/
+
+	SYSTEM REQUIREMENTS
+
+	This project has been implemented on Red Hat Linux 7.3, SuSE
+	SLES 8, 9, and 10, Windows 2000, RHEL 3.0, 4.0 and 5.0 and a few 
+        other Linux distrubutions. The structure of the code is designed 
+        to allow other operating systems to easily be adapted.
+
+	The DAPL team has used Mellanox Tavor based InfiniBand HCAs for
+	development, and continues with this platform. Our HCAs use the
+	IB verbs API submitted by IBM. Mellanox has contributed an
+	adapter layer using their VAPI verbs API. Either platform is
+	available to any group considering DAPL work. The structure of
+	the uDAPL source allows other provider API sets to be easily
+	integrated.
+
+	The development team uses any one of three topologies: two HCAs
+	in a single machine; a single HCA in each of two machines; and
+	most commonly, a switch. Machines connected to a switch may have
+	more than one HCA.
+
+	The DAPL Plugfest revealed that switches and HCAs available from
+	most vendors will interoperate with little trouble, given the
+	most recent releases of software. The dapl reference team makes
+	no recommendation on HCA or switch vendors.
+
+	Explicit machine configurations are available upon request.	
+
+	IN THE TREE
+
+	The DAPL tree contains source code for the uDAPL and kDAPL
+	implementations, and also includes tests and documentation.
+
+	Included documentation has the base level API of the
+	providers: OpenFabrics, IBM Access, and Mellanox Verbs API. Also
+	included are a growing number of DAPL design documents which
+	lead the reader through specific DAPL subsystems. More
+	design documents are in progress and will appear in the tree in
+	the near future.
+
+	A small number of test applications and a unit test framework
+	are also included. dapltest is the primary testing application
+	used by the DAPL team, it is capable of simulating a variety of
+	loads and exercises a large number of interfaces. Full
+	documentation is included for each of the tests.
+
+	Recently, the dapl conformance test has been added to the source
+	repository. The test provides coverage of the most common
+	interfaces, doing both positive and negative testing. Vendors
+	providing DAPL implementation are strongly encouraged to run
+	this set of tests.
+
+	MAKEFILE NOTES
+
+	There are a number #ifdef's in the code that were necessary
+	during early development. They are disappearing as we
+	have time to take advantage of features and work available from
+	newer releases of provider software. These #ifdefs are not 
+        documented as the intent is to remove them as soon as possible.
+
+	CONTRIBUTIONS
+
+	As is common to Source Forge projects, there are a small number
+	of developers directly associated with the source tree and having
+	privileges to change the tree. Requested updates, changes, bug
+	fixes, enhancements, or contributions should be sent to 
+        James Lentini at jlentinit@netapp.com for review. We welcome your
+	contributions and expect the quality of the project will
+	improve thanks to your help.
+
+	The core DAPL team is:
+
+	  James Lentini
+          Arlin Davis
+	  Steve Sears
+
+	  ... with contributions from a number of excellent engineers in
+	  various companies contributing to the open source effort.
+
+
+	ONGOING WORK
+
+	Not all of the DAPL spec is implemented at this time.
+	Functionality such as shared memory will probably not be
+	implemented by the reference implementation (there is a write up
+	on this in the doc/ area), and there are yet various cases where
+	work remains to be done.  And of course, not all of the
+	implemented functionality has been tested yet.  The DAPL team
+	continues to develop and test the tree with the intent of
+	completing the specification and delivering a robust and useful
+	implementation.
+
+
+The DAPL Team
+

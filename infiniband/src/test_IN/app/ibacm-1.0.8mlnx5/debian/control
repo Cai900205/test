@@ -1,0 +1,34 @@
+Source: ibacm
+Section: net
+Priority: optional
+Maintainer: Sean Hefty <sean.hefty@intel.com>
+Standards-Version: 3.9.1
+Build-Depends: debhelper (>= 8), dpkg-dev (>= 1.13.19), libibverbs-dev (>= 1.1-1), libibumad-devel
+Homepage: http://www.openfabrics.org/
+
+Package: ibacm
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libibverbs1, libibumad 
+Description: The ibacm daemon helps reduce the load of managing path record lookups on
+ large InfiniBand fabrics by providing a user space implementation of what
+ is functionally similar to an ARP cache.  The use of ibacm, when properly
+ configured, can reduce the SA packet load of a large IB cluster from O(n^2)
+ to O(n).  The ibacm daemon is started and normally runs in the background,
+ user applications need not know about this daemon as long as their app
+ uses librdmacm to handle connection bring up/tear down.  The librdmacm
+ library knows how to talk directly to the ibacm daemon to retrieve data. 
+
+Package: ibacm-dev
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ibacm 
+Description: Most applications do not need to know how to talk directly to the ibacm
+ daemon, but it does have a socket that it listens on, and it has a
+ specific protocol for incoming/outgoing data.  So if you wish to build
+ the ability to communicate directly with ibacm into your own application,
+ the protocol used to communicate with it, and the data structures
+ involved, are in this header file.  Please note that this is an unsupported
+ method of using this daemon.  The only supported means of using this is
+ via librdmacm.  As such, even though this header file is provided, no
+ further documentation is available.  One must read the source if they
+ wish to make use of this header file.
+

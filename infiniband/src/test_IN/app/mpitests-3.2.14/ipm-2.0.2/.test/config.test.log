@@ -1,0 +1,4 @@
+#test simplec_MPI_STATUS_COUNT start {
++ mpicc -g -O2 ./simplec_MPI_STATUS_COUNT.c -o ./simplec_MPI_STATUS_COUNT
++ test -x ./simplec_MPI_STATUS_COUNT
++ exit 0

@@ -1,0 +1,4 @@
+usr/sbin/ibstat
+usr/sbin/ibstatus
+usr/share/man/man8/ibstat.8*
+usr/share/man/man8/ibstatus.8*

@@ -1,0 +1,177 @@
+#!/bin/bash -eE
+# Name: Expose libmlx5 headers
+# Author: Majd Dibbiny - majd@mellanox.com
+
+name=libmlx_expose_headers
+author="Majd Dibbiny - Majd@Mellanox.com"
+usage="./libmlx_expose_headers defines-file structures-file enumerations-file\nPlease provide the files in the exact order"
+example="./libmlx_expose_headers defines.txt structs.txt enums.txt"
+script_output="The script's output file is saved to $output_file"
+SCRIPTPATH=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
+args=3
+defines_file="$1"
+structs_file="$2"
+enums_file="$3"
+prefix="$4"
+output_file="$prefix/include/infiniband/mlx5_hw.h"
+mkdir -p "$prefix/include/infiniband"
+libmlx5_path="$SCRIPTPATH/../../src/*"
+FILES="$libmlx5_path"
+function add_header {
+	echo  -e "/**\n"\
+		"* Copyright (C) Mellanox Technologies Ltd. 2001-2014.  ALL RIGHTS RESERVED.\n"\
+		"* This software product is a proprietary product of Mellanox Technologies Ltd.\n"\
+		"* (the "Company") and all right, title, and interest and to the software product,\n"\
+		"* including all associated intellectual property rights, are and shall\n"\
+		"* remain exclusively with the Company.\n"\
+		"*\n"\
+		"* This software product is governed by the End User License Agreement\n"\
+		"* provided with the software product.\n"\
+		"*/\n" > $output_file
+
+	echo -e "#ifndef MLX_HW_H_" >> $output_file
+	echo -e "#define MLX_HW_H_ \n" >> $output_file
+	echo "#include <linux/types.h>" >> $output_file
+	echo "#include <stdint.h>" >> $output_file
+	echo "#include <pthread.h>" >> $output_file
+	echo "#include <infiniband/driver.h>" >> $output_file
+	echo  -e "#include <infiniband/verbs.h>\n" >> $output_file
+}
+function add_footer {
+	echo -e "\n#endif" >> $output_file
+}
+
+function expose_defines {
+	#need to add support for define on multiple lines
+	local expose_defines_res=0
+	for f in $FILES ; do
+		grep -F -f $defines_file $f | sed -n '/^#/p' >> $output_file
+	done
+	while read -r line
+	do
+		if [ "`grep $line $output_file`" = "" ]; then
+			#echo "define: $line wasn't found."
+			expose_defines_res=1
+			break
+		fi
+	done < "$defines_file"
+	echo -e "\n" >> $output_file
+	echo $expose_defines_res
+}
+
+function expose_enums {
+	local expose_enums_res=0
+	echo -e "enum mlx5_alloc_type { MXM_MLX5_ALLOC_TYPE_DUMMY };\nenum mlx5_rsc_type   { MXM_MLX5_RSC_TYPE_DUMMY };\n" >> $output_file
+	echo "enum {" >> $output_file
+	while read -r line
+	do
+		for f in $FILES ; do
+			grep "$line" $f| while read -r gline ; do
+				pat="(\t)*(\s)*$line(\t)*(\s)*="
+				if [[ $gline =~ $pat ]] ;
+				then
+					grep_res="`echo $gline|sed -e 's/,.*//'`"
+					echo -e "\t$grep_res," >> $output_file
+					break
+				fi
+			done
+		done
+		if [ "`grep $line $output_file`" = "" ]; then
+			#echo "enum: $line wasn't found."
+			expose_enums_res=1
+			break
+		fi
+	done < "$enums_file"
+	echo -e "};\n" >> $output_file
+	echo $expose_enums_res
+}
+
+function expose_structs {
+	local expose_structs_res=0
+	while read -r line
+	do
+		struct_found=0
+		for f in $FILES; do
+			struct_line="struct $line {"
+			grep_res=`grep "$struct_line" $f`
+			if [ "$grep_res" != "" ] ; then
+				struct_found=1
+				counter=0
+				flag=0
+				while IFS='' read -r fline
+					do
+						if [ "$struct_line" == "$fline" ] ;
+						then
+							flag=1
+						fi
+						if [ "$flag" -gt "0" ] ;
+						then
+							if [[ $fline == *{* ]] ;
+							then
+								((counter++))
+							elif [[ $fline == *}* ]] ;
+							then
+								((counter--))
+							fi
+							printf "%s\n" "$fline">> $output_file
+							if [ "$counter" -eq "0" ] ;
+							then
+								flag=0
+								echo -e "\n" >> $output_file
+							fi
+						fi
+				done < "$f"
+				break
+			fi
+		done
+		if [ $struct_found -lt 1 ]; then
+			#echo "struct: $line wasn't found."
+			expose_structs_res=1
+			break
+		fi
+	done < "$structs_file"
+	echo $expose_structs_res
+}
+
+
+##MAIN##
+
+if [ $# -lt $args ] ; then
+	echo "Wrong number of arguments!"
+	echo -e "\n"
+	echo -e "Usage: $usage"
+	echo -e "\n"
+	echo "Example: $example"
+	echo -e "\n"
+	echo "Output: $script_output"
+	echo -e "\n\n"
+	echo -e "For help please contact $author \nExiting..."
+	exit 1
+fi
+
+add_header
+expose_defines_res=$(expose_defines)
+if [ $expose_defines_res -ne 0 ] ; then
+	echo "expose_defines: Failed!"
+	echo "Exiting..."
+	rm -f $output_file
+	exit 1
+fi
+expose_enums_res=$(expose_enums)
+if [ $expose_enums_res -ne 0 ] ; then
+        echo "expose_enums: Failed!"
+        echo "Exiting..."
+	rm -f $output_file
+        exit 1
+fi
+expose_structs_res=$(expose_structs)
+if [ $expose_structs_res -ne 0 ] ; then
+        echo "expose_structs: Failed!"
+        echo "Exiting..."
+	rm -f $output_file
+        exit 1
+fi
+
+add_footer
+
+exit 0

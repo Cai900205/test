@@ -1,0 +1,15 @@
+IBIS stands for IB In-band Services.
+It provides a TCL API for sending MADs over the local IB ports.
+
+It also provides C API for sending batches of MADs and waiting for the entire
+batch completion.
+
+The detailed API is described in the doc/ibis_wrap.html directory.
+
+Example applications are available in the tests directory:
+ibcr_test.tcl - simple test for CR space device access
+ibpm_test.tcl - simple performance monitoring agent queries
+ibvs_test.tcl - vendor specific gateways testing
+sac_demo.tcl - SA client queries
+obj.tcl - how to dump out TCL objects fields
+

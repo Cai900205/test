@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+# Get the package version
+package=knem
+version=`dpkg-query -W -f='${Version}' "$package-dkms" \
+    | sed -e 's/[+-].*//'`
+
+dkms remove -m "$package" -v "$version" --all || true
+
+rm -f /usr/lib/pkgconfig/${package}.pc
+
+#DEBHELPER#
+
+exit 0

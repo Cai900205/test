@@ -1,0 +1,24 @@
+2004-09-21  Eitan Zahavi  <eitan@mellanox.co.il>
+
+	* IBNL: Major change in how Systems are defined. Instead of having
+	a C++ module for each of the systems we now provide a netlist
+	format called IBNL and a set of predefined IB netlists for the
+	Mellanox provided systems.
+
+2004-08-25  Eitan Zahavi  <eitan@mellanox.co.il>
+
+	* TopoMatch : new capability to compare a discovered fabric (read
+	from OpenSM subnet file) and a spec topology (read using
+	parseTopology). Also build a merged fabric taking all matching
+	names from the spec topoloy.
+
+2004-06-30  Eitan Zahavi  <eitan@mellanox.co.il>
+
+	* conifgure.in : rearrange the file according to the autotools
+	book
+
+	* datamodel (new dir) : Rearrange the package by separating the
+	datamodel from the applications.
+
+
+

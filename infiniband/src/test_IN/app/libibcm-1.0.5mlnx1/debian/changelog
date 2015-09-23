@@ -1,0 +1,5 @@
+libibcm (1.0.5mlnx1-OFED.2.3.47.gc8011c5) unstable; urgency=low
+
+  * New Mellanox release.
+
+ -- Vladimir Sokolovsky <vlad@mellanox.com>  Mon, 7 Jan 2013 13:38:10 +0200

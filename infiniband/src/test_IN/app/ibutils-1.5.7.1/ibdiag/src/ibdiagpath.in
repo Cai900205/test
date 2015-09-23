@@ -1,0 +1,10 @@
+#!/bin/sh -f
+
+export TCLLIBPATH="%with_ibdm_lib% %ibdiag_libdir%"; \
+export PATH="%with_ibis%":"%with_ibis_bindir%":$PATH; \
+exec ibis "$@" <<EOF
+
+set argv0 ibdiagpath
+package require ibdiagpath
+
+EOF

@@ -1,0 +1,1 @@
+cmd_/home/root/Infiniband/test/app/knem-1.1.1.90mlnx/driver/linux/built-in.o :=  rm -f /home/root/Infiniband/test/app/knem-1.1.1.90mlnx/driver/linux/built-in.o; GNUTARGET=elf64-powerpc ar rcsD /home/root/Infiniband/test/app/knem-1.1.1.90mlnx/driver/linux/built-in.o
