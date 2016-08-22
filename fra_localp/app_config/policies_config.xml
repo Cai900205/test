@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2012 Freescale Semiconductor, Inc.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<policies_cfg>
+	<policy name="processing1" enable="no">
+		<!-- 10gec0 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_10gec0"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_10gec0"/>
+		</dist_order>
+
+		<!-- 10gec1 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_10gec1"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_10gec1"/>
+		</dist_order>
+
+		<!-- 10gec2 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_10gec2"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_10gec2"/>
+		</dist_order>
+
+		<!-- 10gec3 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_10gec3"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_10gec3"/>
+		</dist_order>
+
+		<!-- dtsec0 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec0"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec0"/>
+		</dist_order>
+
+		<!-- dtsec1 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec1"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec1"/>
+		</dist_order>
+
+		<!-- dtsec2 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec2"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec2"/>
+		</dist_order>
+
+		<!-- dtsec3 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec3"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec3"/>
+		</dist_order>
+
+		<!-- dtsec4 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec4"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec4"/>
+		</dist_order>
+
+		<!-- dtsec5 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec5"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec5"/>
+		</dist_order>
+
+		<!-- dtsec8 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec8"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec8"/>
+		</dist_order>
+
+		<!-- dtsec9 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec9"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec9"/>
+		</dist_order>
+
+		<!-- dtsec10 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec10"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec10"/>
+		</dist_order>
+
+		<!-- dtsec11 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec11"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec11"/>
+		</dist_order>
+
+		<!-- dtsec12 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec12"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec12"/>
+		</dist_order>
+
+		<!-- dtsec13 packets processing -->
+		<dist_order>
+			<distributionref name="rman_to_fman_dtsec13"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="fman_to_rman_dtsec13"/>
+		</dist_order>
+	</policy>
+
+	<policy name="processing2" enable="no">
+		<!-- 10gec0 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_10gec0"/>
+			<distributionref name="rman_to_peer_10gec0"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_10gec0"/>
+			<distributionref name="fman_to_10gec0"/>
+		</dist_order>
+
+		<!-- 10gec1 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_10gec1"/>
+			<distributionref name="rman_to_peer_10gec1"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_10gec1"/>
+			<distributionref name="fman_to_10gec1"/>
+		</dist_order>
+
+		<!-- 10gec2 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_10gec2"/>
+			<distributionref name="rman_to_peer_10gec2"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_10gec2"/>
+			<distributionref name="fman_to_10gec2"/>
+		</dist_order>
+
+		<!-- 10gec3 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_10gec3"/>
+			<distributionref name="rman_to_peer_10gec3"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_10gec3"/>
+			<distributionref name="fman_to_10gec3"/>
+		</dist_order>
+
+		<!-- dtsec0 packets processing-->
+		<dist_order>
+			<distributionref name="fman_from_dtsec0"/>
+			<distributionref name="rman_to_peer_dtsec0"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec0"/>
+			<distributionref name="fman_to_dtsec0"/>
+		</dist_order>
+
+		<!-- dtsec1 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec1"/>
+			<distributionref name="rman_to_peer_dtsec1"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec1"/>
+			<distributionref name="fman_to_dtsec1"/>
+		</dist_order>
+
+		<!-- dtsec2 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec2"/>
+			<distributionref name="rman_to_peer_dtsec2"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec2"/>
+			<distributionref name="fman_to_dtsec2"/>
+		</dist_order>
+
+		<!-- dtsec3 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec3"/>
+			<distributionref name="rman_to_peer_dtsec3"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec3"/>
+			<distributionref name="fman_to_dtsec3"/>
+		</dist_order>
+
+		<!-- dtsec4 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec4"/>
+			<distributionref name="rman_to_peer_dtsec4"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec4"/>
+			<distributionref name="fman_to_dtsec4"/>
+		</dist_order>
+
+		<!-- dtsec5 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec5"/>
+			<distributionref name="rman_to_peer_dtsec5"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec5"/>
+			<distributionref name="fman_to_dtsec5"/>
+		</dist_order>
+
+		<!-- dtsec8 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec8"/>
+			<distributionref name="rman_to_peer_dtsec8"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec8"/>
+			<distributionref name="fman_to_dtsec8"/>
+		</dist_order>
+
+		<!-- dtsec9 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec9"/>
+			<distributionref name="rman_to_peer_dtsec9"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec9"/>
+			<distributionref name="fman_to_dtsec9"/>
+		</dist_order>
+
+		<!-- dtsec10 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec10"/>
+			<distributionref name="rman_to_peer_dtsec10"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec10"/>
+			<distributionref name="fman_to_dtsec10"/>
+		</dist_order>
+
+		<!-- dtsec11 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec11"/>
+			<distributionref name="rman_to_peer_dtsec11"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec11"/>
+			<distributionref name="fman_to_dtsec11"/>
+		</dist_order>
+
+		<!-- dtsec12 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec12"/>
+			<distributionref name="rman_to_peer_dtsec12"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec12"/>
+			<distributionref name="fman_to_dtsec12"/>
+		</dist_order>
+
+		<!-- dtsec13 packets processing -->
+		<dist_order>
+			<distributionref name="fman_from_dtsec13"/>
+			<distributionref name="rman_to_peer_dtsec13"/>
+		</dist_order>
+		<dist_order>
+			<distributionref name="rman_from_peer_dtsec13"/>
+			<distributionref name="fman_to_dtsec13"/>
+		</dist_order>
+	</policy>
+</policies_cfg>

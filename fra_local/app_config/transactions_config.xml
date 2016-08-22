@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2012 Freescale Semiconductor, Inc.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<trans_cfg>
+	<transaction name="dstr-10gec0" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="100" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-10gec1" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="110" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-10gec2" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="120" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-10gec3" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="130" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec0" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="0" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec1" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="1" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec2" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="2" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec3" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="3" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec4" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="4" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec5" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="5" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec8" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="8" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec9" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="9" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec10" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="10" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec11" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="11" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec12" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="12" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="dstr-dtsec13" type="Data-streaming">
+		<flowlvl value="0" mask="2"/>
+		<cos value="13" mask="0"/>
+		<streamid value="0" mask="0x1f"/>
+	</transaction>
+
+	<transaction name="mbox-10gec0" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="0" mask="0"/>
+		<ltr value="0" mask="3" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-10gec1" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="1" mask="0"/>
+		<ltr value="0" mask="3" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-10gec2" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="2" mask="0"/>
+		<ltr value="0" mask="3" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-10gec3" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="3" mask="0"/>
+		<ltr value="0" mask="3" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec0" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="3" mask="0"/>
+		<ltr value="0" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec1" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="3" mask="0"/>
+		<ltr value="1" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec2" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="3" mask="0"/>
+		<ltr value="2" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec3" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="3" mask="0"/>
+		<ltr value="3" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec4" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="2" mask="0"/>
+		<ltr value="0" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec5" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="2" mask="0"/>
+		<ltr value="1" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec8" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="2" mask="0"/>
+		<ltr value="2" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec9" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="2" mask="0"/>
+		<ltr value="3" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec10" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="1" mask="0"/>
+		<ltr value="0" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec11" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="1" mask="0"/>
+		<ltr value="1" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec12" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="1" mask="0"/>
+		<ltr value="2" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+
+	<transaction name="mbox-dtsec13" type="Mailbox">
+		<flowlvl value="0" mask="2"/>
+		<mbox value="1" mask="0"/>
+		<ltr value="3" mask="0" />
+		<msglen value="6" mask="1"/>
+	</transaction>
+</trans_cfg>
