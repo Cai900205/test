@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/include/readline
+END
+keymaps.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/include/readline/keymaps.h
+END
+rlstdc.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/include/readline/rlstdc.h
+END
+chardefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/include/readline/chardefs.h
+END
+history.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/include/readline/history.h
+END
+rltypedefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/include/readline/rltypedefs.h
+END
+tilde.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/include/readline/tilde.h
+END
+readline.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/include/readline/readline.h
+END
