@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/fivaldev/spark_devel/!svn/ver/78/trunk/src/testapp/idt_tb
+END
+idt_tool.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/77/trunk/src/testapp/idt_tb/idt_tool.h
+END
+idt_rtbl.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/75/trunk/src/testapp/idt_tb/idt_rtbl.c
+END
+idt_port.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/77/trunk/src/testapp/idt_tb/idt_port.c
+END
+idt_cli.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/77/trunk/src/testapp/idt_tb/idt_cli.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/75/trunk/src/testapp/idt_tb/Makefile
+END
+idt_reg.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/75/trunk/src/testapp/idt_tb/idt_reg.c
+END
+idt_tool.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/78/trunk/src/testapp/idt_tb/idt_tool.c
+END

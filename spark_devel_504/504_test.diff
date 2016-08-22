@@ -1,0 +1,249 @@
+Index: src/libips/ips_core.c
+===================================================================
+--- src/libips/ips_core.c	(revision 78)
++++ src/libips/ips_core.c	(working copy)
+@@ -346,7 +346,7 @@
+     epctx->tx_swnd_base.pa = srio_wnd.range_start;
+     IPS_LOGINFO(epid, "Acquire SWND: start=0x%lx, size=0x%lx, va=%p",
+                 epctx->tx_swnd_base.pa, srio_wnd.range_size, epctx->tx_swnd_base.va);
+-    assert(srio_wnd.range_size == IPS_SRIOWND_SIZE_ALL); // 256M
++    //assert(srio_wnd.range_size == IPS_SRIOWND_SIZE_ALL); // 256M
+ 
+     // alloc ctrl region for rx
+     epctx->rx_ctr_base.va = ips_dmamem_alloc(IPS_MM_CTLREG_SIZE,
+@@ -1067,4 +1067,4 @@
+ spk_stats_t* ips_chan_get_stats(ips_pcctx_t* pcctx)
+ {
+     return(&pcctx->stats_xfer);
+-}
+\ No newline at end of file
++}
+Index: src/syslk/syslk_job.c
+===================================================================
+--- src/syslk/syslk_job.c	(revision 78)
++++ src/syslk/syslk_job.c	(working copy)
+@@ -218,14 +218,17 @@
+     int ret = -1;
+ #ifdef ARCH_ppc64
+     struct ips_pcctx* pcctx = NULL;
+-    struct dfv_file* file_ctx = NULL;
++    struct net_handle* file_ctx = NULL;
++
+     int wkr_id = wkr_ctx->wkr_id;
+     spk_stats_t* stats = &wkr_ctx->stats;
+ 
+     void* chunk_buf = NULL;
+-    size_t chunk_size = slice_def->size * slice_def->num;
+-    int dfv_cpu_base = 12+4*wkr_ctx->wkr_id;
+ 
++	size_t chunk_size = slice_def->size * slice_def->num;
++    
++	int dfv_cpu_base = 12+4*wkr_ctx->wkr_id;
++
+     zlog_notice(sys_zc, "wkr#%d> prepare for recording: ips={0x%x:%d}, dfv={repo={%d:%d}, "
+                         "slice={%d, 0x%lx}, cpu_base=%d}",
+                         wkr_id,
+@@ -233,45 +236,35 @@
+                         dfv_repo_get_id(slot_def->repo), slot_def->slot_id,
+                         slice_def->num, slice_def->size,
+                         dfv_cpu_base);
+-
+     // reset stats
+     spk_stats_reset(stats);
+ 
+-    // open dfv slot
+-    file_ctx = dfv_file_open(slot_def->repo, slot_def->slot_id, SPK_DIR_WRITE, slice_def,
+-                             dfv_cpu_base);
+-    if (!file_ctx) {
+-        zlog_fatal(sys_zc, "wkr#%d> failed to open dfv file", wkr_id);
+-        ret = SPKERR_BADRES;
++    // open net slot
++	if(wkr_id==1) {
++        file_ctx = net_open("192.168.11.3",9720,4,dfv_cpu_base,SPK_DIR_WRITE,net_intf_tcp);
++        if (!file_ctx) {
++           zlog_fatal(sys_zc,"wkr#%d> failed to open net",wkr_id);
++           ret = SPKERR_BADRES;
++           goto out;
++        }
++	} else if(wkr_id ==0) {
++        file_ctx = net_open("192.168.10.3",9734,4,dfv_cpu_base,SPK_DIR_WRITE,net_intf_tcp);
++        if (!file_ctx) {
++           zlog_fatal(sys_zc,"wkr#%d> failed to open net",wkr_id);
++           ret = SPKERR_BADRES;
++           goto out;
++        }
++	} else {
++        zlog_fatal(sys_zc, "wkr#%d> error wkr_id", wkr_id);
++        ret = SPKERR_EACCESS;
+         goto out;
++	}
++    
++    ret= net_intf_is_connected(file_ctx);
++    if(!ret) {
++        zlog_fatal(sys_zc,"wkr#:%d>net is not connected",wkr_id);
++	    goto out;
+     }
+-
+-    // write to dfv
+-    if (!(sys_env.dbg_flag & SYSDBG_REC_NOTSAVE2DISK)) {
+-        size_t warmup_sz = 128*1024*1024;
+-        size_t xferred = 0;
+-        void * txbuf = NULL;
+-
+-        txbuf = memalign(SYS_INTERLACE_SIZE, DFV_CHUNK_SIZE);
+-        assert(txbuf);
+-        memset(txbuf, 0xfe, DFV_CHUNK_SIZE);
+-        while(xferred < warmup_sz) {
+-            ssize_t xfer = dfv_file_write(file_ctx, txbuf, DFV_CHUNK_SIZE);
+-            if (xfer != DFV_CHUNK_SIZE) {
+-                zlog_fatal(sys_zc, "wkr#%d> failed to write to dfv: xfer=%ld, expect=%u",
+-                                    wkr_id, xfer, DFV_CHUNK_SIZE);
+-                ret = SPKERR_EACCESS;
+-                SAFE_RELEASE(txbuf);
+-                goto out;
+-            }
+-            xferred += xfer;
+-        }
+-        dfv_file_seek(file_ctx, 0);
+-        SAFE_RELEASE(txbuf);
+-    }
+-    zlog_notice(sys_zc, "wkr#%d> dfv warmup done", wkr_id);
+-
+-
+     // open ips srio
+     pcctx = ips_chan_open(src_id, pc_id);
+     if (!pcctx) {
+@@ -304,20 +297,18 @@
+             // got a chunk from ips
+             assert(read_size == chunk_size);
+             // preserve first buf for snapshot use
+-            pthread_mutex_lock(&wkr_ctx->buf_snap_lock);
+-            memcpy(wkr_ctx->buf_snap, chunk_buf, SYS_SNAP_BUF_SZ);
+-            pthread_mutex_unlock(&wkr_ctx->buf_snap_lock);
++            //pthread_mutex_lock(&wkr_ctx->buf_snap_lock);
++          //  memcpy(wkr_ctx->buf_snap, chunk_buf, SYS_SNAP_BUF_SZ);
++           // pthread_mutex_unlock(&wkr_ctx->buf_snap_lock);
+ 
+             // write to dfv
+             if (sys_env.dbg_flag & SYSDBG_REC_NOTSAVE2DISK) {
+                 xfer = chunk_size;
+             } else {
+-                xfer = dfv_file_write(file_ctx, chunk_buf, read_size);
++                xfer = net_write(file_ctx, chunk_buf, read_size);
+             }
+-
+             // notify ips to free buffer first
+             ips_chan_free_buf(pcctx, read_size);
+-
+             if (xfer != read_size) {
+                 zlog_fatal(sys_zc, "wkr#%d> failed to write to dfv: xfer=%ld, expect=%lu",
+                                     wkr_id, xfer, read_size);
+@@ -397,7 +388,7 @@
+             if (sys_env.dbg_flag & SYSDBG_REC_NOTSAVE2DISK) {
+                 xfer = tail_size;
+             } else {
+-                xfer = dfv_file_write(file_ctx, chunk_buf, tail_size);
++                xfer = net_write(file_ctx, chunk_buf, tail_size);
+             }
+             ips_chan_free_buf(pcctx, tail_size);
+             if (xfer != tail_size) {
+@@ -424,7 +415,7 @@
+ 
+     // close dfv slot
+     if (file_ctx) {
+-        dfv_file_close(file_ctx);
++        net_close(file_ctx);
+         file_ctx = NULL;
+     }
+ 
+@@ -697,7 +688,7 @@
+     dfv_slice_def_t slice_def;
+     memset(&slice_def, 0, sizeof(dfv_slice_def_t));
+     slice_def.num = DFV_SLICE_NUM;
+-    slice_def.size = DFV_SLICE_SIZE;
++    slice_def.size = 0x4000;//DFV_SLICE_SIZE;
+ 
+     dfv_slot_def_t slot_def;
+ 
+Index: src/syslk/syslk.c
+===================================================================
+--- src/syslk/syslk.c	(revision 78)
++++ src/syslk/syslk.c	(working copy)
+@@ -267,6 +267,7 @@
+     zlog_notice(sys_zc, "  DFV: %s", DFV_MOD_VER);
+     zlog_notice(sys_zc, "  IDT: %s", IDT_MOD_VER);
+     zlog_notice(sys_zc, "  CMI: %s", CMI_MOD_VER);
++    zlog_notice(sys_zc, "  NET: %s", NET_MOD_VER);
+ 
+     // initialize env
+     // TBD: should be read from .conf
+@@ -334,6 +335,9 @@
+     assert(!ret);
+     ret = cmi_module_init(NULL);
+     assert(!ret);
++    
++	ret = net_module_init(NULL);
++    assert(!ret);
+ 
+     // initialize ctxs
+     memset(&sys_ctx, 0, sizeof(sys_ctx));
+Index: src/syslk/syslk.h
+===================================================================
+--- src/syslk/syslk.h	(revision 78)
++++ src/syslk/syslk.h	(working copy)
+@@ -4,6 +4,7 @@
+ #include "ips/ips_intf.h"
+ #include "dfv/dfv_intf.h"
+ #include "idt/idt_intf.h"
++#include "net/net_intf.h"
+ #include "zlog/zlog.h"
+ 
+ #define SYS_VERSION_MAJOR   0
+@@ -134,4 +135,4 @@
+ uint64_t sys_lktm_to_systm(uint32_t lktm);
+ 
+ void* __sys_wkr_job(void* args);
+-void* __sys_wkr_autorec(void* args);
+\ No newline at end of file
++void* __sys_wkr_autorec(void* args);
+Index: src/syslk/Makefile
+===================================================================
+--- src/syslk/Makefile	(revision 78)
++++ src/syslk/Makefile	(working copy)
+@@ -6,7 +6,7 @@
+ ifeq ($(ARCH),ppc64)
+ LIBS += -lidt -lips  -L$(LIB_ROOT)/usdpaa -lusdpaa_srio -lusdpaa_dma -lusdpaa_dma_mem -lusdpaa_of -lusdpaa_process
+ endif
+-LIBS += -lcmi -ldfv -lm
++LIBS += -lcmi -ldfv -lnet -lm
+ 
+ SRCS = syslk.c syslk_job.c syslk_cmd.c
+ EXEC = syslk
+Index: src/Makefile
+===================================================================
+--- src/Makefile	(revision 78)
++++ src/Makefile	(working copy)
+@@ -3,6 +3,7 @@
+ LIBCMI_DIR = libcmi
+ LIBIPS_DIR = libips
+ LIBIDT_DIR = libidt
++LIBNET_DIR = libnet
+ SYSLK_DIR = syslk
+ SYSAGT_DIR = sysagt
+ 
+@@ -11,6 +12,7 @@
+ 	@if [ -d $(LIBCMI_DIR) ]; then cd $(LIBCMI_DIR) && $(MAKE) $@; fi
+ 	@if [ -d $(LIBIPS_DIR) ]; then cd $(LIBIPS_DIR) && $(MAKE) $@; fi
+ 	@if [ -d $(LIBIDT_DIR) ]; then cd $(LIBIDT_DIR) && $(MAKE) $@; fi
++	@if [ -d $(LIBNET_DIR) ]; then cd $(LIBNET_DIR) && $(MAKE) $@; fi
+ 	@if [ -d $(SYSLK_DIR) ]; then cd $(SYSLK_DIR) && $(MAKE) $@; fi
+ 	@if [ -d $(SYSAGT_DIR) ]; then cd $(SYSAGT_DIR) && $(MAKE) $@; fi
+ 
+@@ -19,6 +21,7 @@
+ 	@if [ -d $(LIBCMI_DIR) ]; then cd $(LIBCMI_DIR) && $(MAKE) $@; fi
+ 	@if [ -d $(LIBIPS_DIR) ]; then cd $(LIBIPS_DIR) && $(MAKE) $@; fi
+ 	@if [ -d $(LIBIDT_DIR) ]; then cd $(LIBIDT_DIR) && $(MAKE) $@; fi
++	@if [ -d $(LIBNET_DIR) ]; then cd $(LIBNET_DIR) && $(MAKE) $@; fi
+ 	@if [ -d $(SYSLK_DIR) ]; then cd $(SYSLK_DIR) && $(MAKE) $@; fi
+ 	@if [ -d $(SYSAGT_DIR) ]; then cd $(SYSAGT_DIR) && $(MAKE) $@; fi
+ 

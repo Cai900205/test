@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/sysagt
+END
+zlog.conf
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/fivaldev/spark_devel/!svn/ver/46/trunk/src/sysagt/zlog.conf
+END
+sysagt.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/sysagt/sysagt.h
+END
+sysagt.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/sysagt/sysagt.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fivaldev/spark_devel/!svn/ver/45/trunk/src/sysagt/Makefile
+END

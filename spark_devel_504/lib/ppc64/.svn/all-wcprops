@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/fivaldev/spark_devel/!svn/ver/75/trunk/lib/ppc64
+END
+libzlog.a
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fivaldev/spark_devel/!svn/ver/30/trunk/lib/ppc64/libzlog.a
+END
+libhistory.a
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/fivaldev/spark_devel/!svn/ver/75/trunk/lib/ppc64/libhistory.a
+END
+libreadline.a
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/fivaldev/spark_devel/!svn/ver/75/trunk/lib/ppc64/libreadline.a
+END

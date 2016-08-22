@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/fivaldev/spark_devel/!svn/ver/76/trunk/src/libips
+END
+ips_cmd.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/fivaldev/spark_devel/!svn/ver/55/trunk/src/libips/ips_cmd.c
+END
+ips.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/fivaldev/spark_devel/!svn/ver/68/trunk/src/libips/ips.h
+END
+ips_core.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/fivaldev/spark_devel/!svn/ver/76/trunk/src/libips/ips_core.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fivaldev/spark_devel/!svn/ver/45/trunk/src/libips/Makefile
+END

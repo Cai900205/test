@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe
+END
+config.h.in
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/config.h.in
+END
+configure
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/configure
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/Makefile.in
+END
+screen.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/screen.h
+END
+configure.in
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/configure.in
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/ChangeLog
+END
+os.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/os.h
+END
+rlfe.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/rlfe.c
+END
+extern.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/extern.h
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/README
+END
+pty.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlfe/pty.c
+END

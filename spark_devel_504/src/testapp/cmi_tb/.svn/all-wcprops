@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/fivaldev/spark_devel/!svn/ver/64/trunk/src/testapp/cmi_tb
+END
+client.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/15/trunk/src/testapp/cmi_tb/client.c
+END
+server.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/24/trunk/src/testapp/cmi_tb/server.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/64/trunk/src/testapp/cmi_tb/Makefile
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/src/testapp/ips_tb
+END
+dual_slave.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/68/trunk/src/testapp/ips_tb/dual_slave.c
+END
+loopback.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/src/testapp/ips_tb/loopback.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/55/trunk/src/testapp/ips_tb/Makefile
+END

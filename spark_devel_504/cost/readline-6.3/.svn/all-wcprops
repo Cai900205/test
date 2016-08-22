@@ -1,0 +1,455 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3
+END
+ansi_stdlib.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/ansi_stdlib.h
+END
+history.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/history.c
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/Makefile.in
+END
+display.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/display.c
+END
+history.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/history.h
+END
+posixdir.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/posixdir.h
+END
+posixselect.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/posixselect.h
+END
+rlshell.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rlshell.h
+END
+util.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/util.c
+END
+posixjmp.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/posixjmp.h
+END
+configure.ac
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/configure.ac
+END
+vi_keymap.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/vi_keymap.c
+END
+rldefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rldefs.h
+END
+text.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/text.c
+END
+savestring.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/savestring.c
+END
+MANIFEST
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/MANIFEST
+END
+rltypedefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rltypedefs.h
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/COPYING
+END
+NEWS
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/NEWS
+END
+shell.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/shell.c
+END
+complete.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/complete.c
+END
+parse-colors.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/parse-colors.c
+END
+terminal.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/terminal.c
+END
+rlprivate.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rlprivate.h
+END
+parse-colors.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/parse-colors.h
+END
+config.h.in
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/config.h.in
+END
+vi_mode.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/vi_mode.c
+END
+compat.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/compat.c
+END
+readline.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/readline.c
+END
+USAGE
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/USAGE
+END
+rlconf.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rlconf.h
+END
+readline.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/readline.h
+END
+mbutil.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/mbutil.c
+END
+histsearch.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/histsearch.c
+END
+emacs_keymap.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/emacs_keymap.c
+END
+xmalloc.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/xmalloc.c
+END
+rlstdc.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rlstdc.h
+END
+configure
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/configure
+END
+tilde.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/tilde.c
+END
+macro.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/macro.c
+END
+colors.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/colors.c
+END
+posixstat.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/posixstat.h
+END
+histlib.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/histlib.h
+END
+xmalloc.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/xmalloc.h
+END
+tilde.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/tilde.h
+END
+CHANGELOG
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/CHANGELOG
+END
+colors.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/colors.h
+END
+histfile.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/histfile.c
+END
+histexpand.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/histexpand.c
+END
+xfree.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/xfree.c
+END
+keymaps.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/keymaps.c
+END
+rltty.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rltty.c
+END
+keymaps.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/keymaps.h
+END
+isearch.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/isearch.c
+END
+rltty.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rltty.h
+END
+chardefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/chardefs.h
+END
+INSTALL
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/INSTALL
+END
+CHANGES
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/CHANGES
+END
+parens.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/parens.c
+END
+kill.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/kill.c
+END
+tcap.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/tcap.h
+END
+nls.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/nls.c
+END
+input.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/input.c
+END
+rlmbutil.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rlmbutil.h
+END
+signals.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/signals.c
+END
+undo.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/undo.c
+END
+search.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/search.c
+END
+patchlevel
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/patchlevel
+END
+bind.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/bind.c
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/README
+END
+funmap.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/funmap.c
+END
+misc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/misc.c
+END
+rlwinsize.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/rlwinsize.h
+END
+callback.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/callback.c
+END
+aclocal.m4
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/aclocal.m4
+END

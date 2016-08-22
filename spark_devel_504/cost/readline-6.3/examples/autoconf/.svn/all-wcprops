@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/autoconf
+END
+wi_LIB_READLINE
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/autoconf/wi_LIB_READLINE
+END
+BASH_CHECK_LIB_TERMCAP
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/autoconf/BASH_CHECK_LIB_TERMCAP
+END
+RL_LIB_READLINE_VERSION
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/autoconf/RL_LIB_READLINE_VERSION
+END
