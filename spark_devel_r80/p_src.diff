@@ -1,0 +1,51 @@
+Binary files p_src/libcmi/cmi_core.o and src/libcmi/cmi_core.o differ
+Binary files p_src/libcmi/cmi_msg.o and src/libcmi/cmi_msg.o differ
+Binary files p_src/libcmi/cmi_sock.o and src/libcmi/cmi_sock.o differ
+Binary files p_src/libcmi/libcmi.a and src/libcmi/libcmi.a differ
+Binary files p_src/libdfv/dfv_cm.o and src/libdfv/dfv_cm.o differ
+Binary files p_src/libdfv/dfv_file.o and src/libdfv/dfv_file.o differ
+Binary files p_src/libdfv/dfv_meta.o and src/libdfv/dfv_meta.o differ
+Binary files p_src/libdfv/dfv.o and src/libdfv/dfv.o differ
+Binary files p_src/libdfv/dfv_repo.o and src/libdfv/dfv_repo.o differ
+Binary files p_src/libdfv/libdfv.a and src/libdfv/libdfv.a differ
+Binary files p_src/libidt/idt_core.o and src/libidt/idt_core.o differ
+Binary files p_src/libidt/libidt.a and src/libidt/libidt.a differ
+diff -uNr p_src/libips/ips_cmd.c src/libips/ips_cmd.c
+--- p_src/libips/ips_cmd.c	2016-08-18 19:03:55.554627580 +0800
++++ src/libips/ips_cmd.c	2016-08-18 22:38:34.260612328 +0800
+@@ -300,10 +300,10 @@
+     __ips_chan_stop(pcctx);
+ 
+     if (pl_start->dir == SPK_DIR_READ) {
+-        memset(&pcctx->rx_inst, 0, sizeof(ips_dx_inst_t));
++        memset(&pcctx->tx_inst, 0, sizeof(ips_dx_inst_t));
+         ips_chan_shift_phase(pcctx, IPS_PHASE_TX);
+     } else if (pl_start->dir == SPK_DIR_WRITE) {
+-        memset(&pcctx->tx_inst, 0, sizeof(ips_dx_inst_t));
++        memset(&pcctx->rx_inst, 0, sizeof(ips_dx_inst_t));
+         ips_chan_shift_phase(pcctx, IPS_PHASE_RX);
+     } else {
+         start_r->status = SPKERR_BADSEQ;
+Binary files p_src/libips/ips_cmd.o and src/libips/ips_cmd.o differ
+Binary files p_src/libips/ips_core.o and src/libips/ips_core.o differ
+Binary files p_src/libips/libips.a and src/libips/libips.a differ
+Binary files p_src/sysagt/sysagt and src/sysagt/sysagt differ
+Binary files p_src/sysagt/sysagt.o and src/sysagt/sysagt.o differ
+Binary files p_src/syslk/syslk and src/syslk/syslk differ
+Binary files p_src/syslk/syslk_cmd.o and src/syslk/syslk_cmd.o differ
+Binary files p_src/syslk/syslk_job.o and src/syslk/syslk_job.o differ
+Binary files p_src/syslk/syslk.o and src/syslk/syslk.o differ
+Binary files p_src/testapp/ips_tb/dual_slave and src/testapp/ips_tb/dual_slave differ
+diff -uNr p_src/testapp/ips_tb/dual_slave.c src/testapp/ips_tb/dual_slave.c
+--- p_src/testapp/ips_tb/dual_slave.c	2016-08-18 19:03:55.527627580 +0800
++++ src/testapp/ips_tb/dual_slave.c	2016-08-18 22:38:49.892612314 +0800
+@@ -235,7 +235,6 @@
+ 
+     ips_chan_stop(pcctx);
+     ips_chan_close(pcctx);
+-    sleep(2);
+     goto RESTART;
+ 
+     return(NULL);
+Binary files p_src/testapp/ips_tb/dual_slave.o and src/testapp/ips_tb/dual_slave.o differ
+Binary files p_src/testapp/ips_tb/loopback and src/testapp/ips_tb/loopback differ

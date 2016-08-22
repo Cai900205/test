@@ -1,0 +1,43 @@
+10
+
+dir
+80
+https://svn.fival.cn/svn/fivaldev/spark_devel/trunk
+https://svn.fival.cn/svn/fivaldev/spark_devel
+
+
+
+2016-08-09T06:07:10.216099Z
+80
+zhou.k
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+be55938a-96d3-476b-be63-eef500de6d40
+
+include
+dir
+
+lib
+dir
+
+src
+dir
+
+bin
+dir
+
+cost
+dir
+

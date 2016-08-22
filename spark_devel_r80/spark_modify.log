@@ -1,0 +1,62 @@
+
+
+
+**** : display program bug not be  released 
+$$$$ : display test progarm
+spark version is 0125:
+****    on this version : 
+****                   1. change srio_maint add deviceid_set interface and recovery debug.
+ 
+spark version is 504:
+$$$$                   1. this test process ,on this program ,SRIO receive data is direct sended by XFI interface.
+
+spark version is 0325: 
+    on the this version: 1.add  chain mode dma.
+spark version is 0503:
+    on this version : 1.change idt tool .on the port init ,we can't recovery port.
+                      2.playback speed . delete usleep(100)
+                      3.can't stop playback .change fsl_dma_wait()
+                      4.playback bug.
+spark version date is 0711
+    on this version:
+                    1.idt_tool release and update version as V1.1
+                    2.add mode select by conf (include :)
+                      ips_mode_t syslk_ips_mode = {
+                      .dma_use_nlwr = 0,
+                      .dma_use_chain = 0,
+                      .tx.use_wptr = 1,
+                      .tx.use_rptr = 1,
+                      .rx.use_wptr = 1,
+                      .rx.use_rptr = 1
+                     };
+                      Beili use mode as follows:
+                      ips_mode_t syslk_ips_mode = {
+                      .dma_use_nlwr = 1,
+                      .dma_use_chain = 1,
+                      .tx.use_wptr = 1,
+                      .tx.use_rptr = 1,
+                      .rx.use_wptr = 0,
+                      .rx.use_rptr = 0
+                     };
+                    3.add interface to receive FPGA Debug info to send to Windows console.
+                    4.release spark version 20160711
+spark verison date is 0725
+    on this version:
+                   1. recovery one warn info (isspace)
+
+spark version _r80：
+    on this verison:
+                   release to resolve upper problem.
+spark_devel_r80:
+    on this version: display version
+                   1.use to display srio with Tank .
+                   2.support 2 srio ,每个srio 对应4个盘符。114（1个srio,1个repo,4个slice）
+                   3.support 1 srio, 每个srio 对应8个盘符。118（1个srio,1个repo,8个slice）
+   p_src : display demo
+   src: recovery debug  slave (libips/ips_cmd.c)
+   conf_src: want to use conf to run two mode Demo.(not complete).
+
+spark_devel_r80_test:test version
+    on this version:
+                   1.have porblem;181(1个srio,8个repo,1个slice)
+

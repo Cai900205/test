@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/libdfv
+END
+dfv_cm.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fivaldev/spark_devel/!svn/ver/68/trunk/src/libdfv/dfv_cm.c
+END
+dfv_file.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/libdfv/dfv_file.c
+END
+dfv.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/fivaldev/spark_devel/!svn/ver/68/trunk/src/libdfv/dfv.c
+END
+dfv.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/fivaldev/spark_devel/!svn/ver/68/trunk/src/libdfv/dfv.h
+END
+dfv_repo.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/fivaldev/spark_devel/!svn/ver/68/trunk/src/libdfv/dfv_repo.c
+END
+dfv_meta.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/fivaldev/spark_devel/!svn/ver/62/trunk/src/libdfv/dfv_meta.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fivaldev/spark_devel/!svn/ver/50/trunk/src/libdfv/Makefile
+END

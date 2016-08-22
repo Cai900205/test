@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/libcmi
+END
+cmi_msg.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/libcmi/cmi_msg.c
+END
+cmi_core.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/libcmi/cmi_core.c
+END
+cmi_sock.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/fivaldev/spark_devel/!svn/ver/62/trunk/src/libcmi/cmi_sock.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fivaldev/spark_devel/!svn/ver/47/trunk/src/libcmi/Makefile
+END
+cmi.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/fivaldev/spark_devel/!svn/ver/58/trunk/src/libcmi/cmi.h
+END

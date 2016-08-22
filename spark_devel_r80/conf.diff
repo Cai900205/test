@@ -1,0 +1,16 @@
+diff -uNr conf_src/syslk/syslk.h src/syslk/syslk.h
+--- conf_src/syslk/syslk.h	2016-08-22 19:22:15.957216928 +0800
++++ src/syslk/syslk.h	2016-08-18 00:20:46.913707404 +0800
+@@ -18,10 +18,10 @@
+ #define IPS_CLS_SECTOR_SIZE (0x10000)
+ 
+ #define DFV_SLICE_SIZE      (4*1024*1024)
+-#define DFV_SLICE_NUM       (8/SYS_MAX_PIPES)
++#define DFV_SLICE_NUM       (8)
+ #define DFV_CHUNK_SIZE      (DFV_SLICE_SIZE*DFV_SLICE_NUM)
+ 
+-#define DFVCM_BUF_NODE_NUM  (4*SYS_MAX_PIPES)
++#define DFVCM_BUF_NODE_NUM  (4)
+ #define SYS_CACHE_SIZE      (DFV_CHUNK_SIZE*SYS_MAX_PIPES)
+ 
+ #define SYS_INTERLACE_SIZE  (4*1024)
