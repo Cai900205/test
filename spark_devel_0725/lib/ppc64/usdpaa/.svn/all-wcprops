@@ -1,0 +1,281 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa
+END
+libzlog.a
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libzlog.a
+END
+libusdpaa_helper.a
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_helper.a
+END
+libusdpaa_pme.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_pme.a
+END
+libfvl_srio.a
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libfvl_srio.a
+END
+libfslcrypto.a
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libfslcrypto.a
+END
+libapp_lpm_ethernet.a
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_lpm_ethernet.a
+END
+libapps_ipsecfwd_arp.a
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapps_ipsecfwd_arp.a
+END
+libapp_lpm_arp.a
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_lpm_arp.a
+END
+libhash_table.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libhash_table.a
+END
+libusdpaa_dpa_offload.a
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_dpa_offload.a
+END
+libusdpaa_qbman.a
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_qbman.a
+END
+libapp_ipsecfwd_ip.a
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_ipsecfwd_ip.a
+END
+libapp_rc_ip.a
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_rc_ip.a
+END
+libusdpaa_dma_mem.a
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_dma_mem.a
+END
+libapp_rc_mm.a
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_rc_mm.a
+END
+libapp_ipsecfwd_mm.a
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_ipsecfwd_mm.a
+END
+libusdpaa_rmu.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_rmu.a
+END
+libusdpaa_of.a
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_of.a
+END
+libfra_cfg_parser.a
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libfra_cfg_parser.a
+END
+libusdpaa_hx504.a
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_hx504.a
+END
+libapp_ipsecfwd_refcount.a
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_ipsecfwd_refcount.a
+END
+libusdpaa_srio.a
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_srio.a
+END
+libapp_rc_net.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_rc_net.a
+END
+libapp_ipsecfwd_net.a
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_ipsecfwd_net.a
+END
+libusdpaa_process.a
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_process.a
+END
+librman_interface.a
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/librman_interface.a
+END
+libfra_fman_port.a
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libfra_fman_port.a
+END
+libfra_fq_interface.a
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libfra_fq_interface.a
+END
+libusdpaa_fman.a
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_fman.a
+END
+libapp_lpm_ip.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_lpm_ip.a
+END
+libusdpaa_ppac.a
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_ppac.a
+END
+libapp_lpm_mm.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_lpm_mm.a
+END
+libusdpaa_srams.a
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_srams.a
+END
+libapp_refcount.a
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_refcount.a
+END
+libfifo_queue.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libfifo_queue.a
+END
+libapp_ipsecfwd_ipsec.a
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_ipsecfwd_ipsec.a
+END
+libfra_utils.a
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libfra_utils.a
+END
+libusdpaa_rman.a
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_rman.a
+END
+libusdpaa_syscfg.a
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_syscfg.a
+END
+libusdpaa_dma.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/80/trunk/lib/ppc64/usdpaa/libusdpaa_dma.a
+END
+libapp_lpm_net.a
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_lpm_net.a
+END
+libapp_rc_ethernet.a
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_rc_ethernet.a
+END
+libapp_ipsecfwd_ethernet.a
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_ipsecfwd_ethernet.a
+END
+libfra_bpool.a
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libfra_bpool.a
+END
+libapp_rc_arp.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libapp_rc_arp.a
+END
+libusdpaa_sec.a
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/fivaldev/spark_devel/!svn/ver/28/trunk/lib/ppc64/usdpaa/libusdpaa_sec.a
+END

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk
+END
+zlog.conf
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fivaldev/spark_devel/!svn/ver/45/trunk/src/syslk/zlog.conf
+END
+syslk_job.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/fivaldev/spark_devel/!svn/ver/80/trunk/src/syslk/syslk_job.c
+END
+syslk.c
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/fivaldev/spark_devel/!svn/ver/80/trunk/src/syslk/syslk.c
+END
+syslk_cmd.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/fivaldev/spark_devel/!svn/ver/80/trunk/src/syslk/syslk_cmd.c
+END
+syslk.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/fivaldev/spark_devel/!svn/ver/80/trunk/src/syslk/syslk.h
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/fivaldev/spark_devel/!svn/ver/62/trunk/src/syslk/Makefile
+END

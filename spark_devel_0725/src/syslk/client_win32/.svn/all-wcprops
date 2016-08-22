@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk/client_win32
+END
+stdafx.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/27/trunk/src/syslk/client_win32/stdafx.h
+END
+syslk_clientDlg.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk/client_win32/syslk_clientDlg.h
+END
+DlgProgress.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/fivaldev/spark_devel/!svn/ver/44/trunk/src/syslk/client_win32/DlgProgress.h
+END
+DlgSvrSelect.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/fivaldev/spark_devel/!svn/ver/43/trunk/src/syslk/client_win32/DlgSvrSelect.cpp
+END
+syslk_client.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/fivaldev/spark_devel/!svn/ver/42/trunk/src/syslk/client_win32/syslk_client.cpp
+END
+syslk_client.aps
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk/client_win32/syslk_client.aps
+END
+DlgSvrSelect.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/fivaldev/spark_devel/!svn/ver/43/trunk/src/syslk/client_win32/DlgSvrSelect.h
+END
+cmi.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk/client_win32/cmi.cpp
+END
+targetver.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/fivaldev/spark_devel/!svn/ver/27/trunk/src/syslk/client_win32/targetver.h
+END
+syslk_client.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/fivaldev/spark_devel/!svn/ver/27/trunk/src/syslk/client_win32/syslk_client.h
+END
+syslk_client.vcxproj
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/fivaldev/spark_devel/!svn/ver/44/trunk/src/syslk/client_win32/syslk_client.vcxproj
+END
+cmi.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk/client_win32/cmi.h
+END
+syslk_client.sln
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/fivaldev/spark_devel/!svn/ver/27/trunk/src/syslk/client_win32/syslk_client.sln
+END
+syslk_client.vcxproj.filters
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/fivaldev/spark_devel/!svn/ver/42/trunk/src/syslk/client_win32/syslk_client.vcxproj.filters
+END
+syslk_client.rc
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk/client_win32/syslk_client.rc
+END
+syslk_client.suo
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk/client_win32/syslk_client.suo
+END
+stdafx.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/fivaldev/spark_devel/!svn/ver/27/trunk/src/syslk/client_win32/stdafx.cpp
+END
+syslk_client.vcxproj.user
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/fivaldev/spark_devel/!svn/ver/27/trunk/src/syslk/client_win32/syslk_client.vcxproj.user
+END
+syslk_clientDlg.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk/client_win32/syslk_clientDlg.cpp
+END
+ReadMe.txt
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/fivaldev/spark_devel/!svn/ver/27/trunk/src/syslk/client_win32/ReadMe.txt
+END
+DlgProgress.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/48/trunk/src/syslk/client_win32/DlgProgress.cpp
+END
+resource.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/fivaldev/spark_devel/!svn/ver/70/trunk/src/syslk/client_win32/resource.h
+END

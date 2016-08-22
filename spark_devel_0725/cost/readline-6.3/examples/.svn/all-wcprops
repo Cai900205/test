@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/Makefile.in
+END
+histexamp.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/histexamp.c
+END
+Inputrc
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/Inputrc
+END
+rlcat.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlcat.c
+END
+manexamp.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/manexamp.c
+END
+rl-callbacktest.c
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rl-callbacktest.c
+END
+rlwrap-0.30.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlwrap-0.30.tar.gz
+END
+rlptytest.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlptytest.c
+END
+fileman.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/fileman.c
+END
+rl.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rl.c
+END
+rltest.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rltest.c
+END
+rlevent.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlevent.c
+END
+hist_erasedups.c
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/hist_erasedups.c
+END
+rlversion.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rlversion.c
+END
+rl-fgets.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/rl-fgets.c
+END
+readlinebuf.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/readlinebuf.h
+END
+excallback.c
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/excallback.c
+END
+hist_purgecmd.c
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/fivaldev/spark_devel/!svn/ver/71/trunk/cost/readline-6.3/examples/hist_purgecmd.c
+END

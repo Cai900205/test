@@ -1,0 +1,1104 @@
+Index: include/ips/ips_intf.h
+===================================================================
+--- include/ips/ips_intf.h	(revision 79)
++++ include/ips/ips_intf.h	(working copy)
+@@ -1,7 +1,7 @@
+ #ifndef __IPS_INTF_H__
+ #define __IPS_INTF_H__
+ 
+-#define IPS_MOD_VER     "0.9.151230"
++#define IPS_MOD_VER     "0.9.160711"
+ 
+ #define IPS_MAX_FCNUM   (4)
+ 
+@@ -22,6 +22,18 @@
+ #define IPS_MAKE_EPID(MODE, DID, PID)   ((MODE&0x01)<<6 | (DID&0x0f)<<4 | (PID&0x03))
+ 
+ typedef struct {
++    uint8_t use_wptr;
++    uint8_t use_rptr;
++} ptr_mode_t;
++typedef struct {
++    uint8_t ver;
++    uint8_t dma_use_nlwr;
++    uint8_t dma_use_chain;
++    ptr_mode_t  tx;
++    ptr_mode_t  rx;
++} ips_mode_t;
++
++typedef struct {
+     int is_master;
+     IPS_EPID mst_id;
+     IPS_EPID slv_id;
+@@ -63,14 +75,16 @@
+ 
+ struct ips_pcctx* ips_chan_open(IPS_EPID epid, int pc_id);
+ void ips_chan_close(struct ips_pcctx* pcctx);
+-int ips_chan_config(struct ips_pcctx* pcctx, char* config_buf, size_t buf_sz);
++int ips_chan_config(struct ips_pcctx* pcctx, char* config_buf, size_t buf_sz, char **out_buf, size_t *out_sz);
+ int ips_chan_start(struct ips_pcctx* pcctx, SPK_DIR dir);
+ int ips_chan_stop(struct ips_pcctx* pcctx);
+ int ips_chan_is_start(struct ips_pcctx* pcctx);
++int ips_init_mode(ips_mode_t mode);
+ 
+ ssize_t ips_chan_write(struct ips_pcctx* pcctx, void* buf, size_t size);
+ ssize_t ips_chan_read(struct ips_pcctx* pcctx, void** pbuf, size_t min_size, size_t max_size);
+ int ips_chan_free_buf(struct ips_pcctx* pcctx, size_t buf_sz);
++int ips_chan_get_tx_freebn(struct ips_pcctx* pcctx, size_t buf_sz);
+ 
+ SPK_DIR ips_chan_get_dir(struct ips_pcctx* pcctx);
+ void* ips_chan_get_txbuf(struct ips_pcctx* pcctx, size_t* size);
+Index: lib/ppc64/usdpaa/libusdpaa_dma.a
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/x-archive
+Index: src/testapp/ips_tb/dual_slave.c
+===================================================================
+--- src/testapp/ips_tb/dual_slave.c	(revision 79)
++++ src/testapp/ips_tb/dual_slave.c	(working copy)
+@@ -17,6 +17,7 @@
+ #include "ips/ips_intf.h"
+ #include "dfv/dfv_intf.h"
+ #include "idt/idt_intf.h"
++#include "iniparser/iniparser.h"
+ #include "zlog/zlog.h"
+ 
+ #define WORK_CPU_BASE   (22)
+@@ -26,7 +27,15 @@
+ pthread_t wkr[PIPE_NUM];
+ static pthread_mutex_t sync_cnt_lock;
+ static uint64_t sync_cnt = 0;
++ips_mode_t test_ips_mode = {
++    .dma_use_nlwr = 0,
++    .dma_use_chain = 0,
++    .tx.use_wptr = 1,
++    .tx.use_rptr = 1,
++    .rx.use_wptr = 1,
++    .rx.use_rptr = 1
+ 
++};
+ int break_req = 0;
+ pthread_barrier_t barrier;
+ 
+@@ -52,15 +61,42 @@
+     ips_chan_start(pcctx, SPK_DIR_WRITE);
+ 
+     txbuf = ips_chan_get_txbuf(pcctx, &txbuf_sz);
+-    tx_sz = 0x100000;
++    tx_sz = 0x1000000;
+     printf("TX#%d: start, txbuf_sz=0x%lx\n", wkr_id, txbuf_sz);
+ 
++    uint64_t use_buf_num  = 0;
++    uint64_t send_buf_num = 0;
++    int current_buf_num = 8;
++    uint8_t data = 0;
++    int free_buf_num = 0;
++
+     while(1) {
+         ssize_t write_ret;
++        if (test_ips_mode.dma_use_chain) {
++            if (current_buf_num <= 4) {
++                free_buf_num = ips_chan_get_tx_freebn(pcctx,tx_sz);
++                if (free_buf_num > 0) {
++                    use_buf_num += free_buf_num;
++                    current_buf_num += free_buf_num;
++                }
++                continue;
++            }
++        }
+         do {
+-            memcpy(txbuf, &now, sizeof(uint64_t));
+-            write_ret = ips_chan_write(pcctx, txbuf, tx_sz);
++            if (!test_ips_mode.dma_use_chain) {
++                memcpy(txbuf, &now, sizeof(uint64_t));
++                write_ret = ips_chan_write(pcctx, txbuf, tx_sz);
++            } else {
++                int index = use_buf_num%8;
++                memset(txbuf+(index*tx_sz), data, tx_sz);
++                write_ret = ips_chan_write(pcctx, txbuf+(index * tx_sz), tx_sz);
++            }
+             if (write_ret != 0) {
++                if (test_ips_mode.dma_use_chain) {
++                    current_buf_num--;
++                    send_buf_num++;
++                    data++;
++                }
+                 break;
+             }
+         } while(ips_chan_is_start(pcctx) && spk_get_tick_count() < hb_tick);
+@@ -201,6 +237,42 @@
+     return(NULL);
+ }
+ 
++static void parse_ips_mode_ini(void)
++{
++    dictionary *ini = NULL;
++    int ret = 0;
++   
++    ini = iniparser_load("./conf.ini");
++    if (ini == NULL) {
++        fprintf(stderr,"can not open %s","conf.ini");
++        return;
++    }
++    ret = iniparser_getint(ini, "ips_mode:dma_use_chain", -1);
++    if(ret != -1) {
++        test_ips_mode.dma_use_chain = ret;
++    }
++    ret = iniparser_getint(ini, "ips_mode:dma_use_nlwr", -1);
++    if(ret != -1) {
++        test_ips_mode.dma_use_nlwr = ret;
++    }
++    ret = iniparser_getint(ini, "ips_mode:tx_wptr_mode", -1);
++    if(ret != -1) {
++        test_ips_mode.tx.use_wptr = ret;
++    }
++    ret = iniparser_getint(ini, "ips_mode:tx_rptr_mode", -1);
++    if(ret != -1) {
++        test_ips_mode.tx.use_rptr = ret;
++    }
++    ret = iniparser_getint(ini, "ips_mode:rx_wptr_mode", -1);
++    if(ret != -1) {
++        test_ips_mode.rx.use_wptr = ret;
++    }
++    ret = iniparser_getint(ini, "ips_mode:rx_rptr_mode", -1);
++    if(ret != -1) {
++        test_ips_mode.rx.use_rptr = ret;
++    }
++}
++
+ int main(int argc, char **argv)
+ {
+     int rvl = 0;
+@@ -249,7 +321,9 @@
+         }
+     }
+     idt_dev_close(idt_fd);
+-
++    //init ips mode
++    parse_ips_mode_ini();
++    ips_init_mode(test_ips_mode);
+     for(int pipe=0; pipe<PIPE_NUM; pipe++) {
+         ips_epdesc_t   epdesc;
+         memset(&epdesc, 0, sizeof(ips_epdesc_t));
+Index: src/testapp/ips_tb/Makefile
+===================================================================
+--- src/testapp/ips_tb/Makefile	(revision 79)
++++ src/testapp/ips_tb/Makefile	(working copy)
+@@ -3,7 +3,7 @@
+ 
+ include ../../Makefile.inc
+ LIB_ROOT = ../../../lib/$(ARCH)
+-LIBS = -L$(LIB_ROOT)  -lzlog -lpthread -lm
++LIBS = -L$(LIB_ROOT)  -lzlog -lpthread -lm -liniparser
+ LIBS += -lidt -ldfv -lips  -L$(LIB_ROOT)/usdpaa -lusdpaa_srio -lusdpaa_dma -lusdpaa_dma_mem -lusdpaa_of -lusdpaa_process
+ INCS = -I../../../include
+ CFLAGS +=  $(INCS)
+Index: src/libips/ips_cmd.c
+===================================================================
+--- src/libips/ips_cmd.c	(revision 79)
++++ src/libips/ips_cmd.c	(working copy)
+@@ -53,7 +53,44 @@
+ 
+     return;
+ }
++static int ips_pkt_build_desc(struct dma_ch *dmadev, uint64_t src_pa, uint64_t dest_pa,size_t size,
++       size_t num, uint64_t desc_pa, void *desc_va,int do_start )
++{
++    struct dma_link_setup_data *link_data;
++    struct dma_link_dsc *link_desc;
++    size_t i;
+ 
++    link_data = (struct dma_link_setup_data *)malloc(sizeof(*link_data) * num);
++    link_desc = (struct dma_link_dsc *)desc_va;
++
++    for (i = 0; i < num; i++) {
++        link_data[i].byte_count = size;
++        link_data[i].src_addr = src_pa + (i * size);
++        link_data[i].dst_addr = dest_pa + (i * size);
++        link_data[i].dst_snoop_en = 1;
++        link_data[i].src_snoop_en = 1;
++        link_data[i].dst_nlwr = ips_mode.dma_use_nlwr;
++        link_data[i].dst_stride_en = 0;
++        link_data[i].src_stride_en = 0;
++        link_data[i].dst_stride_dist = 0;
++        link_data[i].src_stride_dist = 0;
++        link_data[i].dst_stride_size = 0;
++        link_data[i].src_stride_size = 0;
++        link_data[i].err_interrupt_en = 0;
++        link_data[i].seg_interrupt_en = 0;
++        link_data[i].link_interrupt_en = 0;
++    }
++
++    fsl_dma_chain_link_build(link_data, link_desc, desc_pa, num);
++    if (do_start) {
++   	    fsl_dma_chain_basic_start(dmadev, link_data, desc_pa);
++    }
++
++    free(link_data);
++    
++    return 0;
++}
++
+ static int __ips_pkt_write(struct dma_ch *dmadev, uint64_t src_pa, uint64_t dest_pa, size_t size)
+ {
+     int rvl;
+@@ -71,8 +108,10 @@
+ 
+ ssize_t ips_data_write(ips_pcctx_t* pcctx, void* buf, size_t bufsize)
+ {
+-    assert(pcctx->tx_inst.wptr - pcctx->tx_inst.rptr < pcctx->desc->sector_num);
+-    assert(bufsize == pcctx->desc->sector_sz);
++    if ((ips_mode.tx.use_wptr) && (ips_mode.tx.use_rptr)) {
++        assert(pcctx->tx_inst.wptr - pcctx->tx_inst.rptr < pcctx->desc->sector_num);
++    }
++    size_t sector_sz = pcctx->desc->sector_sz;
+     int ret;
+     ssize_t sz_ret;
+ 
+@@ -82,7 +121,7 @@
+     int zero_copy = 1;
+ 
+     pthread_mutex_lock(&pcctx->dmach_dxr_lock);
+-    // 
++
+     if (buf < pcctx->tx_dxr_sector.va ||
+         buf + bufsize > pcctx->tx_dxr_sector.va + IPS_MAX_TX_SECTOR_SZ) {
+         memcpy(pcctx->tx_dxr_sector.va, buf, bufsize);
+@@ -96,16 +135,45 @@
+                  pcctx->pc_id, wptr, rptr, sec_idx,
+                  bufsize, pcctx->tx_dxr_sector.va,
+                  *(uint32_t*)pcctx->tx_dxr_sector.va);
+-    ret = __ips_pkt_write(pcctx->dmach_dxr,
++    size_t  write_num = (bufsize/sector_sz);
++    if (!ips_mode.dma_use_chain) {
++        IPS_LOGINFO(IPS_GET_MYEPID(pcctx), "ips_data_write: direct_dma_use_chain=%d",ips_mode.dma_use_chain);
++        ret = __ips_pkt_write(pcctx->dmach_dxr,
+                           pcctx->tx_dxr_sector.pa + (zero_copy?(buf - pcctx->tx_dxr_sector.va):0),
+                           pcctx->swnd_dxr_pa_tbl[sec_idx],
+                           bufsize);
++    } else {
++        IPS_LOGINFO(IPS_GET_MYEPID(pcctx), "ips_data_write: chan_dma_use_chain=%d",ips_mode.dma_use_chain);
++        IPS_RWPTR desc_wptr = pcctx->desc_inst.wptr;
++        uint32_t desc_idx = desc_wptr % pcctx->desc_num;
++        size_t  write_num = (bufsize/sector_sz);
++        int do_start = 0;
++        if (desc_wptr == 0) {
++            do_start = 1;
++        } else {
++            do_start = 0;
++        }
++        ret = ips_pkt_build_desc(pcctx->dmach_dxr,
++                          pcctx->tx_dxr_sector.pa + (zero_copy?(buf - pcctx->tx_dxr_sector.va):0),
++                          pcctx->swnd_dxr_pa_tbl[desc_idx],
++                          sector_sz, write_num, pcctx->desc_sector.pa + (desc_idx*IPS_DESC_SIZE),
++                          pcctx->desc_sector.va + (desc_idx * IPS_DESC_SIZE), do_start);
++
++        if (!do_start) {
++            uint32_t update_desc_idx=(desc_wptr -1) % pcctx->desc_num;
++            ips_dma_change_desc_eaddr(pcctx->desc_sector.va+(update_desc_idx * IPS_DESC_SIZE),
++                                pcctx->desc_sector.pa+(desc_idx * IPS_DESC_SIZE));
++        }
++        ips_dma_enable_cc(pcctx->dmach_dxr);
++
++        pcctx->desc_inst.wptr += write_num;
++    }
+     if (ret < 0) {
+         sz_ret = ret;
+     } else {
+         sz_ret = bufsize;
+     }
+-    pcctx->tx_inst.wptr++;
++    pcctx->tx_inst.wptr += write_num;
+     pthread_mutex_unlock(&pcctx->dmach_dxr_lock);
+ 
+     return(sz_ret);
+@@ -207,6 +275,9 @@
+     pcctx->tx_dxr_offset = pl_init->local.mm_offset;
+     ips_chan_init_dxrtx(pcctx);
+ 
++    ips_chan_init_desc(pcctx);
++    pcctx->desc_num = (IPS_MAX_TX_SECTOR_SZ/pcctx->desc->sector_sz);
++
+     ips_chan_shift_phase(pcctx, IPS_PHASE_IDLE);
+ 
+     // construct ACK
+Index: src/libips/ips.h
+===================================================================
+--- src/libips/ips.h	(revision 79)
++++ src/libips/ips.h	(working copy)
+@@ -17,21 +17,23 @@
+ 
+ #define IPS_PROT_VERSION            (0x01)     // protocol version
+ #define IPS_MAGIC                   (0xf1a10000 | IPS_PROT_VERSION)
++#define IPS_MODE_VERSION            (0x01)
+ 
+ #define IPS_MAX_SECTOR_SIZE         (4*1024*1024)
+ #define IPS_MAX_SECTORS_IN_CLS      (64*1024)
+ #define IPS_SECTOR_SZ_MULTIPLIER    (64*1024)
+-#define IPS_MAX_TX_SECTOR_SZ        (32*1024*1024)
++#define IPS_MAX_TX_SECTOR_SZ        (128*1024*1024)
++#define IPS_DESC_SPACE_SIZE         (1*1024*1024)
++#define IPS_DESC_SIZE               (0x20)
++#define IPS_SRIOWND_SIZE_ALL        (512*1024*1024) // 512M 
++#define IPS_SRIOWND_CTR_BASE        (448*1024*1024) // 
++#define IPS_SRIOWND_DXR_BASE        (0)
+ 
+-#define IPS_SRIOWND_SIZE_ALL    (256*1024*1024) // 256M
+-#define IPS_SRIOWND_CTR_BASE    (192*1024*1024)
+-#define IPS_SRIOWND_DXR_BASE    (0)
+-
+ // IPS memory map definition
+ #define IPS_MM_CTLREG_BASE  (0x01000000)
+ #define IPS_MM_CTLREG_SIZE  (0x01000000) // 16M
+ #define IPS_MM_DXREG_BASE   (0x10000000)
+-#define IPS_MM_DXREG_SIZE   (0x04000000) // 64M
++#define IPS_MM_DXREG_SIZE   (0x10000000) // 256M 
+ 
+ #define IPS_IBID_CTLREG     (1)
+ #define IPS_IBID_DXREG      (IPS_IBID_CTLREG + 1)
+@@ -122,6 +124,12 @@
+     pthread_mutex_t dmach_dxr_lock;
+     ips_dx_inst_t   tx_inst;
+     
++    //link_dsc_region - tx 
++    ips_dma_addr_t  desc_sector;
++    ips_dx_inst_t   desc_inst;
++    uint32_t        desc_num;
++    //link_dsc_region - rx
++    dma_addr_t      desc_base;
+     // statistics
+     spk_stats_t     stats_xfer;
+ } ips_pcctx_t;
+@@ -212,6 +220,7 @@
+     IPS_RWPTR rptr;
+ } ips_pl_sync_t;
+ 
++extern ips_mode_t ips_mode;
+ #include "zlog/zlog.h"
+ extern zlog_category_t* ips_zc;
+ #define IPS_EPID_UNKNOWN        (0xff)
+@@ -267,6 +276,7 @@
+ 
+ int ips_chan_init_dxrtx(ips_pcctx_t* pcctx);
+ int ips_chan_init_dxrrx(ips_pcctx_t* pcctx);
++int ips_chan_init_desc(ips_pcctx_t* pcctx);/*add*/
+ void ips_chan_shift_phase(ips_pcctx_t* pcctx, IPS_PHASE new_phase);
+ 
+ const char* ips_desc_opcode2str(int opcode);
+Index: src/libips/include/usdpaa/fsl_dma.h
+===================================================================
+--- src/libips/include/usdpaa/fsl_dma.h	(revision 79)
++++ src/libips/include/usdpaa/fsl_dma.h	(working copy)
+@@ -69,9 +69,11 @@
+ 	uint8_t err_interrupt_en;
+ };
+ 
++extern int dma_basic_mode;
+ int fsl_dma_chan_init(struct dma_ch **dma_ch, uint8_t dma_id, uint8_t ch_id);
+ int fsl_dma_chan_finish(struct dma_ch *dma_ch);
+ int fsl_dma_chan_basic_direct_init(struct dma_ch *dma_ch);
++int ips_dma_chan_basic_set_mode(int mode);
+ int fsl_dma_chan_bwc(struct dma_ch *dma_ch, uint8_t bwc);
+ int fsl_dma_wait(struct dma_ch *dma_ch);
+ int fsl_dma_direct_start(struct dma_ch *dma_ch, dma_addr_t src_phys,
+@@ -82,4 +84,7 @@
+ int fsl_dma_chain_basic_start(struct dma_ch *dma_ch,
+ 			struct dma_link_setup_data *link_data,
+ 			uint64_t link_dsc_phys);
++int ips_dma_enable_cc(struct dma_ch *dma_ch);
++uint32_t  ips_dma_get_current_desc_addr(struct dma_ch *dma_ch);
++int ips_dma_change_desc_eaddr(void *desc_addr, dma_addr_t next_desc_addr);
+ #endif
+Index: src/libips/ips_core.c
+===================================================================
+--- src/libips/ips_core.c	(revision 79)
++++ src/libips/ips_core.c	(working copy)
+@@ -5,6 +5,15 @@
+ pthread_mutex_t ips_zlog_lock;
+ static ips_epctx_t* ips_epctx_tbl[IPS_MAX_PORTS_IN_DEV] = {NULL};
+ zlog_category_t* ips_zc = NULL;
++ips_mode_t ips_mode = {
++    .ver = IPS_MODE_VERSION,
++    .dma_use_nlwr = 0,
++    .dma_use_chain = 0,
++    .tx.use_wptr = 1,
++    .tx.use_rptr = 1,
++    .rx.use_wptr = 1,
++    .rx.use_rptr = 1
++};
+ 
+ static inline int get_order(size_t size)
+ {
+@@ -218,7 +227,7 @@
+     pcctx->tx_dxr_sector.va = ips_dmamem_alloc(IPS_MAX_TX_SECTOR_SZ,
+                               &pcctx->tx_dxr_sector.pa,
+                               &pcctx->tx_dxr_sector.dma_mem);
+-    IPS_LOGINFO(epid, "Alloc TX_DXR_SECTOR: pc_id=%d, size=%d, "
++    IPS_LOGNOTICE(epid, "Alloc TX_DXR_SECTOR: pc_id=%d, size=%d, "
+                 "va=%p, pa=0x%lx",
+                 pcctx->pc_id, IPS_MAX_TX_SECTOR_SZ,
+                 pcctx->tx_dxr_sector.va, pcctx->tx_dxr_sector.pa);
+@@ -232,7 +241,7 @@
+     uint64_t remote_offset = pcctx->tx_dxr_offset + cls_sz;
+     int wnd_sz = get_order(ips_chan_get_clssize(pcctx)) - 1;
+     int obwin_id = IPS_OBID_DXREG + pcctx->pc_id;
+-    IPS_LOGINFO(epid, "Bind TX_DXR_SECTOR: pc_id=%d, win_id=%d, "
++    IPS_LOGNOTICE(epid, "Bind TX_DXR_SECTOR: pc_id=%d, win_id=%d, "
+                 "swnd_pa=0x%lx, offset=0x%lx, wnd_sz=%d",
+                 pcctx->pc_id, obwin_id, pcctx->swnd_dxr_pa_base,
+                 remote_offset, wnd_sz);
+@@ -255,7 +264,24 @@
+ 
+     return(SPK_SUCCESS);
+ }
++int ips_chan_init_desc(ips_pcctx_t *pcctx)
++{
++    IPS_EPID epid = IPS_GET_MYEPID(pcctx);
++    // alloc desc_sector
++    pcctx->desc_sector.va = ips_dmamem_alloc(IPS_DESC_SPACE_SIZE,
++                              &pcctx->desc_sector.pa,
++                              &pcctx->desc_sector.dma_mem);
++    IPS_LOGNOTICE(epid, "Alloc TX_DSC_SECTOR: pc_id=%d, size=%d, "
++                "va=%p, pa=0x%lx",
++                pcctx->pc_id, IPS_DESC_SPACE_SIZE,
++                pcctx->desc_sector.va, pcctx->desc_sector.pa);
++    assert(pcctx->desc_sector.va);
+ 
++    pcctx->desc_base = pcctx->desc_sector.pa;
++
++    return(SPK_SUCCESS);
++}
++
+ void* __ips_daemon_slave(void* args)
+ {
+     ips_worker_args_t* worker_args = (ips_worker_args_t*)args;
+@@ -413,6 +439,8 @@
+                      "id=%d, dev=%p, ret=%d",
+                      i, i, pcctx->dmach_ctr,  rvl);
+         assert(!rvl);
++        int dma_use_nlwr = ips_mode.dma_use_nlwr;
++        ips_dma_chan_basic_set_mode(dma_use_nlwr);
+         fsl_dma_chan_basic_direct_init(pcctx->dmach_ctr);
+         fsl_dma_chan_bwc(pcctx->dmach_ctr, DMA_BWC_1024);
+ 
+@@ -508,7 +536,7 @@
+     return(SPK_SUCCESS);
+ }
+ 
+-int ips_chan_config(ips_pcctx_t* pcctx, char* config_buf, size_t buf_sz)
++int ips_chan_config(ips_pcctx_t* pcctx, char* config_buf, size_t buf_sz, char **out_buf, size_t* out_sz)
+ {
+     IPS_EPID epid = IPS_GET_MYEPID(pcctx);
+     int pc_id = pcctx->pc_id;
+@@ -531,6 +559,10 @@
+         IPS_LOGFATAL(epid, "failed to config channel: pc=%d, ret=%d", pc_id, ret);
+         goto out;
+     }
++    size_t pl_sz = (sizeof(ips_mailbox_t) - sizeof(ips_mb_header_t));
++    *out_sz = pl_sz;
++    *out_buf = (char *)(malloc(pl_sz)); 
++    memcpy(*out_buf, ack.payload, pl_sz);
+     IPS_LOGNOTICE(epid, "channel config done: pc=%d", pc_id);
+     ret = SPK_SUCCESS;
+ 
+@@ -608,6 +640,8 @@
+         pcctx->tx_dxr_offset = IPS_MM_DXREG_BASE + cls_sz; // TBD: equals to local
+         ips_chan_init_dxrtx(pcctx);
+     
++        ips_chan_init_desc(pcctx);
++        pcctx->desc_num = (IPS_MAX_TX_SECTOR_SZ/pcctx->desc->sector_sz);
+         // handshake
+         // construct PKT_CMD_INIT
+         IPS_LOGNOTICE(epid, "start handshake: pc=%d", pc_id);
+@@ -700,6 +734,7 @@
+     // initialize rx/tx instance
+     memset(&pcctx->rx_inst, 0, sizeof(ips_dx_inst_t));
+     memset(&pcctx->tx_inst, 0, sizeof(ips_dx_inst_t));
++    memset(&pcctx->desc_inst, 0, sizeof(ips_dx_inst_t));
+     spk_stats_reset(&pcctx->stats_xfer);
+ 
+     // clear rx/tx stat repo
+@@ -749,50 +784,64 @@
+     int sec_num_req = bufsize / sector_sz;
+     int sec_num_free;
+ 
+-    sec_num_free = sec_num_total - (dx_inst->wptr - dx_inst->rptr);
+-    if (sec_num_free < sec_num_req) {
++    if (ips_mode.tx.use_rptr) {
++        sec_num_free = sec_num_total - (dx_inst->wptr - dx_inst->rptr);
++        if (sec_num_free < sec_num_req) {
+         // not enough free buffer, update rptr to try again
+-        stat_sz = ips_mb_read(pcctx,
+-                                IPS_OFFSET_STATREPO_IN_PCB + IPS_OFFSET_TXSTAT_IN_REPO, &tx_stat);
+-        if (stat_sz > 0) {
+-            ips_pl_sync_t* plsync = (ips_pl_sync_t*)tx_stat.payload;
+-            dx_inst->rptr = plsync->rptr;
+-            sec_num_free = sec_num_total - (dx_inst->wptr - dx_inst->rptr);
++            stat_sz = ips_mb_read(pcctx,
++                                    IPS_OFFSET_STATREPO_IN_PCB + IPS_OFFSET_TXSTAT_IN_REPO, &tx_stat);
++            if (stat_sz > 0) {
++                ips_pl_sync_t* plsync = (ips_pl_sync_t*)tx_stat.payload;
++                dx_inst->rptr = plsync->rptr;
++                sec_num_free = sec_num_total - (dx_inst->wptr - dx_inst->rptr);
++            }
+         }
+-    }
+ 
+-    if (sec_num_free < sec_num_req) {
+-        ret_sz = 0;
+-        goto out;
+-        IPS_LOGWARN(epid, "not enough buffer: "
++        if (sec_num_free < sec_num_req) {
++            ret_sz = 0;
++            goto out;
++            IPS_LOGWARN(epid, "not enough buffer: "
+                          "wptr=0x%lx, rptr=0x%lx, total=%d, free_buf=%d, expect=%d",
+                          dx_inst->wptr,
+                          dx_inst->rptr,
+                          sec_num_total,
+                          sec_num_free,
+                          sec_num_req);
++        }
+     }
+ 
+-    for(int i = 0; i < sec_num_req; i++) {
+-        size_t written = ips_data_write(pcctx, buf + i * sector_sz, sector_sz);
+-        if (written != sector_sz) {
+-            ret_sz = written;
+-            goto out;
++    if (!ips_mode.dma_use_chain) {
++        IPS_LOGINFO(epid, "ips_chan_write:direct_dma_use_chain=%d",ips_mode.dma_use_chain);
++        for(int i = 0; i < sec_num_req; i++) {
++            size_t written = ips_data_write(pcctx, buf + i * sector_sz, sector_sz);
++            if (written != sector_sz) {
++                ret_sz = written;
++                goto out;
++            }
++            spk_stats_inc_xfer(&pcctx->stats_xfer, sector_sz, 1);
+         }
+-        spk_stats_inc_xfer(&pcctx->stats_xfer, sector_sz, 1);
+-    }
+-
+-    uint64_t repo_offset = IPS_OFFSET_STATREPO_IN_PCB + IPS_OFFSET_RXSTAT_IN_REPO;
+-    ips_pl_sync_t pl_sync;
+-    memset(&pl_sync, 0, sizeof(ips_pl_sync_t));
+-    pl_sync.wptr = pcctx->tx_inst.wptr;
+-    pl_sync.rptr = pcctx->tx_inst.rptr;
+-    ssize_t access_sz = ips_mb_write(pcctx, repo_offset,
++        if (ips_mode.tx.use_wptr) {
++            uint64_t repo_offset = IPS_OFFSET_STATREPO_IN_PCB + IPS_OFFSET_RXSTAT_IN_REPO;
++            ips_pl_sync_t pl_sync;
++            memset(&pl_sync, 0, sizeof(ips_pl_sync_t));
++            pl_sync.wptr = pcctx->tx_inst.wptr;
++            pl_sync.rptr = pcctx->tx_inst.rptr;
++            ssize_t access_sz = ips_mb_write(pcctx, repo_offset,
+                                      IPS_OPNTF_DMADONE,
+                                      &pl_sync, sizeof(ips_pl_sync_t));
+-    if (access_sz <= 0) {
+-        ret_sz = SPKERR_EACCESS;
+-        goto out;
++            if (access_sz <= 0) {
++                ret_sz = SPKERR_EACCESS;
++                goto out;
++            }
++        }
++    } else {
++        IPS_LOGINFO(epid, "ips_chan_write:chan_dma_use_chain=%d",ips_mode.dma_use_chain);
++        size_t written = ips_data_write(pcctx, buf,bufsize);
++        if (written != bufsize) {
++             ret_sz = written;
++             goto out;
++        }
++        spk_stats_inc_xfer(&pcctx->stats_xfer, bufsize, 1);
+     }
+ 
+     // success
+@@ -821,13 +870,15 @@
+     }
+ 
+     // update wptr
+-    ips_mailbox_t rx_stat;
+-    stat_sz = ips_mb_read(pcctx,
++    if (ips_mode.rx.use_wptr) {
++        ips_mailbox_t rx_stat;
++        stat_sz = ips_mb_read(pcctx,
+                             IPS_OFFSET_STATREPO_IN_PCB + IPS_OFFSET_RXSTAT_IN_REPO, &rx_stat);
+ 
+-    if (stat_sz > 0) {
+-        ips_pl_sync_t* plsync = (ips_pl_sync_t*)rx_stat.payload;
+-        dx_inst->wptr = plsync->wptr;
++        if (stat_sz > 0) {
++            ips_pl_sync_t* plsync = (ips_pl_sync_t*)rx_stat.payload;
++            dx_inst->wptr = plsync->wptr;
++        }
+     }
+ 
+     int work_sec_num = dx_inst->wptr - dx_inst->rptr;
+@@ -914,19 +965,56 @@
+     dx_inst->rptr += buf_cnt;
+     pl_sync.rptr = dx_inst->rptr;
+     pl_sync.wptr = dx_inst->wptr;
+-    ssize_t access_sz = ips_mb_write(pcctx,
++    if (ips_mode.rx.use_rptr) {
++        ssize_t access_sz = ips_mb_write(pcctx,
+                                      IPS_OFFSET_STATREPO_IN_PCB + IPS_OFFSET_TXSTAT_IN_REPO,
+                                      IPS_OPNTF_FREEBUF,
+                                      &pl_sync, sizeof(ips_pl_sync_t));
+-    pthread_mutex_unlock(pcctx->ctx_lock);
++        pthread_mutex_unlock(pcctx->ctx_lock);
+ 
+-    if (access_sz <= 0) {
+-        return(SPKERR_EACCESS);
++        if (access_sz <= 0) {
++            return(SPKERR_EACCESS);
++        }
+     }
+ 
+     return(SPK_SUCCESS);
+ }
++int ips_chan_get_tx_freebn(ips_pcctx_t* pcctx,size_t buf_sz)
++{
++    size_t sector_sz = pcctx->desc->sector_sz;
++    IPS_EPID    epid = IPS_GET_MYEPID(pcctx);
+ 
++    uint32_t local_desc_pa = (pcctx->desc_base & 0xffffffff);
++    uint32_t total_desc_num = pcctx->desc_num;
++    uint32_t current_desc_pa = ips_dma_get_current_desc_addr(pcctx->dmach_dxr);
++    size_t buf_cnt = buf_sz/sector_sz;
++    size_t buf_num = (IPS_MAX_TX_SECTOR_SZ) / buf_sz;
++    int free_num = 0;
++    
++    free_num = (((total_desc_num*IPS_DESC_SIZE)+current_desc_pa - local_desc_pa)
++            / (buf_cnt * IPS_DESC_SIZE)) % buf_num;
++    if (free_num > 0 ) {
++        IPS_LOGINFO(epid,"current_desc_pa:%x,local_pa:%x buf_cnt:%lx", current_desc_pa, local_desc_pa, buf_cnt);
++        pcctx->desc_inst.rptr += (free_num * buf_cnt);
++        pcctx->desc_base = current_desc_pa;
++        if (ips_mode.tx.use_wptr) {
++            uint64_t repo_offset = IPS_OFFSET_STATREPO_IN_PCB + IPS_OFFSET_RXSTAT_IN_REPO;
++            ips_pl_sync_t pl_sync;
++            memset(&pl_sync, 0, sizeof(ips_pl_sync_t));
++            pl_sync.wptr = pcctx->desc_inst.rptr;
++            pl_sync.rptr = pcctx->tx_inst.rptr;
++            ssize_t access_sz = ips_mb_write(pcctx, repo_offset,
++                                     IPS_OPNTF_DMADONE,
++                                     &pl_sync, sizeof(ips_pl_sync_t));
++            if (access_sz <= 0) {
++                IPS_LOGWARN(epid,"ips_mb_write update wptr failed:%lx",access_sz);
++            }
++        }
++    }
++
++    return free_num;
++}
++
+ void* ips_chan_get_txbuf(ips_pcctx_t* pcctx, size_t* size)
+ {
+     *size = IPS_MAX_TX_SECTOR_SZ;
+@@ -992,6 +1080,9 @@
+     int mode = IPS_EPID_2_MODE(epid);
+     int ret = SPK_SUCCESS;
+     
++    if (ips_mode.dma_use_chain) { 
++        fsl_dma_wait(pcctx->dmach_dxr);
++    }
+     IPS_PHASE phase = ips_chan_get_phase(pcctx);
+     if (phase == IPS_PHASE_RX || phase == IPS_PHASE_TX) {
+         if (mode == IPS_EPMODE_MASTER) {
+@@ -1036,6 +1127,11 @@
+             dma_mem_destroy(pcctx->tx_dxr_sector.dma_mem);
+             pcctx->tx_dxr_sector.va = NULL;
+         }
++        
++        if (pcctx->desc_sector.va) {
++            dma_mem_destroy(pcctx->desc_sector.dma_mem);
++            pcctx->desc_sector.va = NULL;
++        }
+         ips_chan_shift_phase(pcctx, IPS_PHASE_INIT);
+         IPS_LOGNOTICE(epid, "channel closed: pc=%d", pcctx->pc_id);
+     }
+@@ -1067,4 +1163,16 @@
+ spk_stats_t* ips_chan_get_stats(ips_pcctx_t* pcctx)
+ {
+     return(&pcctx->stats_xfer);
+-}
+\ No newline at end of file
++}
++
++int ips_init_mode(ips_mode_t mode)
++{
++    ips_mode.dma_use_nlwr = mode.dma_use_nlwr;
++    ips_mode.dma_use_chain = mode.dma_use_chain;
++    ips_mode.tx.use_wptr = mode.tx.use_wptr;
++    ips_mode.tx.use_rptr = mode.tx.use_rptr;
++    ips_mode.rx.use_wptr = mode.rx.use_wptr;
++    ips_mode.rx.use_rptr = mode.rx.use_rptr;
++    
++    return 0;
++}
+Index: src/syslk/syslk_job.c
+===================================================================
+--- src/syslk/syslk_job.c	(revision 79)
++++ src/syslk/syslk_job.c	(working copy)
+@@ -459,8 +459,11 @@
+     }
+ 
+     zlog_notice(sys_zc, "wkr#%d> ---------- start config ----------", wkr_id);
+-    ret = ips_chan_config(pcctx, config_buf, buf_sz);
+-
++    char *out_buf = NULL;
++    size_t out_sz = 0;
++    ret = ips_chan_config(pcctx, config_buf, buf_sz, &out_buf, &out_sz);
++    memcpy(&sys_fpga_stat[wkr_id], (out_buf+8), sizeof(sys_fpga_stat[wkr_id]));
++    free(out_buf);
+ out:
+     zlog_notice(sys_zc, "wkr#%d> ---------- stop config ---------- ret=%d", wkr_id, ret);
+ 
+@@ -518,7 +521,7 @@
+         stats = ips_chan_get_stats(pcctx);
+     }
+ 
+-    int dfvcm_buf_nodes = 2;
++    int dfvcm_buf_nodes = DFVCM_BUF_NODE_NUM;//
+     // we use ips's tx_buffers directly (for zero-copy)
+     // scratch bufs from ips
+     txbuf = ips_chan_get_txbuf(pcctx, &txbuf_sz);
+@@ -529,19 +532,20 @@
+     dfvcm = dfvcm_open(wkr_id, slot_def, SPK_DIR_READ, NULL, dfv_cpu_base);
+     assert(dfvcm);
+ 
++    dfv_bufq_node_t *local_node[DFVCM_BUF_NODE_NUM];
+     for (i=0; i<dfvcm_buf_nodes; i++) {
+         // initialize buf nodes
+-        dfv_bufq_node_t* node = malloc(sizeof(dfv_bufq_node_t));
+-        assert(node);
+-        memset(node, 0, sizeof(dfv_bufq_node_t));
++        local_node[i] = malloc(sizeof(dfv_bufq_node_t));
++        assert(local_node[i]);
++        memset(local_node[i], 0, sizeof(dfv_bufq_node_t));
+         // points to txbuf
+-        node->buf_ptr = txbuf + i*DFV_CHUNK_SIZE;
+-        node->buf_sz = DFV_CHUNK_SIZE;
++        local_node[i]->buf_ptr = txbuf + i*DFV_CHUNK_SIZE;
++        local_node[i]->buf_sz = DFV_CHUNK_SIZE;
+         // enqueue to dfvcm's freeq
+         // dfvcm will start reading immediatly
+-        dfv_bufq_enqueue(dfvcm_get_freeq(dfvcm), node);
++        dfv_bufq_enqueue(dfvcm_get_freeq(dfvcm), local_node[i]);
+         zlog_notice(sys_zc, "wkr#%d> enqueue node to dfvcm: buf={%p+%zu}",
+-                            wkr_id, node->buf_ptr, node->buf_sz);
++                            wkr_id, local_node[i]->buf_ptr, local_node[i]->buf_sz);
+     }
+ 
+     // start playback
+@@ -549,14 +553,32 @@
+     uint64_t now = spk_get_tick_count();
+     uint64_t tm_log = now;
+     ret = SPK_SUCCESS;
++    uint64_t use_buf_num = 0;
++    int  current_buf_num = DFVCM_BUF_NODE_NUM;
++    int dfv_status = 0;
+     while(!wkr_ctx->reset_req) {
+         // dequeue buffers from dfvcm
++        if (dfvcm_get_eof(dfvcm)) {
++            dfv_status=1;
++        }
+         dfv_bufq_node_t* node = dfv_bufq_dequeue(dfvcm_get_workq(dfvcm));
++        if (syslk_ips_mode.dma_use_chain) {
++            if(current_buf_num <= 4) {
++                int free_buf_num = ips_chan_get_tx_freebn(pcctx, DFV_CHUNK_SIZE);
++                if(free_buf_num > 0) {
++                    for(i=0; i<free_buf_num; i++) {
++                        int index = (use_buf_num % (DFVCM_BUF_NODE_NUM));
++                        dfv_bufq_enqueue(dfvcm_get_freeq(dfvcm), local_node[index]);
++                        use_buf_num++;
++                        current_buf_num++;
++                    }
++                }
++            }
++        }
+         if (!node) {
+-            if (dfvcm_get_eof(dfvcm)) {
++            if (dfvcm_get_eof(dfvcm) && (dfv_status)) {
+                 break;
+             }
+-            usleep(100);
+             continue;
+         }
+         // got one node
+@@ -567,9 +589,14 @@
+             ssize_t xfer = ips_chan_write(pcctx, node->buf_ptr, node->valid_sz);
+             if (xfer == node->valid_sz) {
+                 // done
+-                spk_stats_inc_xfer(stats, node->valid_sz, 1);
+-                // recycle buffer to dfvcm
+-                dfv_bufq_enqueue(dfvcm_get_freeq(dfvcm), node);
++                if (!syslk_ips_mode.dma_use_chain) {
++                    spk_stats_inc_xfer(stats, node->valid_sz, 1);
++                    // recycle buffer to dfvcm
++                    dfv_bufq_enqueue(dfvcm_get_freeq(dfvcm), node);
++                } else {
++                    spk_stats_inc_xfer(stats,node->valid_sz, 1);
++                    current_buf_num--;;
++                }
+                 break;
+             }
+             if (xfer != 0) {
+Index: src/syslk/syslk.c
+===================================================================
+--- src/syslk/syslk.c	(revision 79)
++++ src/syslk/syslk.c	(working copy)
+@@ -5,6 +5,7 @@
+     > Created Time: Wed 12 Aug 2015 05:16:49 PM CST
+  ************************************************************************/
+ 
++#include <ctype.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <malloc.h>
+@@ -23,6 +24,15 @@
+ sys_env_t sys_env;
+ sys_ctx_t sys_ctx;
+ 
++uint64_t sys_fpga_stat[2];
++ips_mode_t syslk_ips_mode = {
++    .dma_use_nlwr = 0,
++    .dma_use_chain = 0,
++    .tx.use_wptr = 1,
++    .tx.use_rptr = 1,
++    .rx.use_wptr = 1,
++    .rx.use_rptr = 1
++};
+ // lktm
+ //  sec: [0: 5] - 6bit
+ //  min: [6:11] - 6bit
+@@ -225,6 +235,130 @@
+     return(ret);
+ }
+ 
++static void l_trim(char* output, char* input)
++{
++    assert(input != NULL);
++    assert(output != NULL);
++    assert(output != input);
++    
++    for(; (*input != '\0' && isspace(*input)); ++input) {
++        ;
++    }
++    strcpy(output, input); 
++}
++
++static void lr_trim(char* output, char* input)
++{
++    char *p = NULL;
++    assert(input != NULL);
++    assert(output != NULL);
++    l_trim(output, input);
++    for(p = output + strlen(output) - 1; p >= output && isspace(*p); --p) {
++        ;
++    }
++    *(++p) = '\0';
++}
++
++int  syslk_parse_keyval(FILE *fp, char* KeyName, char* value)
++{
++    char buf_o[KEYVALLEN], buf_i[KEYVALLEN];
++    char *buf = NULL;
++    char *c;
++    char keyname[KEYVALLEN];
++    char KeyVal[KEYVALLEN];
++    int ret = -1;
++    
++    while( !feof(fp) && fgets(buf_i,KEYVALLEN,fp) != NULL) {
++        l_trim(buf_o, buf_i);
++        if( strlen(buf_o) <= 0 ) {
++            continue;	
++        }
++        buf = NULL;
++        buf = buf_o;
++        if ( buf[0] == '#') {
++            continue;	
++        } else {
++            if( (c = (char*)strchr(buf, '=')) == NULL ) {
++                continue;
++            }	
++            sscanf( buf, "%[^=|^ |^\t]", keyname );
++            if( strcmp(keyname, KeyName) == 0 ) {
++                sscanf( ++c, "%[^\n]", KeyVal );
++                char *KeyVal_o = (char *)malloc(strlen(KeyVal) + 1);
++                if(KeyVal_o != NULL) {
++                    memset((void *)KeyVal_o, 0, sizeof(KeyVal_o));
++                    lr_trim(KeyVal_o, KeyVal);
++                    if(KeyVal_o && strlen(KeyVal_o) > 0) {
++                        strcpy(value, KeyVal_o);
++                    }
++                    free(KeyVal_o);
++                    KeyVal_o = NULL;
++                    ret = 0;
++                    break;
++                }
++            }
++        }
++        
++    }
++    return ret;
++}
++
++static void syslk_parse_ips_mode(char *filename)
++{
++    FILE *fp = NULL;
++    uint8_t value = 0;
++    char data[KEYVALLEN];
++    int ret = -1;
++
++    if ((fp = fopen(filename, "r")) == NULL) {
++        fprintf(stderr, "can not open %s", filename);
++        return;
++    }
++    fseek(fp, 0, SEEK_SET);
++    ret = syslk_parse_keyval(fp, "dma_use_nlwr", data);
++    if (ret == 0) {
++        value = atoi(data);
++        syslk_ips_mode.dma_use_nlwr = value; 
++    }
++    
++    fseek(fp, 0, SEEK_SET);
++    ret = syslk_parse_keyval(fp, "dma_use_chain", data);
++    if (ret == 0) {
++        value = atoi(data);
++        syslk_ips_mode.dma_use_chain = value; 
++    }
++    
++    fseek(fp, 0, SEEK_SET);
++    ret = syslk_parse_keyval(fp, "tx_use_wptr", data);
++    if (ret == 0) {
++        value = atoi(data);
++        syslk_ips_mode.tx.use_wptr = value; 
++    }
++    
++    fseek(fp, 0, SEEK_SET);
++    ret = syslk_parse_keyval(fp,"tx_use_rptr", data);
++    if (ret == 0) {
++        value = atoi(data);
++        syslk_ips_mode.tx.use_rptr = value; 
++    }
++    
++    fseek(fp, 0, SEEK_SET);
++    ret = syslk_parse_keyval(fp, "rx_use_wptr", data);
++    if (ret == 0) {
++        value = atoi(data);
++        syslk_ips_mode.rx.use_wptr = value; 
++    }
++    
++    fseek(fp, 0, SEEK_SET);
++    ret = syslk_parse_keyval(fp, "rx_use_rptr", data);
++    if (ret == 0) {
++        value = atoi(data);
++        syslk_ips_mode.rx.use_rptr = value; 
++    }
++
++    fclose(fp);
++}
++
+ int main(int argc, char **argv)
+ {
+     int ret;
+@@ -335,6 +469,12 @@
+     ret = cmi_module_init(NULL);
+     assert(!ret);
+ 
++    //init ips mode
++    syslk_parse_ips_mode("./syslk_ips.conf");
++    ips_init_mode(syslk_ips_mode);
++    zlog_notice(sys_zc,"dma_use_nlwr:%d dma_use_chain:%d tx_wmd:%d tx_rmd:%d rx_wmd:%d rx_rmd:%d",
++                syslk_ips_mode.dma_use_nlwr, syslk_ips_mode.dma_use_chain, syslk_ips_mode.tx.use_wptr,
++                syslk_ips_mode.tx.use_rptr, syslk_ips_mode.rx.use_wptr, syslk_ips_mode.rx.use_rptr);    
+     // initialize ctxs
+     memset(&sys_ctx, 0, sizeof(sys_ctx));
+ 
+@@ -534,6 +674,7 @@
+         
+         if (sys_ctx.sysdown_req) {
+             zlog_notice(sys_zc, "################# SYSTEM SHUTDOWN");
++            spk_os_exec("poweroff");
+             goto RECONN;
+         }
+         // TODO: other ret code
+Index: src/syslk/syslk_cmd.c
+===================================================================
+--- src/syslk/syslk_cmd.c	(revision 79)
++++ src/syslk/syslk_cmd.c	(working copy)
+@@ -594,6 +594,8 @@
+         cmdresp.success = CMI_CMDEXEC_SUCC;
+         if (cmd->cmd_type == cmd_type_init) {
+             cmdresp.u.version.sys_ver = SYS_VERSION_INT;
++        } else if (cmd->cmd_type == cmd_type_config) {
++            memcpy(cmdresp.u.all.words, &sys_fpga_stat[0], sizeof(sys_fpga_stat[0]));    
+         }
+     } else {
+         zlog_error(sys_zc, "failed to exec cmd: type=%s, ret=%d",
+Index: src/syslk/syslk.h
+===================================================================
+--- src/syslk/syslk.h	(revision 79)
++++ src/syslk/syslk.h	(working copy)
+@@ -8,24 +8,26 @@
+ 
+ #define SYS_VERSION_MAJOR   0
+ #define SYS_VERSION_MINOR   9
+-#define SYS_VERSION_DATE    151230
++#define SYS_VERSION_DATE    160711
+ 
+ #define SYS_VERSION         MAKE_VER_STR(SYS_VERSION_MAJOR, SYS_VERSION_MINOR, SYS_VERSION_DATE)
+ #define SYS_VERSION_INT     MAKE_VER_INT(SYS_VERSION_MAJOR, SYS_VERSION_MINOR, SYS_VERSION_DATE)
+ 
+ #define SYS_MAX_PIPES       (2)
+-#define IPS_CLS_SECTOR_NUM  (1024)
++#define IPS_CLS_SECTOR_NUM  (4096) 
+ #define IPS_CLS_SECTOR_SIZE (0x10000)
+ 
+ #define DFV_SLICE_SIZE      (4*1024*1024)
+ #define DFV_SLICE_NUM       (4)
+ #define DFV_CHUNK_SIZE      (DFV_SLICE_SIZE*DFV_SLICE_NUM)
+ 
++#define DFVCM_BUF_NODE_NUM  (8)
+ #define SYS_CACHE_SIZE      (DFV_CHUNK_SIZE*SYS_MAX_PIPES)
+ 
+ #define SYS_INTERLACE_SIZE  (4*1024)
+ #define SYS_SNAP_BUF_SZ     (SYS_INTERLACE_SIZE)
+ #define SYS_MAX_UPGRD_SCRIPT_SZ  (16*1024*1024)
++#define KEYVALLEN 100
+ 
+ typedef struct
+ {
+@@ -124,6 +126,8 @@
+ extern zlog_category_t* sys_zc;
+ extern sys_env_t sys_env;
+ extern sys_ctx_t sys_ctx;
++extern ips_mode_t syslk_ips_mode;
++extern uint64_t sys_fpga_stat[2];
+ 
+ int sys_cmd_exec(cmi_cmd_t* cmd, size_t size);
+ int sys_cmd_exec_stopul(cmi_cmd_t* cmd);
+@@ -134,4 +138,5 @@
+ uint64_t sys_lktm_to_systm(uint32_t lktm);
+ 
+ void* __sys_wkr_job(void* args);
+-void* __sys_wkr_autorec(void* args);
+\ No newline at end of file
++void* __sys_wkr_autorec(void* args);
++
+Index: src/sysagt/sysagt.c
+===================================================================
+--- src/sysagt/sysagt.c	(revision 79)
++++ src/sysagt/sysagt.c	(working copy)
+@@ -850,8 +850,8 @@
+     agt_env.svr_intftype = cmi_intf_tcp;
+     agt_env.svr_endian = cmi_endian_big;
+ 
+-    agt_env.conn_num = 1;
+-    agt_env.conn_tbl[0].svr_ipaddr = "192.168.248.128";
++    agt_env.conn_num = 2;
++    agt_env.conn_tbl[0].svr_ipaddr = "192.168.133.13";
+     agt_env.conn_tbl[0].svr_port = 1235;
+     agt_env.conn_tbl[1].svr_ipaddr = "192.168.133.14";
+     agt_env.conn_tbl[1].svr_port = 1235;
