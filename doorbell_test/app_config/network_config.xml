@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2012 Freescale Semiconductor, Inc.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of Freescale Semiconductor nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+
+
+ ALTERNATIVELY, this software may be distributed under the terms of the
+ GNU General Public License ("GPL") as published by the Free Software
+ Foundation, either version 2 of that License or (at your option) any
+ later version.
+
+ THIS SOFTWARE IS PROVIDED BY Freescale Semiconductor ``AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL Freescale Semiconductor BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<network_cfg>
+	<port name="10gec0" type="10G" fm="0" number="0"/>
+	<port name="10gec1" type="10G" fm="0" number="1"/>
+	<port name="10gec2" type="10G" fm="1" number="0"/>
+	<port name="10gec3" type="10G" fm="1" number="1"/>
+	<port name="dtsec0" type="1G" fm="0" number="0"/>
+	<port name="dtsec1" type="1G" fm="0" number="1"/>
+	<port name="dtsec2" type="1G" fm="0" number="2"/>
+	<port name="dtsec3" type="1G" fm="0" number="3"/>
+	<port name="dtsec4" type="1G" fm="0" number="4"/>
+	<port name="dtsec5" type="1G" fm="0" number="5"/>
+	<port name="dtsec8" type="1G" fm="1" number="0"/>
+	<port name="dtsec9" type="1G" fm="1" number="1"/>
+	<port name="dtsec10" type="1G" fm="1" number="2"/>
+	<port name="dtsec11" type="1G" fm="1" number="3"/>
+	<port name="dtsec12" type="1G" fm="1" number="4"/>
+	<port name="dtsec13" type="1G" fm="1" number="5"/>
+</network_cfg>
